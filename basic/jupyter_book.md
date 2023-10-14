@@ -1,4 +1,10 @@
+# Jupyter Book 使用指南
+
 ## Publish your book online with GitHub Pages
+
+```bash
+$ jupyter-book build mybookname/
+```
 
 ```bash
 $ ghp-import -n -p -f _build/html
