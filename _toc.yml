@@ -3,12 +3,12 @@
 
 format: jb-book
 root: intro
-
+parts:
 - caption: Basic Guides
   chapters:
   - file: basic/jupyter_book
-  - file: markdown
-  - file: notebooks
-  - file: markdown-notebooks
+    sections:
+    - file: markdown
+    - file: notebooks
+    - file: markdown-notebooks
 
-- caption: MRI Reconstruction
