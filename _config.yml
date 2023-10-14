@@ -3,7 +3,7 @@
 
 title: Jy' s phd learning notes
 author: Jiyao Liu
-logo: logo.png
+logo: images/logo.jpg
 
 # Force re-execution of notebooks on each build.
 # See https://jupyterbook.org/content/execute.html

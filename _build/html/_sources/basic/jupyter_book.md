@@ -1,6 +1,14 @@
+# Jupyter Book 使用指南
+
 ## Publish your book online with GitHub Pages
 
 ```bash
+$ cd ..
+$ jupyter-book build JiyaoPhdNotes
+```
+
+```bash
+$ cd JiyaoPhdNotes
 $ ghp-import -n -p -f _build/html
 ```
 

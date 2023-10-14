@@ -3,10 +3,12 @@
 ## Publish your book online with GitHub Pages
 
 ```bash
-$ jupyter-book build mybookname/
+$ cd ..
+$ jupyter-book build JiyaoPhdNotes
 ```
 
 ```bash
+$ cd JiyaoPhdNotes
 $ ghp-import -n -p -f _build/html
 ```
 
