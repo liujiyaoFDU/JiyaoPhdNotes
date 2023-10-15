@@ -16,4 +16,14 @@ parts:
 - caption: Math
   numbered: true # Number your chapters and sections
   chapters:
-  - file: math/matrix_analysis.
+  - file: math/matrix_analysis
+
+
+- caption: PRML notes
+  numbered: true # Number your chapters and sections
+  chapters:
+  - file: PRML/intro
+    sections:
+    - file: PRML/math_basic
+
+  
