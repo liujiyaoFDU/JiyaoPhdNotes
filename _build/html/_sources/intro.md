@@ -1,20 +1,28 @@
-# Welcome to your Jupyter Book
+# Jiyao Liu's Phd lecture notebook
 
-This is a small sample book to give you a feel for how book content is
-structured.
-It shows off a few of the major file types, as well as some sample content.
-It does not go in-depth into any particular topic - check out [the Jupyter Book documentation](https://jupyterbook.org) for more information.
+```{note}
+This is Jiyao Liu's the lecture notes during Phd.
 
-Check out the content pages bundled with this sample book to see more.
-
-```{tableofcontents}
+<script type="text/javascript">
+function lastModified() {
+    var modiDate = new Date(document.lastModified);
+    var showAs = modiDate.getDate() + "-" + (modiDate.getMonth() + 1) + "-" + modiDate.getFullYear();
+    return showAs
+}
+document.writeln("<div style='font-size: 14px;'>");
+document.write("Last updated on " + lastModified());
+document.writeln("</div>");
+</script>
 ```
 
-# Here's my sample title
 
-This is some sample text.
 
-(section-label)=
-## Here's my first section
 
-Here is a [reference to the intro](intro.md). Here is a reference to [](section-label).
+## Acknowledgements
+
+Special thanks to [Jupyter Book](https://github.com/executablebooks/jupyter-book) for this open-source tool for building publication-quality books and documents from computational material.
+
+<!-- (section-label)=
+## Here's my first section -->
+
+<!-- Here is a [reference to the intro](intro.md). Here is a reference to [](section-label). -->
