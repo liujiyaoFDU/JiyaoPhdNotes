@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
-    <title>1.5. Markdown Files &#8212; Jy&#39; s phd learning notes</title>
+    <title>Markdown Files &#8212; Jy&#39; s phd learning notes</title>
   
   
   
@@ -65,8 +65,6 @@ const thebe_selector_output = ".output, .cell_output"
     <script>DOCUMENTATION_OPTIONS.pagename = 'markdown';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="1.6. Content with notebooks" href="notebooks.html" />
-    <link rel="prev" title="1. Jupyter Book 使用指南" href="basic/jupyter_book.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -167,11 +165,10 @@ const thebe_selector_output = ".output, .cell_output"
             </li>
         </ul>
         <p aria-level="2" class="caption" role="heading"><span class="caption-text">Basic Guides</span></p>
-<ul class="current nav bd-sidenav">
-<li class="toctree-l1 current active has-children"><a class="reference internal" href="basic/jupyter_book.html">1. Jupyter Book 使用指南</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
-<li class="toctree-l2 current active"><a class="current reference internal" href="#">1.5. Markdown Files</a></li>
-<li class="toctree-l2"><a class="reference internal" href="notebooks.html">1.6. Content with notebooks</a></li>
-<li class="toctree-l2"><a class="reference internal" href="markdown-notebooks.html">1.7. Notebooks with MyST Markdown</a></li>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="basic/jupyter_book.html">1. Jupyter Book 使用指南</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="research/evidential_regression.html">1.5. Evidential Learning and Uncentainty</a></li>
+
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="basic/notebooks.html">2. Jupyter Notebook files</a></li>
@@ -368,10 +365,10 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-is-myst">1.5.1. What is MyST?</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sample-roles-and-directives">1.5.2. Sample Roles and Directives</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#citations">1.5.3. Citations</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#learn-more">1.5.4. Learn more</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-is-myst">What is MyST?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sample-roles-and-directives">Sample Roles and Directives</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#citations">Citations</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#learn-more">Learn more</a></li>
 </ul>
             </nav>
         </div>
@@ -384,13 +381,13 @@ document.write(`
                 <article class="bd-article" role="main">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="markdown-files">
-<h1><span class="section-number">1.5. </span>Markdown Files<a class="headerlink" href="#markdown-files" title="Permalink to this heading">#</a></h1>
+<h1>Markdown Files<a class="headerlink" href="#markdown-files" title="Permalink to this heading">#</a></h1>
 <p>Whether you write your book’s content in Jupyter Notebooks (<code class="docutils literal notranslate"><span class="pre">.ipynb</span></code>) or
 in regular markdown files (<code class="docutils literal notranslate"><span class="pre">.md</span></code>), you’ll write in the same flavor of markdown
 called <strong>MyST Markdown</strong>.
 This is a simple file to help you get started and show off some syntax.</p>
 <section id="what-is-myst">
-<h2><span class="section-number">1.5.1. </span>What is MyST?<a class="headerlink" href="#what-is-myst" title="Permalink to this heading">#</a></h2>
+<h2>What is MyST?<a class="headerlink" href="#what-is-myst" title="Permalink to this heading">#</a></h2>
 <p>MyST stands for “Markedly Structured Text”. It
 is a slight variation on a flavor of markdown called “CommonMark” markdown,
 with small syntax extensions to allow you to write <strong>roles</strong> and <strong>directives</strong>
@@ -398,7 +395,7 @@ in the Sphinx ecosystem.</p>
 <p>For more about MyST, see <a class="reference external" href="https://jupyterbook.org/content/myst.html">the MyST Markdown Overview</a>.</p>
 </section>
 <section id="sample-roles-and-directives">
-<h2><span class="section-number">1.5.2. </span>Sample Roles and Directives<a class="headerlink" href="#sample-roles-and-directives" title="Permalink to this heading">#</a></h2>
+<h2>Sample Roles and Directives<a class="headerlink" href="#sample-roles-and-directives" title="Permalink to this heading">#</a></h2>
 <p>Roles and directives are two of the most powerful tools in Jupyter Book. They
 are kind of like functions, but written in a markup language. They both
 serve a similar purpose, but <strong>roles are written in one line</strong>, whereas
@@ -414,10 +411,10 @@ that is being called.</p>
 <p>Here is an inline directive to refer to a document: <a class="reference internal" href="markdown-notebooks.html"><span class="doc">Notebooks with MyST Markdown</span></a>.</p>
 </section>
 <section id="citations">
-<h2><span class="section-number">1.5.3. </span>Citations<a class="headerlink" href="#citations" title="Permalink to this heading">#</a></h2>
+<h2>Citations<a class="headerlink" href="#citations" title="Permalink to this heading">#</a></h2>
 <p>You can also cite references that are stored in a <code class="docutils literal notranslate"><span class="pre">bibtex</span></code> file. For example,
 the following syntax: <code class="docutils literal notranslate"><span class="pre">{cite}`holdgraf_evidence_2014`</span></code> will render like
-this: <span id="id1">[<a class="reference internal" href="#id3" title="Christopher Ramsay Holdgraf, Wendy de Heer, Brian N. Pasley, and Robert T. Knight. Evidence for Predictive Coding in Human Auditory Cortex. In International Conference on Cognitive Neuroscience. Brisbane, Australia, Australia, 2014. Frontiers in Neuroscience.">HdHPK14</a>]</span>.</p>
+this: <span id="id1">[]</span>.</p>
 <p>Moreover, you can insert a bibliography into your page with this syntax:
 The <code class="docutils literal notranslate"><span class="pre">{bibliography}</span></code> directive must be used for all the <code class="docutils literal notranslate"><span class="pre">{cite}</span></code> roles to
 render properly.
@@ -425,14 +422,14 @@ For example, if the references for your book are stored in <code class="docutils
 then the bibliography is inserted with:</p>
 <div class="docutils container" id="id2">
 <div class="citation" id="id3" role="doc-biblioentry">
-<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id1">HdHPK14</a><span class="fn-bracket">]</span></span>
-<p>Christopher Ramsay Holdgraf, Wendy de Heer, Brian N. Pasley, and Robert T. Knight. Evidence for Predictive Coding in Human Auditory Cortex. In <em>International Conference on Cognitive Neuroscience</em>. Brisbane, Australia, Australia, 2014. Frontiers in Neuroscience.</p>
+<span class="label"><span class="fn-bracket">[</span>MG18<span class="fn-bracket">]</span></span>
+<p>Andrey Malinin and Mark Gales. Predictive uncertainty estimation via prior networks. <em>Advances in neural information processing systems</em>, 2018.</p>
 </div>
 </div>
 </div>
 </section>
 <section id="learn-more">
-<h2><span class="section-number">1.5.4. </span>Learn more<a class="headerlink" href="#learn-more" title="Permalink to this heading">#</a></h2>
+<h2>Learn more<a class="headerlink" href="#learn-more" title="Permalink to this heading">#</a></h2>
 <p>This is just a simple starter to get you started.
 You can learn a lot more at <a class="reference external" href="https://jupyterbook.org">jupyterbook.org</a>.</p>
 </section>
@@ -468,24 +465,6 @@ You can learn a lot more at <a class="reference external" href="https://jupyterb
                 <footer class="prev-next-footer">
                   <!-- Previous / next buttons -->
 <div class="prev-next-area">
-    <a class="left-prev"
-       href="basic/jupyter_book.html"
-       title="previous page">
-      <i class="fa-solid fa-angle-left"></i>
-      <div class="prev-next-info">
-        <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title"><span class="section-number">1. </span>Jupyter Book 使用指南</p>
-      </div>
-    </a>
-    <a class="right-next"
-       href="notebooks.html"
-       title="next page">
-      <div class="prev-next-info">
-        <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title"><span class="section-number">1.6. </span>Content with notebooks</p>
-      </div>
-      <i class="fa-solid fa-angle-right"></i>
-    </a>
 </div>
                 </footer>
               
@@ -501,10 +480,10 @@ You can learn a lot more at <a class="reference external" href="https://jupyterb
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-is-myst">1.5.1. What is MyST?</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sample-roles-and-directives">1.5.2. Sample Roles and Directives</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#citations">1.5.3. Citations</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#learn-more">1.5.4. Learn more</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-is-myst">What is MyST?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sample-roles-and-directives">Sample Roles and Directives</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#citations">Citations</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#learn-more">Learn more</a></li>
 </ul>
   </nav></div>
 

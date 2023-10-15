@@ -1,6 +1,6 @@
 # 矩阵与张量分析
 
-## 证明：$A \in \mathbb C^{m\times n}$，$B\in \mathbb C^{m\times n}$矩阵相乘，$AB$和$BA$具有完全相同的非零特征值
+## 特征值性质
 
 ```{admonition} Definition: *特征值性质*
 :class: important
