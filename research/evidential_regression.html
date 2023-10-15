@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
-    <title>1.8. Evidential Regression &#8212; Jy&#39; s phd learning notes</title>
+    <title>1.5. Evidential Learning and Uncentainty &#8212; Jy&#39; s phd learning notes</title>
   
   
   
@@ -66,7 +66,7 @@ const thebe_selector_output = ".output, .cell_output"
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="2. Jupyter Notebook files" href="../basic/notebooks.html" />
-    <link rel="prev" title="1.7. Notebooks with MyST Markdown" href="../markdown-notebooks.html" />
+    <link rel="prev" title="1. Jupyter Book 使用指南" href="../basic/jupyter_book.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -169,10 +169,8 @@ const thebe_selector_output = ".output, .cell_output"
         <p aria-level="2" class="caption" role="heading"><span class="caption-text">Basic Guides</span></p>
 <ul class="current nav bd-sidenav">
 <li class="toctree-l1 current active has-children"><a class="reference internal" href="../basic/jupyter_book.html">1. Jupyter Book 使用指南</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="../markdown.html">1.5. Markdown Files</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../notebooks.html">1.6. Content with notebooks</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../markdown-notebooks.html">1.7. Notebooks with MyST Markdown</a></li>
-<li class="toctree-l2 current active"><a class="current reference internal" href="#">1.8. Evidential Regression</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">1.5. Evidential Learning and Uncentainty</a></li>
+
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../basic/notebooks.html">2. Jupyter Notebook files</a></li>
@@ -346,7 +344,9 @@ document.write(`
   </button>
 `);
 </script>
-
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
 </div></div>
       
     </div>
@@ -357,11 +357,24 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Evidential Regression</h1>
+    <h1>Evidential Learning and Uncentainty</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
             
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">1.5. Evidential Learning and Uncentainty</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-classification-of-uncentainty">1.5.1. The classification of uncentainty</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#evidential-regression">1.6. Evidential Regression</a></li>
+</ul>
+
+            </nav>
         </div>
     </div>
 </div>
@@ -371,8 +384,39 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article" role="main">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="evidential-regression">
-<h1><span class="section-number">1.8. </span>Evidential Regression<a class="headerlink" href="#evidential-regression" title="Permalink to this heading">#</a></h1>
+  <section class="tex2jax_ignore mathjax_ignore" id="evidential-learning-and-uncentainty">
+<h1><span class="section-number">1.5. </span>Evidential Learning and Uncentainty<a class="headerlink" href="#evidential-learning-and-uncentainty" title="Permalink to this heading">#</a></h1>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>In this chapter we present uncentainty estimation and a specific method called evidential learning to compute uncentainty.</p>
+<script type="text/javascript">
+function lastModified() {
+    var modiDate = new Date(document.lastModified);
+    var showAs = modiDate.getDate() + "-" + (modiDate.getMonth() + 1) + "-" + modiDate.getFullYear();
+    return showAs
+}
+document.writeln("<div style='font-size: 14px;'>");
+document.write("Last updated on " + lastModified());
+document.writeln("</div>");
+</script>
+</div>
+<section id="the-classification-of-uncentainty">
+<h2><span class="section-number">1.5.1. </span>The classification of uncentainty<a class="headerlink" href="#the-classification-of-uncentainty" title="Permalink to this heading">#</a></h2>
+<blockquote>
+<div><p>Predictive Uncertainty Estimation via Prior Networks, 2018</p>
+</div></blockquote>
+<div class="important admonition">
+<p class="admonition-title">Abstract:</p>
+<p>Uncertainty可以通过<strong>uncertainty in model parameters</strong>，<strong>irreducible data uncertainty</strong>和<strong>uncertainty due to distributional mismatch</strong> between the test and training data distributions进行估计。本文提出了一个先验网络显示学习distributional uncertainty，通过参数化一个预测分布的先验分布实现。并且本文对uncentainty的分类比较清晰</p>
+</div>
+<p><span id="id1"><sup><a class="reference internal" href="../markdown.html#id3" title="Andrey Malinin and Mark Gales. Predictive uncertainty estimation via prior networks. Advances in neural information processing systems, 2018.">MG18</a></sup></span> 将uncentainty分为三类。
+model uncertainty (epistemic uncertainty)
+data uncertainty
+distributional uncertainty</p>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="evidential-regression">
+<h1><span class="section-number">1.6. </span>Evidential Regression<a class="headerlink" href="#evidential-regression" title="Permalink to this heading">#</a></h1>
 <figure class="align-default" id="blackhole">
 <a class="reference internal image-reference" href="https://ossjiyaoliu.oss-cn-beijing.aliyuncs.com/uPic/N0QLOZ.png"><img alt="https://ossjiyaoliu.oss-cn-beijing.aliyuncs.com/uPic/N0QLOZ.png" src="https://ossjiyaoliu.oss-cn-beijing.aliyuncs.com/uPic/N0QLOZ.png" style="height: 150px;" /></a>
 <figcaption>
@@ -412,12 +456,12 @@ document.write(`
                   <!-- Previous / next buttons -->
 <div class="prev-next-area">
     <a class="left-prev"
-       href="../markdown-notebooks.html"
+       href="../basic/jupyter_book.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title"><span class="section-number">1.7. </span>Notebooks with MyST Markdown</p>
+        <p class="prev-next-title"><span class="section-number">1. </span>Jupyter Book 使用指南</p>
       </div>
     </a>
     <a class="right-next"
@@ -435,6 +479,25 @@ document.write(`
             </div>
             
             
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">1.5. Evidential Learning and Uncentainty</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-classification-of-uncentainty">1.5.1. The classification of uncentainty</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#evidential-regression">1.6. Evidential Regression</a></li>
+</ul>
+
+  </nav></div>
+
+</div></div>
               
             
           </div>
