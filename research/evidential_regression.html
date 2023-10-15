@@ -62,6 +62,8 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'research/evidential_regression';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -369,6 +371,13 @@ document.write(`
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">1.5. Evidential Learning and Uncentainty</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-classification-of-uncentainty">1.5.1. The classification of uncentainty</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#evidential-classification">1.5.2. Evidential classification</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#categorical-and-multinomial-distribution">1.5.2.1. Categorical and multinomial Distribution</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">1.5.2.2. 背景知识：狄利克雷分布</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#gamma-distribution">1.5.2.3. <span class="math notranslate nohighlight">\(\Gamma\)</span> Distribution</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#inverse-gamma-distribution">1.5.2.4. inverse <span class="math notranslate nohighlight">\(\Gamma\)</span> Distribution</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#evidential-regression">1.6. Evidential Regression</a></li>
@@ -405,22 +414,106 @@ document.writeln("</div>");
 <blockquote>
 <div><p>Predictive Uncertainty Estimation via Prior Networks, 2018</p>
 </div></blockquote>
-<div class="important admonition">
-<p class="admonition-title">Abstract:</p>
-<p>Uncertainty可以通过<strong>uncertainty in model parameters</strong>，<strong>irreducible data uncertainty</strong>和<strong>uncertainty due to distributional mismatch</strong> between the test and training data distributions进行估计。本文提出了一个先验网络显示学习distributional uncertainty，通过参数化一个预测分布的先验分布实现。并且本文对uncentainty的分类比较清晰</p>
-</div>
-<p><span id="id1"><sup><a class="reference internal" href="../markdown.html#id3" title="Andrey Malinin and Mark Gales. Predictive uncertainty estimation via prior networks. Advances in neural information processing systems, 2018.">MG18</a></sup></span> 将uncentainty分为三类。
-model uncertainty (epistemic uncertainty)
-data uncertainty
-distributional uncertainty</p>
+<!-- ```{admonition} Abstract:
+:class: important
+
+Uncertainty可以通过**uncertainty in model parameters**，**irreducible data uncertainty**和**uncertainty due to distributional mismatch** between the test and training data distributions进行估计。本文提出了一个先验网络显示学习distributional uncertainty，通过参数化一个预测分布的先验分布实现。并且本文对uncentainty的分类比较清晰
+
+``` -->
+<p><span id="id1">[<a class="reference internal" href="../markdown.html#id3" title="Andrey Malinin and Mark Gales. Predictive uncertainty estimation via prior networks. Advances in neural information processing systems, 2018.">MG18</a>]</span> 将uncentainty分为三类。</p>
+<ul class="simple">
+<li><p>model uncertainty / epistemic uncertainty（认知不确定性）：测量给定训练数据估计模型参数的不确定性，模型不确定性根据训练数据的增加而降低。</p></li>
+<li><p>data uncertainty / aleatoric uncertainty（对抗不确定性）:  irreducible uncertainty which arises from the natural complexity of the data, such as class overlap, label noise, homoscedastic and heteroscedastic noise.</p></li>
+<li><p>distributional uncertainty：mismatching between the training and test distributions</p></li>
+</ul>
+<figure class="align-default" id="blackhole">
+<a class="reference internal image-reference" href="https://ossjiyaoliu.oss-cn-beijing.aliyuncs.com/uPic/2023-10-09%2023.00.53.png"><img alt="https://ossjiyaoliu.oss-cn-beijing.aliyuncs.com/uPic/2023-10-09%2023.00.53.png" src="https://ossjiyaoliu.oss-cn-beijing.aliyuncs.com/uPic/2023-10-09%2023.00.53.png" style="height: 170px;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 1.1 </span><span class="caption-text">其中两种不确定性的定义及性质</span><a class="headerlink" href="#blackhole" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+</section>
+<section id="evidential-classification">
+<h2><span class="section-number">1.5.2. </span>Evidential classification<a class="headerlink" href="#evidential-classification" title="Permalink to this heading">#</a></h2>
+<section id="categorical-and-multinomial-distribution">
+<h3><span class="section-number">1.5.2.1. </span>Categorical and multinomial Distribution<a class="headerlink" href="#categorical-and-multinomial-distribution" title="Permalink to this heading">#</a></h3>
+<ol class="arabic simple">
+<li><p>Categorical distribution</p></li>
+</ol>
+<p>Categorical distribution是一个变量对应多种类别，每次只能归属为一类。使用向量对<span class="math notranslate nohighlight">\(x\)</span>进行编码。</p>
+<p>Defination</p>
+<figure class="align-default" id="id2">
+<a class="reference internal image-reference" href="https://ossjiyaoliu.oss-cn-beijing.aliyuncs.com/uPic/8KR4lP.png"><img alt="https://ossjiyaoliu.oss-cn-beijing.aliyuncs.com/uPic/8KR4lP.png" src="https://ossjiyaoliu.oss-cn-beijing.aliyuncs.com/uPic/8KR4lP.png" style="height: 400px;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 1.2 </span><span class="caption-text">Categorical distribution defination</span><a class="headerlink" href="#id2" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+<ol class="arabic simple" start="2">
+<li><p>Multinomial distribution</p></li>
+</ol>
+<p>Multinomial 和 Categorical distribution的区别是前者是多个随机变量，也就是说在某一类中小球的数量。</p>
+<figure class="align-default" id="id3">
+<a class="reference internal image-reference" href="https://ossjiyaoliu.oss-cn-beijing.aliyuncs.com/uPic/aA0k1h.png"><img alt="https://ossjiyaoliu.oss-cn-beijing.aliyuncs.com/uPic/aA0k1h.png" src="https://ossjiyaoliu.oss-cn-beijing.aliyuncs.com/uPic/aA0k1h.png" style="height: 400px;" /></a>
+</figure>
+</section>
+<section id="id4">
+<h3><span class="section-number">1.5.2.2. </span>背景知识：狄利克雷分布<a class="headerlink" href="#id4" title="Permalink to this heading">#</a></h3>
+<ol class="arabic simple">
+<li><p>Defination</p></li>
+</ol>
+<figure class="align-default" id="id5">
+<a class="reference internal image-reference" href="https://ossjiyaoliu.oss-cn-beijing.aliyuncs.com/uPic/dlil.png"><img alt="https://ossjiyaoliu.oss-cn-beijing.aliyuncs.com/uPic/dlil.png" src="https://ossjiyaoliu.oss-cn-beijing.aliyuncs.com/uPic/dlil.png" style="height: 400px;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 1.3 </span><span class="caption-text">狄利克雷分布定义</span><a class="headerlink" href="#id5" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+<p>注意：根据定义，<span class="math notranslate nohighlight">\(k=3\)</span>时，<span class="math notranslate nohighlight">\(\theta\)</span>是在阴影三角形是，不能超出这个范围。<span class="math notranslate nohighlight">\(\alpha_k\)</span>为参数，必须满足<span class="math notranslate nohighlight">\(\alpha_k\geq 0\)</span>。</p>
+<p>下图是狄利克雷参数的选择影响分布的结果：(红色表示分布更密集区域)</p>
+<figure class="align-default" id="id6">
+<a class="reference internal image-reference" href="https://ossjiyaoliu.oss-cn-beijing.aliyuncs.com/uPic/UjwSlz.png"><img alt="https://ossjiyaoliu.oss-cn-beijing.aliyuncs.com/uPic/UjwSlz.png" src="https://ossjiyaoliu.oss-cn-beijing.aliyuncs.com/uPic/UjwSlz.png" style="height: 400px;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 1.4 </span><span class="caption-text">狄利克雷参数的选择对分布的影响</span><a class="headerlink" href="#id6" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+<p>下面这个例子说明了狄利克雷分布有什么作用：假设运动员有有三个指标，下面三幅图对应了三种运动的运动员通常的指标。对着<span class="math notranslate nohighlight">\(n\)</span>个运动员的三个指标分别进行打分，得到<span class="math notranslate nohighlight">\(n\)</span>个样本。我们假设每个运动员的指标<span class="math notranslate nohighlight">\(\theta = [\theta_1, ..., \theta_3]\)</span>是i.i.d的，且满足狄利克雷分布，那么便可以估计<span class="math notranslate nohighlight">\(\hat{\alpha}\)</span>，即估计得到样本的分布。</p>
+<figure class="align-default" id="id7">
+<a class="reference internal image-reference" href="https://ossjiyaoliu.oss-cn-beijing.aliyuncs.com/uPic/Pn0Adj.png"><img alt="https://ossjiyaoliu.oss-cn-beijing.aliyuncs.com/uPic/Pn0Adj.png" src="https://ossjiyaoliu.oss-cn-beijing.aliyuncs.com/uPic/Pn0Adj.png" style="height: 400px;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 1.5 </span><span class="caption-text">狄利克雷分布有什么作用</span><a class="headerlink" href="#id7" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+<ol class="arabic simple" start="2">
+<li><p>Conjugate Prior</p></li>
+</ol>
+<p><em>Dirichlet是multinomial的一个Conjugate Prior</em>：</p>
+<figure class="align-default" id="id8">
+<a class="reference internal image-reference" href="https://ossjiyaoliu.oss-cn-beijing.aliyuncs.com/uPic/GcGPOA.png"><img alt="https://ossjiyaoliu.oss-cn-beijing.aliyuncs.com/uPic/GcGPOA.png" src="https://ossjiyaoliu.oss-cn-beijing.aliyuncs.com/uPic/GcGPOA.png" style="height: 400px;" /></a>
+</figure>
+<figure class="align-default" id="id9">
+<a class="reference internal image-reference" href="https://ossjiyaoliu.oss-cn-beijing.aliyuncs.com/uPic/7IAQVs.png"><img alt="https://ossjiyaoliu.oss-cn-beijing.aliyuncs.com/uPic/7IAQVs.png" src="https://ossjiyaoliu.oss-cn-beijing.aliyuncs.com/uPic/7IAQVs.png" style="height: 400px;" /></a>
+</figure>
+</section>
+<section id="gamma-distribution">
+<h3><span class="section-number">1.5.2.3. </span><span class="math notranslate nohighlight">\(\Gamma\)</span> Distribution<a class="headerlink" href="#gamma-distribution" title="Permalink to this heading">#</a></h3>
+<p><span class="math notranslate nohighlight">\(\Gamma\)</span>分布：<span class="math notranslate nohighlight">\(X \sim \Gamma(\alpha, \gamma), \ \alpha,\lambda&gt;0\)</span>, p.d.f 定义为：</p>
+<div class="math notranslate nohighlight">
+\[f(x) = \frac{\lambda e^{-\lambda x}(\lambda x)^{\alpha-1}}{\Gamma(x)} = \frac{e^{-\lambda x}\lambda^\alpha x^{\alpha-1}}{\Gamma(x)}, x \geq0\]</div>
+<p>其中，Gamma函数定义为</p>
+<div class="math notranslate nohighlight">
+\[\Gamma(\alpha) = \int_{0}^{\infty}e^{-y}y^{\alpha-1}  \,dy \]</div>
+</section>
+<section id="inverse-gamma-distribution">
+<h3><span class="section-number">1.5.2.4. </span>inverse <span class="math notranslate nohighlight">\(\Gamma\)</span> Distribution<a class="headerlink" href="#inverse-gamma-distribution" title="Permalink to this heading">#</a></h3>
+<p>逆Gamma分布是Gamma分布的变量的倒数分布</p>
+</section>
 </section>
 </section>
 <section class="tex2jax_ignore mathjax_ignore" id="evidential-regression">
 <h1><span class="section-number">1.6. </span>Evidential Regression<a class="headerlink" href="#evidential-regression" title="Permalink to this heading">#</a></h1>
-<figure class="align-default" id="blackhole">
+<figure class="align-default" id="id10">
 <a class="reference internal image-reference" href="https://ossjiyaoliu.oss-cn-beijing.aliyuncs.com/uPic/N0QLOZ.png"><img alt="https://ossjiyaoliu.oss-cn-beijing.aliyuncs.com/uPic/N0QLOZ.png" src="https://ossjiyaoliu.oss-cn-beijing.aliyuncs.com/uPic/N0QLOZ.png" style="height: 150px;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 1.1 </span><span class="caption-text">Depiction of a black hole as reconstructed from data recorded by the Event Horizon Telescope.</span><a class="headerlink" href="#blackhole" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 1.6 </span><span class="caption-text">Depiction of a black hole as reconstructed from data recorded by the Event Horizon Telescope.</span><a class="headerlink" href="#id10" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 </section>
@@ -490,6 +583,13 @@ distributional uncertainty</p>
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">1.5. Evidential Learning and Uncentainty</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-classification-of-uncentainty">1.5.1. The classification of uncentainty</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#evidential-classification">1.5.2. Evidential classification</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#categorical-and-multinomial-distribution">1.5.2.1. Categorical and multinomial Distribution</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">1.5.2.2. 背景知识：狄利克雷分布</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#gamma-distribution">1.5.2.3. <span class="math notranslate nohighlight">\(\Gamma\)</span> Distribution</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#inverse-gamma-distribution">1.5.2.4. inverse <span class="math notranslate nohighlight">\(\Gamma\)</span> Distribution</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#evidential-regression">1.6. Evidential Regression</a></li>
