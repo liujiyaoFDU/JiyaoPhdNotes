@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
-    <title>1.7. Notebooks with MyST Markdown &#8212; Jy&#39; s phd learning notes</title>
+    <title>1.6. Notebooks with MyST Markdown &#8212; Jy&#39; s phd learning notes</title>
   
   
   
@@ -65,8 +65,7 @@ const thebe_selector_output = ".output, .cell_output"
     <script>DOCUMENTATION_OPTIONS.pagename = 'markdown-notebooks';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="&lt;no title&gt;" href="research/evidential_regression.html" />
-    <link rel="prev" title="1.6. Content with notebooks" href="notebooks.html" />
+    <link rel="next" title="1.7. Evidential Regression" href="research/evidential_regression.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -170,8 +169,8 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="current nav bd-sidenav">
 <li class="toctree-l1 current active has-children"><a class="reference internal" href="basic/jupyter_book.html">1. Jupyter Book 使用指南</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="markdown.html">1.5. Markdown Files</a></li>
-<li class="toctree-l2"><a class="reference internal" href="notebooks.html">1.6. Content with notebooks</a></li>
-<li class="toctree-l2 current active"><a class="current reference internal" href="#">1.7. Notebooks with MyST Markdown</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">1.6. Notebooks with MyST Markdown</a></li>
+<li class="toctree-l2"><a class="reference internal" href="research/evidential_regression.html">1.7. Evidential Regression</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="basic/notebooks.html">2. Jupyter Notebook files</a></li>
@@ -368,9 +367,9 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#an-example-cell">1.7.1. An example cell</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#create-a-notebook-with-myst-markdown">1.7.2. Create a notebook with MyST Markdown</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#quickly-add-yaml-metadata-for-myst-notebooks">1.7.3. Quickly add YAML metadata for MyST Notebooks</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#an-example-cell">1.6.1. An example cell</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#create-a-notebook-with-myst-markdown">1.6.2. Create a notebook with MyST Markdown</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#quickly-add-yaml-metadata-for-myst-notebooks">1.6.3. Quickly add YAML metadata for MyST Notebooks</a></li>
 </ul>
             </nav>
         </div>
@@ -383,12 +382,12 @@ document.write(`
                 <article class="bd-article" role="main">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="notebooks-with-myst-markdown">
-<h1><span class="section-number">1.7. </span>Notebooks with MyST Markdown<a class="headerlink" href="#notebooks-with-myst-markdown" title="Permalink to this heading">#</a></h1>
+<h1><span class="section-number">1.6. </span>Notebooks with MyST Markdown<a class="headerlink" href="#notebooks-with-myst-markdown" title="Permalink to this heading">#</a></h1>
 <p>Jupyter Book also lets you write text-based notebooks using MyST Markdown.
 See <a class="reference external" href="https://jupyterbook.org/file-types/myst-notebooks.html">the Notebooks with MyST Markdown documentation</a> for more detailed instructions.
 This page shows off a notebook written in MyST Markdown.</p>
 <section id="an-example-cell">
-<h2><span class="section-number">1.7.1. </span>An example cell<a class="headerlink" href="#an-example-cell" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">1.6.1. </span>An example cell<a class="headerlink" href="#an-example-cell" title="Permalink to this heading">#</a></h2>
 <p>With MyST Markdown, you can define code cells with a directive like so:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -411,7 +410,7 @@ in-line with the rest of your content.</p>
 </div>
 </section>
 <section id="create-a-notebook-with-myst-markdown">
-<h2><span class="section-number">1.7.2. </span>Create a notebook with MyST Markdown<a class="headerlink" href="#create-a-notebook-with-myst-markdown" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">1.6.2. </span>Create a notebook with MyST Markdown<a class="headerlink" href="#create-a-notebook-with-myst-markdown" title="Permalink to this heading">#</a></h2>
 <p>MyST Markdown notebooks are defined by two things:</p>
 <ol class="arabic simple">
 <li><p>YAML metadata that is needed to understand if / how it should convert text files to notebooks (including information about the kernel needed).
@@ -421,7 +420,7 @@ See the YAML at the top of this page for example.</p></li>
 <p>That’s all that is needed to get started!</p>
 </section>
 <section id="quickly-add-yaml-metadata-for-myst-notebooks">
-<h2><span class="section-number">1.7.3. </span>Quickly add YAML metadata for MyST Notebooks<a class="headerlink" href="#quickly-add-yaml-metadata-for-myst-notebooks" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">1.6.3. </span>Quickly add YAML metadata for MyST Notebooks<a class="headerlink" href="#quickly-add-yaml-metadata-for-myst-notebooks" title="Permalink to this heading">#</a></h2>
 <p>If you have a markdown file and you’d like to quickly add YAML metadata to it, so that Jupyter Book will treat it as a MyST Markdown Notebook, run the following command:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">jupyter</span><span class="o">-</span><span class="n">book</span> <span class="n">myst</span> <span class="n">init</span> <span class="n">path</span><span class="o">/</span><span class="n">to</span><span class="o">/</span><span class="n">markdownfile</span><span class="o">.</span><span class="n">md</span>
 </pre></div>
@@ -459,21 +458,12 @@ See the YAML at the top of this page for example.</p></li>
                 <footer class="prev-next-footer">
                   <!-- Previous / next buttons -->
 <div class="prev-next-area">
-    <a class="left-prev"
-       href="notebooks.html"
-       title="previous page">
-      <i class="fa-solid fa-angle-left"></i>
-      <div class="prev-next-info">
-        <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title"><span class="section-number">1.6. </span>Content with notebooks</p>
-      </div>
-    </a>
     <a class="right-next"
        href="research/evidential_regression.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">&lt;no title&gt;</p>
+        <p class="prev-next-title"><span class="section-number">1.7. </span>Evidential Regression</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -492,9 +482,9 @@ See the YAML at the top of this page for example.</p></li>
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#an-example-cell">1.7.1. An example cell</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#create-a-notebook-with-myst-markdown">1.7.2. Create a notebook with MyST Markdown</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#quickly-add-yaml-metadata-for-myst-notebooks">1.7.3. Quickly add YAML metadata for MyST Notebooks</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#an-example-cell">1.6.1. An example cell</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#create-a-notebook-with-myst-markdown">1.6.2. Create a notebook with MyST Markdown</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#quickly-add-yaml-metadata-for-myst-notebooks">1.6.3. Quickly add YAML metadata for MyST Notebooks</a></li>
 </ul>
   </nav></div>
 
