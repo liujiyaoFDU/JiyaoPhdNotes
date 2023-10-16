@@ -26,4 +26,7 @@ parts:
     sections:
     - file: PRML/math_basic
 
-  
+- caption: 学术报告
+  numbered: true # Number your chapters and sections
+  chapters:
+  - file: Report/acad_lunch_zhuang_wang
