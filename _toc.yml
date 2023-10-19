@@ -9,8 +9,6 @@ parts:
   numbered: true # Number your chapters and sections
   chapters:
   - file: basic/jupyter_book
-    sections:
-    - file: research/evidential_regression
   - file: basic/notebooks
 
 - caption: Math
@@ -30,3 +28,14 @@ parts:
   numbered: true # Number your chapters and sections
   chapters:
   - file: Report/acad_lunch_zhuang_wang
+
+- caption: research
+  numbered: true # Number your chapters and sections
+  chapters:
+  - file: research/evidential_regression
+  - file: research/MRI_reconstruction/preprocess
+
+- caption: MRI notes
+  numbered: true # Number your chapters and sections
+  chapters:
+  - file:  MRI/MT-CEST-NOE

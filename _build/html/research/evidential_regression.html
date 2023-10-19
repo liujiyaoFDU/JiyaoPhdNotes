@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
-    <title>1.5. Evidential Learning and Uncentainty &#8212; Jy&#39; s phd learning notes</title>
+    <title>1. Evidential Learning and Uncentainty &#8212; Jy&#39; s phd learning notes</title>
   
   
   
@@ -67,8 +67,8 @@ const thebe_selector_output = ".output, .cell_output"
     <script>DOCUMENTATION_OPTIONS.pagename = 'research/evidential_regression';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="2. Jupyter Notebook files" href="../basic/notebooks.html" />
-    <link rel="prev" title="1. Jupyter Book 使用指南" href="../basic/jupyter_book.html" />
+    <link rel="next" title="3. MRI reconstruction预处理方法" href="MRI_reconstruction/preprocess.html" />
+    <link rel="prev" title="1. 20231016-庄吓海/王成彦-可解释医学影像分析" href="../Report/acad_lunch_zhuang_wang.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -169,17 +169,34 @@ const thebe_selector_output = ".output, .cell_output"
             </li>
         </ul>
         <p aria-level="2" class="caption" role="heading"><span class="caption-text">Basic Guides</span></p>
-<ul class="current nav bd-sidenav">
-<li class="toctree-l1 current active has-children"><a class="reference internal" href="../basic/jupyter_book.html">1. Jupyter Book 使用指南</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
-<li class="toctree-l2 current active"><a class="current reference internal" href="#">1.5. Evidential Learning and Uncentainty</a></li>
-
-</ul>
-</li>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../basic/jupyter_book.html">1. Jupyter Book 使用指南</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../basic/notebooks.html">2. Jupyter Notebook files</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Math</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../math/matrix_analysis.html">1. 矩阵与张量分析</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">PRML notes</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../PRML/intro.html">1. PRML</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../PRML/math_basic.html">1.1. 数学基础</a></li>
+</ul>
+</li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">学术报告</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../Report/acad_lunch_zhuang_wang.html">1. 20231016-庄吓海/王成彦-可解释医学影像分析</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">research</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">1. Evidential Learning and Uncentainty</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="MRI_reconstruction/preprocess.html">3. MRI reconstruction预处理方法</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">MRI notes</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../MRI/MT-CEST-NOE.html">1. MT&amp;CEST&amp;NOE 磁化转移定量成像</a></li>
 </ul>
 
     </div>
@@ -373,18 +390,18 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">1.5. Evidential Learning and Uncentainty</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-classification-of-uncentainty">1.5.1. The classification of uncentainty</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#evidential-classification">1.5.2. Evidential classification</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#categorical-and-multinomial-distribution">1.5.2.1. Categorical and multinomial Distribution</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">1.5.2.2. 背景知识：狄利克雷分布</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#gamma-distribution">1.5.2.3. <span class="math notranslate nohighlight">\(\Gamma\)</span> Distribution</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#inverse-gamma-distribution">1.5.2.4. inverse <span class="math notranslate nohighlight">\(\Gamma\)</span> Distribution</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">1. Evidential Learning and Uncentainty</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-classification-of-uncentainty">1.1. The classification of uncentainty</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#evidential-classification">1.2. Evidential classification</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#categorical-and-multinomial-distribution">1.2.1. Categorical and multinomial Distribution</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">1.2.2. 背景知识：狄利克雷分布</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#gamma-distribution">1.2.3. <span class="math notranslate nohighlight">\(\Gamma\)</span> Distribution</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#inverse-gamma-distribution">1.2.4. inverse <span class="math notranslate nohighlight">\(\Gamma\)</span> Distribution</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#evidential-regression">1.6. Evidential Regression</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#evidential-regression">2. Evidential Regression</a></li>
 </ul>
 
             </nav>
@@ -398,7 +415,7 @@ document.write(`
                 <article class="bd-article" role="main">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="evidential-learning-and-uncentainty">
-<h1><span class="section-number">1.5. </span>Evidential Learning and Uncentainty<a class="headerlink" href="#evidential-learning-and-uncentainty" title="Permalink to this heading">#</a></h1>
+<h1><span class="section-number">1. </span>Evidential Learning and Uncentainty<a class="headerlink" href="#evidential-learning-and-uncentainty" title="Permalink to this heading">#</a></h1>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>In this chapter we present uncentainty estimation and a specific method called evidential learning to compute uncentainty.</p>
@@ -414,7 +431,7 @@ document.writeln("</div>");
 </script>
 </div>
 <section id="the-classification-of-uncentainty">
-<h2><span class="section-number">1.5.1. </span>The classification of uncentainty<a class="headerlink" href="#the-classification-of-uncentainty" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">1.1. </span>The classification of uncentainty<a class="headerlink" href="#the-classification-of-uncentainty" title="Permalink to this heading">#</a></h2>
 <blockquote>
 <div><p>Predictive Uncertainty Estimation via Prior Networks, 2018</p>
 </div></blockquote>
@@ -438,9 +455,9 @@ Uncertainty可以通过**uncertainty in model parameters**，**irreducible data 
 </figure>
 </section>
 <section id="evidential-classification">
-<h2><span class="section-number">1.5.2. </span>Evidential classification<a class="headerlink" href="#evidential-classification" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">1.2. </span>Evidential classification<a class="headerlink" href="#evidential-classification" title="Permalink to this heading">#</a></h2>
 <section id="categorical-and-multinomial-distribution">
-<h3><span class="section-number">1.5.2.1. </span>Categorical and multinomial Distribution<a class="headerlink" href="#categorical-and-multinomial-distribution" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">1.2.1. </span>Categorical and multinomial Distribution<a class="headerlink" href="#categorical-and-multinomial-distribution" title="Permalink to this heading">#</a></h3>
 <ol class="arabic simple">
 <li><p>Categorical distribution</p></li>
 </ol>
@@ -461,7 +478,7 @@ Uncertainty可以通过**uncertainty in model parameters**，**irreducible data 
 </figure>
 </section>
 <section id="id4">
-<h3><span class="section-number">1.5.2.2. </span>背景知识：狄利克雷分布<a class="headerlink" href="#id4" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">1.2.2. </span>背景知识：狄利克雷分布<a class="headerlink" href="#id4" title="Permalink to this heading">#</a></h3>
 <ol class="arabic simple">
 <li><p>Defination</p></li>
 </ol>
@@ -498,7 +515,7 @@ Uncertainty可以通过**uncertainty in model parameters**，**irreducible data 
 </figure>
 </section>
 <section id="gamma-distribution">
-<h3><span class="section-number">1.5.2.3. </span><span class="math notranslate nohighlight">\(\Gamma\)</span> Distribution<a class="headerlink" href="#gamma-distribution" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">1.2.3. </span><span class="math notranslate nohighlight">\(\Gamma\)</span> Distribution<a class="headerlink" href="#gamma-distribution" title="Permalink to this heading">#</a></h3>
 <p><span class="math notranslate nohighlight">\(\Gamma\)</span>分布：<span class="math notranslate nohighlight">\(X \sim \Gamma(\alpha, \gamma), \ \alpha,\lambda&gt;0\)</span>, p.d.f 定义为：</p>
 <div class="math notranslate nohighlight">
 \[f(x) = \frac{\lambda e^{-\lambda x}(\lambda x)^{\alpha-1}}{\Gamma(x)} = \frac{e^{-\lambda x}\lambda^\alpha x^{\alpha-1}}{\Gamma(x)}, x \geq0\]</div>
@@ -507,17 +524,17 @@ Uncertainty可以通过**uncertainty in model parameters**，**irreducible data 
 \[\Gamma(\alpha) = \int_{0}^{\infty}e^{-y}y^{\alpha-1}  \,dy \]</div>
 </section>
 <section id="inverse-gamma-distribution">
-<h3><span class="section-number">1.5.2.4. </span>inverse <span class="math notranslate nohighlight">\(\Gamma\)</span> Distribution<a class="headerlink" href="#inverse-gamma-distribution" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">1.2.4. </span>inverse <span class="math notranslate nohighlight">\(\Gamma\)</span> Distribution<a class="headerlink" href="#inverse-gamma-distribution" title="Permalink to this heading">#</a></h3>
 <p>逆Gamma分布是Gamma分布的变量的倒数分布</p>
 </section>
 </section>
 </section>
 <section class="tex2jax_ignore mathjax_ignore" id="evidential-regression">
-<h1><span class="section-number">1.6. </span>Evidential Regression<a class="headerlink" href="#evidential-regression" title="Permalink to this heading">#</a></h1>
+<h1><span class="section-number">2. </span>Evidential Regression<a class="headerlink" href="#evidential-regression" title="Permalink to this heading">#</a></h1>
 <figure class="align-default" id="id10">
 <a class="reference internal image-reference" href="https://ossjiyaoliu.oss-cn-beijing.aliyuncs.com/uPic/N0QLOZ.png"><img alt="https://ossjiyaoliu.oss-cn-beijing.aliyuncs.com/uPic/N0QLOZ.png" src="https://ossjiyaoliu.oss-cn-beijing.aliyuncs.com/uPic/N0QLOZ.png" style="height: 150px;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 1.6 </span><span class="caption-text">Depiction of a black hole as reconstructed from data recorded by the Event Horizon Telescope.</span><a class="headerlink" href="#id10" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 2.1 </span><span class="caption-text">Depiction of a black hole as reconstructed from data recorded by the Event Horizon Telescope.</span><a class="headerlink" href="#id10" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 </section>
@@ -553,20 +570,20 @@ Uncertainty可以通过**uncertainty in model parameters**，**irreducible data 
                   <!-- Previous / next buttons -->
 <div class="prev-next-area">
     <a class="left-prev"
-       href="../basic/jupyter_book.html"
+       href="../Report/acad_lunch_zhuang_wang.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title"><span class="section-number">1. </span>Jupyter Book 使用指南</p>
+        <p class="prev-next-title"><span class="section-number">1. </span>20231016-庄吓海/王成彦-可解释医学影像分析</p>
       </div>
     </a>
     <a class="right-next"
-       href="../basic/notebooks.html"
+       href="MRI_reconstruction/preprocess.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title"><span class="section-number">2. </span>Jupyter Notebook files</p>
+        <p class="prev-next-title"><span class="section-number">3. </span>MRI reconstruction预处理方法</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -585,18 +602,18 @@ Uncertainty可以通过**uncertainty in model parameters**，**irreducible data 
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">1.5. Evidential Learning and Uncentainty</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-classification-of-uncentainty">1.5.1. The classification of uncentainty</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#evidential-classification">1.5.2. Evidential classification</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#categorical-and-multinomial-distribution">1.5.2.1. Categorical and multinomial Distribution</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">1.5.2.2. 背景知识：狄利克雷分布</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#gamma-distribution">1.5.2.3. <span class="math notranslate nohighlight">\(\Gamma\)</span> Distribution</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#inverse-gamma-distribution">1.5.2.4. inverse <span class="math notranslate nohighlight">\(\Gamma\)</span> Distribution</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">1. Evidential Learning and Uncentainty</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-classification-of-uncentainty">1.1. The classification of uncentainty</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#evidential-classification">1.2. Evidential classification</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#categorical-and-multinomial-distribution">1.2.1. Categorical and multinomial Distribution</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">1.2.2. 背景知识：狄利克雷分布</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#gamma-distribution">1.2.3. <span class="math notranslate nohighlight">\(\Gamma\)</span> Distribution</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#inverse-gamma-distribution">1.2.4. inverse <span class="math notranslate nohighlight">\(\Gamma\)</span> Distribution</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#evidential-regression">1.6. Evidential Regression</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#evidential-regression">2. Evidential Regression</a></li>
 </ul>
 
   </nav></div>
