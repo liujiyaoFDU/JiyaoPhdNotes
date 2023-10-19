@@ -25,11 +25,11 @@
 
 + 1.7 描述上面NOE的couple的过程：有两个常数自弛豫和交叉弛豫
 
-  ![CamScanner 10-18-2023 15.27_2](https://ossjiyaoliu.oss-cn-beijing.aliyuncs.com/uPic/CamScanner%2010-18-2023%2015.27_2.jpg)
+  ![CamScanner 10-18-2023 15.27_2](https://ossjiyaoliu.oss-cn-beijing.aliyuncs.com/uPic/CamScanner%252010-18-2023%252015.27_2-20231019131533360.jpg)
 
 + 1.8 Chemical Exchange：大分子上有很多结合的氢质子，当有一个其他水分子和这个大分子有接触的时候，两个氢质子会发生化学交换（直接交换位置）。原因：水上的氢质子非常活泼。化学交换的衡量核心是交换速率，CEST只能对中速和慢速交换进行定量。
 
-  ![CamScanner10-18-202315.27_2](https://ossjiyaoliu.oss-cn-beijing.aliyuncs.com/uPic/CamScanner%252010-18-2023%252015.27_2.jpg)
+  ![CamScanner10-18-202315.27_2](https://ossjiyaoliu.oss-cn-beijing.aliyuncs.com/uPic/CamScanner%2010-18-2023%2015.27_2.jpg)
 
 ![CamScanner10-18-202315.27_4](https://ossjiyaoliu.oss-cn-beijing.aliyuncs.com/uPic/CamScanner%252010-18-2023%252015.27_4-20231018154908622.jpg)
 
