@@ -23,6 +23,7 @@ parts:
   - file: PRML/intro
     sections:
     - file: PRML/math_basic
+    - file: PRML/Exponential_Family_Distribution
 
 - caption: 学术报告
   numbered: true # Number your chapters and sections
@@ -39,3 +40,8 @@ parts:
   numbered: true # Number your chapters and sections
   chapters:
   - file:  MRI/MT-CEST-NOE
+
+- caption: 工具使用
+  numbered: true # Number your chapters and sections
+  chapters:
+  - file: tools/latex_symbol.md
