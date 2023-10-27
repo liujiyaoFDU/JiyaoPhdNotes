@@ -179,6 +179,7 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="nav bd-sidenav">
 <li class="toctree-l1 has-children"><a class="reference internal" href="../PRML/intro.html">1. PRML</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="../PRML/math_basic.html">1.1. 数学基础</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../PRML/Exponential_Family_Distribution.html">1.2. 指数组分布</a></li>
 </ul>
 </li>
 </ul>
@@ -195,6 +196,10 @@ const thebe_selector_output = ".output, .cell_output"
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">MRI notes</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../MRI/MT-CEST-NOE.html">1. MT&amp;CEST&amp;NOE 磁化转移定量成像</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">工具使用</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../tools/latex_symbol.html">1. Latex常用符号表</a></li>
 </ul>
 
     </div>
@@ -388,13 +393,14 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#publish-your-book-online-with-github-pages">1.1. Publish your book online with GitHub Pages</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">1.2. 创建修改与提交</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">1.3. 主题指引</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">1.3.1. 结构与内容管理</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#my-homepage">1.1. My homepage</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#publish-your-book-online-with-github-pages">1.2. Publish your book online with GitHub Pages</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">1.3. 创建修改与提交</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">1.4. 主题指引</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">1.4.1. 结构与内容管理</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">1.4. 一些参考的模板网页</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">1.5. 一些参考的模板网页</a></li>
 </ul>
             </nav>
         </div>
@@ -408,8 +414,12 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="jupyter-book">
 <h1><span class="section-number">1. </span>Jupyter Book 使用指南<a class="headerlink" href="#jupyter-book" title="Permalink to this heading">#</a></h1>
+<section id="my-homepage">
+<h2><span class="section-number">1.1. </span>My homepage<a class="headerlink" href="#my-homepage" title="Permalink to this heading">#</a></h2>
+<p><a class="reference external" href="https://jy-stdio.github.io/JiyaoPhdNotes/intro.html">https://jy-stdio.github.io/JiyaoPhdNotes/intro.html</a></p>
+</section>
 <section id="publish-your-book-online-with-github-pages">
-<h2><span class="section-number">1.1. </span>Publish your book online with GitHub Pages<a class="headerlink" href="#publish-your-book-online-with-github-pages" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">1.2. </span>Publish your book online with GitHub Pages<a class="headerlink" href="#publish-your-book-online-with-github-pages" title="Permalink to this heading">#</a></h2>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span><span class="nb">cd</span><span class="w"> </span>..
 $<span class="w"> </span>jupyter-book<span class="w"> </span>build<span class="w"> </span>JiyaoPhdNotes
 </pre></div>
@@ -420,23 +430,23 @@ $<span class="w"> </span>ghp-import<span class="w"> </span>-n<span class="w"> </
 </div>
 </section>
 <section id="id1">
-<h2><span class="section-number">1.2. </span>创建修改与提交<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">1.3. </span>创建修改与提交<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h2>
 <ul class="simple">
 <li><p>如何创建与提交参考：<a class="reference external" href="https://jupyterbook.org/en/stable/start/create.html">Tutorial</a></p></li>
 <li><p>参考Jupyter Book Docs<a class="reference external" href="https://jupyterbook.org/en/stable/start/build.html">homepage</a>及对应<a class="reference external" href="https://github.com/executablebooks/jupyter-book/blob/master/docs/_toc.yml">源码</a>更改框架细节。</p></li>
 </ul>
 </section>
 <section id="id2">
-<h2><span class="section-number">1.3. </span>主题指引<a class="headerlink" href="#id2" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">1.4. </span>主题指引<a class="headerlink" href="#id2" title="Permalink to this heading">#</a></h2>
 <section id="id3">
-<h3><span class="section-number">1.3.1. </span>结构与内容管理<a class="headerlink" href="#id3" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">1.4.1. </span>结构与内容管理<a class="headerlink" href="#id3" title="Permalink to this heading">#</a></h3>
 <ul class="simple">
 <li><p><a class="reference external" href="https://jupyterbook.org/en/stable/file-types/notebooks.html">Jupyter Notebook files</a></p></li>
 </ul>
 </section>
 </section>
 <section id="id4">
-<h2><span class="section-number">1.4. </span>一些参考的模板网页<a class="headerlink" href="#id4" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">1.5. </span>一些参考的模板网页<a class="headerlink" href="#id4" title="Permalink to this heading">#</a></h2>
 <ul class="simple">
 <li><p><a class="reference external" href="https://tristanvanleeuwen.github.io/IP_and_Im_Lectures/what_is.html">Inverse Problems and Imaging</a></p></li>
 </ul>
@@ -506,13 +516,14 @@ $<span class="w"> </span>ghp-import<span class="w"> </span>-n<span class="w"> </
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#publish-your-book-online-with-github-pages">1.1. Publish your book online with GitHub Pages</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">1.2. 创建修改与提交</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">1.3. 主题指引</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">1.3.1. 结构与内容管理</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#my-homepage">1.1. My homepage</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#publish-your-book-online-with-github-pages">1.2. Publish your book online with GitHub Pages</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">1.3. 创建修改与提交</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">1.4. 主题指引</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">1.4.1. 结构与内容管理</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">1.4. 一些参考的模板网页</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">1.5. 一些参考的模板网页</a></li>
 </ul>
   </nav></div>
 

@@ -1,0 +1,722 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>2. VALSE 20200415 | 机器学习 vs 压缩感知：核磁共振成像与重建 &#8212; Jy&#39; s phd learning notes</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=ac02cc09edc035673794" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=ac02cc09edc035673794" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=ac02cc09edc035673794" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=ac02cc09edc035673794" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=ac02cc09edc035673794" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=ac02cc09edc035673794" />
+  <script src="../_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=ac02cc09edc035673794"></script>
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'Report/report-rec';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="1. Evidential Learning and Uncentainty" href="../research/evidential_regression.html" />
+    <link rel="prev" title="1. 20231016 | 庄吓海/王成彦-可解释医学影像分析" href="acad_lunch_zhuang_wang.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+  
+
+<a class="navbar-brand logo" href="../intro.html">
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/logo.jpg" class="logo__image only-light" alt="Logo image"/>
+    <script>document.write(`<img src="../_static/logo.jpg" class="logo__image only-dark" alt="Logo image"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../intro.html">
+                    Jiyao Liu’s Phd lecture notebook
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Basic Guides</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../basic/jupyter_book.html">1. Jupyter Book 使用指南</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../basic/notebooks.html">2. Jupyter Notebook files</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Math</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../math/matrix_analysis.html">1. 矩阵与张量分析</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">PRML notes</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../PRML/intro.html">1. PRML</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../PRML/math_basic.html">1.1. 数学基础</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../PRML/Exponential_Family_Distribution.html">1.2. 指数组分布</a></li>
+</ul>
+</li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">学术报告</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="acad_lunch_zhuang_wang.html">1. 20231016 | 庄吓海/王成彦-可解释医学影像分析</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">2. VALSE 20200415 |  机器学习 vs 压缩感知：核磁共振成像与重建</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">research</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../research/evidential_regression.html">1. Evidential Learning and Uncentainty</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="../research/MRI_reconstruction/preprocess.html">3. MRI reconstruction预处理方法</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">MRI notes</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../MRI/MT-CEST-NOE.html">1. MT&amp;CEST&amp;NOE 磁化转移定量成像</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Pytorch</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../pytorch/%E6%A8%A1%E5%9E%8B%E6%8B%93%E6%89%91%E7%BB%93%E6%9E%84.html">1. 模型拓扑结构</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../pytorch/hook.html">1.1. pytorch 注册钩子函数（register_forward_hook）实现对各个层（layer）输入输出 shape 的查看</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../pytorch/computation_graph.html">1.2. 计算图构建细节</a></li>
+</ul>
+</li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">工具使用</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../tools/latex_symbol.html">1. Latex常用符号表</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2FReport/report-rec.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/Report/report-rec.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script>
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>VALSE 20200415 |  机器学习 vs 压缩感知：核磁共振成像与重建</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#deep-learning-for-mr-imaging-and-analysis-shanshan-wang">2.1. Deep learning for MR imaging and analysis - Shanshan Wang</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#machine-learning-for-cs-mri-from-model-based-methods-to-deep-learning-bihan-wen">2.2. Machine Learning for CS MRI: From Model-Based Methods to Deep Learning - Bihan Wen</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">2.2.1. 重建问题简介</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">2.2.2. 压缩感知介绍</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#model-based-method-transform-learning-for-better-sparsity">2.2.3. Model-based method: Transform learning for better sparsity</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">2.2.3.1. 基本概念</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#transform-learning-method-1-sparsifying-transform-learning-stl">2.2.3.2. 1.Transform learning Method 1: Sparsifying Transform Learning(STL)</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#unitary-transform-learning-ut">2.2.3.3. 2.Unitary Transform Learning (UT)</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#learning-a-union-of-transforms-unite">2.2.3.4. 3. Learning a UNIon of Transforms (UNITE)</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#flipping-and-rotation-invariant-sparsifying-transform-frist">2.2.3.5. 4.Flipping and Rotation Invariant Sparsifying Transform (FRIST)</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#sparsifying-transform-learning-and-low-rankness-strollr">2.2.3.6. 5. Sparsifying TRansfOrm Learning and Low-Rankness (STROLLR)</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">2.2.3.7. 总结</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">2.2.3.8. 讨论</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#deep-learning">2.2.4. Deep Learning</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">2.2.4.1. 一些主流模型</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">2.2.4.2. 深度学习模型和传统模型的对比</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="valse-20200415-vs">
+<h1><span class="section-number">2. </span>VALSE 20200415 |  机器学习 vs 压缩感知：核磁共振成像与重建<a class="headerlink" href="#valse-20200415-vs" title="Permalink to this heading">#</a></h1>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<blockquote>
+<div><p>报告主页：<a class="reference external" href="http://valser.org/article-359-1.html">http://valser.org/article-359-1.html</a></p>
+<p><a class="reference external" href="https://www.bilibili.com/video/BV19Q4y1P7VS?vd_source=225dba48b31d269151658db856705273">20200415 机器学习 vs 压缩感知：核磁共振成像与重建</a></p>
+<p>PPT：<a class="reference external" href="http://valser.org/webinar/slide/slides/20200415/%E7%8E%8B%E7%8F%8A%E7%8F%8A-valse30min%E6%BC%94%E8%AE%B2%E7%A8%BF%E7%BB%88%E7%89%88.pdf">Shanshan Wang slides</a> | <a class="reference external" href="http://valser.org/webinar/slide/slides/20200415/Valse2020_WBH_TL-CSMRI.pdf">Bihan Wen slides</a></p>
+<p>谷歌学术：</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://scholar.google.com.hk/citations?hl=zh-CN&amp;user=8pnz5L4AAAAJ&amp;view_op=list_works&amp;sortby=pubdate">王珊珊 Shanshan Wang</a> | siat</p></li>
+<li><p><a class="reference external" href="https://scholar.google.com.hk/citations?hl=zh-CN&amp;user=ypkClpwAAAAJ">文碧汉</a> | ntu</p></li>
+</ul>
+</div></blockquote>
+<p>2023/10/16</p>
+<script type="text/javascript">
+function lastModified() {
+    var modiDate = new Date(document.lastModified);
+    var showAs = modiDate.getDate() + "-" + (modiDate.getMonth() + 1) + "-" + modiDate.getFullYear();
+    return showAs
+}
+document.writeln("<div style='font-size: 14px;'>");
+document.write("Last updated on " + lastModified());
+document.writeln("</div>");
+</script>
+</div>
+<section id="deep-learning-for-mr-imaging-and-analysis-shanshan-wang">
+<h2><span class="section-number">2.1. </span>Deep learning for MR imaging and analysis - Shanshan Wang<a class="headerlink" href="#deep-learning-for-mr-imaging-and-analysis-shanshan-wang" title="Permalink to this heading">#</a></h2>
+<p>可以参考前面链接中的ppt，这里不重点讲，我们主要关注文碧汉老师的talk。</p>
+</section>
+<section id="machine-learning-for-cs-mri-from-model-based-methods-to-deep-learning-bihan-wen">
+<h2><span class="section-number">2.2. </span>Machine Learning for CS MRI: From Model-Based Methods to Deep Learning - Bihan Wen<a class="headerlink" href="#machine-learning-for-cs-mri-from-model-based-methods-to-deep-learning-bihan-wen" title="Permalink to this heading">#</a></h2>
+<section id="id1">
+<h3><span class="section-number">2.2.1. </span>重建问题简介<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h3>
+<p>计算机视觉准确来说是图像理解，成像/重建的本质是感知，从低质量观测恢复高质量图像。</p>
+<p><img alt="计算机视觉和图像重建对比" src="https://ossjiyaoliu.oss-cn-beijing.aliyuncs.com/uPic/image-20230706014353119.png" /></p>
+<p>MRI成像过程可以看做下面的公式：</p>
+<p><img alt="MRI成像模型" src="Users/liujiyao/Downloads/image-20230707013705811.png" /></p>
+<p>理想情况下k-space是连续的，但是由于信息的采集都是的数字信号，因此采集到的都是离散化的数据，因此可以说采集到的k-空间的全采样图像都是真实情况下的欠采样。</p>
+<p>但是我们要讨论的情况是在全采样情况下的欠采样，也就是对全采样的图像我们只采样部分区域，如下图：</p>
+<p><img alt="" src="https://ossjiyaoliu.oss-cn-beijing.aliyuncs.com/uPic/image-20230707013756984.png" /></p>
+<p>但是直接求解这个逆过程是一个ill-posed 问题。在十年前，压缩感知作为一个比较好的方法在重建领域大放异彩。</p>
+</section>
+<section id="id2">
+<h3><span class="section-number">2.2.2. </span>压缩感知介绍<a class="headerlink" href="#id2" title="Permalink to this heading">#</a></h3>
+<p>经典压缩感知公式如下</p>
+<ul>
+<li><p><strong>有约束优化问题</strong>（Transform domain sparsity）：利用MR成像的关系式<span class="math notranslate nohighlight">\(F_ux=y\)</span>，我们设计一个有约束的优化问题。目标在固定的Transform（变换）下的最优的sparsity，找到使得sparsity最优的<span class="math notranslate nohighlight">\(x\)</span>。</p>
+<p><img alt="image-20230707013832092" src="https://ossjiyaoliu.oss-cn-beijing.aliyuncs.com/uPic/image-20230707013832092.png" /></p>
+</li>
+<li><p><strong>无约束优化问题</strong>：sparsity作为正则项<img alt="image-20230707013842646" src="https://ossjiyaoliu.oss-cn-beijing.aliyuncs.com/uPic/image-20230707013842646.png" /></p></li>
+</ul>
+<blockquote>
+<div><p><strong>稀疏性</strong></p>
+<p>①为什么sparsity比较重要？</p>
+<p>image model的作用如下，即提供判断是否为我们想要的图像的依据。<img alt="image-20230707013847785" src="https://ossjiyaoliu.oss-cn-beijing.aliyuncs.com/uPic/image-20230707013847785.png" /></p>
+<p>②信号的稀疏性定义</p>
+<p>定义：一个dense的信号在transform domain是稀疏的</p>
+<p>举例：一个一维信号是稀疏的<span class="math notranslate nohighlight">\(\Leftrightarrow\)</span>大多数相关系数为0</p>
+<p><img alt="image-20230707013858597" src="https://ossjiyaoliu.oss-cn-beijing.aliyuncs.com/uPic/image-20230707013858597.png" /></p>
+<p>特点：自然信号大都是满足sparsity属性的，例如自然图像的离散余弦变换<img alt="image-20230707013903212" src="https://ossjiyaoliu.oss-cn-beijing.aliyuncs.com/uPic/image-20230707013903212.png" /></p>
+<p>而噪声的离散余弦变换仍为噪声：</p>
+<p><img alt="image-20230707013908933" src="https://ossjiyaoliu.oss-cn-beijing.aliyuncs.com/uPic/image-20230707013908933.png" /></p>
+</div></blockquote>
+<p>磁共振重建领域的压缩感知方法发展如下：</p>
+<p><img alt="image-20230707013915500" src="https://ossjiyaoliu.oss-cn-beijing.aliyuncs.com/uPic/image-20230707013915500.png" /></p>
+</section>
+<section id="model-based-method-transform-learning-for-better-sparsity">
+<h3><span class="section-number">2.2.3. </span>Model-based method: Transform learning for better sparsity<a class="headerlink" href="#model-based-method-transform-learning-for-better-sparsity" title="Permalink to this heading">#</a></h3>
+<section id="id3">
+<h4><span class="section-number">2.2.3.1. </span>基本概念<a class="headerlink" href="#id3" title="Permalink to this heading">#</a></h4>
+<p>在压缩感知中，我们给定了一个变换<span class="math notranslate nohighlight">\(\Psi\)</span>（如DCT、小波等等），求得这个变换下最稀疏的<span class="math notranslate nohighlight">\(x\)</span>。如下式：</p>
+<p><img alt="image-20230707013920584" src="https://ossjiyaoliu.oss-cn-beijing.aliyuncs.com/uPic/image-20230707013920584.png" /></p>
+<p>但是我们希望去学习这个变换，使得稀疏化更好，如下图：</p>
+<p><img alt="image-20230707013924578" src="https://ossjiyaoliu.oss-cn-beijing.aliyuncs.com/uPic/image-20230707013924578.png" /></p>
+</section>
+<section id="transform-learning-method-1-sparsifying-transform-learning-stl">
+<h4><span class="section-number">2.2.3.2. </span>1.Transform learning Method 1: Sparsifying Transform Learning(STL)<a class="headerlink" href="#transform-learning-method-1-sparsifying-transform-learning-stl" title="Permalink to this heading">#</a></h4>
+<p><img alt="image-20230707013929165" src="https://ossjiyaoliu.oss-cn-beijing.aliyuncs.com/uPic/image-20230707013929165.png" /></p>
+<blockquote>
+<div><p>符号解释：</p>
+<p><span class="math notranslate nohighlight">\(\mathbf{W}\)</span>: 要学习的变换矩阵；<span class="math notranslate nohighlight">\(\mathbf{b}_i\)</span>: patch对应的sparse code</p>
+<p><span class="math notranslate nohighlight">\(\mathbf{P}_i\)</span>: 图像中的第<span class="math notranslate nohighlight">\(i\)</span>个patch；</p>
+<p><span class="math notranslate nohighlight">\(\frac \lambda 2 \Vert \mathbf W\Vert^2_F - \lambda log(det \mathbf W)\)</span>: 保证了<span class="math notranslate nohighlight">\(\mathbf W,\mathbf  b\)</span>不会变成一个trivial的解：为0，保证让<span class="math notranslate nohighlight">\(\frac \lambda 2 \Vert \mathbf W\Vert^2_F\)</span>其尽量趋近于1</p>
+</div></blockquote>
+<blockquote>
+<div><p>该方法的优缺点：</p>
+<p>① 有闭式解</p>
+</div></blockquote>
+</section>
+<section id="unitary-transform-learning-ut">
+<h4><span class="section-number">2.2.3.3. </span>2.Unitary Transform Learning (UT)<a class="headerlink" href="#unitary-transform-learning-ut" title="Permalink to this heading">#</a></h4>
+<p><img alt="image-20230707014024926" src="https://ossjiyaoliu.oss-cn-beijing.aliyuncs.com/uPic/image-20230707014024926.png" /></p>
+<p>算法的具体实现过程：<img alt="image-20230707013956805" src="https://ossjiyaoliu.oss-cn-beijing.aliyuncs.com/uPic/image-20230707013956805.png" /></p>
+</section>
+<section id="learning-a-union-of-transforms-unite">
+<h4><span class="section-number">2.2.3.4. </span>3. Learning a UNIon of Transforms (UNITE)<a class="headerlink" href="#learning-a-union-of-transforms-unite" title="Permalink to this heading">#</a></h4>
+<p><img alt="image-20230707014030802" src="https://ossjiyaoliu.oss-cn-beijing.aliyuncs.com/uPic/image-20230707014030802.png" /></p>
+<p>图像比较复杂的情况下，一个transformer是不够的。</p>
+</section>
+<section id="flipping-and-rotation-invariant-sparsifying-transform-frist">
+<h4><span class="section-number">2.2.3.5. </span>4.Flipping and Rotation Invariant Sparsifying Transform (FRIST)<a class="headerlink" href="#flipping-and-rotation-invariant-sparsifying-transform-frist" title="Permalink to this heading">#</a></h4>
+<p><img alt="image-20230707014035838" src="https://ossjiyaoliu.oss-cn-beijing.aliyuncs.com/uPic/image-20230707014035838.png" /></p>
+</section>
+<section id="sparsifying-transform-learning-and-low-rankness-strollr">
+<h4><span class="section-number">2.2.3.6. </span>5. Sparsifying TRansfOrm Learning and Low-Rankness (STROLLR)<a class="headerlink" href="#sparsifying-transform-learning-and-low-rankness-strollr" title="Permalink to this heading">#</a></h4>
+<p>有的时候不光使用sparsity，也可以构建Low-rank，将二者结合在一起约束。</p>
+<p><img alt="image-20230707014040635" src="https://ossjiyaoliu.oss-cn-beijing.aliyuncs.com/uPic/image-20230707014040635.png" /></p>
+</section>
+<section id="id4">
+<h4><span class="section-number">2.2.3.7. </span>总结<a class="headerlink" href="#id4" title="Permalink to this heading">#</a></h4>
+<p><img alt="image-20230707014044897" src="https://ossjiyaoliu.oss-cn-beijing.aliyuncs.com/uPic/image-20230707014044897.png" /></p>
+</section>
+<section id="id5">
+<h4><span class="section-number">2.2.3.8. </span>讨论<a class="headerlink" href="#id5" title="Permalink to this heading">#</a></h4>
+<p><img alt="image-20230707014049220" src="https://ossjiyaoliu.oss-cn-beijing.aliyuncs.com/uPic/image-20230707014049220.png" /></p>
+<blockquote>
+<div><p>注：不同的model在不同的MRI中有不同的效果，需要选择更适合的方法，达到最好的效果。<img alt="image-20230707014053294" src="https://ossjiyaoliu.oss-cn-beijing.aliyuncs.com/uPic/image-20230707014053294.png" /></p>
+</div></blockquote>
+</section>
+</section>
+<section id="deep-learning">
+<h3><span class="section-number">2.2.4. </span>Deep Learning<a class="headerlink" href="#deep-learning" title="Permalink to this heading">#</a></h3>
+<section id="id6">
+<h4><span class="section-number">2.2.4.1. </span>一些主流模型<a class="headerlink" href="#id6" title="Permalink to this heading">#</a></h4>
+<p>model的发展，即model灵活性的上升，模型具有更好的适应性：<img alt="image-20230707014057478" src="https://ossjiyaoliu.oss-cn-beijing.aliyuncs.com/uPic/image-20230707014057478.png" /></p>
+<p>下面我们主要关注两种方向：①unroll network（主流），将迭代过程变为多个network，如下图：</p>
+<p><img alt="image-20230707014101790" src="https://ossjiyaoliu.oss-cn-beijing.aliyuncs.com/uPic/image-20230707014101790.png" /></p>
+<p><img alt="image-20230707014105759" src="https://ossjiyaoliu.oss-cn-beijing.aliyuncs.com/uPic/image-20230707014105759.png" /></p>
+<p>②另一种想法就是设计多层的transform：</p>
+<p><img alt="image-20230707014109415" src="https://ossjiyaoliu.oss-cn-beijing.aliyuncs.com/uPic/image-20230707014109415.png" /></p>
+<p>一些结果：</p>
+<p><img alt="image-20230707014112740" src="https://ossjiyaoliu.oss-cn-beijing.aliyuncs.com/uPic/image-20230707014112740.png" /></p>
+<p><img alt="image-20230707014117510" src="https://ossjiyaoliu.oss-cn-beijing.aliyuncs.com/uPic/image-20230707014117510.png" /></p>
+<p>此外，自监督的方式也有一定的优势：我们希望模型不只是拘泥于数据集，而要一定程度上focus在图像本身，根据图像本身的一些全局和局部信息进行重建。</p>
+</section>
+<section id="id7">
+<h4><span class="section-number">2.2.4.2. </span>深度学习模型和传统模型的对比<a class="headerlink" href="#id7" title="Permalink to this heading">#</a></h4>
+<p><img alt="image-20230707014121664" src="https://ossjiyaoliu.oss-cn-beijing.aliyuncs.com/uPic/image-20230707014121664.png" /></p>
+</section>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./Report"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer">
+                  <!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="acad_lunch_zhuang_wang.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title"><span class="section-number">1. </span>20231016 | 庄吓海/王成彦-可解释医学影像分析</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="../research/evidential_regression.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><span class="section-number">1. </span>Evidential Learning and Uncentainty</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#deep-learning-for-mr-imaging-and-analysis-shanshan-wang">2.1. Deep learning for MR imaging and analysis - Shanshan Wang</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#machine-learning-for-cs-mri-from-model-based-methods-to-deep-learning-bihan-wen">2.2. Machine Learning for CS MRI: From Model-Based Methods to Deep Learning - Bihan Wen</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">2.2.1. 重建问题简介</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">2.2.2. 压缩感知介绍</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#model-based-method-transform-learning-for-better-sparsity">2.2.3. Model-based method: Transform learning for better sparsity</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">2.2.3.1. 基本概念</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#transform-learning-method-1-sparsifying-transform-learning-stl">2.2.3.2. 1.Transform learning Method 1: Sparsifying Transform Learning(STL)</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#unitary-transform-learning-ut">2.2.3.3. 2.Unitary Transform Learning (UT)</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#learning-a-union-of-transforms-unite">2.2.3.4. 3. Learning a UNIon of Transforms (UNITE)</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#flipping-and-rotation-invariant-sparsifying-transform-frist">2.2.3.5. 4.Flipping and Rotation Invariant Sparsifying Transform (FRIST)</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#sparsifying-transform-learning-and-low-rankness-strollr">2.2.3.6. 5. Sparsifying TRansfOrm Learning and Low-Rankness (STROLLR)</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">2.2.3.7. 总结</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">2.2.3.8. 讨论</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#deep-learning">2.2.4. Deep Learning</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">2.2.4.1. 一些主流模型</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">2.2.4.2. 深度学习模型和传统模型的对比</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Jiyao Liu
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  <p class="copyright">
+    
+      © Copyright 2022.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=ac02cc09edc035673794"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=ac02cc09edc035673794"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

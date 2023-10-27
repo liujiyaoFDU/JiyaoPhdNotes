@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
-    <title>1. 20231016-庄吓海/王成彦-可解释医学影像分析 &#8212; Jy&#39; s phd learning notes</title>
+    <title>1. 20231016 | 庄吓海/王成彦-可解释医学影像分析 &#8212; Jy&#39; s phd learning notes</title>
   
   
   
@@ -65,8 +65,8 @@ const thebe_selector_output = ".output, .cell_output"
     <script>DOCUMENTATION_OPTIONS.pagename = 'Report/acad_lunch_zhuang_wang';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="1. Evidential Learning and Uncentainty" href="../research/evidential_regression.html" />
-    <link rel="prev" title="1.1. 数学基础" href="../PRML/math_basic.html" />
+    <link rel="next" title="2. VALSE 20200415 | 机器学习 vs 压缩感知：核磁共振成像与重建" href="report-rec.html" />
+    <link rel="prev" title="1.2. 指数组分布" href="../PRML/Exponential_Family_Distribution.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -179,12 +179,14 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="nav bd-sidenav">
 <li class="toctree-l1 has-children"><a class="reference internal" href="../PRML/intro.html">1. PRML</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="../PRML/math_basic.html">1.1. 数学基础</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../PRML/Exponential_Family_Distribution.html">1.2. 指数组分布</a></li>
 </ul>
 </li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">学术报告</span></p>
 <ul class="current nav bd-sidenav">
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">1. 20231016-庄吓海/王成彦-可解释医学影像分析</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">1. 20231016 | 庄吓海/王成彦-可解释医学影像分析</a></li>
+<li class="toctree-l1"><a class="reference internal" href="report-rec.html">2. VALSE 20200415 |  机器学习 vs 压缩感知：核磁共振成像与重建</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">research</span></p>
 <ul class="nav bd-sidenav">
@@ -195,6 +197,17 @@ const thebe_selector_output = ".output, .cell_output"
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">MRI notes</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../MRI/MT-CEST-NOE.html">1. MT&amp;CEST&amp;NOE 磁化转移定量成像</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Pytorch</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../pytorch/%E6%A8%A1%E5%9E%8B%E6%8B%93%E6%89%91%E7%BB%93%E6%9E%84.html">1. 模型拓扑结构</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../pytorch/hook.html">1.1. pytorch 注册钩子函数（register_forward_hook）实现对各个层（layer）输入输出 shape 的查看</a></li>
+</ul>
+</li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">工具使用</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../tools/latex_symbol.html">1. Latex常用符号表</a></li>
 </ul>
 
     </div>
@@ -378,7 +391,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>20231016-庄吓海/王成彦-可解释医学影像分析</h1>
+    <h1>20231016 | 庄吓海/王成彦-可解释医学影像分析</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -401,7 +414,7 @@ document.write(`
                 <article class="bd-article" role="main">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="id1">
-<h1><span class="section-number">1. </span>20231016-庄吓海/王成彦-可解释医学影像分析<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h1>
+<h1><span class="section-number">1. </span>20231016 | 庄吓海/王成彦-可解释医学影像分析<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h1>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>类脑学术午餐会</p>
@@ -476,20 +489,20 @@ document.writeln("</div>");
                   <!-- Previous / next buttons -->
 <div class="prev-next-area">
     <a class="left-prev"
-       href="../PRML/math_basic.html"
+       href="../PRML/Exponential_Family_Distribution.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title"><span class="section-number">1.1. </span>数学基础</p>
+        <p class="prev-next-title"><span class="section-number">1.2. </span>指数组分布</p>
       </div>
     </a>
     <a class="right-next"
-       href="../research/evidential_regression.html"
+       href="report-rec.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title"><span class="section-number">1. </span>Evidential Learning and Uncentainty</p>
+        <p class="prev-next-title"><span class="section-number">2. </span>VALSE 20200415 |  机器学习 vs 压缩感知：核磁共振成像与重建</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>

@@ -67,7 +67,7 @@ const thebe_selector_output = ".output, .cell_output"
     <script>DOCUMENTATION_OPTIONS.pagename = 'PRML/Exponential_Family_Distribution';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="1. 20231016-庄吓海/王成彦-可解释医学影像分析" href="../Report/acad_lunch_zhuang_wang.html" />
+    <link rel="next" title="1. 20231016 | 庄吓海/王成彦-可解释医学影像分析" href="../Report/acad_lunch_zhuang_wang.html" />
     <link rel="prev" title="1.1. 数学基础" href="math_basic.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -187,7 +187,8 @@ const thebe_selector_output = ".output, .cell_output"
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">学术报告</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../Report/acad_lunch_zhuang_wang.html">1. 20231016-庄吓海/王成彦-可解释医学影像分析</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Report/acad_lunch_zhuang_wang.html">1. 20231016 | 庄吓海/王成彦-可解释医学影像分析</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Report/report-rec.html">2. VALSE 20200415 |  机器学习 vs 压缩感知：核磁共振成像与重建</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">research</span></p>
 <ul class="nav bd-sidenav">
@@ -198,6 +199,13 @@ const thebe_selector_output = ".output, .cell_output"
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">MRI notes</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../MRI/MT-CEST-NOE.html">1. MT&amp;CEST&amp;NOE 磁化转移定量成像</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Pytorch</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../pytorch/%E6%A8%A1%E5%9E%8B%E6%8B%93%E6%89%91%E7%BB%93%E6%9E%84.html">1. 模型拓扑结构</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../pytorch/hook.html">1.1. pytorch 注册钩子函数（register_forward_hook）实现对各个层（layer）输入输出 shape 的查看</a></li>
+</ul>
+</li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">工具使用</span></p>
 <ul class="nav bd-sidenav">
@@ -397,6 +405,7 @@ document.write(`
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">1.2.1. 背景及应用</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">1.2.2. 高斯分布的指数族形式</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">1.2.3. 总结</a></li>
 </ul>
             </nav>
         </div>
@@ -410,6 +419,7 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="id1">
 <h1><span class="section-number">1.2. </span>指数组分布<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h1>
+<p><img alt="wuQ8zW" src="https://ossjiyaoliu.oss-cn-beijing.aliyuncs.com/uPic/wuQ8zW.png" /></p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>本节主要讲了指数族分布(Exponential Family Distribution)及其应用。</p>
@@ -504,7 +514,17 @@ document.writeln("</div>");
 </section>
 <section id="id3">
 <h2><span class="section-number">1.2.2. </span>高斯分布的指数族形式<a class="headerlink" href="#id3" title="Permalink to this heading">#</a></h2>
+<p>上一节给出了指数族分布的统一表达形式：</p>
 <p>目标是将参数<span class="math notranslate nohighlight">\(\theta\)</span>转化成<span class="math notranslate nohighlight">\(\eta\)</span>的形式</p>
+</section>
+<section id="id4">
+<h2><span class="section-number">1.2.3. </span>总结<a class="headerlink" href="#id4" title="Permalink to this heading">#</a></h2>
+<p>指数族分布是一类分布，包括高斯分布、伯努利分布等，可以统一写为如下形式：</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}P(x|\eta) = h(x)\exp(\eta^T\phi(x)-A(\eta))\\\end{split}\]</div>
+<p>第二节用高斯分布进行了验证</p>
+<p>后续又找出了对数配分函数与充分统计量的关系</p>
+<p>对经验分布利用最大熵原理导出的分布也是指数族分布</p>
 </section>
 </section>
 
@@ -552,7 +572,7 @@ document.writeln("</div>");
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title"><span class="section-number">1. </span>20231016-庄吓海/王成彦-可解释医学影像分析</p>
+        <p class="prev-next-title"><span class="section-number">1. </span>20231016 | 庄吓海/王成彦-可解释医学影像分析</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -573,6 +593,7 @@ document.writeln("</div>");
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">1.2.1. 背景及应用</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">1.2.2. 高斯分布的指数族形式</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">1.2.3. 总结</a></li>
 </ul>
   </nav></div>
 

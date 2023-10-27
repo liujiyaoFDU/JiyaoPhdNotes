@@ -29,6 +29,7 @@ parts:
   numbered: true # Number your chapters and sections
   chapters:
   - file: Report/acad_lunch_zhuang_wang
+  - file: Report/report-rec
 
 - caption: research
   numbered: true # Number your chapters and sections
@@ -40,6 +41,14 @@ parts:
   numbered: true # Number your chapters and sections
   chapters:
   - file:  MRI/MT-CEST-NOE
+
+- caption: Pytorch
+  numbered: true # Number your chapters and sections
+  chapters:
+  - file: pytorch/模型拓扑结构
+    sections:
+    - file: pytorch/hook
+    - file: pytorch/computation_graph
 
 - caption: 工具使用
   numbered: true # Number your chapters and sections

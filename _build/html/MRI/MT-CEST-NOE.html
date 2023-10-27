@@ -67,6 +67,7 @@ const thebe_selector_output = ".output, .cell_output"
     <script>DOCUMENTATION_OPTIONS.pagename = 'MRI/MT-CEST-NOE';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="1. Latex常用符号表" href="../tools/latex_symbol.html" />
     <link rel="prev" title="3. MRI reconstruction预处理方法" href="../research/MRI_reconstruction/preprocess.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -180,6 +181,7 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="nav bd-sidenav">
 <li class="toctree-l1 has-children"><a class="reference internal" href="../PRML/intro.html">1. PRML</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="../PRML/math_basic.html">1.1. 数学基础</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../PRML/Exponential_Family_Distribution.html">1.2. 指数组分布</a></li>
 </ul>
 </li>
 </ul>
@@ -196,6 +198,10 @@ const thebe_selector_output = ".output, .cell_output"
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">MRI notes</span></p>
 <ul class="current nav bd-sidenav">
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">1. MT&amp;CEST&amp;NOE 磁化转移定量成像</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">工具使用</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../tools/latex_symbol.html">1. Latex常用符号表</a></li>
 </ul>
 
     </div>
@@ -424,20 +430,20 @@ document.write(`
 <li><p>1.5 交叉弛豫：两个氢质子（spin自旋），在距离非常近的情况下，这两个氢质子会相互作用，造成能量传递。（偶极耦合）。</p></li>
 <li><p>1.6 Nuclear Overhauser E：等同于交叉弛豫</p></li>
 <li><p>1.7 描述上面NOE的couple的过程：有两个常数自弛豫和交叉弛豫</p>
-<p><img alt="CamScanner 10-18-2023 15.27_2" src="https://ossjiyaoliu.oss-cn-beijing.aliyuncs.com/uPic/CamScanner%252010-18-2023%252015.27_2-20231019131533360.jpg" /></p>
+<p><img alt="image-20231025120039520" src="https://ossjiyaoliu.oss-cn-beijing.aliyuncs.com/uPic/image-20231025120039520.png" /></p>
 </li>
 <li><p>1.8 Chemical Exchange：大分子上有很多结合的氢质子，当有一个其他水分子和这个大分子有接触的时候，两个氢质子会发生化学交换（直接交换位置）。原因：水上的氢质子非常活泼。化学交换的衡量核心是交换速率，CEST只能对中速和慢速交换进行定量。</p>
-<p><img alt="CamScanner10-18-202315.27_2" src="https://ossjiyaoliu.oss-cn-beijing.aliyuncs.com/uPic/CamScanner%2010-18-2023%2015.27_2.jpg" /></p>
+<p><img alt="image-20231025120113910" src="https://ossjiyaoliu.oss-cn-beijing.aliyuncs.com/uPic/image-20231025120113910.png" /></p>
 </li>
 </ul>
-<p><img alt="CamScanner10-18-202315.27_4" src="https://ossjiyaoliu.oss-cn-beijing.aliyuncs.com/uPic/CamScanner%252010-18-2023%252015.27_4-20231018154908622.jpg" /></p>
+<p><img alt="image-20231025120127271" src="https://ossjiyaoliu.oss-cn-beijing.aliyuncs.com/uPic/image-20231025120127271.png" /></p>
 <ul class="simple">
 <li><p>1.9 描述化学交换的过程公式是在Block equation的基础上进行modify。</p></li>
 </ul>
-<p><img alt="CamScanner10-18-202315.27_5" src="https://ossjiyaoliu.oss-cn-beijing.aliyuncs.com/uPic/CamScanner%252010-18-2023%252015.27_5-20231018154809423.jpg" /></p>
+<p><img alt="image-20231025120140794" src="https://ossjiyaoliu.oss-cn-beijing.aliyuncs.com/uPic/image-20231025120140794.png" /></p>
 <ul>
 <li><p>1.10 饱和转移</p>
-<p><img alt="CamScanner10-18-202315.27_6" src="https://ossjiyaoliu.oss-cn-beijing.aliyuncs.com/uPic/CamScanner%252010-18-2023%252015.27_6.jpg" /></p>
+<p><img alt="image-20231025120155121" src="https://ossjiyaoliu.oss-cn-beijing.aliyuncs.com/uPic/image-20231025120155121.png" /></p>
 </li>
 </ul>
 </section>
@@ -446,24 +452,24 @@ document.write(`
 <ul class="simple">
 <li><p>semi-solid成分很难成像，一般是invisible的。因为T2时间非常短。例如软骨、细胞膜、髓鞘等</p></li>
 </ul>
-<p><img alt="CamScanner10-18-202315.27_8" src="https://ossjiyaoliu.oss-cn-beijing.aliyuncs.com/uPic/CamScanner%252010-18-2023%252015.27_8-20231018155358384.jpg" /></p>
-<p><img alt="CamScanner10-18-202315.27_10" src="https://ossjiyaoliu.oss-cn-beijing.aliyuncs.com/uPic/CamScanner%252010-18-2023%252015.27_10.jpg" /></p>
+<p><img alt="image-20231025120212913" src="https://ossjiyaoliu.oss-cn-beijing.aliyuncs.com/uPic/image-20231025120212913.png" /></p>
+<p><img alt="image-20231025120225354" src="https://ossjiyaoliu.oss-cn-beijing.aliyuncs.com/uPic/image-20231025120225354.png" /></p>
 <p><strong>由于大分子很难成像，因此，可以使用饱和激发/偏共振脉冲大分子，会使得自由水分子信号变化（发生交叉弛豫），通过检测水分子的信号变化，就能检测出大分子的信号变化。</strong></p>
 <ul class="simple">
 <li><p>**这种序列如何设计：**使用较宽/无选择性的脉冲</p></li>
 </ul>
-<p><img alt="CamScanner10-18-202316.03_1" src="https://ossjiyaoliu.oss-cn-beijing.aliyuncs.com/uPic/CamScanner%252010-18-2023%252016.03_1-20231018160342019.jpg" /></p>
+<p><img alt="image-20231025120238701" src="https://ossjiyaoliu.oss-cn-beijing.aliyuncs.com/uPic/image-20231025120238701.png" /></p>
 <ul class="simple">
 <li><p><strong>定量分析</strong>：计算MTR</p></li>
 </ul>
-<p><img alt="CamScanner10-18-202316.03_2" src="https://ossjiyaoliu.oss-cn-beijing.aliyuncs.com/uPic/CamScanner%252010-18-2023%252016.03_2.jpg" /></p>
+<p><img alt="image-20231025120253803" src="https://ossjiyaoliu.oss-cn-beijing.aliyuncs.com/uPic/image-20231025120253803.png" /></p>
 <p>缺陷：没有考虑如何交换，是一种半定量技术</p>
 <ul class="simple">
 <li><p>最终的<span class="math notranslate nohighlight">\(MTR = (M_{sat}-M_0)/M_0\)</span></p></li>
 </ul>
-<p><img alt="CamScanner10-18-202316.03_3" src="https://ossjiyaoliu.oss-cn-beijing.aliyuncs.com/uPic/CamScanner%252010-18-2023%252016.03_3.jpg" /></p>
+<p><img alt="image-20231025120308271" src="https://ossjiyaoliu.oss-cn-beijing.aliyuncs.com/uPic/image-20231025120308271.png" /></p>
 <p>可以看到白质信号更好，自由水信号变暗。为什么会这样：</p>
-<p><img alt="CamScanner10-18-202316.03_4" src="https://ossjiyaoliu.oss-cn-beijing.aliyuncs.com/uPic/CamScanner%252010-18-2023%252016.03_4.jpg" /></p>
+<p><img alt="image-20231025120321034" src="https://ossjiyaoliu.oss-cn-beijing.aliyuncs.com/uPic/image-20231025120321034.png" /></p>
 <ul class="simple">
 <li><p>定量MT可以用2、3、4-pool model进行建模</p></li>
 </ul>
@@ -472,17 +478,17 @@ document.write(`
 <section id="cest">
 <h2><span class="section-number">1.2. </span>CEST<a class="headerlink" href="#cest" title="Permalink to this heading">#</a></h2>
 <p>CEST是一种特殊的MT。CEST有两个池：free water和中等分子（代谢物、蛋白等可自由运动的分子，比大分子小的多比水分子大）。则两个池的信号如下面所示，中分子的信号相对于大分子更局限，如右图：</p>
-<p><img alt="CamScanner10-18-202316.41_1" src="https://ossjiyaoliu.oss-cn-beijing.aliyuncs.com/uPic/CamScanner%252010-18-2023%252016.41_1.jpg" /></p>
+<p><img alt="image-20231025120334704" src="https://ossjiyaoliu.oss-cn-beijing.aliyuncs.com/uPic/image-20231025120334704.png" /></p>
 <p>想要观察中分子可以先用选择性的频率对中等大小的分子（OH或者NH或者NH2）进行饱和，然后传递到水分子，就会发现化学传递。使得周围的水分子也饱和，从而造成水分子信号下降。</p>
-<p><img alt="CamScanner10-18-202316.41_2" src="https://ossjiyaoliu.oss-cn-beijing.aliyuncs.com/uPic/CamScanner%252010-18-2023%252016.41_2.jpg" /></p>
+<p><img alt="image-20231025120346622" src="https://ossjiyaoliu.oss-cn-beijing.aliyuncs.com/uPic/image-20231025120346622.png" /></p>
 <p>小池子是中分子，大池子是自由水。举个具体的例子：可以看做饱和脉冲抽到了A-pool中的水，就会是的B-pool中的水过来（这里的水相当于信号）。</p>
-<p><img alt="CamScanner10-18-202316.41_3" src="https://ossjiyaoliu.oss-cn-beijing.aliyuncs.com/uPic/CamScanner%252010-18-2023%252016.41_3.jpg" /></p>
-<p><img alt="CamScanner 10-18-2023 16.41_4" src="https://ossjiyaoliu.oss-cn-beijing.aliyuncs.com/uPic/CamScanner%2010-18-2023%2016.41_4.jpg" /></p>
+<p><img alt="image-20231025120400536" src="https://ossjiyaoliu.oss-cn-beijing.aliyuncs.com/uPic/image-20231025120400536.png" /></p>
+<p><img alt="image-20231025120413703" src="https://ossjiyaoliu.oss-cn-beijing.aliyuncs.com/uPic/image-20231025120413703.png" /></p>
 <p>**和MT相比CEST的优势：**有选择性，我们可以知道到底是哪一类的中等分子的贡献。</p>
 <ul>
 <li><p>Z谱：每个点的ppm会得到一个对应的contrast</p></li>
 <li><p>CEST可以观测到哪些呢？amide是最常用的</p>
-<p><img alt="CamScanner10-18-202316.41_5" src="https://ossjiyaoliu.oss-cn-beijing.aliyuncs.com/uPic/CamScanner%252010-18-2023%252016.41_5.jpg" /></p>
+<p><img alt="image-20231025120429925" src="https://ossjiyaoliu.oss-cn-beijing.aliyuncs.com/uPic/image-20231025120429925.png" /></p>
 </li>
 </ul>
 <p>**矫正：**静磁场不均匀性</p>
@@ -527,6 +533,15 @@ document.write(`
         <p class="prev-next-subtitle">previous</p>
         <p class="prev-next-title"><span class="section-number">3. </span>MRI reconstruction预处理方法</p>
       </div>
+    </a>
+    <a class="right-next"
+       href="../tools/latex_symbol.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><span class="section-number">1. </span>Latex常用符号表</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
     </a>
 </div>
                 </footer>
