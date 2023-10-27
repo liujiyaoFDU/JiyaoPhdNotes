@@ -67,6 +67,7 @@ const thebe_selector_output = ".output, .cell_output"
     <script>DOCUMENTATION_OPTIONS.pagename = 'PRML/math_basic';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="1.2. 指数组分布" href="Exponential_Family_Distribution.html" />
     <link rel="prev" title="1. PRML" href="intro.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -169,11 +170,7 @@ const thebe_selector_output = ".output, .cell_output"
         </ul>
         <p aria-level="2" class="caption" role="heading"><span class="caption-text">Basic Guides</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1 has-children"><a class="reference internal" href="../basic/jupyter_book.html">1. Jupyter Book 使用指南</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
-<li class="toctree-l2"><a class="reference internal" href="../research/evidential_regression.html">1.5. Evidential Learning and Uncentainty</a></li>
-
-</ul>
-</li>
+<li class="toctree-l1"><a class="reference internal" href="../basic/jupyter_book.html">1. Jupyter Book 使用指南</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../basic/notebooks.html">2. Jupyter Notebook files</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Math</span></p>
@@ -182,10 +179,29 @@ const thebe_selector_output = ".output, .cell_output"
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">PRML notes</span></p>
 <ul class="current nav bd-sidenav">
-<li class="toctree-l1 current active has-children"><a class="reference internal" href="intro.html">1. PRML</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="intro.html">1. PRML</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
 <li class="toctree-l2 current active"><a class="current reference internal" href="#">1.1. 数学基础</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Exponential_Family_Distribution.html">1.2. 指数组分布</a></li>
 </ul>
 </li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">学术报告</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../Report/acad_lunch_zhuang_wang.html">1. 20231016-庄吓海/王成彦-可解释医学影像分析</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">research</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../research/evidential_regression.html">1. Evidential Learning and Uncentainty</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="../research/MRI_reconstruction/preprocess.html">3. MRI reconstruction预处理方法</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">MRI notes</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../MRI/MT-CEST-NOE.html">1. MT&amp;CEST&amp;NOE 磁化转移定量成像</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">工具使用</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../tools/latex_symbol.html">1. Latex常用符号表</a></li>
 </ul>
 
     </div>
@@ -383,10 +399,10 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#vs">1.1.2. 概率-高斯分布2-极大似然估计（无偏估计 VS 有偏估计）</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">1.1.3. 概率-高斯分布3-从概率密度函数角度观察</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">1.1.4. 概率-高斯分布4-局限性</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">1.1.5. 概率-高斯分布5-已知联合概率求边缘概率及条件概率</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">1.1.6. 概率-高斯分布6-已知边缘和条件概率求联合概率分布</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">1.1.5. 概率-高斯分布5-已知联合概率求边缘概率及条件概率</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id11">1.1.6. 概率-高斯分布6-已知边缘和条件概率求联合概率分布</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#jensen-s-inequality">1.1.7. 概率-不等式1-杰森不等式（Jensen’s Inequality）</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">1.1.8. 参考</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id20">1.1.8. 参考</a></li>
 </ul>
             </nav>
         </div>
@@ -470,22 +486,111 @@ document.write(`
 <blockquote>
 <div><p>通常来说，<span class="math notranslate nohighlight">\(\Sigma\)</span>是半正定的(对称的)，本节内容假设是正定的（特征值<span class="math notranslate nohighlight">\(\lambda&gt;0\)</span>）,便于叙述。首先从概率密度函数来看，<span class="math notranslate nohighlight">\(x\)</span>是自变量，因此<span class="math notranslate nohighlight">\(\exp\)</span>前面的内容为常数。</p>
 </div></blockquote>
-</section>
 <hr class="docutils" />
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\((x-\mu)^T\Sigma^{-1}(x-\mu)\)</span>：马氏距离(<span class="math notranslate nohighlight">\(x\)</span>和<span class="math notranslate nohighlight">\(\mu\)</span>之间，<span class="math notranslate nohighlight">\(\Sigma^{-1}\)</span>看做协方差矩阵的逆)</p></li>
+</ul>
+<blockquote>
+<div><p>马氏距离：Mahalanobis Distance是一种用于测量多维空间中两个数据点之间的距离的方法，马氏距离考虑了各个特征之间的相关性，因此在具有多个特征的数据集中更为有效。注意，<span class="math notranslate nohighlight">\(\Sigma = I\)</span>时，马氏距离=欧氏距离。</p>
+</div></blockquote>
+<p>下面我们分析一下这种马氏距离的实际意义：对<span class="math notranslate nohighlight">\(\Sigma = U\Lambda U^T\)</span>特征值分解（<span class="math notranslate nohighlight">\(U\)</span>为正交阵），<span class="math notranslate nohighlight">\(U=(u_1,u_2,\cdots,u_p)_{p\times p}\)</span></p>
+<p>则有：</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{equation*}\begin{split} \Sigma &amp;= U\Lambda U^T\\ &amp;=(u_1,u_2,\cdots,u_p)\begin{pmatrix}  \lambda_1&amp;0&amp;\cdots&amp;0\\ 0&amp;\lambda_2&amp;\cdots&amp;\vdots\\  \vdots&amp;\vdots&amp;\ddots&amp;\vdots\\  0&amp;0&amp;\cdots&amp;\lambda_p\\  \end{pmatrix} \begin{pmatrix} u_1^T\\ u_2^T\\ \vdots\\ u_p^T \end{pmatrix}\\ &amp;=(u_1\lambda_1, u_2\lambda_2,\cdots,u_p\lambda_p)\begin{pmatrix} u_1^T\\ u_2^T\\ \vdots\\ u_p^T \end{pmatrix}\\ &amp;=\displaystyle\sum_{i=1}^p{u_i\lambda_iu_i^T} \end{split}\end{equation*} \end{split}\]</div>
+<p>则：<span class="math notranslate nohighlight">\(\Sigma^{-1}=(U\Lambda U^T)^{-1}=(U^T)^{-1}\Lambda^{-1}U^{-1}=U\Lambda^{-1} U^T =\displaystyle\sum_{i=1}^p{u_i{1\over\lambda_i}u_i^T}\)</span></p>
+<p>将<span class="math notranslate nohighlight">\(U^T = U^{-1}\)</span>和上式<span class="math notranslate nohighlight">\(\Sigma^{-1}\)</span>带入，令<span class="math notranslate nohighlight">\(y_i=(x-\mu)^Tu_i\)</span>，则有</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{equation*}\begin{split} \Delta=&amp;(x-\mu)^T\Sigma^{-1}(x-\mu)\\ =&amp;(x-\mu)^T\displaystyle\sum_{i=1}^p({u_i{1\over\lambda_i}u_i^T})(x-\mu)\\ =&amp;\displaystyle\sum_{i=1}^p({(x-\mu)^Tu_i{1\over\lambda_i}u_i^T(x-\mu)})\\ =&amp;\displaystyle\sum_{i=1}^p({y_i{1\over\lambda_i}y_i^T})\\ =&amp;\displaystyle\sum_{i=1}^p({y_i^2\over\lambda_i}) \end{split}\end{equation*}\end{split}\]</div>
+<p>上面的推导意味着马氏距离经过变换成为了<span class="math notranslate nohighlight">\(\displaystyle\sum_{i=1}^p({y_i^2\over\lambda_i})\)</span>，<span class="math notranslate nohighlight">\(y_i\)</span>是<span class="math notranslate nohighlight">\(x-\mu\)</span>在特征向量<span class="math notranslate nohighlight">\(u_i\)</span>上的投影长度。</p>
+<p>令<span class="math notranslate nohighlight">\(p=2\)</span>,则上式便是令<span class="math notranslate nohighlight">\(\Delta取不同值时候的同心椭圆\)</span></p>
+<figure class="align-default" id="blackhole">
+<a class="reference internal image-reference" href="https://ossjiyaoliu.oss-cn-beijing.aliyuncs.com/uPic/MDL7BE.png"><img alt="https://ossjiyaoliu.oss-cn-beijing.aliyuncs.com/uPic/MDL7BE.png" src="https://ossjiyaoliu.oss-cn-beijing.aliyuncs.com/uPic/MDL7BE.png" style="height: 300px;" /></a>
+</figure>
+<blockquote>
+<div><p>每当<span class="math notranslate nohighlight">\(\Delta\)</span>取不同值，椭圆就相当于对这一高度的等高线，也对应一个固定的概率值。若<span class="math notranslate nohighlight">\(\lambda_i=c\)</span>(常量)时，上图便是一个圆</p>
+</div></blockquote>
+</section>
 <section id="id4">
 <h2><span class="section-number">1.1.4. </span>概率-高斯分布4-局限性<a class="headerlink" href="#id4" title="Permalink to this heading">#</a></h2>
-</section>
-<section id="id5">
-<h2><span class="section-number">1.1.5. </span>概率-高斯分布5-已知联合概率求边缘概率及条件概率<a class="headerlink" href="#id5" title="Permalink to this heading">#</a></h2>
+<p>继上节内容，将<span class="math notranslate nohighlight">\(\Delta\)</span>代入<span class="math notranslate nohighlight">\(p(x)\)</span>：<span class="math notranslate nohighlight">\(p(x) = {1\over(2\pi)^{p\over2}\lvert\Sigma\rvert^{1\over 2}}\exp(-{1\over2}\Delta)\)</span>。每当<span class="math notranslate nohighlight">\(p(x)\)</span>取一个概率值时，都对应一个固定的<span class="math notranslate nohighlight">\(\Delta\)</span>，即如下图</p>
+<figure class="align-default" id="id5">
+<a class="reference internal image-reference" href="https://ossjiyaoliu.oss-cn-beijing.aliyuncs.com/uPic/Zkyyj3.png"><img alt="https://ossjiyaoliu.oss-cn-beijing.aliyuncs.com/uPic/Zkyyj3.png" src="https://ossjiyaoliu.oss-cn-beijing.aliyuncs.com/uPic/Zkyyj3.png" style="height: 200px;" /></a>
+</figure>
+<blockquote>
+<div><p>每当<span class="math notranslate nohighlight">\(p(x)\)</span>取为某个概率值时，相当于水平切小山，投影到<span class="math notranslate nohighlight">\(x-y\)</span>面便是一个椭圆曲线，也是等高线。若<span class="math notranslate nohighlight">\(\Sigma\)</span>中对的对角元都相等，则称各向同性</p>
+</div></blockquote>
+<hr class="docutils" />
+<p>高斯分布存在局限：有些数据无法用高斯分布表示，因此需要使用GMM等混合模型。</p>
 </section>
 <section id="id6">
-<h2><span class="section-number">1.1.6. </span>概率-高斯分布6-已知边缘和条件概率求联合概率分布<a class="headerlink" href="#id6" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">1.1.5. </span>概率-高斯分布5-已知联合概率求边缘概率及条件概率<a class="headerlink" href="#id6" title="Permalink to this heading">#</a></h2>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>本节目标：已知一个多维高斯分布的联合概率，求其边缘概率分布及条件概率分布</p>
+<p>本节内容是推导最多最复杂的部分</p>
+</div>
+<p>已知：</p>
+<div class="math notranslate nohighlight">
+\[x\sim N(\mu,\Sigma) = {1\over(2\pi)^{p\over2}\lvert\Sigma\rvert^{1\over 2}}\exp(-{1\over2}{(x-\mu)^T\Sigma^{-1}(x-\mu)}), x \in \mathbb R^p\]</div>
+<p>其中，<span class="math notranslate nohighlight">\(x=\begin{pmatrix} x_1\\ x_2\\ \vdots\\ x_p\\ \end{pmatrix}\)</span>, <span class="math notranslate nohighlight">\(\mu=\begin{pmatrix} \mu_1\\ \mu_2\\ \vdots\\ \mu_p\\ \end{pmatrix}\)</span>，<span class="math notranslate nohighlight">\(\Sigma=\begin{pmatrix}  \sigma_{11}&amp;\sigma_{12}&amp;\cdots&amp;\sigma_{1p}\\ \sigma_{21}&amp;\sigma_{22}&amp;\cdots&amp;\sigma_{2p}\\  \vdots&amp;\vdots&amp;&amp;\vdots\\  \sigma_{p1}&amp;\sigma_{p2}&amp;\cdots&amp;\sigma_{pp}\\  \end{pmatrix}_{p\times p}\)</span>。</p>
+<p>为了简化，我们假设已知两个高维高斯分布的联合分布（将<span class="math notranslate nohighlight">\(x\)</span>看做<span class="math notranslate nohighlight">\(x_a\)</span>和<span class="math notranslate nohighlight">\(x_b\)</span>的联合概率分布）：</p>
+<p><span class="math notranslate nohighlight">\(x=\begin{pmatrix} x_a\\ x_b\\ \end{pmatrix}, \mu=\begin{pmatrix} \mu_a\\ \mu_b\\ \end{pmatrix}, \Sigma=\begin{pmatrix}  \sigma_{aa}&amp;\sigma_{ab}\\ \sigma_{ba}&amp;\sigma_{bb}\\ \end{pmatrix}, (a+b=p)\)</span></p>
+<p>求：<span class="math notranslate nohighlight">\(p(x_a),p(x_b|x_a)\)</span>，由对称性可得<span class="math notranslate nohighlight">\(p(x_b),p(x_a|x_b)\)</span></p>
+<blockquote>
+<div><p>通用方法：配方法（RPML）。今天使用另一种方法，比配方法简便</p>
+</div></blockquote>
+<figure class="align-default" id="id7">
+<a class="reference internal image-reference" href="https://ossjiyaoliu.oss-cn-beijing.aliyuncs.com/uPic/3zcMbU.png"><img alt="https://ossjiyaoliu.oss-cn-beijing.aliyuncs.com/uPic/3zcMbU.png" src="https://ossjiyaoliu.oss-cn-beijing.aliyuncs.com/uPic/3zcMbU.png" style="height: 640px;" /></a>
+</figure>
+<figure class="align-default" id="id8">
+<a class="reference internal image-reference" href="https://ossjiyaoliu.oss-cn-beijing.aliyuncs.com/uPic/aCRHwY.png"><img alt="https://ossjiyaoliu.oss-cn-beijing.aliyuncs.com/uPic/aCRHwY.png" src="https://ossjiyaoliu.oss-cn-beijing.aliyuncs.com/uPic/aCRHwY.png" style="height: 640px;" /></a>
+</figure>
+<figure class="align-default" id="id9">
+<a class="reference internal image-reference" href="https://ossjiyaoliu.oss-cn-beijing.aliyuncs.com/uPic/ndC19Q.png"><img alt="https://ossjiyaoliu.oss-cn-beijing.aliyuncs.com/uPic/ndC19Q.png" src="https://ossjiyaoliu.oss-cn-beijing.aliyuncs.com/uPic/ndC19Q.png" style="height: 640px;" /></a>
+</figure>
+<figure class="align-default" id="id10">
+<a class="reference internal image-reference" href="https://ossjiyaoliu.oss-cn-beijing.aliyuncs.com/uPic/h5A1KN.png"><img alt="https://ossjiyaoliu.oss-cn-beijing.aliyuncs.com/uPic/h5A1KN.png" src="https://ossjiyaoliu.oss-cn-beijing.aliyuncs.com/uPic/h5A1KN.png" style="height: 240px;" /></a>
+</figure>
+</section>
+<section id="id11">
+<h2><span class="section-number">1.1.6. </span>概率-高斯分布6-已知边缘和条件概率求联合概率分布<a class="headerlink" href="#id11" title="Permalink to this heading">#</a></h2>
+<figure class="align-default" id="id12">
+<a class="reference internal image-reference" href="https://ossjiyaoliu.oss-cn-beijing.aliyuncs.com/uPic/sC2hnu.png"><img alt="https://ossjiyaoliu.oss-cn-beijing.aliyuncs.com/uPic/sC2hnu.png" src="https://ossjiyaoliu.oss-cn-beijing.aliyuncs.com/uPic/sC2hnu.png" style="height: 380px;" /></a>
+</figure>
+<figure class="align-default" id="id13">
+<a class="reference internal image-reference" href="https://ossjiyaoliu.oss-cn-beijing.aliyuncs.com/uPic/IMqmt0.png"><img alt="https://ossjiyaoliu.oss-cn-beijing.aliyuncs.com/uPic/IMqmt0.png" src="https://ossjiyaoliu.oss-cn-beijing.aliyuncs.com/uPic/IMqmt0.png" style="height: 580px;" /></a>
+</figure>
+<figure class="align-default" id="id14">
+<a class="reference internal image-reference" href="https://ossjiyaoliu.oss-cn-beijing.aliyuncs.com/uPic/c68tIQ.png"><img alt="https://ossjiyaoliu.oss-cn-beijing.aliyuncs.com/uPic/c68tIQ.png" src="https://ossjiyaoliu.oss-cn-beijing.aliyuncs.com/uPic/c68tIQ.png" style="height: 600px;" /></a>
+</figure>
+<figure class="align-default" id="id15">
+<a class="reference internal image-reference" href="https://ossjiyaoliu.oss-cn-beijing.aliyuncs.com/uPic/m6VvVX.png"><img alt="https://ossjiyaoliu.oss-cn-beijing.aliyuncs.com/uPic/m6VvVX.png" src="https://ossjiyaoliu.oss-cn-beijing.aliyuncs.com/uPic/m6VvVX.png" style="height: 600px;" /></a>
+</figure>
 </section>
 <section id="jensen-s-inequality">
 <h2><span class="section-number">1.1.7. </span>概率-不等式1-杰森不等式（Jensen’s Inequality）<a class="headerlink" href="#jensen-s-inequality" title="Permalink to this heading">#</a></h2>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>杰森不等式在机器学习的推导中经常被用到，其定义如下：假设<span class="math notranslate nohighlight">\(f(x)\)</span>为凸函数，则<span class="math notranslate nohighlight">\(E[f(x)]\geq f(E[x])\)</span></p>
+</div>
+<p>证明如下：</p>
+<figure class="align-default" id="id16">
+<a class="reference internal image-reference" href="https://ossjiyaoliu.oss-cn-beijing.aliyuncs.com/uPic/r8Ajlm.png"><img alt="https://ossjiyaoliu.oss-cn-beijing.aliyuncs.com/uPic/r8Ajlm.png" src="https://ossjiyaoliu.oss-cn-beijing.aliyuncs.com/uPic/r8Ajlm.png" style="height: 200px;" /></a>
+</figure>
+<figure class="align-default" id="id17">
+<a class="reference internal image-reference" href="https://ossjiyaoliu.oss-cn-beijing.aliyuncs.com/uPic/2yqHuu.png"><img alt="https://ossjiyaoliu.oss-cn-beijing.aliyuncs.com/uPic/2yqHuu.png" src="https://ossjiyaoliu.oss-cn-beijing.aliyuncs.com/uPic/2yqHuu.png" style="height: 400px;" /></a>
+</figure>
+<hr class="docutils" />
+<p>实际上我们在机器学习中使用的更多的是<strong>杰森不等式的变式</strong>，如下推导</p>
+<figure class="align-default" id="id18">
+<a class="reference internal image-reference" href="https://ossjiyaoliu.oss-cn-beijing.aliyuncs.com/uPic/bu9HuF.png"><img alt="https://ossjiyaoliu.oss-cn-beijing.aliyuncs.com/uPic/bu9HuF.png" src="https://ossjiyaoliu.oss-cn-beijing.aliyuncs.com/uPic/bu9HuF.png" style="height: 200px;" /></a>
+</figure>
+<figure class="align-default" id="id19">
+<a class="reference internal image-reference" href="https://ossjiyaoliu.oss-cn-beijing.aliyuncs.com/uPic/wvhDs6.png"><img alt="https://ossjiyaoliu.oss-cn-beijing.aliyuncs.com/uPic/wvhDs6.png" src="https://ossjiyaoliu.oss-cn-beijing.aliyuncs.com/uPic/wvhDs6.png" style="height: 600px;" /></a>
+</figure>
 </section>
-<section id="id7">
-<h2><span class="section-number">1.1.8. </span>参考<a class="headerlink" href="#id7" title="Permalink to this heading">#</a></h2>
+<section id="id20">
+<h2><span class="section-number">1.1.8. </span>参考<a class="headerlink" href="#id20" title="Permalink to this heading">#</a></h2>
 <p>[1] <a class="reference external" href="https://www.bilibili.com/video/av32905863/">机器学习-白板推导系列-数学基础(bilibili)</a></p>
 <p>[2] <a class="reference external" href="https://zhuanlan.zhihu.com/p/290876484">机器学习-白板推导系列(二)-数学基础笔记</a></p>
 </section>
@@ -530,6 +635,15 @@ document.write(`
         <p class="prev-next-title"><span class="section-number">1. </span>PRML</p>
       </div>
     </a>
+    <a class="right-next"
+       href="Exponential_Family_Distribution.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><span class="section-number">1.2. </span>指数组分布</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
 </div>
                 </footer>
               
@@ -549,10 +663,10 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#vs">1.1.2. 概率-高斯分布2-极大似然估计（无偏估计 VS 有偏估计）</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">1.1.3. 概率-高斯分布3-从概率密度函数角度观察</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">1.1.4. 概率-高斯分布4-局限性</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">1.1.5. 概率-高斯分布5-已知联合概率求边缘概率及条件概率</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">1.1.6. 概率-高斯分布6-已知边缘和条件概率求联合概率分布</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">1.1.5. 概率-高斯分布5-已知联合概率求边缘概率及条件概率</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id11">1.1.6. 概率-高斯分布6-已知边缘和条件概率求联合概率分布</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#jensen-s-inequality">1.1.7. 概率-不等式1-杰森不等式（Jensen’s Inequality）</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">1.1.8. 参考</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id20">1.1.8. 参考</a></li>
 </ul>
   </nav></div>
 

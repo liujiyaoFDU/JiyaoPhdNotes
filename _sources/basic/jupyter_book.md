@@ -1,5 +1,9 @@
 # Jupyter Book 使用指南
 
+## My homepage
+
+https://jy-stdio.github.io/JiyaoPhdNotes/intro.html
+
 ## Publish your book online with GitHub Pages
 
 ```bash
