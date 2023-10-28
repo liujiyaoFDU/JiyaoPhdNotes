@@ -67,8 +67,8 @@ const thebe_selector_output = ".output, .cell_output"
     <script>DOCUMENTATION_OPTIONS.pagename = 'pytorch/computation_graph';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="1. Latex常用符号表" href="../tools/latex_symbol.html" />
-    <link rel="prev" title="1.1. pytorch 注册钩子函数（register_forward_hook）实现对各个层（layer）输入输出 shape 的查看" href="hook.html" />
+    <link rel="next" title="1.3. Torch.gather 索引" href="torch.gather.html" />
+    <link rel="prev" title="1.1. 注册钩子函数（register_forward_hook）" href="hook.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -203,8 +203,9 @@ const thebe_selector_output = ".output, .cell_output"
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Pytorch</span></p>
 <ul class="current nav bd-sidenav">
 <li class="toctree-l1 current active has-children"><a class="reference internal" href="%E6%A8%A1%E5%9E%8B%E6%8B%93%E6%89%91%E7%BB%93%E6%9E%84.html">1. 模型拓扑结构</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="hook.html">1.1. pytorch 注册钩子函数（register_forward_hook）实现对各个层（layer）输入输出 shape 的查看</a></li>
+<li class="toctree-l2"><a class="reference internal" href="hook.html">1.1. 注册钩子函数（register_forward_hook）</a></li>
 <li class="toctree-l2 current active"><a class="current reference internal" href="#">1.2. 计算图构建细节</a></li>
+<li class="toctree-l2"><a class="reference internal" href="torch.gather.html">1.3. Torch.gather 索引</a></li>
 </ul>
 </li>
 </ul>
@@ -410,6 +411,7 @@ document.write(`
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#embedding">1.2.1.3. Embedding</a></li>
 </ul>
 </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#retain-graph">1.2.2. Retain graph</a></li>
 </ul>
             </nav>
         </div>
@@ -830,6 +832,151 @@ tensor([0., 0., 0.])
 </div>
 </section>
 </section>
+<section id="retain-graph">
+<h2><span class="section-number">1.2.2. </span>Retain graph<a class="headerlink" href="#retain-graph" title="Permalink to this heading">#</a></h2>
+<p>本节主要介绍在pytorch中计算图多次反向传播/multi (head) loss的计算问题。</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">torch</span>
+<span class="kn">from</span> <span class="nn">torch.autograd</span> <span class="kn">import</span> <span class="n">Variable</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>假设有如下计算图：
+<img alt="p72gjX" src="https://ossjiyaoliu.oss-cn-beijing.aliyuncs.com/uPic/p72gjX.png" /></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">a</span> <span class="o">=</span> <span class="n">Variable</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">),</span> <span class="n">requires_grad</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">b</span> <span class="o">=</span> <span class="n">a</span><span class="o">**</span><span class="mi">2</span>
+<span class="n">c</span> <span class="o">=</span> <span class="n">b</span><span class="o">*</span><span class="mi">2</span>
+
+<span class="n">d</span> <span class="o">=</span> <span class="n">c</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+<span class="n">e</span> <span class="o">=</span> <span class="n">c</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>如果我们需要对d,e分别backward()，就会出现问题，即在第一次backward()后，计算图被释放（为了节省内存）；第二次backward()的时候，计算图不存在。</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">a</span> <span class="o">=</span> <span class="n">Variable</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">),</span> <span class="n">requires_grad</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">b</span> <span class="o">=</span> <span class="n">a</span><span class="o">**</span><span class="mi">2</span>
+<span class="n">c</span> <span class="o">=</span> <span class="n">b</span><span class="o">*</span><span class="mi">2</span>
+
+<span class="n">d</span> <span class="o">=</span> <span class="n">c</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+<span class="n">e</span> <span class="o">=</span> <span class="n">c</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+<span class="n">d</span><span class="o">.</span><span class="n">backward</span><span class="p">()</span>
+
+<span class="c1"># RuntimeError: Trying to backward through the graph a second time</span>
+<span class="n">e</span><span class="o">.</span><span class="n">backward</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">RuntimeError</span><span class="g g-Whitespace">                              </span>Traceback (most recent call last)
+<span class="o">/</span><span class="n">Users</span><span class="o">/</span><span class="n">liujiyao</span><span class="o">/</span><span class="n">Documents</span><span class="o">/</span><span class="n">PhdLearningNotes</span><span class="o">/</span><span class="n">JiyaoPhdNotes</span><span class="o">/</span><span class="n">pytorch</span><span class="o">/</span><span class="n">computation_graph</span><span class="o">.</span><span class="n">ipynb</span> <span class="n">单元格</span> <span class="mi">39</span> <span class="n">line</span> <span class="mi">1</span>
+      <span class="o">&lt;</span><span class="n">a</span> <span class="n">href</span><span class="o">=</span><span class="s1">&#39;vscode-notebook-cell:/Users/liujiyao/Documents/PhdLearningNotes/JiyaoPhdNotes/pytorch/computation_graph.ipynb#X60sZmlsZQ%3D%3D?line=6&#39;</span><span class="o">&gt;</span><span class="mi">7</span><span class="o">&lt;/</span><span class="n">a</span><span class="o">&gt;</span> <span class="n">d</span><span class="o">.</span><span class="n">backward</span><span class="p">()</span>
+      <span class="o">&lt;</span><span class="n">a</span> <span class="n">href</span><span class="o">=</span><span class="s1">&#39;vscode-notebook-cell:/Users/liujiyao/Documents/PhdLearningNotes/JiyaoPhdNotes/pytorch/computation_graph.ipynb#X60sZmlsZQ%3D%3D?line=8&#39;</span><span class="o">&gt;</span><span class="mi">9</span><span class="o">&lt;/</span><span class="n">a</span><span class="o">&gt;</span> <span class="c1"># RuntimeError: Trying to backward through the graph a second time</span>
+<span class="o">---&gt;</span> <span class="o">&lt;</span><span class="n">a</span> <span class="n">href</span><span class="o">=</span><span class="s1">&#39;vscode-notebook-cell:/Users/liujiyao/Documents/PhdLearningNotes/JiyaoPhdNotes/pytorch/computation_graph.ipynb#X60sZmlsZQ%3D%3D?line=9&#39;</span><span class="o">&gt;</span><span class="mi">10</span><span class="o">&lt;/</span><span class="n">a</span><span class="o">&gt;</span> <span class="n">e</span><span class="o">.</span><span class="n">backward</span><span class="p">()</span>
+
+<span class="nn">File ~/miniforge3/envs/torchcpu/lib/python3.8/site-packages/torch/_tensor.py:487,</span> in <span class="ni">Tensor.backward</span><span class="nt">(self, gradient, retain_graph, create_graph, inputs)</span>
+<span class="g g-Whitespace">    </span><span class="mi">477</span> <span class="k">if</span> <span class="n">has_torch_function_unary</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="g g-Whitespace">    </span><span class="mi">478</span>     <span class="k">return</span> <span class="n">handle_torch_function</span><span class="p">(</span>
+<span class="g g-Whitespace">    </span><span class="mi">479</span>         <span class="n">Tensor</span><span class="o">.</span><span class="n">backward</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">480</span>         <span class="p">(</span><span class="bp">self</span><span class="p">,),</span>
+   <span class="p">(</span><span class="o">...</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">485</span>         <span class="n">inputs</span><span class="o">=</span><span class="n">inputs</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">486</span>     <span class="p">)</span>
+<span class="ne">--&gt; </span><span class="mi">487</span> <span class="n">torch</span><span class="o">.</span><span class="n">autograd</span><span class="o">.</span><span class="n">backward</span><span class="p">(</span>
+<span class="g g-Whitespace">    </span><span class="mi">488</span>     <span class="bp">self</span><span class="p">,</span> <span class="n">gradient</span><span class="p">,</span> <span class="n">retain_graph</span><span class="p">,</span> <span class="n">create_graph</span><span class="p">,</span> <span class="n">inputs</span><span class="o">=</span><span class="n">inputs</span>
+<span class="g g-Whitespace">    </span><span class="mi">489</span> <span class="p">)</span>
+
+<span class="nn">File ~/miniforge3/envs/torchcpu/lib/python3.8/site-packages/torch/autograd/__init__.py:200,</span> in <span class="ni">backward</span><span class="nt">(tensors, grad_tensors, retain_graph, create_graph, grad_variables, inputs)</span>
+<span class="g g-Whitespace">    </span><span class="mi">195</span>     <span class="n">retain_graph</span> <span class="o">=</span> <span class="n">create_graph</span>
+<span class="g g-Whitespace">    </span><span class="mi">197</span> <span class="c1"># The reason we repeat same the comment below is that</span>
+<span class="g g-Whitespace">    </span><span class="mi">198</span> <span class="c1"># some Python versions print out the first line of a multi-line function</span>
+<span class="g g-Whitespace">    </span><span class="mi">199</span> <span class="c1"># calls in the traceback and some print out the last line</span>
+<span class="ne">--&gt; </span><span class="mi">200</span> <span class="n">Variable</span><span class="o">.</span><span class="n">_execution_engine</span><span class="o">.</span><span class="n">run_backward</span><span class="p">(</span>  <span class="c1"># Calls into the C++ engine to run the backward pass</span>
+<span class="g g-Whitespace">    </span><span class="mi">201</span>     <span class="n">tensors</span><span class="p">,</span> <span class="n">grad_tensors_</span><span class="p">,</span> <span class="n">retain_graph</span><span class="p">,</span> <span class="n">create_graph</span><span class="p">,</span> <span class="n">inputs</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">202</span>     <span class="n">allow_unreachable</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">accumulate_grad</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="ne">RuntimeError</span>: Trying to backward through the graph a second time (or directly access saved tensors after they have already been freed). Saved intermediate values of the graph are freed when you call .backward() or autograd.grad(). Specify retain_graph=True if you need to backward through the graph a second time or if you need to access saved tensors after calling backward.
+</pre></div>
+</div>
+</div>
+</div>
+<ul class="simple">
+<li><p>when we do d.backward(), that is fine.</p></li>
+<li><p>After this computation, the parts of the graph that calculate <strong>d will be freed by default to save memory</strong>.</p></li>
+<li><p>So if we do e.backward(), the error message will pop up. In order to do e.backward(), we have to set the parameter retain_graph to True in d.backward(), i.e.,</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">a</span> <span class="o">=</span> <span class="n">Variable</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">),</span> <span class="n">requires_grad</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">b</span> <span class="o">=</span> <span class="n">a</span><span class="o">**</span><span class="mi">2</span>
+<span class="n">c</span> <span class="o">=</span> <span class="n">b</span><span class="o">*</span><span class="mi">2</span>
+
+<span class="n">d</span> <span class="o">=</span> <span class="n">c</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+<span class="n">e</span> <span class="o">=</span> <span class="n">c</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+<span class="n">d</span><span class="o">.</span><span class="n">backward</span><span class="p">(</span><span class="n">retain_graph</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">e</span><span class="o">.</span><span class="n">backward</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>我们可以具体分析一下每次backword的梯度结果：</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(d=\frac{\sum_i2a_i^2}4\)</span></p>
+<ul>
+<li><p><span class="math notranslate nohighlight">\(\frac{\partial d}{\partial a_i}=a_i\)</span></p></li>
+</ul>
+</li>
+<li><p><span class="math notranslate nohighlight">\(e=\sum_i2a_i^2\)</span></p>
+<ul>
+<li><p><span class="math notranslate nohighlight">\(\frac{\partial e}{\partial a_i}=4a_i\)</span></p></li>
+</ul>
+</li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">a</span> <span class="o">=</span> <span class="n">Variable</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">([</span><span class="mf">1.</span><span class="p">,</span> <span class="mf">2.</span><span class="p">,</span> <span class="mf">3.</span><span class="p">,</span> <span class="mf">4.</span><span class="p">]),</span> <span class="n">requires_grad</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">b</span> <span class="o">=</span> <span class="n">a</span><span class="o">**</span><span class="mi">2</span>
+<span class="n">c</span> <span class="o">=</span> <span class="n">b</span><span class="o">*</span><span class="mi">2</span>
+
+<span class="c1"># scalar</span>
+<span class="n">d</span> <span class="o">=</span> <span class="n">c</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+<span class="n">e</span> <span class="o">=</span> <span class="n">c</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+
+
+<span class="n">d</span><span class="o">.</span><span class="n">backward</span><span class="p">(</span><span class="n">retain_graph</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="c1"># tensor([1., 2., 3., 4.])</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">a</span><span class="o">.</span><span class="n">grad</span><span class="p">)</span>
+<span class="n">e</span><span class="o">.</span><span class="n">backward</span><span class="p">()</span>
+<span class="c1"># 两次 backwward 累加</span>
+<span class="c1"># tensor([ 5., 10., 15., 20.])</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">a</span><span class="o">.</span><span class="n">grad</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>tensor([1., 2., 3., 4.])
+tensor([ 5., 10., 15., 20.])
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>应用场景：multi loss</strong></p>
+<p>一般在多任务/多loss的情况下，例如图像风格迁移，我们需要对多个loss进行累积+优化：</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># suppose you first back-propagate loss1, then loss2 (you can also do the reverse)</span>
+<span class="n">l1</span><span class="o">.</span><span class="n">backward</span><span class="p">(</span><span class="n">retain_graph</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">l2</span><span class="o">.</span><span class="n">backward</span><span class="p">()</span> <span class="c1"># now the graph is freed, and next process of batch gradient descent is ready</span>
+
+<span class="n">optimizer</span><span class="o">.</span><span class="n">step</span><span class="p">()</span> <span class="c1"># update the network parameters</span>
+</pre></div>
+</div>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -868,15 +1015,15 @@ tensor([0., 0., 0.])
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title"><span class="section-number">1.1. </span>pytorch 注册钩子函数（register_forward_hook）实现对各个层（layer）输入输出 shape 的查看</p>
+        <p class="prev-next-title"><span class="section-number">1.1. </span>注册钩子函数（register_forward_hook）</p>
       </div>
     </a>
     <a class="right-next"
-       href="../tools/latex_symbol.html"
+       href="torch.gather.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title"><span class="section-number">1. </span>Latex常用符号表</p>
+        <p class="prev-next-title"><span class="section-number">1.3. </span>Torch.gather 索引</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -901,6 +1048,7 @@ tensor([0., 0., 0.])
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#embedding">1.2.1.3. Embedding</a></li>
 </ul>
 </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#retain-graph">1.2.2. Retain graph</a></li>
 </ul>
   </nav></div>
 
