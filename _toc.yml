@@ -49,6 +49,7 @@ parts:
     sections:
     - file: pytorch/hook
     - file: pytorch/computation_graph
+    - file: pytorch/torch.gather
 
 - caption: 工具使用
   numbered: true # Number your chapters and sections
