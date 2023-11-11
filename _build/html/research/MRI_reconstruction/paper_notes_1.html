@@ -183,7 +183,8 @@ const thebe_selector_output = ".output, .cell_output"
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">学术报告</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../../Report/acad_lunch_zhuang_wang.html">1. 20231016-庄吓海/王成彦-可解释医学影像分析</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Report/acad_lunch_zhuang_wang.html">1. 20231016 | 庄吓海/王成彦-可解释医学影像分析</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Report/report-rec.html">2. VALSE 20200415 |  机器学习 vs 压缩感知：核磁共振成像与重建</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">research</span></p>
 <ul class="nav bd-sidenav">
@@ -194,6 +195,15 @@ const thebe_selector_output = ".output, .cell_output"
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">MRI notes</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../../MRI/MT-CEST-NOE.html">1. MT&amp;CEST&amp;NOE 磁化转移定量成像</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Pytorch</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../pytorch/%E6%A8%A1%E5%9E%8B%E6%8B%93%E6%89%91%E7%BB%93%E6%9E%84.html">1. 模型拓扑结构</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../pytorch/hook.html">1.1. 注册钩子函数（register_forward_hook）</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../pytorch/computation_graph.html">1.2. 计算图构建细节</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../pytorch/torch.gather.html">1.3. Torch.gather 索引</a></li>
+</ul>
+</li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">工具使用</span></p>
 <ul class="nav bd-sidenav">
@@ -368,9 +378,7 @@ document.write(`
   </button>
 `);
 </script>
-<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <span class="fa-solid fa-list"></span>
-</label>
+
 </div></div>
       
     </div>
@@ -386,14 +394,6 @@ document.write(`
     <div id="print-main-content">
         <div id="jb-print-toc">
             
-            <div>
-                <h2> Contents </h2>
-            </div>
-            <nav aria-label="Page">
-                <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#decolearn">DeCoLearn</a></li>
-</ul>
-            </nav>
         </div>
     </div>
 </div>
@@ -405,9 +405,9 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="id1">
 <h1>无监督重建方法<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h1>
-<section id="decolearn">
-<h2>DeCoLearn<a class="headerlink" href="#decolearn" title="Permalink to this heading">#</a></h2>
-</section>
+<ul class="simple">
+<li><p><strong>Deformation-Compensated Learning for Image Reconstruction Without Ground Truth.</strong>. Weijie Gan <a class="reference external" href="http://et.al">et.al</a>. <strong>IEEE Trans. Medical Imaging</strong>, <strong>2022</strong>, **Number of Citations: 8, (<span class="xref myst">link</span>)| <a class="github reference external" href="https://github.com/wustl-cig/DeCoLearn">wustl-cig/DeCoLearn</a> )</p></li>
+</ul>
 </section>
 
     <script type="text/x-thebe-config">
@@ -446,20 +446,6 @@ document.write(`
             </div>
             
             
-              
-                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
-
-  <div class="sidebar-secondary-item">
-  <div class="page-toc tocsection onthispage">
-    <i class="fa-solid fa-list"></i> Contents
-  </div>
-  <nav class="bd-toc-nav page-toc">
-    <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#decolearn">DeCoLearn</a></li>
-</ul>
-  </nav></div>
-
-</div></div>
               
             
           </div>

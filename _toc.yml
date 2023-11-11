@@ -24,7 +24,8 @@ parts:
     sections:
     - file: PRML/math_basic
     - file: PRML/Exponential_Family_Distribution
-
+    - file: PRML/概率图模型1
+    - file: PRML/概率图模型总
 - caption: 学术报告
   numbered: true # Number your chapters and sections
   chapters:
@@ -35,7 +36,9 @@ parts:
   numbered: true # Number your chapters and sections
   chapters:
   - file: research/evidential_regression
-  - file: research/MRI_reconstruction/preprocess
+  sections:
+  - file: research/Liver_Translation/paper_notes_1
+  - file: research/Liver_Translation/paper_notes_1
 
 - caption: MRI notes
   numbered: true # Number your chapters and sections
@@ -54,4 +57,5 @@ parts:
 - caption: 工具使用
   numbered: true # Number your chapters and sections
   chapters:
-  - file: tools/latex_symbol.md
+  - file: tools/latex_symbol
+  - file: tools/常用工具

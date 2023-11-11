@@ -1,0 +1,664 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>1.3. 概率图模型入门 &#8212; Jy&#39; s phd learning notes</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=ac02cc09edc035673794" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=ac02cc09edc035673794" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=ac02cc09edc035673794" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=ac02cc09edc035673794" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=ac02cc09edc035673794" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=ac02cc09edc035673794" />
+  <script src="../_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=ac02cc09edc035673794"></script>
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'PRML/概率图模型1';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="&lt;no title&gt;" href="%E6%A6%82%E7%8E%87%E5%9B%BE%E6%A8%A1%E5%9E%8B%E6%80%BB.html" />
+    <link rel="prev" title="1.2. 指数组分布" href="Exponential_Family_Distribution.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+  
+
+<a class="navbar-brand logo" href="../intro.html">
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/logo.jpg" class="logo__image only-light" alt="Logo image"/>
+    <script>document.write(`<img src="../_static/logo.jpg" class="logo__image only-dark" alt="Logo image"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../intro.html">
+                    Jiyao Liu’s Phd lecture notebook
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Basic Guides</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../basic/jupyter_book.html">1. Jupyter Book 使用指南</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../basic/notebooks.html">2. Jupyter Notebook files</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Math</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../math/matrix_analysis.html">1. 矩阵与张量分析作业</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">PRML notes</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="intro.html">1. PRML</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="math_basic.html">1.1. 数学基础</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Exponential_Family_Distribution.html">1.2. 指数组分布</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">1.3. 概率图模型入门</a></li>
+</ul>
+</li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">学术报告</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../Report/acad_lunch_zhuang_wang.html">1. 20231016 | 庄吓海/王成彦-可解释医学影像分析</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Report/report-rec.html">2. VALSE 20200415 |  机器学习 vs 压缩感知：核磁共振成像与重建</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">research</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../research/evidential_regression.html">1. Evidential Learning and Uncentainty</a></li>
+
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">MRI notes</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../MRI/MT-CEST-NOE.html">1. MT&amp;CEST&amp;NOE 磁化转移定量成像</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Pytorch</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../pytorch/%E6%A8%A1%E5%9E%8B%E6%8B%93%E6%89%91%E7%BB%93%E6%9E%84.html">1. 模型拓扑结构</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../pytorch/hook.html">1.1. 注册钩子函数（register_forward_hook）</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../pytorch/computation_graph.html">1.2. 计算图构建细节</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../pytorch/torch.gather.html">1.3. Torch.gather 索引</a></li>
+</ul>
+</li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">工具使用</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../tools/latex_symbol.html">1. Latex常用符号表</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2FPRML/概率图模型1.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/PRML/概率图模型1.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script>
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>概率图模型入门</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">1.3.1. 概率基础</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bayesian-network">1.3.2. Bayesian Network</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">1.3.2.1. 概率图模型的动机及举例</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">1.3.3. 概率图应用一：朴素贝叶斯</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#markov-model">1.3.4. 概率图应用二：Markov model</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#hmm">1.3.5. 概率图应用三：HMM</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="id1">
+<h1><span class="section-number">1.3. </span>概率图模型入门<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h1>
+<blockquote>
+<div><p>from: 【概率图模型初步：从贝叶斯网络到HMM模型】<a class="reference external" href="https://www.bilibili.com/video/BV1E4411a7zY?vd_source=225dba48b31d269151658db856705273">https://www.bilibili.com/video/BV1E4411a7zY?vd_source=225dba48b31d269151658db856705273</a></p>
+</div></blockquote>
+<section id="id2">
+<h2><span class="section-number">1.3.1. </span>概率基础<a class="headerlink" href="#id2" title="Permalink to this heading">#</a></h2>
+<p><img alt="lUID1D" src="https://ossjiyaoliu.oss-cn-beijing.aliyuncs.com/uPic/lUID1D.png" /></p>
+<p><img alt="TF3MGP" src="https://ossjiyaoliu.oss-cn-beijing.aliyuncs.com/uPic/TF3MGP.png" /></p>
+<p><img alt="8HrQsS" src="https://ossjiyaoliu.oss-cn-beijing.aliyuncs.com/uPic/8HrQsS.png" /></p>
+<p><img alt="zfS8FR" src="https://ossjiyaoliu.oss-cn-beijing.aliyuncs.com/uPic/zfS8FR.png" /></p>
+</section>
+<section id="bayesian-network">
+<h2><span class="section-number">1.3.2. </span>Bayesian Network<a class="headerlink" href="#bayesian-network" title="Permalink to this heading">#</a></h2>
+<section id="id3">
+<h3><span class="section-number">1.3.2.1. </span>概率图模型的动机及举例<a class="headerlink" href="#id3" title="Permalink to this heading">#</a></h3>
+<blockquote>
+<div><ul class="simple">
+<li><p>知道了联合分布就能进一步求出边缘分布或者条件分布；</p></li>
+<li><p>用一种有效的方式对联合分布进行建模;</p></li>
+</ul>
+</div></blockquote>
+<p><img alt="vaDreW" src="https://ossjiyaoliu.oss-cn-beijing.aliyuncs.com/uPic/vaDreW.png" /></p>
+<p><strong>举个例子：</strong></p>
+<p>对于两个选项的选课问题，有三个人，我们想要得到三个人是否选三门课的联合分布。可能的组合有<span class="math notranslate nohighlight">\(2^3\)</span>种：</p>
+<p><img alt="vDInB9" src="https://ossjiyaoliu.oss-cn-beijing.aliyuncs.com/uPic/vDInB9.png" />。</p>
+<p>当有成千上万个变量的时候，对每种可能性组合进行保存就会造成维度灾难。</p>
+<hr class="docutils" />
+<p>所以，我们可以假设这几种变量存在一定的依赖关系，以一种图的形式对变量的关系进行建模，便可以减少储存联合分布的空间：</p>
+<p><img alt="Syt7S4" src="https://ossjiyaoliu.oss-cn-beijing.aliyuncs.com/uPic/Syt7S4.png" /></p>
+<p>举个例子，假设有5个变量：课程难度，GPA，IQ，GRE，老师是否愿意写推荐信，我们可以建模这几个变量的依赖关系：</p>
+<p><img alt="ImPTZk" src="https://ossjiyaoliu.oss-cn-beijing.aliyuncs.com/uPic/ImPTZk.png" /></p>
+<p>**概率图模型的结论是：如果我们知道这几个变量的联合概率等于每个节点given parients的节点概率的乘积。**这样的好处是联合分布的复杂度以指数程度降低。</p>
+<p><img alt="VIAIiL" src="https://ossjiyaoliu.oss-cn-beijing.aliyuncs.com/uPic/VIAIiL.png" /></p>
+<p>如下图：联合分布存储的复杂度从左边的15降到右边的9次。</p>
+<p><img alt="IP7zGN" src="https://ossjiyaoliu.oss-cn-beijing.aliyuncs.com/uPic/IP7zGN.png" /></p>
+<p><strong>一般来说，图的关系是由专家定义出来的。</strong></p>
+<hr class="docutils" />
+<p>得到概率图及联合概率后，我们就可以使用概率图进行推断。想要高效实现，这就涉及动态规划，不想高效实现推断，那动态规划也不一定必要。下面是最暴力的推断方法，也就是上帝视角来看推断我们要干的事情。</p>
+<p><img alt="hMslbL" src="https://ossjiyaoliu.oss-cn-beijing.aliyuncs.com/uPic/hMslbL.png" /></p>
+<p>但是一般来说完整的联合分布没法全部得到，我们可以拆成多个概率，然后对每一项暴力求解：</p>
+<p><img alt="KBEHfJ" src="https://ossjiyaoliu.oss-cn-beijing.aliyuncs.com/uPic/KBEHfJ.png" /></p>
+<p>但是这样因噎废食，我们降低了存储的复杂度，但是增加了计算的复杂度！！</p>
+<hr class="docutils" />
+<p>一种更优雅的方式动态规划：</p>
+<blockquote>
+<div><p>机器学习中，一般只在：概率图模型（维特比算法）、强化学习中用到（求解马尔科夫决策过程）；</p>
+</div></blockquote>
+<p>我们再上述计算过程中，某些<strong>变量其实计算了好几遍，我们可以消除这些变量的重复计算。</strong> 也就是说，我们先把求和公式中出现单独的变量拿出来先求和，比如先求<span class="math notranslate nohighlight">\(\sum p(w|s=1,R)\)</span>，其实这一项等于1就消掉了。最后只剩下了蓝色部分的两项求和。</p>
+<p><img alt="XRrlIT" src="https://ossjiyaoliu.oss-cn-beijing.aliyuncs.com/uPic/XRrlIT.png" /></p>
+<hr class="docutils" />
+<p>但是这样动态规划的技巧算出来的是一个精确值，是成本比较高的，我们可以使用Gibbs等采样方式，去逼近这个推断的精确值。</p>
+<p><img alt="6xcRmL" src="https://ossjiyaoliu.oss-cn-beijing.aliyuncs.com/uPic/6xcRmL.png" /></p>
+</section>
+</section>
+<section id="id4">
+<h2><span class="section-number">1.3.3. </span>概率图应用一：朴素贝叶斯<a class="headerlink" href="#id4" title="Permalink to this heading">#</a></h2>
+<p>朴素贝叶斯的本质就是简单的概率图模型。比如垃圾邮件分类任务，可以建立如下概率图，邮件分类可以通过如下几个关键词的出现进行分类。所谓naive就是联合分布能写成这样简单的概率乘积。</p>
+<p><img alt="Kt3dvF" src="https://ossjiyaoliu.oss-cn-beijing.aliyuncs.com/uPic/Kt3dvF.png" /></p>
+<p>假设每个词的出现是条件独立，那么后验分布的计算公式如下（贝叶斯公式）：</p>
+<p><img alt="hnMzt5" src="https://ossjiyaoliu.oss-cn-beijing.aliyuncs.com/uPic/hnMzt5.png" /></p>
+</section>
+<section id="markov-model">
+<h2><span class="section-number">1.3.4. </span>概率图应用二：Markov model<a class="headerlink" href="#markov-model" title="Permalink to this heading">#</a></h2>
+<p><img alt="kWhyUY" src="https://ossjiyaoliu.oss-cn-beijing.aliyuncs.com/uPic/kWhyUY.png" /></p>
+<p>马尔科夫模型中，我们只需要知道初始值和状态转移概率（共享），那么联合分布就知道了。</p>
+<hr class="docutils" />
+<p>举个例子：我们想求上图的<span class="math notranslate nohighlight">\(P(x_1, x_2, x_3, x_4)\)</span>，那么暴力方法是：</p>
+<p><img alt="kAOfIX" src="https://ossjiyaoliu.oss-cn-beijing.aliyuncs.com/uPic/kAOfIX.png" /></p>
+<p>加快计算：变量消元法/动态规划</p>
+<p><img alt="XGgnrb" src="https://ossjiyaoliu.oss-cn-beijing.aliyuncs.com/uPic/XGgnrb.png" /></p>
+<hr class="docutils" />
+<p>再举个例子：手算一下<span class="math notranslate nohighlight">\(P(x_2)\)</span>
+<img alt="xJ3ZxC" src="https://ossjiyaoliu.oss-cn-beijing.aliyuncs.com/uPic/xJ3ZxC.png" />
+<img alt="TLkz7Y" src="https://ossjiyaoliu.oss-cn-beijing.aliyuncs.com/uPic/TLkz7Y.png" /></p>
+<blockquote>
+<div><p>上帝视角就是我们知道联合分布，我们就能干所有事情！！！</p>
+</div></blockquote>
+<p>上面例子写成矩阵形式</p>
+<p><img alt="CpYfe4" src="https://ossjiyaoliu.oss-cn-beijing.aliyuncs.com/uPic/CpYfe4.png" /></p>
+<p><span class="math notranslate nohighlight">\(x_\infty\)</span>与初始状态无关，即无记忆性。</p>
+<blockquote>
+<div><p>证明：马尔科夫链无记忆性
+对于矩阵，<span class="math notranslate nohighlight">\(AX = \lambda X\)</span>，则有<span class="math notranslate nohighlight">\(A^2X = \lambda AX = \lambda \cdot \lambda X = \lambda^2 X\)</span>，则<span class="math notranslate nohighlight">\(A^kX = \lambda^k X\)</span>。</p>
+<p>那么对于马尔科夫链，<span class="math notranslate nohighlight">\(X_k = A\cdot ... A\cdot AX_0 = A^kX_0\)</span>。假设A有n个互相独立的特征向量<span class="math notranslate nohighlight">\([C_1,...,C_n]\)</span>（一般来说马尔科夫链是非病态的，也就是都是稳态的），那么<span class="math notranslate nohighlight">\(X_0\)</span>可以表示为<span class="math notranslate nohighlight">\(x_0 = a_1C_1 + ... +a_kC_k\)</span>，也就是特征向量的线性组合。</p>
+<p>则<span class="math notranslate nohighlight">\(X_k = A^kX_0 = a_1A^k\cdot C_1 + a_kA^k\cdot C_k = a_1\lambda_1^k\cdot C_1 + a_k\lambda_k^k\cdot C_k\)</span></p>
+<p>claim：</p>
+<ul class="simple">
+<li><p>马尔科夫矩阵有一个特征值为1，其余都小于1(也就是说，稳态的概率为特征值为1的特征向量的倍数)</p></li>
+</ul>
+<p><img alt="wZQT9d" src="https://ossjiyaoliu.oss-cn-beijing.aliyuncs.com/uPic/wZQT9d.png" /></p>
+</div></blockquote>
+<p><img alt="PnjFeM" src="https://ossjiyaoliu.oss-cn-beijing.aliyuncs.com/uPic/PnjFeM.png" /></p>
+</section>
+<section id="hmm">
+<h2><span class="section-number">1.3.5. </span>概率图应用三：HMM<a class="headerlink" href="#hmm" title="Permalink to this heading">#</a></h2>
+<p><img alt="t4yplr" src="https://ossjiyaoliu.oss-cn-beijing.aliyuncs.com/uPic/t4yplr.png" /></p>
+<p><img alt="LGAOGy" src="https://ossjiyaoliu.oss-cn-beijing.aliyuncs.com/uPic/LGAOGy.png" /></p>
+<p><img alt="LRbQor" src="https://ossjiyaoliu.oss-cn-beijing.aliyuncs.com/uPic/LRbQor.png" /></p>
+<p><img alt="Ofc1Fp" src="https://ossjiyaoliu.oss-cn-beijing.aliyuncs.com/uPic/Ofc1Fp.png" /></p>
+<p><img alt="CIi2tP" src="https://ossjiyaoliu.oss-cn-beijing.aliyuncs.com/uPic/CIi2tP.png" /></p>
+<p><img alt="AvOgWU" src="https://ossjiyaoliu.oss-cn-beijing.aliyuncs.com/uPic/AvOgWU.png" /></p>
+<p><img alt="vTaQp3" src="https://ossjiyaoliu.oss-cn-beijing.aliyuncs.com/uPic/vTaQp3.png" /></p>
+<blockquote>
+<div><p>马尔科夫模型要注意的点：</p>
+<ol class="arabic simple">
+<li><p>马尔科夫模型不适合处理大规模的数据；</p></li>
+<li><p>LSTM可以做的任务，HMM都可以做，HMM适合小数据，效果可能好，大数据还是LSTM效果更好；</p></li>
+</ol>
+</div></blockquote>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./PRML"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer">
+                  <!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="Exponential_Family_Distribution.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title"><span class="section-number">1.2. </span>指数组分布</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="%E6%A6%82%E7%8E%87%E5%9B%BE%E6%A8%A1%E5%9E%8B%E6%80%BB.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">&lt;no title&gt;</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">1.3.1. 概率基础</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bayesian-network">1.3.2. Bayesian Network</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">1.3.2.1. 概率图模型的动机及举例</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">1.3.3. 概率图应用一：朴素贝叶斯</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#markov-model">1.3.4. 概率图应用二：Markov model</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#hmm">1.3.5. 概率图应用三：HMM</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Jiyao Liu
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  <p class="copyright">
+    
+      © Copyright 2022.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=ac02cc09edc035673794"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=ac02cc09edc035673794"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
