@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
-    <title>1.3. Torch.gather 索引 &#8212; Jy&#39; s phd learning notes</title>
+    <title>&lt;no title&gt; &#8212; Jy&#39; s phd learning notes</title>
   
   
   
@@ -62,11 +62,11 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="../_static/sphinx-thebe.js"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'pytorch/torch.gather';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'PRML/概率图模型总';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="1. Latex常用符号表" href="../tools/latex_symbol.html" />
-    <link rel="prev" title="1.2. 计算图构建细节" href="computation_graph.html" />
+    <link rel="next" title="1. 20231016 | 庄吓海/王成彦-可解释医学影像分析" href="../Report/acad_lunch_zhuang_wang.html" />
+    <link rel="prev" title="1.3. 概率图模型入门" href="%E6%A6%82%E7%8E%87%E5%9B%BE%E6%A8%A1%E5%9E%8B1.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -173,13 +173,14 @@ const thebe_selector_output = ".output, .cell_output"
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Math</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../math/matrix_analysis.html">1. 矩阵与张量分析</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../math/matrix_analysis.html">1. 矩阵与张量分析作业</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">PRML notes</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1 has-children"><a class="reference internal" href="../PRML/intro.html">1. PRML</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
-<li class="toctree-l2"><a class="reference internal" href="../PRML/math_basic.html">1.1. 数学基础</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../PRML/Exponential_Family_Distribution.html">1.2. 指数组分布</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="intro.html">1. PRML</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="math_basic.html">1.1. 数学基础</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Exponential_Family_Distribution.html">1.2. 指数组分布</a></li>
+<li class="toctree-l2"><a class="reference internal" href="%E6%A6%82%E7%8E%87%E5%9B%BE%E6%A8%A1%E5%9E%8B1.html">1.3. 概率图模型入门</a></li>
 </ul>
 </li>
 </ul>
@@ -192,18 +193,17 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../research/evidential_regression.html">1. Evidential Learning and Uncentainty</a></li>
 
-<li class="toctree-l1"><a class="reference internal" href="../research/MRI_reconstruction/preprocess.html">3. MRI reconstruction预处理方法</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">MRI notes</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../MRI/MT-CEST-NOE.html">1. MT&amp;CEST&amp;NOE 磁化转移定量成像</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Pytorch</span></p>
-<ul class="current nav bd-sidenav">
-<li class="toctree-l1 current active has-children"><a class="reference internal" href="%E6%A8%A1%E5%9E%8B%E6%8B%93%E6%89%91%E7%BB%93%E6%9E%84.html">1. 模型拓扑结构</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="hook.html">1.1. 注册钩子函数（register_forward_hook）</a></li>
-<li class="toctree-l2"><a class="reference internal" href="computation_graph.html">1.2. 计算图构建细节</a></li>
-<li class="toctree-l2 current active"><a class="current reference internal" href="#">1.3. Torch.gather 索引</a></li>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../pytorch/%E6%A8%A1%E5%9E%8B%E6%8B%93%E6%89%91%E7%BB%93%E6%9E%84.html">1. 模型拓扑结构</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../pytorch/hook.html">1.1. 注册钩子函数（register_forward_hook）</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../pytorch/computation_graph.html">1.2. 计算图构建细节</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../pytorch/torch.gather.html">1.3. Torch.gather 索引</a></li>
 </ul>
 </li>
 </ul>
@@ -281,7 +281,7 @@ const thebe_selector_output = ".output, .cell_output"
       
       
       
-      <li><a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2Fpytorch/torch.gather.html&body=Your%20issue%20content%20here." target="_blank"
+      <li><a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2FPRML/概率图模型总.html&body=Your%20issue%20content%20here." target="_blank"
    class="btn btn-sm btn-source-issues-button dropdown-item"
    title="Open an issue"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -311,7 +311,7 @@ const thebe_selector_output = ".output, .cell_output"
       
       
       
-      <li><a href="../_sources/pytorch/torch.gather.ipynb" target="_blank"
+      <li><a href="../_sources/PRML/概率图模型总.md" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -321,7 +321,7 @@ const thebe_selector_output = ".output, .cell_output"
 <span class="btn__icon-container">
   <i class="fas fa-file"></i>
   </span>
-<span class="btn__text-container">.ipynb</span>
+<span class="btn__text-container">.md</span>
 </a>
 </li>
       
@@ -393,7 +393,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Torch.gather 索引</h1>
+    <h1><no title></h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -402,11 +402,9 @@ document.write(`
                 <h2> Contents </h2>
             </div>
             <nav aria-label="Page">
-                <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">1.3.1. 基本介绍</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">1.3.2. 官网示例</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">1.3.3. 复杂例子</a></li>
+                <ul class="simple visible nav section-nav flex-column">
 </ul>
+
             </nav>
         </div>
     </div>
@@ -417,166 +415,9 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article" role="main">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="torch-gather">
-<h1><span class="section-number">1.3. </span>Torch.gather 索引<a class="headerlink" href="#torch-gather" title="Permalink to this heading">#</a></h1>
-<blockquote>
-<div><p>from: <a class="reference external" href="https://www.bilibili.com/video/BV1YY4y1Q72M?vd_source=225dba48b31d269151658db856705273">https://www.bilibili.com/video/BV1YY4y1Q72M?vd_source=225dba48b31d269151658db856705273</a></p>
-</div></blockquote>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">torch</span>
-</pre></div>
-</div>
-</div>
-</div>
-<section id="id1">
-<h2><span class="section-number">1.3.1. </span>基本介绍<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h2>
-<ul>
-<li><p>复杂的接口，一些抽象的接口的深入理解</p>
-<ul class="simple">
-<li><p>理解复杂的代码；</p></li>
-<li><p>有助于构建复杂的神经网络，且清晰，不出错；</p></li>
-</ul>
-</li>
-<li><p>基于 index 在 原始 tensor 上选择（select）</p>
-<ul class="simple">
-<li><p>行选多个（行选1个是一种特例），提供的是列值(<code class="docutils literal notranslate"><span class="pre">dim=1</span></code>)；</p>
-<ul>
-<li><p>多个时，是几个必须一致；</p></li>
-</ul>
-</li>
-<li><p>列选多个（列选1个是一种特例），提供的是行值（<code class="docutils literal notranslate"><span class="pre">dim=0</span></code>）；</p></li>
-</ul>
-</li>
-<li><p>要求，</p>
-<ul class="simple">
-<li><p>input tensor 与 index 的 dim 相同</p></li>
-<li><p>index.shape &lt; input.shape</p></li>
-</ul>
-</li>
-<li><p>应用场景</p>
-<ul>
-<li><p>batch sample 多分类问题的分类输出，获得各个true label 上的 score(logits)/probs（行选1个）</p>
-<ul class="simple">
-<li><p>batch sample: n*c</p></li>
-<li><p>index(true label): n*1</p></li>
-</ul>
-</li>
-<li><p>dqn：batch state 的 batch action 的输出，回归问题；</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">state_action_values</span> <span class="o">=</span> <span class="n">policy_net</span><span class="p">(</span><span class="n">state_batch</span><span class="p">)</span><span class="o">.</span><span class="n">gather</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">action_batch</span><span class="p">)</span>
-</pre></div>
-</div>
-<ul class="simple">
-<li><p>state_batch: n*d</p></li>
-<li><p>action_batch: n*1</p></li>
-<li><p>state_action_values: n*1</p></li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</section>
-<section id="id2">
-<h2><span class="section-number">1.3.2. </span>官网示例<a class="headerlink" href="#id2" title="Permalink to this heading">#</a></h2>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">t</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> 
-                  <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">]])</span>
-<span class="n">t</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>tensor([[1, 2],
-        [3, 4]])
-</pre></div>
-</div>
-</div>
-</div>
-<p>我们可以通过gather索引获取对应元素</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">torch</span><span class="o">.</span><span class="n">gather</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">([[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> 
-                                 <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">]]))</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>tensor([[1, 1],
-        [4, 3]])
-</pre></div>
-</div>
-</div>
-</div>
-<p>底层代码实现逻辑是：</p>
-<p>[0, 0]<br />
-[1, 0] =&gt;</p>
-<blockquote>
-<div><p>[(0, 0), (0, 0)]<br />
-[(1, 1), (1, 0)]</p>
-</div></blockquote>
-</section>
-<section id="id3">
-<h2><span class="section-number">1.3.3. </span>复杂例子<a class="headerlink" href="#id3" title="Permalink to this heading">#</a></h2>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">t</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span><span class="o">.</span><span class="n">view</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
-<span class="n">t</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>tensor([[1, 2, 3],
-        [4, 5, 6],
-        [7, 8, 9]])
-</pre></div>
-</div>
-</div>
-</div>
-<ul class="simple">
-<li><p>如果想选择 (1,3), (5, 6)</p>
-<ul>
-<li><p>0, 2</p></li>
-<li><p>1, 2</p></li>
-</ul>
-</li>
-</ul>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">t</span><span class="o">.</span><span class="n">gather</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">(((</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">))))</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>tensor([[1, 3],
-        [5, 6]])
-</pre></div>
-</div>
-</div>
-</div>
-<ul class="simple">
-<li><p>如果想选择 (1, 4), (2, 8)，提供的是行值</p>
-<ul>
-<li><p>(0, 1),</p></li>
-<li><p>(0, 2)</p></li>
-</ul>
-</li>
-</ul>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">t</span><span class="o">.</span><span class="n">gather</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">(((</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">))))</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>tensor([[1, 2],
-        [4, 8]])
-</pre></div>
-</div>
-</div>
-</div>
-</section>
-</section>
+  <p><img alt="IfMmBU" src="https://ossjiyaoliu.oss-cn-beijing.aliyuncs.com/uPic/IfMmBU.png" /></p>
+<p><img alt="vtUt1O" src="https://ossjiyaoliu.oss-cn-beijing.aliyuncs.com/uPic/vtUt1O.png" />
+from:<a class="reference external" href="https://zhuanlan.zhihu.com/p/511173601">https://zhuanlan.zhihu.com/p/511173601</a></p>
 
     <script type="text/x-thebe-config">
     {
@@ -591,7 +432,7 @@ document.write(`
         },
         kernelOptions: {
             name: "python3",
-            path: "./pytorch"
+            path: "./PRML"
         },
         predefinedOutput: true
     }
@@ -609,20 +450,20 @@ document.write(`
                   <!-- Previous / next buttons -->
 <div class="prev-next-area">
     <a class="left-prev"
-       href="computation_graph.html"
+       href="%E6%A6%82%E7%8E%87%E5%9B%BE%E6%A8%A1%E5%9E%8B1.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title"><span class="section-number">1.2. </span>计算图构建细节</p>
+        <p class="prev-next-title"><span class="section-number">1.3. </span>概率图模型入门</p>
       </div>
     </a>
     <a class="right-next"
-       href="../tools/latex_symbol.html"
+       href="../Report/acad_lunch_zhuang_wang.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title"><span class="section-number">1. </span>Latex常用符号表</p>
+        <p class="prev-next-title"><span class="section-number">1. </span>20231016 | 庄吓海/王成彦-可解释医学影像分析</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -640,11 +481,9 @@ document.write(`
     <i class="fa-solid fa-list"></i> Contents
   </div>
   <nav class="bd-toc-nav page-toc">
-    <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">1.3.1. 基本介绍</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">1.3.2. 官网示例</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">1.3.3. 复杂例子</a></li>
+    <ul class="simple visible nav section-nav flex-column">
 </ul>
+
   </nav></div>
 
 </div></div>
