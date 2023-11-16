@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
-    <title>1.3. 概率图模型入门 &#8212; Jy&#39; s phd learning notes</title>
+    <title>1.4. 概率图模型入门 &#8212; Jy&#39; s phd learning notes</title>
   
   
   
@@ -67,8 +67,8 @@ const thebe_selector_output = ".output, .cell_output"
     <script>DOCUMENTATION_OPTIONS.pagename = 'PRML/概率图模型1';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="&lt;no title&gt;" href="%E6%A6%82%E7%8E%87%E5%9B%BE%E6%A8%A1%E5%9E%8B%E6%80%BB.html" />
-    <link rel="prev" title="1.2. 指数组分布" href="Exponential_Family_Distribution.html" />
+    <link rel="next" title="1.5. 概率图模型" href="%E6%A6%82%E7%8E%87%E5%9B%BE%E6%A8%A1%E5%9E%8B%E6%80%BB.html" />
+    <link rel="prev" title="1.3. 指数组分布" href="Exponential_Family_Distribution.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -180,9 +180,12 @@ const thebe_selector_output = ".output, .cell_output"
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">PRML notes</span></p>
 <ul class="current nav bd-sidenav">
 <li class="toctree-l1 current active has-children"><a class="reference internal" href="intro.html">1. PRML</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="math_basic.html">1.1. 数学基础</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Exponential_Family_Distribution.html">1.2. 指数组分布</a></li>
-<li class="toctree-l2 current active"><a class="current reference internal" href="#">1.3. 概率图模型入门</a></li>
+<li class="toctree-l2"><a class="reference internal" href="math_basic.html">1.2. 数学基础</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Exponential_Family_Distribution.html">1.3. 指数组分布</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">1.4. 概率图模型入门</a></li>
+<li class="toctree-l2"><a class="reference internal" href="%E6%A6%82%E7%8E%87%E5%9B%BE%E6%A8%A1%E5%9E%8B%E6%80%BB.html">1.5. 概率图模型</a></li>
+<li class="toctree-l2"><a class="reference internal" href="%E5%8D%A1%E5%B0%94%E6%9B%BC%E6%BB%A4%E6%B3%A2.html">1.6. 线性动态系统-卡曼滤波（Kalman Filter）</a></li>
+<li class="toctree-l2"><a class="reference internal" href="%E7%B2%92%E5%AD%90%E6%BB%A4%E6%B3%A2.html">1.7. Particle Filter</a></li>
 </ul>
 </li>
 </ul>
@@ -405,14 +408,14 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">1.3.1. 概率基础</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bayesian-network">1.3.2. Bayesian Network</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">1.3.2.1. 概率图模型的动机及举例</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">1.4.1. 概率基础</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bayesian-network">1.4.2. Bayesian Network</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">1.4.2.1. 概率图模型的动机及举例</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">1.3.3. 概率图应用一：朴素贝叶斯</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#markov-model">1.3.4. 概率图应用二：Markov model</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#hmm">1.3.5. 概率图应用三：HMM</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">1.4.3. 概率图应用一：朴素贝叶斯</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#markov-model">1.4.4. 概率图应用二：Markov model</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#hmm">1.4.5. 概率图应用三：HMM</a></li>
 </ul>
             </nav>
         </div>
@@ -425,21 +428,21 @@ document.write(`
                 <article class="bd-article" role="main">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="id1">
-<h1><span class="section-number">1.3. </span>概率图模型入门<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h1>
+<h1><span class="section-number">1.4. </span>概率图模型入门<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h1>
 <blockquote>
 <div><p>from: 【概率图模型初步：从贝叶斯网络到HMM模型】<a class="reference external" href="https://www.bilibili.com/video/BV1E4411a7zY?vd_source=225dba48b31d269151658db856705273">https://www.bilibili.com/video/BV1E4411a7zY?vd_source=225dba48b31d269151658db856705273</a></p>
 </div></blockquote>
 <section id="id2">
-<h2><span class="section-number">1.3.1. </span>概率基础<a class="headerlink" href="#id2" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">1.4.1. </span>概率基础<a class="headerlink" href="#id2" title="Permalink to this heading">#</a></h2>
 <p><img alt="lUID1D" src="https://ossjiyaoliu.oss-cn-beijing.aliyuncs.com/uPic/lUID1D.png" /></p>
 <p><img alt="TF3MGP" src="https://ossjiyaoliu.oss-cn-beijing.aliyuncs.com/uPic/TF3MGP.png" /></p>
 <p><img alt="8HrQsS" src="https://ossjiyaoliu.oss-cn-beijing.aliyuncs.com/uPic/8HrQsS.png" /></p>
 <p><img alt="zfS8FR" src="https://ossjiyaoliu.oss-cn-beijing.aliyuncs.com/uPic/zfS8FR.png" /></p>
 </section>
 <section id="bayesian-network">
-<h2><span class="section-number">1.3.2. </span>Bayesian Network<a class="headerlink" href="#bayesian-network" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">1.4.2. </span>Bayesian Network<a class="headerlink" href="#bayesian-network" title="Permalink to this heading">#</a></h2>
 <section id="id3">
-<h3><span class="section-number">1.3.2.1. </span>概率图模型的动机及举例<a class="headerlink" href="#id3" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">1.4.2.1. </span>概率图模型的动机及举例<a class="headerlink" href="#id3" title="Permalink to this heading">#</a></h3>
 <blockquote>
 <div><ul class="simple">
 <li><p>知道了联合分布就能进一步求出边缘分布或者条件分布；</p></li>
@@ -480,14 +483,14 @@ document.write(`
 </section>
 </section>
 <section id="id4">
-<h2><span class="section-number">1.3.3. </span>概率图应用一：朴素贝叶斯<a class="headerlink" href="#id4" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">1.4.3. </span>概率图应用一：朴素贝叶斯<a class="headerlink" href="#id4" title="Permalink to this heading">#</a></h2>
 <p>朴素贝叶斯的本质就是简单的概率图模型。比如垃圾邮件分类任务，可以建立如下概率图，邮件分类可以通过如下几个关键词的出现进行分类。所谓naive就是联合分布能写成这样简单的概率乘积。</p>
 <p><img alt="Kt3dvF" src="https://ossjiyaoliu.oss-cn-beijing.aliyuncs.com/uPic/Kt3dvF.png" /></p>
 <p>假设每个词的出现是条件独立，那么后验分布的计算公式如下（贝叶斯公式）：</p>
 <p><img alt="hnMzt5" src="https://ossjiyaoliu.oss-cn-beijing.aliyuncs.com/uPic/hnMzt5.png" /></p>
 </section>
 <section id="markov-model">
-<h2><span class="section-number">1.3.4. </span>概率图应用二：Markov model<a class="headerlink" href="#markov-model" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">1.4.4. </span>概率图应用二：Markov model<a class="headerlink" href="#markov-model" title="Permalink to this heading">#</a></h2>
 <p><img alt="kWhyUY" src="https://ossjiyaoliu.oss-cn-beijing.aliyuncs.com/uPic/kWhyUY.png" /></p>
 <p>马尔科夫模型中，我们只需要知道初始值和状态转移概率（共享），那么联合分布就知道了。</p>
 <hr class="docutils" />
@@ -519,7 +522,7 @@ document.write(`
 <p><img alt="PnjFeM" src="https://ossjiyaoliu.oss-cn-beijing.aliyuncs.com/uPic/PnjFeM.png" /></p>
 </section>
 <section id="hmm">
-<h2><span class="section-number">1.3.5. </span>概率图应用三：HMM<a class="headerlink" href="#hmm" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">1.4.5. </span>概率图应用三：HMM<a class="headerlink" href="#hmm" title="Permalink to this heading">#</a></h2>
 <p><img alt="t4yplr" src="https://ossjiyaoliu.oss-cn-beijing.aliyuncs.com/uPic/t4yplr.png" /></p>
 <p><img alt="LGAOGy" src="https://ossjiyaoliu.oss-cn-beijing.aliyuncs.com/uPic/LGAOGy.png" /></p>
 <p><img alt="LRbQor" src="https://ossjiyaoliu.oss-cn-beijing.aliyuncs.com/uPic/LRbQor.png" /></p>
@@ -573,7 +576,7 @@ document.write(`
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title"><span class="section-number">1.2. </span>指数组分布</p>
+        <p class="prev-next-title"><span class="section-number">1.3. </span>指数组分布</p>
       </div>
     </a>
     <a class="right-next"
@@ -581,7 +584,7 @@ document.write(`
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">&lt;no title&gt;</p>
+        <p class="prev-next-title"><span class="section-number">1.5. </span>概率图模型</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -600,14 +603,14 @@ document.write(`
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">1.3.1. 概率基础</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bayesian-network">1.3.2. Bayesian Network</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">1.3.2.1. 概率图模型的动机及举例</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">1.4.1. 概率基础</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bayesian-network">1.4.2. Bayesian Network</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">1.4.2.1. 概率图模型的动机及举例</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">1.3.3. 概率图应用一：朴素贝叶斯</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#markov-model">1.3.4. 概率图应用二：Markov model</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#hmm">1.3.5. 概率图应用三：HMM</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">1.4.3. 概率图应用一：朴素贝叶斯</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#markov-model">1.4.4. 概率图应用二：Markov model</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#hmm">1.4.5. 概率图应用三：HMM</a></li>
 </ul>
   </nav></div>
 

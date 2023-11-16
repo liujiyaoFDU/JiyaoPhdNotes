@@ -1,0 +1,863 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>1.7. Particle Filter &#8212; Jy&#39; s phd learning notes</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=ac02cc09edc035673794" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=ac02cc09edc035673794" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=ac02cc09edc035673794" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=ac02cc09edc035673794" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=ac02cc09edc035673794" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=ac02cc09edc035673794" />
+  <script src="../_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=ac02cc09edc035673794"></script>
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'PRML/粒子滤波';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="1. 20231016 | 庄吓海/王成彦-可解释医学影像分析" href="../Report/acad_lunch_zhuang_wang.html" />
+    <link rel="prev" title="1.6. 线性动态系统-卡曼滤波（Kalman Filter）" href="%E5%8D%A1%E5%B0%94%E6%9B%BC%E6%BB%A4%E6%B3%A2.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+  
+
+<a class="navbar-brand logo" href="../intro.html">
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/logo.jpg" class="logo__image only-light" alt="Logo image"/>
+    <script>document.write(`<img src="../_static/logo.jpg" class="logo__image only-dark" alt="Logo image"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../intro.html">
+                    Jiyao Liu’s Phd lecture notebook
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Basic Guides</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../basic/jupyter_book.html">1. Jupyter Book 使用指南</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../basic/notebooks.html">2. Jupyter Notebook files</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Math</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../math/matrix_analysis.html">1. 矩阵与张量分析作业</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">PRML notes</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="intro.html">1. PRML</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="math_basic.html">1.2. 数学基础</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Exponential_Family_Distribution.html">1.3. 指数组分布</a></li>
+<li class="toctree-l2"><a class="reference internal" href="%E6%A6%82%E7%8E%87%E5%9B%BE%E6%A8%A1%E5%9E%8B1.html">1.4. 概率图模型入门</a></li>
+<li class="toctree-l2"><a class="reference internal" href="%E6%A6%82%E7%8E%87%E5%9B%BE%E6%A8%A1%E5%9E%8B%E6%80%BB.html">1.5. 概率图模型</a></li>
+<li class="toctree-l2"><a class="reference internal" href="%E5%8D%A1%E5%B0%94%E6%9B%BC%E6%BB%A4%E6%B3%A2.html">1.6. 线性动态系统-卡曼滤波（Kalman Filter）</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">1.7. Particle Filter</a></li>
+</ul>
+</li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">学术报告</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../Report/acad_lunch_zhuang_wang.html">1. 20231016 | 庄吓海/王成彦-可解释医学影像分析</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Report/report-rec.html">2. VALSE 20200415 |  机器学习 vs 压缩感知：核磁共振成像与重建</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">research</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../research/evidential_regression.html">1. Evidential Learning and Uncentainty</a></li>
+
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">MRI notes</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../MRI/MT-CEST-NOE.html">1. MT&amp;CEST&amp;NOE 磁化转移定量成像</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Pytorch</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../pytorch/%E6%A8%A1%E5%9E%8B%E6%8B%93%E6%89%91%E7%BB%93%E6%9E%84.html">1. 模型拓扑结构</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../pytorch/hook.html">1.1. 注册钩子函数（register_forward_hook）</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../pytorch/computation_graph.html">1.2. 计算图构建细节</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../pytorch/torch.gather.html">1.3. Torch.gather 索引</a></li>
+</ul>
+</li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">工具使用</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../tools/latex_symbol.html">1. Latex常用符号表</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2FPRML/粒子滤波.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/PRML/粒子滤波.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script>
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Particle Filter</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">1.7.1. 背景介绍</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">1.7.1.1. 两个假设</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">1.7.1.2. 两个方程</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">1.7.1.3. 三大类问题</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#hidden-markov-model">1.7.1.3.1. 隐马尔可夫模型(Hidden Markov Model)}</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#linear-dynamic-system">1.7.1.3.2. 线性动态系统(Linear Dynamic System)</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#non-linear-dynamic-system">1.7.1.3.3. 非线性动态系统(Non-Linear Dynamic System)</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">1.7.2. 重要性采样</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">1.7.2.1. 预备知识-重要性采样</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">1.7.2.2. 粒子滤波中的重要性采样</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sequential-importance-sampling">1.7.3. 顺序重要性采样(Sequential Importance Sampling)</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#p-z-1-t-i-x-1-t">1.7.3.1. 分子<span class="math notranslate nohighlight">\(P(z_{1:t}^{(i)}|x_{1:t})\)</span>解析</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#q-z-1-t-i-x-1-t">1.7.3.2. 分母<span class="math notranslate nohighlight">\(Q(z_{1:t}^{(i)}|x_{1:t})\)</span>解析</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id8">1.7.3.3. 算法小结</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id9">1.7.3.4. Sequential Importance Sampling中的问题</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sampling-importance-resampling-sir">1.7.4. Sampling Importance Resampling (SIR)</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#sir">1.7.4.1. SIR采样方法</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-do-it">1.7.4.2. How to do it?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#q-z">1.7.4.3. 找一个更好的<span class="math notranslate nohighlight">\(Q(Z)\)</span></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id10">1.7.5. Sampling Importance Resampling (SIR)总结</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="particle-filter">
+<h1><span class="section-number">1.7. </span>Particle Filter<a class="headerlink" href="#particle-filter" title="Permalink to this heading">#</a></h1>
+<center><div style='height:2mm;'></div><div style="font-family:华文楷体;font-size:14pt;"> Jiyao Liu， 2023-11-15</div></center>
+<p>[toc]</p>
+<section id="id1">
+<h2><span class="section-number">1.7.1. </span>背景介绍<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h2>
+<p>Dynamic Model 是在概率图模型中加入了时序的因素，所以样本之间不再是独立同分布 (i.i.d) 的，</p>
+<p>而是有依赖关系的。Dynamic Model 的一个主要特点是，混合模型。因为我们看到的都是观测变</p>
+<p>量序列，而每一个观测变量都对应着一个隐变量，隐变量也被称之为系统变量 (System Variable)，所</p>
+<p>以有时我们也将 Dynamic Model 称之为 State Space Model（状态空间模型）。 动态模型分为三类：</p>
+<ul class="simple">
+<li><p>HMM：隐状态是离散变量，观测变量可以离散也可以连续；</p></li>
+<li><p>Linear Dynamic System（Karman filter），<strong>Non-linear Dynamic System（Particle filter）: 隐状态是连续变量</strong></p></li>
+</ul>
+<p>Dynamic Model 我们可以从两个假设，两个方程，三个问题的角度去分析。</p>
+<section id="id2">
+<h3><span class="section-number">1.7.1.1. </span>两个假设<a class="headerlink" href="#id2" title="Permalink to this heading">#</a></h3>
+<p>这是有关Dynamic Model的两个假设，也是我们研究这个模型的前提条件。这两个假设可以大大的帮助我们简化模型：</p>
+<ol class="arabic simple">
+<li><p>**齐次Markov假设(无后向性)：**未来与过去无关，只依赖与当前的状态。数学公式描述也就是。</p></li>
+</ol>
+<div class="math notranslate nohighlight">
+\[
+P(i_{t+1}|i_{t},i_{t-1},\cdots,i_1,o_t,\cdots,o_1) = P(i_{t+1}|i_t)
+\]</div>
+<ol class="arabic simple" start="2">
+<li><p>**观测独立假设：**当前时刻的观测变量只依赖于当前时刻的隐变量。
+$<span class="math notranslate nohighlight">\(
+ P(o_{t}|i_{t},i_{t-1},\cdots,i_1,o_t,\cdots,o_1) = P(o_{t}|i_t)
+ \)</span>$</p></li>
+</ol>
+</section>
+<section id="id3">
+<h3><span class="section-number">1.7.1.2. </span>两个方程<a class="headerlink" href="#id3" title="Permalink to this heading">#</a></h3>
+<p>这两个方程分别描述的是，隐变量状态与状态之间的转移概率，由当前时刻隐变量推出当前时刻观测变量的概率，符合化描述如下所示：
+$<span class="math notranslate nohighlight">\(
+\left\{
+        \begin{array}{ll}
+            z_t = g(z_{t-1},\mu,\xi) &amp; \\
+            x_t = h(z_{t},\mu,\delta) &amp; \\
+        \end{array}
+    \right.
+\)</span><span class="math notranslate nohighlight">\(
+经过类比，我们就可以很简单的发现，\)</span>g(\cdot)<span class="math notranslate nohighlight">\(函数就是HMM中的状态转移矩阵\)</span>A<span class="math notranslate nohighlight">\(，\)</span>h(\cdot)<span class="math notranslate nohighlight">\(函数就是HMM中的发射转移矩阵\)</span>B$。</p>
+</section>
+<section id="id4">
+<h3><span class="section-number">1.7.1.3. </span>三大类问题<a class="headerlink" href="#id4" title="Permalink to this heading">#</a></h3>
+<p>在Dynamic Model中，我们主要可以分为三大类问题。</p>
+<section id="hidden-markov-model">
+<h4><span class="section-number">1.7.1.3.1. </span>隐马尔可夫模型(Hidden Markov Model)}<a class="headerlink" href="#hidden-markov-model" title="Permalink to this heading">#</a></h4>
+<p>这个在之前的章节中，我们已经有了详细的讲解。主要特点就是，隐状态<span class="math notranslate nohighlight">\(z\)</span>之间是离散的，而观测变量<span class="math notranslate nohighlight">\(s\)</span>之间并没有限制。在Hidden Markov Model中，主要关注的是Decoding问题，<strong>也就是在已知观测序列的情况下，最大化可能的隐状态。</strong></p>
+</section>
+<section id="linear-dynamic-system">
+<h4><span class="section-number">1.7.1.3.2. </span>线性动态系统(Linear Dynamic System)<a class="headerlink" href="#linear-dynamic-system" title="Permalink to this heading">#</a></h4>
+<p>线性动态系通常也被我们称为线性高斯系统，而线性高斯系统这个名字更加形象，而线性和高斯的来源主要如下所示：
+$<span class="math notranslate nohighlight">\(
+    \left\{
+        \begin{array}{ll}
+            z_t = A\cdot z_{t-1}+B+\epsilon &amp; \epsilon \sim \mathcal{N}(0,Q) \\
+            x_t = C\cdot z_{t}+D+\delta &amp; \delta \sim \mathcal{N}(0,R)\\
+        \end{array}
+    \right.
+\)</span><span class="math notranslate nohighlight">\(
+也就是式(3)中的两个函数将符合线性和噪声符合Gaussian Distribution的原则。而Dynamic Model中重点关注的就是Filter问题，Filter问题就是求解\)</span>P(z_t|x_1,x_2,\cdots,x_t)$，在已知观测序列的情况下，求解当前时刻的隐变量的状态。</p>
+</section>
+<section id="non-linear-dynamic-system">
+<h4><span class="section-number">1.7.1.3.3. </span>非线性动态系统(Non-Linear Dynamic System)<a class="headerlink" href="#non-linear-dynamic-system" title="Permalink to this heading">#</a></h4>
+<p>Non-Linear Dynamic System和Linear Dynamic System区别是，<strong>相邻两个隐变量状态<span class="math notranslate nohighlight">\(z_t\)</span>和<span class="math notranslate nohighlight">\(z_{t-1}\)</span>之间的关系是任意的，而且，Noise也是Gaussian的</strong>。所以，==无法使用Kalman Filter一样的方法得到解析解==。所以，只能采用Monte-Carlo Sampling一样的采样方法来得出<strong>近似解</strong>。</p>
+<p>Non-Linear没有那么好的特征，求不出，只能采样。在贝叶斯框架的Inference主要要求解的是一个后验分布<span class="math notranslate nohighlight">\(P(Z|X)\)</span>。而这个分布主要是用来求解期望（后验实际上的目标是用来求期望），<span class="math notranslate nohighlight">\(\mathbb{E}_{z|x}[f(x)] = \int f(z)p(z|x)dx\)</span>。如果，我们可以采取<span class="math notranslate nohighlight">\(N\)</span>个样本，<span class="math notranslate nohighlight">\(z^{(i)}\sim P(Z|X),\{ z^{(1)},z^{(2)},\cdots,z^{(N)} \}\)</span>。那么，我们就可以通过<span class="math notranslate nohighlight">\(\frac{1}{N}\sum_{i=1}^N f(z^{(i)})\)</span>来求解。这就是最简单的Monte-Carlo Sampling的方法（<strong>提供一种抽样的方式来近似后验</strong>）。</p>
+</section>
+</section>
+</section>
+<section id="id5">
+<h2><span class="section-number">1.7.2. </span>重要性采样<a class="headerlink" href="#id5" title="Permalink to this heading">#</a></h2>
+<p>首先介绍重要性采样，重要性采样并不是直接对概率分布进行采样，而是对提议 (Proposal) /重要性分布进行采样，即引入一个q(z)，从q(z)中进行采样。</p>
+<section id="id6">
+<h3><span class="section-number">1.7.2.1. </span>预备知识-重要性采样<a class="headerlink" href="#id6" title="Permalink to this heading">#</a></h3>
+<p>给定随机变量<span class="math notranslate nohighlight">\(x\)</span>，变量函数为<span class="math notranslate nohighlight">\(f(x)\)</span>，那么<span class="math notranslate nohighlight">\(\mathbb E[f(x)]=\int f(x)p(x)dx\)</span>，<span class="math notranslate nohighlight">\(p(x)\)</span>为目标<span class="math notranslate nohighlight">\(x\)</span>的分布的pdf。如下图，在重要的地方（左边），如果采样次数比较少，就很难采到左侧的区域，就会导致估计的<span class="math notranslate nohighlight">\(E[f(x)]\)</span>不准确。需要通过一种方法==降低估计的均值的方差==。from：<a class="reference external" href="https://www.bilibili.com/video/BV1Np4y1W7uy?vd_source=225dba48b31d269151658db856705273">【机器学习中的数学-07讲-常见的采样方法4 (重要性采样1)】</a></p>
+<blockquote>
+<div><img src="https://ossjiyaoliu.oss-cn-beijing.aliyuncs.com/uPic/E1K3Nc.png" alt="E1K3Nc" style="xoom:30%;" />
+</div></blockquote>
+<p>重要性采样并不是直接对概率分布进行采样，而是==对importance or proposal分布进行采样==，即引入一个q(x)，从q(x)中进行采样。也就是：
+$<span class="math notranslate nohighlight">\(
+\begin{split}
+        \mathbb{E}_{p(x)}[f(x)] = \int p(x)f(x)dx 
+        = &amp; \int \frac{p(x)}{q(x)} q(x)f(x)dx \\
+        = &amp; \int f(x)\frac{p(x)}{q(x)} q(x)dx 
+    \end{split}
+\)</span><span class="math notranslate nohighlight">\(
+在\)</span>q(x)<span class="math notranslate nohighlight">\(中采样得到一系列样本\)</span>x_i<span class="math notranslate nohighlight">\(，则均值可以通过下面估计得到：
+\)</span><span class="math notranslate nohighlight">\(
+\mathbb{E}_{p(x)}[f(x)] \approx \frac{1}{N} \sum_{i=1}^N f(x_i) \frac{p(x_i)}{q(x_i)}\ (x_i \sim q(x),\ i = 1,2,\cdots,N)
+\)</span><span class="math notranslate nohighlight">\(
+而这里的\)</span>p(x_i)/q(x_i)$也就是 Weight，用来平衡不同的概率密度值之间的差距。同样重要性采样也可能</p>
+<p>会出现一些问题，就是两个分布之间的差距太大了话，总是采样采不到重要的样本，采的可能都是实</p>
+<p>际分布概率值小的部分。也就是采样效率不均匀的问题。</p>
+<hr class="docutils" />
+<p>那么重要性分布<span class="math notranslate nohighlight">\(q(x)\)</span>如何选取才能降低估计的均值的方差？</p>
+<p>设统计量<span class="math notranslate nohighlight">\(\hat \mu_p = \frac{1}{N} \sum_{i=1}^N f(x_i) \frac{p(x_i)}{q(x_i)}\ (x_i \sim q(x),\ i = 1,2,\cdots,N)\)</span>，<span class="math notranslate nohighlight">\(\mu\)</span>为<span class="math notranslate nohighlight">\(f(x)\)</span>的均值，计算其均值和方差为：</p>
+<p><img alt="image-20231116225538773" src="https://ossjiyaoliu.oss-cn-beijing.aliyuncs.com/uPic/image-20231116225538773.png" /></p>
+<p><img alt="image-20231116230053814" src="https://ossjiyaoliu.oss-cn-beijing.aliyuncs.com/uPic/image-20231116230053814.png" /></p>
+<p>不难发现，若<span class="math notranslate nohighlight">\(q(x)=\frac{f(x)p(x)}{\mu}\)</span>，那么<span class="math notranslate nohighlight">\(Var[\hat \mu_q]=0\)</span>，便达到了我们的目标。但是<span class="math notranslate nohighlight">\(f(x)\)</span>可能小于0并且我们需要知道<span class="math notranslate nohighlight">\(\mu\)</span>，而<span class="math notranslate nohighlight">\(\mu\)</span>本身是我们需要估计的目标。因此我们放宽条件，即满足：<span class="math notranslate nohighlight">\(q(x)\propto |f(x)|\cdot p(x)\)</span>。</p>
+<p>下面是这种<span class="math notranslate nohighlight">\(q(x)\)</span>使得方差最小的证明：</p>
+<p><img alt="image-20231116231139105" src="https://ossjiyaoliu.oss-cn-beijing.aliyuncs.com/uPic/image-20231116231139105.png" /></p>
+<p><img alt="image-20231116231836625" src="https://ossjiyaoliu.oss-cn-beijing.aliyuncs.com/uPic/image-20231116231836625.png" /></p>
+</section>
+<section id="id7">
+<h3><span class="section-number">1.7.2.2. </span>粒子滤波中的重要性采样<a class="headerlink" href="#id7" title="Permalink to this heading">#</a></h3>
+<p>如果是在Filtering的问题中，目标是求解*<span class="math notranslate nohighlight">\(P(z_t|x_{1:t})\)</span>*，权值为：
+$<span class="math notranslate nohighlight">\(
+w^{(i)}_t = \frac{P(z_t^{(i)}|x_{1:t})}{Q(z_t^{(i)}|x_{1:t})}
+\)</span><span class="math notranslate nohighlight">\(
+而在每一个时刻，都有\)</span>N<span class="math notranslate nohighlight">\(个样本点：
+\)</span><span class="math notranslate nohighlight">\(
+\begin{split}
+        &amp; t=1:\ w^{(i)}_1,\ i=1,2,\cdots,N \sim w^{(1)}_1,w^{(2)}_1,\cdots,w^{(N)}_1 \\
+        &amp; t=2:\ w^{(i)}_2,\ i=1,2,\cdots,N \sim w^{(1)}_2,w^{(2)}_2,\cdots,w^{(N)}_2 \\
+        &amp; \cdots\cdots \\
+        &amp; t=T:\ w^{(i)}_T,\ i=1,2,\cdots,N \sim w^{(1)}_T,w^{(2)}_T,\cdots,w^{(N)}_T \\
+    \end{split}
+\)</span><span class="math notranslate nohighlight">\(
+而实际上\)</span>P(z_t^{(i)}|x_{1:t})<span class="math notranslate nohighlight">\(的求解非常的复杂，而这样的迭代式求解，实际上复杂度非常的高。我们计算起来非常的复杂。我们想在\)</span>w^{(i)}<em>T<span class="math notranslate nohighlight">\(和\)</span>w^{(i)}</em>{T-1}$之间寻找一个递推关系式来大大的简化计算。然后就引出了下面的Sequential Importance Sampling (SIS)算法。</p>
+</section>
+</section>
+<section id="sequential-importance-sampling">
+<h2><span class="section-number">1.7.3. </span>顺序重要性采样(Sequential Importance Sampling)<a class="headerlink" href="#sequential-importance-sampling" title="Permalink to this heading">#</a></h2>
+<p>这个算法中的主要思想就是，找到<span class="math notranslate nohighlight">\(w^{(i)}_T\)</span>和<span class="math notranslate nohighlight">\(w^{(i)}_{T-1}\)</span>之间的一个递推关系式来简化计算。</p>
+<p>在这个算法的开始，做出了一个我觉得有点神奇的铺垫。那就是将求解的重点做了一个转变：
+$<span class="math notranslate nohighlight">\(
+P(z_t|x_{1:t}) \longrightarrow P(z_{1:t}|x_{1:t}) 
+\)</span><span class="math notranslate nohighlight">\(
+​    实际上\)</span>P(z_t|x_{1:t})<span class="math notranslate nohighlight">\(是\)</span>P(z_{1:t}|x_{1:t})<span class="math notranslate nohighlight">\(的一个边缘概率分布，而老师讲了一个很自然我们可以直接丢弃\)</span>z_{1:t-1}<span class="math notranslate nohighlight">\(，从而使得\)</span>P(z_t|x_{1:t})<span class="math notranslate nohighlight">\(和\)</span>P(z_{1:t}|x_{1:t})<span class="math notranslate nohighlight">\(等价处理。本人水平有限，所以实在没有想清楚这到底是怎样一个自然法。所以，我理解的是，在\)</span>x_{1:t}<span class="math notranslate nohighlight">\(都知道的情况下，\)</span>P(z_{1:t}|x_{1:t})$的边缘概率求起来比较方便。大家有什么好的想法，欢迎留言讨论。</p>
+<p>而<span class="math notranslate nohighlight">\(P(z_{1:t}|x_{1:t})\)</span>对应的权重<span class="math notranslate nohighlight">\(w_t^{(i)}\)</span>为：
+$<span class="math notranslate nohighlight">\(
+w_t^{(i)} \propto \frac{P(z_{1:t}^{(i)}|x_{1:t})}{Q(z_{1:t}^{(i)}|x_{1:t})}
+\)</span>$
+我们要将这个公式中的分子和分母拆开进行化简.</p>
+<section id="p-z-1-t-i-x-1-t">
+<h3><span class="section-number">1.7.3.1. </span>分子<span class="math notranslate nohighlight">\(P(z_{1:t}^{(i)}|x_{1:t})\)</span>解析<a class="headerlink" href="#p-z-1-t-i-x-1-t" title="Permalink to this heading">#</a></h3>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+    \begin{split}
+        P(z_{1:t}^{(i)}|x_{1:t}) 
+        = &amp; \frac{P(z_{1:t}^{(i)},x_{1:t})}{\underbrace{P(x_{1:t}}_{C})} \\
+        = &amp; \frac{1}{C} P(z_{1:t}^{(i)},x_{1:t}) \\
+        = &amp; \frac{1}{C}\underbrace{P(x_t|z_{1:t}^{(i)},x_{1:t-1})}_{P(x_t|z_t^{(i)})}P(z_{1:t}^{(i)},x_{1:t-1}) \\
+        = &amp; \frac{1}{C} P(x_t|z_t^{(i)}) \underbrace{P(z_t^{(i)}|z_{1:t-1}^{(i)},x_{1:t-1})}_{P(z_t^{(i)}|z_{t-1})} P(z_{1:t-1}^{(i)},x_{1:t-1}) \\
+        = &amp; \frac{1}{C} P(x_t|z_t^{(i)})P(z_t^{(i)}|z_{t-1})P(z_{1:t-1}^{(i)},x_{1:t-1}) \\
+        = &amp; \frac{1}{C} P(x_t|z_t^{(i)})P(z_t^{(i)}|z_{t-1})P(z_{1:t-1}^{(i)}|x_{1:t-1})\underbrace{P(x_{1:t-1})}_{D} \\ 
+        = &amp; \frac{D}{C} P(x_t|z_t^{(i)})P(z_t^{(i)}|z_{t-1})P(z_{1:t-1}^{(i)}|x_{1:t-1})
+    \end{split}
+\end{split}\]</div>
+</section>
+<section id="q-z-1-t-i-x-1-t">
+<h3><span class="section-number">1.7.3.2. </span>分母<span class="math notranslate nohighlight">\(Q(z_{1:t}^{(i)}|x_{1:t})\)</span>解析<a class="headerlink" href="#q-z-1-t-i-x-1-t" title="Permalink to this heading">#</a></h3>
+<p>分母中，我们假设：
+$<span class="math notranslate nohighlight">\(
+Q(z_{1:t}^{(i)}|x_{1:t}) = Q(z_t^{(i)}|z_{1:t-1}^{(i)},x_{1:t})Q(z_{1:t-1}^{(i)}|x_{1:t-1})
+\)</span><span class="math notranslate nohighlight">\(
+有的同学会很好奇\)</span>Q(z_{1:t-1}^{(i)}|x_{1:t-1})<span class="math notranslate nohighlight">\(为什么不是\)</span>Q(z_{1:t-1}^{(i)}|x_{1:t})<span class="math notranslate nohighlight">\(。这个很好解释，这是一个假设。\)</span>Q(\cdot)<span class="math notranslate nohighlight">\(本来就是一个Proposal Distribution，我们想设成什么样都没有关系。所以，我们将分子和分母的解析结果汇总可以得到：
+\)</span><span class="math notranslate nohighlight">\(
+\begin{split}
+    w_t^{(i)} &amp; \propto \frac{P(z_{1:t}^{(i)}|x_{1:t})}{Q(z_{1:t}^{(i)}|x_{1:t})} \propto \frac{P(x_t|z_t^{(i)})P(z_t^{(i)}|z_{t-1})P(z_{1:t-1}^{(i)}|x_{1:t-1})}{Q(z_t^{(i)}|z_{1:t-1}^{(i)},x_{1:t})Q(z_{1:t-1}^{(i)}|x_{1:t-1})} \\
+    = &amp; \frac{P(x_t|z_t^{(i)})P(z_t^{(i)}|z_{t-1})}{Q(z_t^{(i)}|z_{1:t-1}^{(i)},x_{1:t})} \cdot w^{(i)}_{t-1}
+\end{split}
+\)</span><span class="math notranslate nohighlight">\(
+\)</span>P(x_t|z_t^{(i)})<span class="math notranslate nohighlight">\(是已知的发射矩阵，\)</span>P(z_t^{(i)}|z_{t-1})<span class="math notranslate nohighlight">\(也是已知的状态转移矩阵，\)</span>Q(z_t^{(i)}|z_{1:t-1}^{(i)},x_{1:t})<span class="math notranslate nohighlight">\(是Proposal Distribution很简单，很好进行求解。那么对于在\)</span>t<span class="math notranslate nohighlight">\(时刻的\)</span>N<span class="math notranslate nohighlight">\(个值\)</span>w_t^{(i)}$，我们不在需要一个个的进行计算了，使用迭代公式就可以很快的求得解。</p>
+</section>
+<section id="id8">
+<h3><span class="section-number">1.7.3.3. </span>算法小结<a class="headerlink" href="#id8" title="Permalink to this heading">#</a></h3>
+<p>我们反复强调过，求解后验概率分布<span class="math notranslate nohighlight">\(P(Z|X)\)</span>大多数时候都是为了求解期望<span class="math notranslate nohighlight">\(\mathbb{E}_{Z|X}[f(Z)]\)</span>，而实际上期望的问题就是一个积分问题。为什么求期望这么的重要呢，我们仔细想想。求方差的过程本质上就是一个求期望的过程：<span class="math notranslate nohighlight">\(Var[X]=\mathbb{E}[X^2]-[\mathbb{E}[X]]^2\)</span>。而求边缘概率也可以转换成一个求期望的问题，本质上还是一个积分的问题。</p>
+<p>前面在公式(16)中得到了，
+$<span class="math notranslate nohighlight">\(
+     w_t^{(i)}  \propto \frac{P(z_{1:t}^{(i)}|x_{1:t})}{Q(z_{1:t}^{(i)}|x_{1:t})} \propto \frac{P(x_t|z_t^{(i)})P(z_t^{(i)}|z_{t-1})}{Q(z_t^{(i)}|z_{1:t-1}^{(i)},x_{1:t})} \cdot w^{(i)}_{t-1}
+\)</span><span class="math notranslate nohighlight">\(
+我们之前提过了关于Proposal Distribution \)</span>Q(\cdot)<span class="math notranslate nohighlight">\(是可以随意设置了，为了求解的方便。我们将\)</span>Q(z_t^{(i)}|z_{1:t-1}^{(i)},x_{1:t})<span class="math notranslate nohighlight">\(改写成\)</span>Q(z_t^{(i)}|z_{t-1}^{(i)}, x_{1:t})$。这个转换非常的自然。下面，我们将梳理一下这个算法：</p>
+<p><strong>Sequential Importance Sampling Algorithm：</strong></p>
+<ul>
+<li><p>前提：<span class="math notranslate nohighlight">\(t-1\)</span>时刻的采样都已经完成；</p></li>
+<li><p><span class="math notranslate nohighlight">\(t\)</span>时刻对于<span class="math notranslate nohighlight">\(N\)</span>个采样值，for i=1, 2,<span class="math notranslate nohighlight">\(\cdots\)</span>, N:
+$<span class="math notranslate nohighlight">\(
+      z_t^{(i)}\sim Q(z_t|z_{t-1},x_{1:t}) 
+  \)</span>$</p>
+<div class="math notranslate nohighlight">
+\[
+	w_t^{(i)}  \propto  \frac{P(x_t|z_t^{(i)})P(z_t^{(i)}|z_{t-1})}{Q(z_t^{(i)}|z_{1:t-1}^{(i)},x_{1:t})} \cdot w^{(i)}_{t-1}
+	\]</div>
+</li>
+<li><p><span class="math notranslate nohighlight">\(w^{(i)}_t\)</span>归一化，令<span class="math notranslate nohighlight">\(\sum_{i=1}^N w^{(i)}_t=1\)</span>。</p></li>
+</ul>
+<p>实际上就这么简单，归一化是为了方便计算和避免程序计算时出现精度问题，而且可以对值的范围进行约束。所以，公式(9)中，我们可以将最后的结果进行改写，可得：
+$<span class="math notranslate nohighlight">\(
+\frac{1}{N}\sum_{i=1}^N f(z^{(i)})w^{(i)} = \sum_{i=1}^N f(z^{(i)})\hat{w}^{(i)}
+\)</span><span class="math notranslate nohighlight">\(
+这里讲的也很模糊，我用直观性的方法来理解。由于有了归一化的过程，\)</span>\hat{w}^{(i)}<span class="math notranslate nohighlight">\(就相当于一个概率密度函数，那么\)</span>\sum_{i=1}^N f(z^{(i)})\hat{w}^{(i)}$求得的不就是期望。这样一样的可以得到异曲同工的作用。</p>
+</section>
+<section id="id9">
+<h3><span class="section-number">1.7.3.4. </span>Sequential Importance Sampling中的问题<a class="headerlink" href="#id9" title="Permalink to this heading">#</a></h3>
+<p>Sequential Importance Sampling最大的问题就是\textbf{权值退化}。也就是<span class="math notranslate nohighlight">\(w^{(i)}_t\)</span>会变得越来越小。举个例子，假如有100个权值，有99个都趋向于0，中有1个趋向于1。这样当然会出问题。</p>
+<p>而为什么会出现这个问题呢？由于高维空间的原因，我们需要更多的样本来反映空间的特征。样本不够就会忽略一些高维特征，导致某些维度特征接近0的情况出现。</p>
+<p>那么，解决方法有三种：</p>
+<ol class="arabic simple">
+<li><p>采更多的样本；</p></li>
+<li><p>Resampling的方法；</p></li>
+<li><p>选择一个更好的Proposal Distribution Q(z)。</p></li>
+</ol>
+</section>
+</section>
+<section id="sampling-importance-resampling-sir">
+<h2><span class="section-number">1.7.4. </span>Sampling Importance Resampling (SIR)<a class="headerlink" href="#sampling-importance-resampling-sir" title="Permalink to this heading">#</a></h2>
+<p>那么Resampling的方法如何来解决权值退化的方法？那就是舍弃权重。之前我们用Weight来代表一个粒子的重要程度，而Resampling就是通过用粒子数量来代替Weight的方法来表示重要程度。</p>
+<section id="sir">
+<h3><span class="section-number">1.7.4.1. </span>SIR采样方法<a class="headerlink" href="#sir" title="Permalink to this heading">#</a></h3>
+<p>经过重要性采样后，我们得到了<span class="math notranslate nohighlight">\(N\)</span>个样本点，以及对应的权重。那么我用权重来作为采样的概率，重新测采样出<span class="math notranslate nohighlight">\(N\)</span>个样本。也就是如下图所示：</p>
+<p><img alt="微信图片_20191230154011" src="https://ossjiyaoliu.oss-cn-beijing.aliyuncs.com/uPic/%25E5%25BE%25AE%25E4%25BF%25A1%25E5%259B%25BE%25E7%2589%2587_20191230154011.png" /></p>
+<p>通过二次采样可以降低采样不平衡的问题。至于为什么呢？大家想一想，我在这里表达一下自己的看法。<span class="math notranslate nohighlight">\(\frac{p(z_i)}{q(z_i)}\)</span>是Weight，如果Weight比较大的话，说明<span class="math notranslate nohighlight">\(p(z_i)\)</span>比较大而<span class="math notranslate nohighlight">\(q(z_i)\)</span>比较的小，也就是我们通过<span class="math notranslate nohighlight">\(q(z_i)\)</span>采出来的数量比较少。那么我们按权重再来采一次，就可以增加采到重要性样本的概率，成功的弥补了重要性采样带来的缺陷，有效的弥补采样不均衡的问题。</p>
+<p>那么，权值大的样本我们就采样的比较多，权值小的样本就采样的比较少。这样就去掉了权值，换了一种方法等价的来表示重要程度。就可以解决权值退化的问题。</p>
+</section>
+<section id="how-to-do-it">
+<h3><span class="section-number">1.7.4.2. </span>How to do it?<a class="headerlink" href="#how-to-do-it" title="Permalink to this heading">#</a></h3>
+<p>具体实现的思路其实就很简单。那就是根据概率密度函数(pdf)来计算得到概率分布函数(cdf)。然后通过从[0,1]之间进行均匀采样，来得到相应的的值。这个，我们在Markov Chain Monte Carlo 01 Sampling Method的<strong>概率分布采样</strong>中已经做了详细的描述。</p>
+<p>讲到这里，Sampling Importance Resampling (SIR)实际上就是一种Basis Particle Filter，也就是SIS+Resampling，这是一种基本可以work的算法。</p>
+</section>
+<section id="q-z">
+<h3><span class="section-number">1.7.4.3. </span>找一个更好的<span class="math notranslate nohighlight">\(Q(Z)\)</span><a class="headerlink" href="#q-z" title="Permalink to this heading">#</a></h3>
+<p>选择<span class="math notranslate nohighlight">\(Q(z_t|z_{1:t-1},x_{1:t})=P(z_t|z_{t-1}^{(i)})\)</span>，用状态转移矩阵来进行定义，那么我们就可以将权值改写成：
+$<span class="math notranslate nohighlight">\(
+    w_t^{(i)}  \propto  \frac{P(x_t|z_t^{(i)})P(z_t^{(i)}|z_{t-1})}{P(z_t|z_{t-1}^{(i)})} \cdot w^{(i)}_{t-1} = P(x_t|z_t^{(i)})\cdot w^{(i)}_{t-1}
+\)</span><span class="math notranslate nohighlight">\(
+所以，\)</span>w_t^{(i)} = P(x_t|z_t^{(i)})\cdot w^{(i)}<em>{t-1}<span class="math notranslate nohighlight">\(，且\)</span>z^{(i)}\sim P(z_t|z</em>{t-1}^{(i)})<span class="math notranslate nohighlight">\(。改写后的算法为SIR Filter，也就是下列三个部分组成的：
+\)</span><span class="math notranslate nohighlight">\(
+Sequential Importance Sampling + Resampling + Q(z_t|z_{1:t-1},x_{1:t})=P(z_t|z_{t-1}^{(i)})
+\)</span><span class="math notranslate nohighlight">\(
+那么我们为什么要令\)</span>Q(z_t|z_{1:t-1},x_{1:t})=P(z_t|z_{t-1}^{(i)})<span class="math notranslate nohighlight">\(呢？因为在\)</span>t$时刻采样的时候，不是要去找一个新的分布，而是就从之前就用的一个中进行寻找。我们可以用一个很简单的例子来说明：就像很多人寻找自己的另一半，找了很久都没有合适的，直到最后才发现另一半就在自己身边的朋友中，也就是“兔子就吃窝边草”吧。我们用之前就算好的会方便很多。</p>
+<p>我们用generate and test，来描述这个过程非常的形象。Generate是<span class="math notranslate nohighlight">\(z_t\longrightarrow P(z_t|Z_{t-1}^{(i)})\)</span>，也就是状态转移矩阵。而Test是<span class="math notranslate nohighlight">\(w_{t-1}\)</span>，也就是<span class="math notranslate nohighlight">\(P(x_t|z_t^{(i)})\)</span>这个实际上就是发射矩阵，这个实际上是一举两得的作用。<span class="math notranslate nohighlight">\(P(x_t|z_t^{(i)})\)</span>越大一方面表示了发射矩阵的概率大；另一方面是表示了采样的权重很大，采出来的样本越重要，采样的效率越高。所以，<span class="math notranslate nohighlight">\(Q(z_t|z_{1:t-1},x_{1:t})=P(z_t|z_{t-1}^{(i)})\)</span>呢？因为在<span class="math notranslate nohighlight">\(t\)</span>起到了一语双关的重用，实现了共同目标的优化。</p>
+</section>
+</section>
+<section id="id10">
+<h2><span class="section-number">1.7.5. </span>Sampling Importance Resampling (SIR)总结<a class="headerlink" href="#id10" title="Permalink to this heading">#</a></h2>
+<p><strong>Sampling Importance Resampling Algorithm：</strong></p>
+<p>前提：<span class="math notranslate nohighlight">\(t-1\)</span>时刻的采样都已经完成；</p>
+<ol class="arabic simple">
+<li><p>Sampling: <span class="math notranslate nohighlight">\(t\)</span>时刻对于<span class="math notranslate nohighlight">\(N\)</span>个采样值，for i=1, 2,<span class="math notranslate nohighlight">\(\cdots\)</span>, N:</p></li>
+</ol>
+<div class="math notranslate nohighlight">
+\[
+z_t^{(i)}\sim P(z_t|z_{t-1}^{(i)})
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+w_t^{(i)}  \propto  \frac{P(x_t|z_t^{(i)})P(z_t^{(i)}|z_{t-1})}{P(z_t|z_{t-1}^{(i)})} \cdot w^{(i)}_{t-1} =P(x_t|z_t^{(i)})\cdot w^{(i)}_{t-1}
+\]</div>
+<ol class="arabic simple" start="2">
+<li><p>Normalized:
+$<span class="math notranslate nohighlight">\(
+w_t^{(i)}\longrightarrow \hat{w}_t^{(i)},\quad \sum_{i=1}^N \hat{w}_t^{(i)} =1
+\)</span>$</p></li>
+<li><p>Resampling：
+$<span class="math notranslate nohighlight">\(
+\hat{\hat{w}}_t^{(i)} = \frac{1}{N}
+\)</span>$</p></li>
+</ol>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./PRML"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer">
+                  <!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="%E5%8D%A1%E5%B0%94%E6%9B%BC%E6%BB%A4%E6%B3%A2.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title"><span class="section-number">1.6. </span>线性动态系统-卡曼滤波（Kalman Filter）</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="../Report/acad_lunch_zhuang_wang.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><span class="section-number">1. </span>20231016 | 庄吓海/王成彦-可解释医学影像分析</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">1.7.1. 背景介绍</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">1.7.1.1. 两个假设</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">1.7.1.2. 两个方程</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">1.7.1.3. 三大类问题</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#hidden-markov-model">1.7.1.3.1. 隐马尔可夫模型(Hidden Markov Model)}</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#linear-dynamic-system">1.7.1.3.2. 线性动态系统(Linear Dynamic System)</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#non-linear-dynamic-system">1.7.1.3.3. 非线性动态系统(Non-Linear Dynamic System)</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">1.7.2. 重要性采样</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">1.7.2.1. 预备知识-重要性采样</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">1.7.2.2. 粒子滤波中的重要性采样</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sequential-importance-sampling">1.7.3. 顺序重要性采样(Sequential Importance Sampling)</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#p-z-1-t-i-x-1-t">1.7.3.1. 分子<span class="math notranslate nohighlight">\(P(z_{1:t}^{(i)}|x_{1:t})\)</span>解析</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#q-z-1-t-i-x-1-t">1.7.3.2. 分母<span class="math notranslate nohighlight">\(Q(z_{1:t}^{(i)}|x_{1:t})\)</span>解析</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id8">1.7.3.3. 算法小结</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id9">1.7.3.4. Sequential Importance Sampling中的问题</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sampling-importance-resampling-sir">1.7.4. Sampling Importance Resampling (SIR)</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#sir">1.7.4.1. SIR采样方法</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-do-it">1.7.4.2. How to do it?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#q-z">1.7.4.3. 找一个更好的<span class="math notranslate nohighlight">\(Q(Z)\)</span></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id10">1.7.5. Sampling Importance Resampling (SIR)总结</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Jiyao Liu
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  <p class="copyright">
+    
+      © Copyright 2022.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=ac02cc09edc035673794"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=ac02cc09edc035673794"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
