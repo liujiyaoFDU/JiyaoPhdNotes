@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
-    <title>1.6. 线性动态系统-卡曼滤波（Kalman Filter） &#8212; Jy&#39; s phd learning notes</title>
+    <title>1.4. 概率图模型入门 &#8212; Jy&#39; s phd learning notes</title>
   
   
   
@@ -64,11 +64,11 @@ const thebe_selector_output = ".output, .cell_output"
     <script async="async" src="../_static/sphinx-thebe.js"></script>
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'PRML/卡尔曼滤波';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'PRML/2023_11_05_PGM1';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="1.7. Particle Filter" href="%E7%B2%92%E5%AD%90%E6%BB%A4%E6%B3%A2.html" />
-    <link rel="prev" title="1.5. 概率图模型" href="%E6%A6%82%E7%8E%87%E5%9B%BE%E6%A8%A1%E5%9E%8B%E6%80%BB.html" />
+    <link rel="next" title="1.5. 概率图模型" href="%E6%A6%82%E7%8E%87%E5%9B%BE%E6%A8%A1%E5%9E%8B%E6%80%BB.html" />
+    <link rel="prev" title="1.3. 指数组分布" href="Exponential_Family_Distribution.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -182,10 +182,10 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1 current active has-children"><a class="reference internal" href="intro.html">1. PRML</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="math_basic.html">1.2. 数学基础</a></li>
 <li class="toctree-l2"><a class="reference internal" href="Exponential_Family_Distribution.html">1.3. 指数组分布</a></li>
-<li class="toctree-l2"><a class="reference internal" href="%E6%A6%82%E7%8E%87%E5%9B%BE%E6%A8%A1%E5%9E%8B1.html">1.4. 概率图模型入门</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">1.4. 概率图模型入门</a></li>
 <li class="toctree-l2"><a class="reference internal" href="%E6%A6%82%E7%8E%87%E5%9B%BE%E6%A8%A1%E5%9E%8B%E6%80%BB.html">1.5. 概率图模型</a></li>
-<li class="toctree-l2 current active"><a class="current reference internal" href="#">1.6. 线性动态系统-卡曼滤波（Kalman Filter）</a></li>
-<li class="toctree-l2"><a class="reference internal" href="%E7%B2%92%E5%AD%90%E6%BB%A4%E6%B3%A2.html">1.7. Particle Filter</a></li>
+<li class="toctree-l2"><a class="reference internal" href="2023_11_12_Kalman_Filter.html">1.6. 线性动态系统-卡曼滤波（Kalman Filter）</a></li>
+<li class="toctree-l2"><a class="reference internal" href="2023_11_15_Pacticle_Filter.html">1.7. Particle Filter</a></li>
 </ul>
 </li>
 </ul>
@@ -215,6 +215,7 @@ const thebe_selector_output = ".output, .cell_output"
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">工具使用</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../tools/latex_symbol.html">1. Latex常用符号表</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tools/%E5%B8%B8%E7%94%A8%E5%B7%A5%E5%85%B7.html">2. 常用工具</a></li>
 </ul>
 
     </div>
@@ -286,7 +287,7 @@ const thebe_selector_output = ".output, .cell_output"
       
       
       
-      <li><a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2FPRML/卡尔曼滤波.html&body=Your%20issue%20content%20here." target="_blank"
+      <li><a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2FPRML/2023_11_05_PGM1.html&body=Your%20issue%20content%20here." target="_blank"
    class="btn btn-sm btn-source-issues-button dropdown-item"
    title="Open an issue"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -316,7 +317,7 @@ const thebe_selector_output = ".output, .cell_output"
       
       
       
-      <li><a href="../_sources/PRML/卡尔曼滤波.md" target="_blank"
+      <li><a href="../_sources/PRML/2023_11_05_PGM1.md" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -398,7 +399,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>线性动态系统-卡曼滤波（Kalman Filter）</h1>
+    <h1>概率图模型入门</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -408,9 +409,14 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">1.6.1. 一、背景介绍</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#filtering">1.6.2. 二、Filtering问题</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">1.6.3. 三、Filtering问题求解</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">1.4.1. 概率基础</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bayesian-network">1.4.2. Bayesian Network</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">1.4.2.1. 概率图模型的动机及举例</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">1.4.3. 概率图应用一：朴素贝叶斯</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#markov-model">1.4.4. 概率图应用二：Markov model</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#hmm">1.4.5. 概率图应用三：HMM</a></li>
 </ul>
             </nav>
         </div>
@@ -422,149 +428,116 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article" role="main">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="kalman-filter">
-<h1><span class="section-number">1.6. </span>线性动态系统-卡曼滤波（Kalman Filter）<a class="headerlink" href="#kalman-filter" title="Permalink to this heading">#</a></h1>
+  <section class="tex2jax_ignore mathjax_ignore" id="id1">
+<h1><span class="section-number">1.4. </span>概率图模型入门<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h1>
 <blockquote>
-<div><p>2023.11.12</p>
+<div><p>from: 【概率图模型初步：从贝叶斯网络到HMM模型】<a class="reference external" href="https://www.bilibili.com/video/BV1E4411a7zY?vd_source=225dba48b31d269151658db856705273">https://www.bilibili.com/video/BV1E4411a7zY?vd_source=225dba48b31d269151658db856705273</a></p>
 </div></blockquote>
-<p><strong>Link:</strong> [<a class="reference external" href="https://zhuanlan.zhihu.com/p/387428987">https://zhuanlan.zhihu.com/p/387428987</a>]</p>
-<p>视频如下：</p>
-<p><a class="reference external" href="https://www.bilibili.com/video/BV1zW411U7fa?share_source=copy_web">机器学习-白板推导系列(十五)-线性动态系统-卡曼滤波（Kalman Filter）_哔哩哔哩_bilibili</a></p>
-<section id="id1">
-<h2><span class="section-number">1.6.1. </span>一、背景介绍<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h2>
-<p>我们在前面讲过，一般的概率图模型加上时间就是动态模型（Dynamic Model）</p>
-<p>动态模型分为三类：</p>
-<ol class="arabic simple">
-<li><p><strong>HMM</strong>：状态是离散的</p></li>
-<li><p><strong>Linear Dynamic System(Kalman Filter)</strong>：线性高斯模型（隐变量和观测变量都是连续的高斯）</p></li>
-<li><p><strong>Particle Filter</strong>：非线性高斯模型</p></li>
-</ol>
-<p>对于图模型主要涉及到的是learning问题（估计系统的参数，如EM）和inference问题（如下图），kalman filter与上一章的HMM类似，如下图所示，其中<span class="math notranslate nohighlight">\(X\)</span>是观测变量，<span class="math notranslate nohighlight">\(Z\)</span>是隐变量。</p>
-<p>inference问题种类如下：</p>
-<ul class="simple">
-<li><p>decoding：已知观测序列，求最有可能的隐状态徐磊</p></li>
-<li><p>evalution问题：观测变量出现的概率</p></li>
-</ul>
-<img src="https://ossjiyaoliu.oss-cn-beijing.aliyuncs.com/uPic/1ZF5VT.png" alt="1ZF5VT" style="zoom:70%;" />
-<p>这一章主要介绍线性动态系统中的卡曼滤波。</p>
-<hr class="docutils" />
-<p><img alt="bRn1jD" src="https://ossjiyaoliu.oss-cn-beijing.aliyuncs.com/uPic/bRn1jD.png" /></p>
-<p>上图为其概率图模型，其中的传递关系与HMM类似，都是使用发射（<span class="math notranslate nohighlight">\(z\rightarrow x\)</span>）矩阵和转移（<span class="math notranslate nohighlight">\(z_{t-1}\rightarrow z_t\)</span>）矩阵表示的。</p>
-<p>卡曼滤波是线性高斯模型，分为：</p>
-<ul class="simple">
-<li><p><strong>线性</strong>:发射和转移都为线性</p></li>
-<li><p><strong>高斯</strong>：</p></li>
-</ul>
-<p>图中发射概率和传递概率的关系可描述为如下公式：</p>
-<p><span class="math notranslate nohighlight">\(z_t=A\cdot z_{t-1} + B + \epsilon\)</span></p>
-<p><span class="math notranslate nohighlight">\(x_t = C\cdot z_t+D+\delta\)</span></p>
-<p>可以看出，其本质符合线性关系。 公式后面的 <span class="math notranslate nohighlight">\(\epsilon \sim N(0,Q)\)</span>与<span class="math notranslate nohighlight">\(\delta \sim N(0,R)\)</span>是一个服从高斯分布的随机变量，是用来描述噪声的，这一块便可以体现是<strong>线性高斯模型</strong>中的<strong>高斯</strong>。</p>
-<p>实际上，发射概率和转移概率也符合高斯分布的：</p>
-<p><span class="math notranslate nohighlight">\(P(z_t|z_{t-1}) \sim N(A\cdot z_{t-1} + B, Q)\)</span></p>
-<p><span class="math notranslate nohighlight">\(P(x_t|z_t) \sim N(C\cdot z_t+D, R)\)</span></p>
-<p>系统的初始状态与HMM中的<span class="math notranslate nohighlight">\(\pi\)</span>是类似的，在这里，它符合一个高斯分布：<span class="math notranslate nohighlight">\(z_1 \sim N(\mu_1, \Sigma_1)\)</span></p>
-<p>Kalman Filter的参数包含：<span class="math notranslate nohighlight">\(\theta = (A,B,C,D,Q,R,\mu_1,\Sigma_1)\)</span>。以上就是Kalman Filter的表示。</p>
-</section>
-<hr class="docutils" />
-<section id="filtering">
-<h2><span class="section-number">1.6.2. </span>二、Filtering问题<a class="headerlink" href="#filtering" title="Permalink to this heading">#</a></h2>
-<p>我们先对kalman filter进行总结：</p>
-<p><img alt="NLkw3n" src="https://ossjiyaoliu.oss-cn-beijing.aliyuncs.com/uPic/NLkw3n.png" /></p>
-<p>根据上一节内容，可以总结为如下关系：</p>
-<p><span class="math notranslate nohighlight">\(\begin{cases}P(z_t|z_{t-1})=N(A\cdot z_{t-1} + B, Q)\\P(x_t|z_t) = N(C\cdot z_t+D, R)\\P(z_1) = N(\mu_1, \Sigma_1)\end{cases}\)</span></p>
-<p>卡尔曼滤波的参数为：<span class="math notranslate nohighlight">\(\theta = (A,B,C,D,Q,R,\mu_1,\Sigma_1)\)</span></p>
-<p>若写为等式：</p>
-<p><span class="math notranslate nohighlight">\(\begin{cases}z_t=A\cdot z_{t-1} + B+\epsilon, &amp; \epsilon \sim N(0,Q)\\x_t=C\cdot z_t +D + \delta, &amp; \delta \sim N(0,R)\end{cases}\)</span></p>
-<p>需要解决的问题主要有两个：<strong>Learning</strong>和<strong>Inference</strong></p>
-<p>其中inference可以细分为很多小问题：</p>
-<ul class="simple">
-<li><p>decoding —&gt; HMM（维特比）</p></li>
-<li><p>prob of evidence —&gt; <span class="math notranslate nohighlight">\(P(O|\lambda)\)</span>（前向/后向）</p></li>
-<li><p>filtering：<span class="math notranslate nohighlight">\(P(z_t|x_1,x_2,\cdots,x_t)\)</span></p></li>
-<li><p>smoothing：<span class="math notranslate nohighlight">\(P(z_t|x_1,x_2,\cdots,x_T)\)</span></p></li>
-<li><p>prediction：</p></li>
-</ul>
-<ul class="simple">
-<li><p><span class="math notranslate nohighlight">\(P(z_{t}|x_1,x_2,\cdots,x_{t-1})\)</span></p></li>
-<li><p><span class="math notranslate nohighlight">\(P(x_{t}|x_1,x_2,\cdots,x_{t-1})\)</span></p></li>
-</ul>
-<p>我们这一讲kalman filter最关心的就是filtering问题，也就是求这个边缘后验概率<span class="math notranslate nohighlight">\(P(z_t|x_1,x_2,\cdots,x_t)\)</span></p>
-<p>这里要借鉴HMM中前向算法的想法，给出一个递推关系。</p>
-<p><span class="math notranslate nohighlight">\(P(z_t|x_1,x_2,\cdots,x_t)={ P(x_1,x_2,\cdots,x_t, z_t) \over P(x_1,x_2,\cdots,x_t)}\)</span></p>
-<p>由于<span class="math notranslate nohighlight">\(x_i\)</span>是观测变量，是已知的，因此<span class="math notranslate nohighlight">\(P(x_1,x_2,\cdots,x_t)\)</span>可以被计算出来，那么:</p>
-<p><span class="math notranslate nohighlight">\(P(z_t|x_1,x_2,\cdots,x_t) \propto P(x_1,x_2,\cdots,x_t, z_t)\)</span></p>
-<p>其中：</p>
-<p><span class="math notranslate nohighlight">\(\begin{equation}\begin{split}P(x_1,x_2,\cdots,x_t, z_t) &amp;= \underbrace{P(x_t|x_1,x_2,\cdots,x_{t-1}, z_t)}_{P(x_t|z_t)（观测独立假设）}\cdot P(x_1,x_2,\cdots,x_{t-1}, z_t) \\&amp;=P(x_t|z_t)\cdot P(x_1,x_2,\cdots,x_{t-1}, z_t)\\&amp;= P(x_t|z_t)\cdot P(z_t|x_1,x_2,\cdots,x_{t-1}) \cdot P(x_1,x_2,\cdots,x_{t-1})\end{split}\end{equation}\)</span></p>
-<p>与上述同理，<span class="math notranslate nohighlight">\(P(x_1,x_2,\cdots,x_{t-1})\)</span>是已知的，因此：</p>
-<p><span class="math notranslate nohighlight">\(P(x_1,x_2,\cdots,x_t, z_t) \propto P(x_t|z_t)\cdot P(z_t|x_1,x_2,\cdots,x_{t-1})\)</span></p>
-<p>其中 <span class="math notranslate nohighlight">\(P(z_t|x_1,x_2,\cdots,x_{t-1})\)</span> 正是前面所说的<strong>Prediction</strong>问题，也就是说在求filtering问题前必须先解决预测问题。</p>
-<p><span class="math notranslate nohighlight">\(\begin{equation}\begin{split}P(z_t|x_1,x_2,\cdots,x_{t-1})&amp;= \int_{z_{t-1}} P(z_t,z_{t-1}|x_1,x_2,\cdots,x_{t-1})dz_{t-1} \\&amp;= \int_{z_{t-1}} \underbrace{ P(z_t|z_{t-1}, x_1,x_2,\cdots,x_{t-1})}_{P(z_t|z_{t-1})(HMM中的齐次马尔科夫假设)} \cdot P(z_{t-1}|x_1,x_2,\cdots,x_{t-1})  dz_{t-1}\\&amp;= \int_{z_{t-1}}  P(z_t|z_{t-1})\cdot P(z_{t-1}|x_1,x_2,\cdots,x_{t-1})  dz_{t-1}\\\end{split}\end{equation}\)</span></p>
-<blockquote>
-<div><p>最后一步中的 <span class="math notranslate nohighlight">\(P(z_{t-1}|x_1,x_2,\cdots,x_{t-1})\)</span> 正是 <span class="math notranslate nohighlight">\(t-1\)</span> 时刻的filtering</p>
-</div></blockquote>
-<p>以上便求出了<strong>filtering的递推式</strong></p>
-<p>总结一下求解步骤：</p>
-<ul class="simple">
-<li><p><span class="math notranslate nohighlight">\(t=1\)</span>：</p></li>
-</ul>
-<ul class="simple">
-<li><p>先根据已知信息求出<span class="math notranslate nohighlight">\(P(z_1|x_1)\)</span>，称为update</p></li>
-<li><p>然后使用<span class="math notranslate nohighlight">\(P(z_1|x_1)\)</span>求出<span class="math notranslate nohighlight">\(P(z_2|x_1)\)</span>，称为prediction</p></li>
-</ul>
-<ul class="simple">
-<li><p><span class="math notranslate nohighlight">\(t=2\)</span>：</p></li>
-</ul>
-<ul class="simple">
-<li><p>求出<span class="math notranslate nohighlight">\(P(z_2|x_1,x_2)\)</span>，update</p></li>
-<li><p>求出<span class="math notranslate nohighlight">\(P(z_3|x_1,x_2)\)</span>，prediction</p></li>
-</ul>
-<ul class="simple">
-<li><p><span class="math notranslate nohighlight">\(\cdots \cdots\)</span></p></li>
-<li><p><span class="math notranslate nohighlight">\(t=T\)</span></p></li>
-</ul>
-<ul class="simple">
-<li><p>求出<span class="math notranslate nohighlight">\(P(z_T|x_1,\cdots,x_T)\)</span>，update</p></li>
-<li><p>求出<span class="math notranslate nohighlight">\(P(z_{T+1}|x_1,\cdots,x_T)\)</span>，prediction</p></li>
-</ul>
-<blockquote>
-<div><p>以上是求解步骤，是一个online的过程</p>
-</div></blockquote>
-<p>一个高斯分布的条件概率分布和边缘概率分布都是高斯分布，而且两个高斯分布的联合概率分布也是高斯分布，所以它的性质非常好，将已知信息全部代入进行求解，可以得到闭式解。</p>
-</section>
-<hr class="docutils" />
 <section id="id2">
-<h2><span class="section-number">1.6.3. </span>三、Filtering问题求解<a class="headerlink" href="#id2" title="Permalink to this heading">#</a></h2>
-<p>上一节中所说一个高斯分布的条件概率分布和边缘概率分布都是高斯分布，而且两个高斯分布的联合概率分布也是高斯分布，因此filtering问题中的<strong>update</strong>和<strong>prediction</strong>的结论也是高斯分布。</p>
-<p>以下，推导一下<strong>update</strong>和<strong>prediction</strong>结果的高斯分布表示。</p>
-<p>首先，假设update中的结果<span class="math notranslate nohighlight">\(P(z_t|x_1,\cdots,x_t)\)</span>服从高斯分布<span class="math notranslate nohighlight">\(N(\mu_t,\Sigma_t)\)</span>；假设prediction中的结果<span class="math notranslate nohighlight">\(P(z_t|x_1,\cdots,x_{t-1})\)</span>服从高斯分布<span class="math notranslate nohighlight">\(N(\mu_t^*,\Sigma_t^*)\)</span></p>
-<p>并且，有如下已知条件：</p>
-<p><span class="math notranslate nohighlight">\(\begin{cases}P(z_t|z_{t-1})=N(A\cdot z_{t-1} + B, Q)\\P(x_t|z_t) = N(C\cdot z_t+D, R)\\P(z_1) = N(\mu_1, \Sigma_1)\end{cases}\)</span></p>
-<p>此外，给出高斯分布常用的计算公式：</p>
-<p><span class="math notranslate nohighlight">\(\begin{cases}P(x) = N(x|\mu,\Lambda^{-1})：\Lambda^{-1}为精度矩阵，为了方便计算\\P(y|x) = N(y|Ax+b,L^{-1})：y = Ax+b+\epsilon\\P(y) = N(y|A\mu + b, L^{-1}+A\Lambda^{-1} A^T)\\\end{cases}\)</span></p>
-<p>因此：</p>
-<ul class="simple">
-<li><p><strong>prediction问题：</strong></p></li>
+<h2><span class="section-number">1.4.1. </span>概率基础<a class="headerlink" href="#id2" title="Permalink to this heading">#</a></h2>
+<p><img alt="lUID1D" src="https://ossjiyaoliu.oss-cn-beijing.aliyuncs.com/uPic/lUID1D.png" /></p>
+<p><img alt="TF3MGP" src="https://ossjiyaoliu.oss-cn-beijing.aliyuncs.com/uPic/TF3MGP.png" /></p>
+<p><img alt="8HrQsS" src="https://ossjiyaoliu.oss-cn-beijing.aliyuncs.com/uPic/8HrQsS.png" /></p>
+<p><img alt="zfS8FR" src="https://ossjiyaoliu.oss-cn-beijing.aliyuncs.com/uPic/zfS8FR.png" /></p>
+</section>
+<section id="bayesian-network">
+<h2><span class="section-number">1.4.2. </span>Bayesian Network<a class="headerlink" href="#bayesian-network" title="Permalink to this heading">#</a></h2>
+<section id="id3">
+<h3><span class="section-number">1.4.2.1. </span>概率图模型的动机及举例<a class="headerlink" href="#id3" title="Permalink to this heading">#</a></h3>
+<blockquote>
+<div><ul class="simple">
+<li><p>知道了联合分布就能进一步求出边缘分布或者条件分布；</p></li>
+<li><p>用一种有效的方式对联合分布进行建模;</p></li>
 </ul>
-<p><span class="math notranslate nohighlight">\(P(z_t|x_1,\cdots,x_{t-1})=\int_{z_{t-1}} P(z_t|z_{t-1}) \cdot P(z_{t-1}|x_1,\cdots,x_{t-1}) dz_{t-1}\)</span></p>
-<p>实际上，这里的<span class="math notranslate nohighlight">\(P(z_t|z_{t-1})\)</span>是在已知<span class="math notranslate nohighlight">\(x_1,\cdots,x_{t-1}\)</span>的条件下，因此可以把<span class="math notranslate nohighlight">\(P(z_{t-1}|x_1,\cdots,x_{t-1})\)</span>看作<span class="math notranslate nohighlight">\(P(x)\)</span>，把<span class="math notranslate nohighlight">\(P(z_t|x_1,\cdots,x_{t-1})\)</span>看作<span class="math notranslate nohighlight">\(P(y)\)</span>，因此<span class="math notranslate nohighlight">\(P(z_t|z_{t-1})\)</span>为<span class="math notranslate nohighlight">\(P(y|x)\)</span>。</p>
-<p>根据已知条件</p>
-<p><span class="math notranslate nohighlight">\(P(z_t|z_{t-1})=N(A\cdot z_{t-1} + B, Q)\)</span></p>
-<p><span class="math notranslate nohighlight">\(P(z_{t-1}|x_1,\cdots,x_{t-1})=N(\mu_{t-1},\Sigma_{t-1})\)</span></p>
-<p>也就是说已知<span class="math notranslate nohighlight">\(P(x)、P(y|x)\)</span>，求<span class="math notranslate nohighlight">\(P(y)\)</span>，将已知条件套入到高斯分布的计算公式中：</p>
-<p>则，<span class="math notranslate nohighlight">\(P(z_t|x_1,\cdots,x_{t-1})\)</span>服从<span class="math notranslate nohighlight">\(N(A\cdot \mu_{t-1}+B,Q+A\Sigma_{t-1}A^T)\)</span></p>
-<p>由于前面假设了<span class="math notranslate nohighlight">\(P(z_t|x_1,\cdots,x_{t-1})\)</span>服从高斯分布<span class="math notranslate nohighlight">\(N(\mu_t^*,\Sigma_t^*)\)</span></p>
-<p>因此：</p>
-<p><span class="math notranslate nohighlight">\(\begin{cases}\mu_t^*=A\cdot \mu_{t-1}+B\\\Sigma_t^*=Q+A\Sigma_{t-1}A^T\end{cases}\)</span></p>
+</div></blockquote>
+<p><img alt="vaDreW" src="https://ossjiyaoliu.oss-cn-beijing.aliyuncs.com/uPic/vaDreW.png" /></p>
+<p><strong>举个例子：</strong></p>
+<p>对于两个选项的选课问题，有三个人，我们想要得到三个人是否选三门课的联合分布。可能的组合有<span class="math notranslate nohighlight">\(2^3\)</span>种：</p>
+<p><img alt="vDInB9" src="https://ossjiyaoliu.oss-cn-beijing.aliyuncs.com/uPic/vDInB9.png" />。</p>
+<p>当有成千上万个变量的时候，对每种可能性组合进行保存就会造成维度灾难。</p>
+<hr class="docutils" />
+<p>所以，我们可以假设这几种变量存在一定的依赖关系，以一种图的形式对变量的关系进行建模，便可以减少储存联合分布的空间：</p>
+<p><img alt="Syt7S4" src="https://ossjiyaoliu.oss-cn-beijing.aliyuncs.com/uPic/Syt7S4.png" /></p>
+<p>举个例子，假设有5个变量：课程难度，GPA，IQ，GRE，老师是否愿意写推荐信，我们可以建模这几个变量的依赖关系：</p>
+<p><img alt="ImPTZk" src="https://ossjiyaoliu.oss-cn-beijing.aliyuncs.com/uPic/ImPTZk.png" /></p>
+<p>**概率图模型的结论是：如果我们知道这几个变量的联合概率等于每个节点given parients的节点概率的乘积。**这样的好处是联合分布的复杂度以指数程度降低。</p>
+<p><img alt="VIAIiL" src="https://ossjiyaoliu.oss-cn-beijing.aliyuncs.com/uPic/VIAIiL.png" /></p>
+<p>如下图：联合分布存储的复杂度从左边的15降到右边的9次。</p>
+<p><img alt="IP7zGN" src="https://ossjiyaoliu.oss-cn-beijing.aliyuncs.com/uPic/IP7zGN.png" /></p>
+<p><strong>一般来说，图的关系是由专家定义出来的。</strong></p>
+<hr class="docutils" />
+<p>得到概率图及联合概率后，我们就可以使用概率图进行推断。想要高效实现，这就涉及动态规划，不想高效实现推断，那动态规划也不一定必要。下面是最暴力的推断方法，也就是上帝视角来看推断我们要干的事情。</p>
+<p><img alt="hMslbL" src="https://ossjiyaoliu.oss-cn-beijing.aliyuncs.com/uPic/hMslbL.png" /></p>
+<p>但是一般来说完整的联合分布没法全部得到，我们可以拆成多个概率，然后对每一项暴力求解：</p>
+<p><img alt="KBEHfJ" src="https://ossjiyaoliu.oss-cn-beijing.aliyuncs.com/uPic/KBEHfJ.png" /></p>
+<p>但是这样因噎废食，我们降低了存储的复杂度，但是增加了计算的复杂度！！</p>
+<hr class="docutils" />
+<p>一种更优雅的方式动态规划：</p>
+<blockquote>
+<div><p>机器学习中，一般只在：概率图模型（维特比算法）、强化学习中用到（求解马尔科夫决策过程）；</p>
+</div></blockquote>
+<p>我们再上述计算过程中，某些<strong>变量其实计算了好几遍，我们可以消除这些变量的重复计算。</strong> 也就是说，我们先把求和公式中出现单独的变量拿出来先求和，比如先求<span class="math notranslate nohighlight">\(\sum p(w|s=1,R)\)</span>，其实这一项等于1就消掉了。最后只剩下了蓝色部分的两项求和。</p>
+<p><img alt="XRrlIT" src="https://ossjiyaoliu.oss-cn-beijing.aliyuncs.com/uPic/XRrlIT.png" /></p>
+<hr class="docutils" />
+<p>但是这样动态规划的技巧算出来的是一个精确值，是成本比较高的，我们可以使用Gibbs等采样方式，去逼近这个推断的精确值。</p>
+<p><img alt="6xcRmL" src="https://ossjiyaoliu.oss-cn-beijing.aliyuncs.com/uPic/6xcRmL.png" /></p>
+</section>
+</section>
+<section id="id4">
+<h2><span class="section-number">1.4.3. </span>概率图应用一：朴素贝叶斯<a class="headerlink" href="#id4" title="Permalink to this heading">#</a></h2>
+<p>朴素贝叶斯的本质就是简单的概率图模型。比如垃圾邮件分类任务，可以建立如下概率图，邮件分类可以通过如下几个关键词的出现进行分类。所谓naive就是联合分布能写成这样简单的概率乘积。</p>
+<p><img alt="Kt3dvF" src="https://ossjiyaoliu.oss-cn-beijing.aliyuncs.com/uPic/Kt3dvF.png" /></p>
+<p>假设每个词的出现是条件独立，那么后验分布的计算公式如下（贝叶斯公式）：</p>
+<p><img alt="hnMzt5" src="https://ossjiyaoliu.oss-cn-beijing.aliyuncs.com/uPic/hnMzt5.png" /></p>
+</section>
+<section id="markov-model">
+<h2><span class="section-number">1.4.4. </span>概率图应用二：Markov model<a class="headerlink" href="#markov-model" title="Permalink to this heading">#</a></h2>
+<p><img alt="kWhyUY" src="https://ossjiyaoliu.oss-cn-beijing.aliyuncs.com/uPic/kWhyUY.png" /></p>
+<p>马尔科夫模型中，我们只需要知道初始值和状态转移概率（共享），那么联合分布就知道了。</p>
+<hr class="docutils" />
+<p>举个例子：我们想求上图的<span class="math notranslate nohighlight">\(P(x_1, x_2, x_3, x_4)\)</span>，那么暴力方法是：</p>
+<p><img alt="kAOfIX" src="https://ossjiyaoliu.oss-cn-beijing.aliyuncs.com/uPic/kAOfIX.png" /></p>
+<p>加快计算：变量消元法/动态规划</p>
+<p><img alt="XGgnrb" src="https://ossjiyaoliu.oss-cn-beijing.aliyuncs.com/uPic/XGgnrb.png" /></p>
+<hr class="docutils" />
+<p>再举个例子：手算一下<span class="math notranslate nohighlight">\(P(x_2)\)</span>
+<img alt="xJ3ZxC" src="https://ossjiyaoliu.oss-cn-beijing.aliyuncs.com/uPic/xJ3ZxC.png" />
+<img alt="TLkz7Y" src="https://ossjiyaoliu.oss-cn-beijing.aliyuncs.com/uPic/TLkz7Y.png" /></p>
+<blockquote>
+<div><p>上帝视角就是我们知道联合分布，我们就能干所有事情！！！</p>
+</div></blockquote>
+<p>上面例子写成矩阵形式</p>
+<p><img alt="CpYfe4" src="https://ossjiyaoliu.oss-cn-beijing.aliyuncs.com/uPic/CpYfe4.png" /></p>
+<p><span class="math notranslate nohighlight">\(x_\infty\)</span>与初始状态无关，即无记忆性。</p>
+<blockquote>
+<div><p>证明：马尔科夫链无记忆性
+对于矩阵，<span class="math notranslate nohighlight">\(AX = \lambda X\)</span>，则有<span class="math notranslate nohighlight">\(A^2X = \lambda AX = \lambda \cdot \lambda X = \lambda^2 X\)</span>，则<span class="math notranslate nohighlight">\(A^kX = \lambda^k X\)</span>。</p>
+<p>那么对于马尔科夫链，<span class="math notranslate nohighlight">\(X_k = A\cdot ... A\cdot AX_0 = A^kX_0\)</span>。假设A有n个互相独立的特征向量<span class="math notranslate nohighlight">\([C_1,...,C_n]\)</span>（一般来说马尔科夫链是非病态的，也就是都是稳态的），那么<span class="math notranslate nohighlight">\(X_0\)</span>可以表示为<span class="math notranslate nohighlight">\(x_0 = a_1C_1 + ... +a_kC_k\)</span>，也就是特征向量的线性组合。</p>
+<p>则<span class="math notranslate nohighlight">\(X_k = A^kX_0 = a_1A^k\cdot C_1 + a_kA^k\cdot C_k = a_1\lambda_1^k\cdot C_1 + a_k\lambda_k^k\cdot C_k\)</span></p>
+<p>claim：</p>
 <ul class="simple">
-<li><p><strong>update问题：</strong></p></li>
+<li><p>马尔科夫矩阵有一个特征值为1，其余都小于1(也就是说，稳态的概率为特征值为1的特征向量的倍数)</p></li>
 </ul>
-<p><span class="math notranslate nohighlight">\(P(z_t|x_1,\cdots,x_t) \propto P(x_t|z_t)\cdot P(z_t|x_1,\cdots,x_{t-1})\)</span></p>
-<p>这里可以把<span class="math notranslate nohighlight">\(x_1,\cdots ,x_{t-1}\)</span>看作是给定的已知数据，因此将<span class="math notranslate nohighlight">\(P(z_t|x_1,\cdots,x_{t-1})\)</span>看作<span class="math notranslate nohighlight">\(P(x)\)</span>，将<span class="math notranslate nohighlight">\(P(x_t|z_t)\)</span>看作<span class="math notranslate nohighlight">\(P(y|x)\)</span>，将<span class="math notranslate nohighlight">\(P(z_t|x_1,\cdots,x_t)=P(z_t|x_t)\)</span>看作<span class="math notranslate nohighlight">\(P(x|y)\)</span>，也就是已知<span class="math notranslate nohighlight">\(P(x),P(y|x)\)</span>，求<span class="math notranslate nohighlight">\(P(x|y)\)</span>。</p>
-<p>此外，根据已知条件：</p>
-<p><span class="math notranslate nohighlight">\(P(x_t|z_t)=N(C\cdot z_t +D,R)\)</span></p>
-<p><span class="math notranslate nohighlight">\(P(z_t|x_1,\cdots,x_{t-1})=N(\mu_t^*,\Sigma_t^*)\)</span></p>
-<p>前面有假设<span class="math notranslate nohighlight">\(P(z_t|x_1,\cdots,x_t)\)</span>服从高斯分布<span class="math notranslate nohighlight">\(N(\mu_t,\Sigma_t)\)</span></p>
-<p>因此，同理将其套用到高斯分布的计算公式中，即可求出<span class="math notranslate nohighlight">\(\mu_t\)</span>与<span class="math notranslate nohighlight">\(\Sigma_t\)</span>。</p>
+<p><img alt="wZQT9d" src="https://ossjiyaoliu.oss-cn-beijing.aliyuncs.com/uPic/wZQT9d.png" /></p>
+</div></blockquote>
+<p><img alt="PnjFeM" src="https://ossjiyaoliu.oss-cn-beijing.aliyuncs.com/uPic/PnjFeM.png" /></p>
+</section>
+<section id="hmm">
+<h2><span class="section-number">1.4.5. </span>概率图应用三：HMM<a class="headerlink" href="#hmm" title="Permalink to this heading">#</a></h2>
+<p><img alt="t4yplr" src="https://ossjiyaoliu.oss-cn-beijing.aliyuncs.com/uPic/t4yplr.png" /></p>
+<p><img alt="LGAOGy" src="https://ossjiyaoliu.oss-cn-beijing.aliyuncs.com/uPic/LGAOGy.png" /></p>
+<p><img alt="LRbQor" src="https://ossjiyaoliu.oss-cn-beijing.aliyuncs.com/uPic/LRbQor.png" /></p>
+<p><img alt="Ofc1Fp" src="https://ossjiyaoliu.oss-cn-beijing.aliyuncs.com/uPic/Ofc1Fp.png" /></p>
+<p><img alt="CIi2tP" src="https://ossjiyaoliu.oss-cn-beijing.aliyuncs.com/uPic/CIi2tP.png" /></p>
+<p><img alt="AvOgWU" src="https://ossjiyaoliu.oss-cn-beijing.aliyuncs.com/uPic/AvOgWU.png" /></p>
+<p><img alt="vTaQp3" src="https://ossjiyaoliu.oss-cn-beijing.aliyuncs.com/uPic/vTaQp3.png" /></p>
+<blockquote>
+<div><p>马尔科夫模型要注意的点：</p>
+<ol class="arabic simple">
+<li><p>马尔科夫模型不适合处理大规模的数据；</p></li>
+<li><p>LSTM可以做的任务，HMM都可以做，HMM适合小数据，效果可能好，大数据还是LSTM效果更好；</p></li>
+</ol>
+</div></blockquote>
 </section>
 </section>
 
@@ -599,20 +572,20 @@ document.write(`
                   <!-- Previous / next buttons -->
 <div class="prev-next-area">
     <a class="left-prev"
-       href="%E6%A6%82%E7%8E%87%E5%9B%BE%E6%A8%A1%E5%9E%8B%E6%80%BB.html"
+       href="Exponential_Family_Distribution.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title"><span class="section-number">1.5. </span>概率图模型</p>
+        <p class="prev-next-title"><span class="section-number">1.3. </span>指数组分布</p>
       </div>
     </a>
     <a class="right-next"
-       href="%E7%B2%92%E5%AD%90%E6%BB%A4%E6%B3%A2.html"
+       href="%E6%A6%82%E7%8E%87%E5%9B%BE%E6%A8%A1%E5%9E%8B%E6%80%BB.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title"><span class="section-number">1.7. </span>Particle Filter</p>
+        <p class="prev-next-title"><span class="section-number">1.5. </span>概率图模型</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -631,9 +604,14 @@ document.write(`
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">1.6.1. 一、背景介绍</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#filtering">1.6.2. 二、Filtering问题</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">1.6.3. 三、Filtering问题求解</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">1.4.1. 概率基础</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bayesian-network">1.4.2. Bayesian Network</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">1.4.2.1. 概率图模型的动机及举例</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">1.4.3. 概率图应用一：朴素贝叶斯</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#markov-model">1.4.4. 概率图应用二：Markov model</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#hmm">1.4.5. 概率图应用三：HMM</a></li>
 </ul>
   </nav></div>
 

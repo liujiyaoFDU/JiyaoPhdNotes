@@ -18,16 +18,17 @@ parts:
 
 
 - caption: PRML notes
-  numbered: true # Number your chapters and sections
+  # numbered: true # Number your chapters and sections
   chapters:
   - file: PRML/intro
-    sections:
-    - file: PRML/math_basic
-    - file: PRML/Exponential_Family_Distribution
-    - file: PRML/概率图模型1
-    - file: PRML/概率图模型总
-    - file: PRML/卡尔曼滤波
-    - file: PRML/粒子滤波
+    # sections:
+  - file: PRML/math_basic
+  - file: PRML/Exponential_Family_Distribution
+  - file: PRML/2023_11_05_PGM1
+  - file: PRML/概率图模型总
+  - file: PRML/2023_11_12_Kalman_Filter
+  - file: PRML/2023_11_15_Pacticle_Filter
+
 - caption: 学术报告
   numbered: true # Number your chapters and sections
   chapters:
