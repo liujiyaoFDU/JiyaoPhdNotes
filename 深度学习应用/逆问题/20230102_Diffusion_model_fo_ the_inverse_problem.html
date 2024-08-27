@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
-    <title>Image misalignment problem &#8212; Jy&#39; s phd learning notes</title>
+    <title>2. 【Method】inverse problem | 基于diffusion model的图像逆问题求解 &#8212; Jy&#39; s phd learning notes</title>
   
   
   
@@ -62,9 +62,11 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="../../_static/sphinx-thebe.js"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'research/Liver_Translation/paper_notes_2';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '深度学习应用/逆问题/20230102_Diffusion_model_fo_ the_inverse_problem';</script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="3. 【method】ADMM-CSNet | 一种图像压缩感知重建的深度学习方法（1）- 方法解析" href="20230717-ADMM-CSNet%20note.html" />
+    <link rel="prev" title="&lt;no title&gt;" href="../%E9%80%86%E9%97%AE%E9%A2%98intro.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -190,7 +192,7 @@ const thebe_selector_output = ".output, .cell_output"
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">research</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../evidential_regression.html">1. Evidential Learning and Uncentainty</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../research/evidential_regression.html">1. Evidential Learning and Uncentainty</a></li>
 
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">深度学习基础</span></p>
@@ -203,15 +205,15 @@ const thebe_selector_output = ".output, .cell_output"
 </li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">深度学习应用</span></p>
-<ul class="nav bd-sidenav">
-<li class="toctree-l1 has-children"><a class="reference internal" href="../../%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%BA%94%E7%94%A8/%E7%94%9F%E6%88%90%E5%BC%8F%E6%A8%A1%E5%9E%8Bintro.html">1. 生成式模型</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
-<li class="toctree-l2"><a class="reference internal" href="../../%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%BA%94%E7%94%A8/%E7%94%9F%E6%88%90%E5%BC%8F%E6%A8%A1%E5%9E%8B/20240110_%E6%89%A9%E6%95%A3%E6%A8%A1%E5%9E%8BScore-based%20model%E7%B2%BE%E8%AE%B2.html">1.1. 扩散模型 | 1.Score-based model精讲</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%BA%94%E7%94%A8/%E7%94%9F%E6%88%90%E5%BC%8F%E6%A8%A1%E5%9E%8B/20240110_%E6%89%A9%E6%95%A3%E6%A8%A1%E5%9E%8BSDE%E7%B2%BE%E8%AE%B2.html">1.2. 扩散模型 | 2.SDE精讲</a></li>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../%E7%94%9F%E6%88%90%E5%BC%8F%E6%A8%A1%E5%9E%8Bintro.html">1. 生成式模型</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../%E7%94%9F%E6%88%90%E5%BC%8F%E6%A8%A1%E5%9E%8B/20240110_%E6%89%A9%E6%95%A3%E6%A8%A1%E5%9E%8BScore-based%20model%E7%B2%BE%E8%AE%B2.html">1.1. 扩散模型 | 1.Score-based model精讲</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../%E7%94%9F%E6%88%90%E5%BC%8F%E6%A8%A1%E5%9E%8B/20240110_%E6%89%A9%E6%95%A3%E6%A8%A1%E5%9E%8BSDE%E7%B2%BE%E8%AE%B2.html">1.2. 扩散模型 | 2.SDE精讲</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="../../%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%BA%94%E7%94%A8/%E9%80%86%E9%97%AE%E9%A2%98/20230102_Diffusion_model_fo_%20the_inverse_problem.html">2. 【Method】inverse problem | 基于diffusion model的图像逆问题求解</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%BA%94%E7%94%A8/%E9%80%86%E9%97%AE%E9%A2%98/20230717-ADMM-CSNet%20note.html">3. 【method】ADMM-CSNet |  一种图像压缩感知重建的深度学习方法（1）- 方法解析</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%BA%94%E7%94%A8/%E9%80%86%E9%97%AE%E9%A2%98/20230719-ADMM-CSNet%20code.html">4. 代码解析</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">2. 【Method】inverse problem | 基于diffusion model的图像逆问题求解</a></li>
+<li class="toctree-l1"><a class="reference internal" href="20230717-ADMM-CSNet%20note.html">3. 【method】ADMM-CSNet |  一种图像压缩感知重建的深度学习方法（1）- 方法解析</a></li>
+<li class="toctree-l1"><a class="reference internal" href="20230719-ADMM-CSNet%20code.html">4. 代码解析</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">工具使用</span></p>
 <ul class="nav bd-sidenav">
@@ -288,7 +290,7 @@ const thebe_selector_output = ".output, .cell_output"
       
       
       
-      <li><a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2Fresearch/Liver_Translation/paper_notes_2.html&body=Your%20issue%20content%20here." target="_blank"
+      <li><a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2F深度学习应用/逆问题/20230102_Diffusion_model_fo_ the_inverse_problem.html&body=Your%20issue%20content%20here." target="_blank"
    class="btn btn-sm btn-source-issues-button dropdown-item"
    title="Open an issue"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -318,7 +320,7 @@ const thebe_selector_output = ".output, .cell_output"
       
       
       
-      <li><a href="../../_sources/research/Liver_Translation/paper_notes_2.md" target="_blank"
+      <li><a href="../../_sources/深度学习应用/逆问题/20230102_Diffusion_model_fo_ the_inverse_problem.md" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -387,7 +389,9 @@ document.write(`
   </button>
 `);
 </script>
-
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
 </div></div>
       
     </div>
@@ -398,11 +402,24 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Image misalignment problem</h1>
+    <h1>【Method】inverse problem | 基于diffusion model的图像逆问题求解</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
             
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">2.1. 参考资料</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">2.2. 任务定义</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#diffusion-model">2.3. diffusion model求解逆问题的两种范式</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">2.3.1. 两种求解方式论文整理</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
         </div>
     </div>
 </div>
@@ -412,16 +429,83 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article" role="main">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="image-misalignment-problem">
-<h1>Image misalignment problem<a class="headerlink" href="#image-misalignment-problem" title="Permalink to this heading">#</a></h1>
-<p>[toc]</p>
+  <p>#! <a class="reference external" href="https://zhuanlan.zhihu.com/p/675716426">https://zhuanlan.zhihu.com/p/675716426</a></p>
+<section class="tex2jax_ignore mathjax_ignore" id="methodinverse-problem-diffusion-model">
+<h1><span class="section-number">2. </span>【Method】inverse problem | 基于diffusion model的图像逆问题求解<a class="headerlink" href="#methodinverse-problem-diffusion-model" title="Permalink to this heading">#</a></h1>
+<section id="id1">
+<h2><span class="section-number">2.1. </span>参考资料<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h2>
 <blockquote>
-<div><p>Jiyao Liu, 2023-11-06</p>
+<div><p>CVPR 2023教程：<a class="reference external" href="https://www.youtube.com/watch?v=1d4r19GEVos">Denoising Diffusion Models: A Generative Learning Big Bang: part 3</a></p>
+<p>Slide：<a class="reference external" href="https://drive.google.com/file/d/18KfSKzS7dOaF15VJx8q_MXCG2yhmVd12/view">https://drive.google.com/file/d/18KfSKzS7dOaF15VJx8q_MXCG2yhmVd12/view</a></p>
 </div></blockquote>
+</section>
+<section id="id2">
+<h2><span class="section-number">2.2. </span>任务定义<a class="headerlink" href="#id2" title="Permalink to this heading">#</a></h2>
+<p>假设我们目前有训练好的diffusion作为高质量图像的<strong>先验</strong>，我们的目标是通过<strong>似然</strong>得到其<strong>后验</strong>（重建后的图像）。使用同一个训练好的diffusion model可以去做不同的逆问题（例如下图的超分和补全），也就是<strong>只需要不同的似然计算方法</strong>就可以实现。</p>
+<p><img alt="Diffusion求解逆问题的示意图" src="https://ossjiyaoliu.oss-cn-beijing.aliyuncs.com/uPic/image-20240102173141961.png" /></p>
+<p><img alt="image-20240102173153750" src="https://ossjiyaoliu.oss-cn-beijing.aliyuncs.com/uPic/image-20240102173153750.png" /></p>
+</section>
+<section id="diffusion-model">
+<h2><span class="section-number">2.3. </span>diffusion model求解逆问题的两种范式<a class="headerlink" href="#diffusion-model" title="Permalink to this heading">#</a></h2>
+<ol class="arabic simple">
+<li><p>第一种是基于<strong>替换</strong>的方法，先让扩散模型生成完整结果，然后将已经观测到的部分替换掉模型输出的部分。</p></li>
+<li><p>第二种是基于<strong>重构</strong>的方法，让扩散模型输出结果，然后约束输出的结果与观测部分比较像，这点类似于<strong>无需额外训练</strong>近似无分类器引导的生成模型，过程如下图</p></li>
+</ol>
+<p><img alt="基于替换的方法和基于重构的方法" src="https://ossjiyaoliu.oss-cn-beijing.aliyuncs.com/uPic/image-20240102173500080.png" /></p>
+<p>下面是两个例子：</p>
+<ol class="arabic simple">
+<li><p>基于替换的方法：Song et al., “<a class="reference external" href="https://arxiv.org/abs/2011.13456">Score-Based Generative Modeling through Stochastic Differential Equations</a>”, ICLR 2021</p></li>
+</ol>
+<p><img alt="Song et al., &quot;Score-Based Generative Modeling through Stochastic Differential Equations&quot;, ICLR 2021" src="https://ossjiyaoliu.oss-cn-beijing.aliyuncs.com/uPic/image-20240102173733089.png" /></p>
+<p>即将每一个step重建后的结果和真实图像进行线性组合。</p>
+<ol class="arabic simple" start="2">
+<li><p>基于重构的方法：Chung et al., “Diffusion Posterior Sampling for General Noisy Inverse Problems”, ICLR 2023</p></li>
+</ol>
+<p><img alt="Chung et al., &quot;Diffusion Posterior Sampling for General Noisy Inverse Problems&quot;, ICLR 2023" src="https://ossjiyaoliu.oss-cn-beijing.aliyuncs.com/uPic/024-01-021.22.png" /></p>
+<p><img alt="Chung et al., &quot;Diffusion Posterior Sampling for General Noisy Inverse Problems&quot;, ICLR 2023" src="https://ossjiyaoliu.oss-cn-beijing.aliyuncs.com/uPic/image-20240102174348222.png" /></p>
+<section id="id3">
+<h3><span class="section-number">2.3.1. </span>两种求解方式论文整理<a class="headerlink" href="#id3" title="Permalink to this heading">#</a></h3>
+<p><strong>Reconstruction-based methods</strong></p>
 <ul class="simple">
-<li><p>{}</p></li>
-<li></li>
+<li><p>ScoreSDE: simple linear problems, e.g., inpainting, colorization; later extended to MRI and CT.</p></li>
+<li><p>ILVR: more linear problems, e.g., super-resolution.</p></li>
+<li><p>SNIPS: slow solution for noisy linear problems.</p></li>
+<li><p>CCDF: better initializations.</p></li>
+<li><p>DDRM: fast solution for all noisy linear problems, and JPEG.</p></li>
 </ul>
+<p>Reference</p>
+<ul class="simple">
+<li><p>Choi et al., “ILVR: Conditioning Method for Denoising Diffusion Probabilistic Models”, ICCV 2021</p></li>
+<li><p>Kawar et al., ”SNIPS: Solving Noisy Inverse Problems Stochastically”, NeurIPS 2021</p></li>
+<li><p>Chung et al., “Come-Closer-Diffuse-Faster: Accelerating Conditional Diffusion Models for Inverse Problems through Stochastic Contraction”, CVPR 2022</p></li>
+<li><p>Song et al., “Solving Inverse Problems in Medical Imaging with Score-Based Generative Models”, ICLR 2022</p></li>
+<li><p>Kawar et al., “Denoising Diffusion Restoration Models”, NeurIPS 2022</p></li>
+</ul>
+<p><strong>Replacement-based methods</strong></p>
+<ul class="simple">
+<li><p>Video Diffusion/Pyramid DDPM: used for super-resolution.</p></li>
+<li><p>Pseudoinverse guidance: linear and some non-differentiable problems, e.g., JPEG</p></li>
+<li><p>MCG: combines replacement &amp; reconstruction for linear problems.</p></li>
+</ul>
+<p><strong>Others</strong></p>
+<ul class="simple">
+<li><p>CSGM: Posterior sampling with Langevin Dynamics based on the diffusion score model.</p></li>
+<li><p>RED-Diff: A Regularizing-by-Denoising (RED), variational inference approach.</p></li>
+<li><p>Posterior sampling: use RealNVP to approximate posterior samples from diffusion models.</p></li>
+</ul>
+<p>Reference</p>
+<ul class="simple">
+<li><p>Ho et al., “Video Diffusion Models”, NeurIPS 2022
+Chung et al., “Improving Diffusion Models for Inverse Problems using Manifold Constraints”, NeurIPS 2022</p></li>
+<li><p>Ryu and Ye, “Pyramidal Denoising Diffusion Probabilistic Models”, arXiv 2022</p></li>
+<li><p>Chung et al., “Diffusion Posterior Sampling for General Noisy Inverse Problems”, arXiv 2022</p></li>
+<li><p>Song et al., “Pseudoinverse-Guided Diffusion Models for Inverse Problems”, ICLR 2023</p></li>
+<li><p>Jalal et al., “Robust Compressed Sensing MRI with Deep Generative Priors”, NeurIPS 2021</p></li>
+<li><p>Mardani et al., “A Variational Perspective on Solving Inverse Problems with Diffusion Models”, arXiv 2023</p></li>
+<li><p>Feng et al., “Score-Based Diffusion Models as Principled Priors for Inverse Imaging”, arXiv 2023</p></li>
+</ul>
+</section>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -437,7 +521,7 @@ document.write(`
         },
         kernelOptions: {
             name: "python3",
-            path: "./research/Liver_Translation"
+            path: "./深度学习应用/逆问题"
         },
         predefinedOutput: true
     }
@@ -454,12 +538,49 @@ document.write(`
                 <footer class="prev-next-footer">
                   <!-- Previous / next buttons -->
 <div class="prev-next-area">
+    <a class="left-prev"
+       href="../%E9%80%86%E9%97%AE%E9%A2%98intro.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">&lt;no title&gt;</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="20230717-ADMM-CSNet%20note.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><span class="section-number">3. </span>【method】ADMM-CSNet |  一种图像压缩感知重建的深度学习方法（1）- 方法解析</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
 </div>
                 </footer>
               
             </div>
             
             
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">2.1. 参考资料</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">2.2. 任务定义</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#diffusion-model">2.3. diffusion model求解逆问题的两种范式</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">2.3.1. 两种求解方式论文整理</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
               
             
           </div>

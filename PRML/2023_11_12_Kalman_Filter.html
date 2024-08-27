@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
-    <title>1.6. 线性动态系统-卡曼滤波（Kalman Filter） &#8212; Jy&#39; s phd learning notes</title>
+    <title>线性动态系统-卡曼滤波（Kalman Filter） &#8212; Jy&#39; s phd learning notes</title>
   
   
   
@@ -64,11 +64,11 @@ const thebe_selector_output = ".output, .cell_output"
     <script async="async" src="../_static/sphinx-thebe.js"></script>
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'PRML/卡尔曼滤波';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'PRML/2023_11_12_Kalman_Filter';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="1.7. Particle Filter" href="%E7%B2%92%E5%AD%90%E6%BB%A4%E6%B3%A2.html" />
-    <link rel="prev" title="1.5. 概率图模型" href="%E6%A6%82%E7%8E%87%E5%9B%BE%E6%A8%A1%E5%9E%8B%E6%80%BB.html" />
+    <link rel="next" title="Particle Filter" href="2023_11_15_Pacticle_Filter.html" />
+    <link rel="prev" title="概率图模型" href="%E6%A6%82%E7%8E%87%E5%9B%BE%E6%A8%A1%E5%9E%8B%E6%80%BB.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -173,21 +173,19 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="../basic/jupyter_book.html">1. Jupyter Book 使用指南</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../basic/notebooks.html">2. Jupyter Notebook files</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">Math</span></p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">数学基础</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../math/matrix_analysis.html">1. 矩阵与张量分析作业</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">PRML notes</span></p>
 <ul class="current nav bd-sidenav">
-<li class="toctree-l1 current active has-children"><a class="reference internal" href="intro.html">1. PRML</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="math_basic.html">1.2. 数学基础</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Exponential_Family_Distribution.html">1.3. 指数组分布</a></li>
-<li class="toctree-l2"><a class="reference internal" href="%E6%A6%82%E7%8E%87%E5%9B%BE%E6%A8%A1%E5%9E%8B1.html">1.4. 概率图模型入门</a></li>
-<li class="toctree-l2"><a class="reference internal" href="%E6%A6%82%E7%8E%87%E5%9B%BE%E6%A8%A1%E5%9E%8B%E6%80%BB.html">1.5. 概率图模型</a></li>
-<li class="toctree-l2 current active"><a class="current reference internal" href="#">1.6. 线性动态系统-卡曼滤波（Kalman Filter）</a></li>
-<li class="toctree-l2"><a class="reference internal" href="%E7%B2%92%E5%AD%90%E6%BB%A4%E6%B3%A2.html">1.7. Particle Filter</a></li>
-</ul>
-</li>
+<li class="toctree-l1"><a class="reference internal" href="intro.html">PRML</a></li>
+<li class="toctree-l1"><a class="reference internal" href="math_basic.html">数学基础</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Exponential_Family_Distribution.html">指数族分布</a></li>
+<li class="toctree-l1"><a class="reference internal" href="2023_11_05_PGM1.html">概率图模型入门</a></li>
+<li class="toctree-l1"><a class="reference internal" href="%E6%A6%82%E7%8E%87%E5%9B%BE%E6%A8%A1%E5%9E%8B%E6%80%BB.html">概率图模型</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">线性动态系统-卡曼滤波（Kalman Filter）</a></li>
+<li class="toctree-l1"><a class="reference internal" href="2023_11_15_Pacticle_Filter.html">Particle Filter</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">学术报告</span></p>
 <ul class="nav bd-sidenav">
@@ -199,22 +197,30 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="../research/evidential_regression.html">1. Evidential Learning and Uncentainty</a></li>
 
 </ul>
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">MRI notes</span></p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">深度学习基础</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../MRI/MT-CEST-NOE.html">1. MT&amp;CEST&amp;NOE 磁化转移定量成像</a></li>
-</ul>
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">Pytorch</span></p>
-<ul class="nav bd-sidenav">
-<li class="toctree-l1 has-children"><a class="reference internal" href="../pytorch/%E6%A8%A1%E5%9E%8B%E6%8B%93%E6%89%91%E7%BB%93%E6%9E%84.html">1. 模型拓扑结构</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../pytorch/%E6%A8%A1%E5%9E%8B%E6%8B%93%E6%89%91%E7%BB%93%E6%9E%84.html">1. 模型拓扑结构</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="../pytorch/hook.html">1.1. 注册钩子函数（register_forward_hook）</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../pytorch/computation_graph.html">1.2. 计算图构建细节</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../pytorch/torch.gather.html">1.3. Torch.gather 索引</a></li>
 </ul>
 </li>
 </ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">深度学习应用</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%BA%94%E7%94%A8/%E7%94%9F%E6%88%90%E5%BC%8F%E6%A8%A1%E5%9E%8Bintro.html">1. 生成式模型</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%BA%94%E7%94%A8/%E7%94%9F%E6%88%90%E5%BC%8F%E6%A8%A1%E5%9E%8B/20240110_%E6%89%A9%E6%95%A3%E6%A8%A1%E5%9E%8BScore-based%20model%E7%B2%BE%E8%AE%B2.html">1.1. 扩散模型 | 1.Score-based model精讲</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%BA%94%E7%94%A8/%E7%94%9F%E6%88%90%E5%BC%8F%E6%A8%A1%E5%9E%8B/20240110_%E6%89%A9%E6%95%A3%E6%A8%A1%E5%9E%8BSDE%E7%B2%BE%E8%AE%B2.html">1.2. 扩散模型 | 2.SDE精讲</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%BA%94%E7%94%A8/%E9%80%86%E9%97%AE%E9%A2%98/20230102_Diffusion_model_fo_%20the_inverse_problem.html">2. 【Method】inverse problem | 基于diffusion model的图像逆问题求解</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%BA%94%E7%94%A8/%E9%80%86%E9%97%AE%E9%A2%98/20230717-ADMM-CSNet%20note.html">3. 【method】ADMM-CSNet |  一种图像压缩感知重建的深度学习方法（1）- 方法解析</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%BA%94%E7%94%A8/%E9%80%86%E9%97%AE%E9%A2%98/20230719-ADMM-CSNet%20code.html">4. 代码解析</a></li>
+</ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">工具使用</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../tools/latex_symbol.html">1. Latex常用符号表</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tools/%E5%B8%B8%E7%94%A8%E5%B7%A5%E5%85%B7.html">2. 常用工具</a></li>
 </ul>
 
     </div>
@@ -286,7 +292,7 @@ const thebe_selector_output = ".output, .cell_output"
       
       
       
-      <li><a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2FPRML/卡尔曼滤波.html&body=Your%20issue%20content%20here." target="_blank"
+      <li><a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2FPRML/2023_11_12_Kalman_Filter.html&body=Your%20issue%20content%20here." target="_blank"
    class="btn btn-sm btn-source-issues-button dropdown-item"
    title="Open an issue"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -316,7 +322,7 @@ const thebe_selector_output = ".output, .cell_output"
       
       
       
-      <li><a href="../_sources/PRML/卡尔曼滤波.md" target="_blank"
+      <li><a href="../_sources/PRML/2023_11_12_Kalman_Filter.md" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -408,9 +414,9 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">1.6.1. 一、背景介绍</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#filtering">1.6.2. 二、Filtering问题</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">1.6.3. 三、Filtering问题求解</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">一、背景介绍</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#filtering">二、Filtering问题</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">三、Filtering问题求解</a></li>
 </ul>
             </nav>
         </div>
@@ -423,7 +429,7 @@ document.write(`
                 <article class="bd-article" role="main">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="kalman-filter">
-<h1><span class="section-number">1.6. </span>线性动态系统-卡曼滤波（Kalman Filter）<a class="headerlink" href="#kalman-filter" title="Permalink to this heading">#</a></h1>
+<h1>线性动态系统-卡曼滤波（Kalman Filter）<a class="headerlink" href="#kalman-filter" title="Permalink to this heading">#</a></h1>
 <blockquote>
 <div><p>2023.11.12</p>
 </div></blockquote>
@@ -431,7 +437,7 @@ document.write(`
 <p>视频如下：</p>
 <p><a class="reference external" href="https://www.bilibili.com/video/BV1zW411U7fa?share_source=copy_web">机器学习-白板推导系列(十五)-线性动态系统-卡曼滤波（Kalman Filter）_哔哩哔哩_bilibili</a></p>
 <section id="id1">
-<h2><span class="section-number">1.6.1. </span>一、背景介绍<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h2>
+<h2>一、背景介绍<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h2>
 <p>我们在前面讲过，一般的概率图模型加上时间就是动态模型（Dynamic Model）</p>
 <p>动态模型分为三类：</p>
 <ol class="arabic simple">
@@ -467,7 +473,7 @@ document.write(`
 </section>
 <hr class="docutils" />
 <section id="filtering">
-<h2><span class="section-number">1.6.2. </span>二、Filtering问题<a class="headerlink" href="#filtering" title="Permalink to this heading">#</a></h2>
+<h2>二、Filtering问题<a class="headerlink" href="#filtering" title="Permalink to this heading">#</a></h2>
 <p>我们先对kalman filter进行总结：</p>
 <p><img alt="NLkw3n" src="https://ossjiyaoliu.oss-cn-beijing.aliyuncs.com/uPic/NLkw3n.png" /></p>
 <p>根据上一节内容，可以总结为如下关系：</p>
@@ -533,7 +539,7 @@ document.write(`
 </section>
 <hr class="docutils" />
 <section id="id2">
-<h2><span class="section-number">1.6.3. </span>三、Filtering问题求解<a class="headerlink" href="#id2" title="Permalink to this heading">#</a></h2>
+<h2>三、Filtering问题求解<a class="headerlink" href="#id2" title="Permalink to this heading">#</a></h2>
 <p>上一节中所说一个高斯分布的条件概率分布和边缘概率分布都是高斯分布，而且两个高斯分布的联合概率分布也是高斯分布，因此filtering问题中的<strong>update</strong>和<strong>prediction</strong>的结论也是高斯分布。</p>
 <p>以下，推导一下<strong>update</strong>和<strong>prediction</strong>结果的高斯分布表示。</p>
 <p>首先，假设update中的结果<span class="math notranslate nohighlight">\(P(z_t|x_1,\cdots,x_t)\)</span>服从高斯分布<span class="math notranslate nohighlight">\(N(\mu_t,\Sigma_t)\)</span>；假设prediction中的结果<span class="math notranslate nohighlight">\(P(z_t|x_1,\cdots,x_{t-1})\)</span>服从高斯分布<span class="math notranslate nohighlight">\(N(\mu_t^*,\Sigma_t^*)\)</span></p>
@@ -604,15 +610,15 @@ document.write(`
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title"><span class="section-number">1.5. </span>概率图模型</p>
+        <p class="prev-next-title">概率图模型</p>
       </div>
     </a>
     <a class="right-next"
-       href="%E7%B2%92%E5%AD%90%E6%BB%A4%E6%B3%A2.html"
+       href="2023_11_15_Pacticle_Filter.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title"><span class="section-number">1.7. </span>Particle Filter</p>
+        <p class="prev-next-title">Particle Filter</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -631,9 +637,9 @@ document.write(`
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">1.6.1. 一、背景介绍</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#filtering">1.6.2. 二、Filtering问题</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">1.6.3. 三、Filtering问题求解</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">一、背景介绍</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#filtering">二、Filtering问题</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">三、Filtering问题求解</a></li>
 </ul>
   </nav></div>
 
