@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
-    <title>MT&amp;CEST&amp;NOE 磁化转移定量成像 &#8212; Jy&#39; s phd learning notes</title>
+    <title>3. 可解释 &#8212; 阿土的炼丹炉</title>
   
   
   
@@ -62,11 +62,11 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="../_static/sphinx-thebe.js"></script>
-    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
-    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'MRI/MT-CEST-NOE';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '深度学习应用/可解释intro';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="3.1. 【深度学习中的一些有趣现象及其理论解释】——曹原（香港大学）-2024" href="%E5%8F%AF%E8%A7%A3%E9%87%8AAI/20240112%E6%9B%B9%E5%8E%9F%E6%B8%AF%E5%A4%A7-%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E4%B8%AD%E7%9A%84%E4%B8%80%E4%BA%9B%E7%8E%B0%E8%B1%A1%E7%9A%84%E8%A7%A3%E9%87%8A.html" />
+    <link rel="prev" title="2.5. 图像逆问题通用算法" href="%E9%80%86%E9%97%AE%E9%A2%98/20230808_%E5%9B%BE%E5%83%8F%E9%80%86%E9%97%AE%E9%A2%98.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -172,8 +172,17 @@ const thebe_selector_output = ".output, .cell_output"
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">数学基础</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../math/%E7%BB%9F%E8%AE%A1/20240204_20%E8%B4%9D%E5%8F%B6%E6%96%AF%E6%8E%A8%E6%96%AD%E5%85%A5%E9%97%A8.html">1. Visual ML | Statistics | 20.贝叶斯推断入门</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../math/%E7%BB%9F%E8%AE%A1/20240204_%E8%B4%9D%E5%8F%B6%E6%96%AF%E6%8E%A8%E6%96%AD%E8%BF%9B%E9%98%B6.html">2. Visual ML | Statistics | 21.深入贝叶斯推断</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../math/%E7%9F%A9%E9%98%B5%E5%88%86%E6%9E%90intro.html">1. 矩阵分析</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../math/%E7%9F%A9%E9%98%B5/matrix_analysis.html">1.1. 矩阵与张量分析作业</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../math/%E5%87%B8%E4%BC%98%E5%8C%96/%E4%BA%A4%E6%9B%BF%E5%90%91%E4%B9%98%E5%AD%90%E6%B3%95%28Alternating_Direction_Method_of_Multipliers_ADMM%29.html">1.2. 交替方向乘子法（Alternating Direction Method of Multipliers, ADMM）</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../math/%E5%87%B8%E4%BC%98%E5%8C%96/20240326%20Krylov%20Subspace%20Regularization%20for%20Inverse%20Problems.html">1.3. Krylov Subspace Regularization for Inverse Problems</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../math/%E7%BB%9F%E8%AE%A1intro.html">2. 统计</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../math/%E7%BB%9F%E8%AE%A1/20240204_20%E8%B4%9D%E5%8F%B6%E6%96%AF%E6%8E%A8%E6%96%AD%E5%85%A5%E9%97%A8.html">2.1. Visual ML | Statistics | 20.贝叶斯推断入门</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../math/%E7%BB%9F%E8%AE%A1/20240204_%E8%B4%9D%E5%8F%B6%E6%96%AF%E6%8E%A8%E6%96%AD%E8%BF%9B%E9%98%B6.html">2.2. Visual ML | Statistics | 21.深入贝叶斯推断</a></li>
+</ul>
+</li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">PRML notes</span></p>
 <ul class="nav bd-sidenav">
@@ -194,34 +203,81 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../research/evidential_regression.html">1. Evidential Learning and Uncentainty</a></li>
 
+<li class="toctree-l1 has-children"><a class="reference internal" href="../research/%E6%96%87%E7%8C%AE%E9%98%85%E8%AF%BB%E8%AE%B0%E5%BD%95intro.html">3. 文献阅读记录</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-3"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../research/%E6%96%87%E7%8C%AE%E9%98%85%E8%AF%BB%E8%AE%B0%E5%BD%95/202401_%E6%96%87%E7%AB%A0%E9%98%85%E8%AF%BB.html">3.1. 【Paper Reading】Foundation model | 可解释性 | 图像融合 20240123</a></li>
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="../research/%E6%96%87%E7%8C%AE%E9%98%85%E8%AF%BB%E8%AE%B0%E5%BD%95/202403%E6%96%87%E7%AB%A0%E9%98%85%E8%AF%BB.html">3.5. 20240303【Paper Reading】Uncertainty | 可解释性</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../research/%E6%96%87%E7%8C%AE%E9%98%85%E8%AF%BB%E8%AE%B0%E5%BD%95/20230614_TV_CS.html">3.6. TV CS</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">深度学习基础</span></p>
+</li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">MRI notes</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1 has-children"><a class="reference internal" href="../pytorch/%E6%A8%A1%E5%9E%8B%E6%8B%93%E6%89%91%E7%BB%93%E6%9E%84.html">1. 模型拓扑结构</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l1"><a class="reference internal" href="../MRI%E5%8E%9F%E7%90%86/20231018_MT_CEST_NOE.html">1. MT&amp;CEST&amp;NOE 磁化转移定量成像</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../MRI%E5%8E%9F%E7%90%86/20230709_Parallel_MRI_reconstruction.html">2. Parallel MRI reconstruction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../MRI%E5%8E%9F%E7%90%86/20230714_Awesome%20MRI%20Recon.html">3. Awesome Accelerated-MRI-Reconstruction-Papers </a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="../MRI%E5%8E%9F%E7%90%86/20230731_MRI%E9%87%8D%E5%BB%BA%E6%96%87%E7%8C%AE%E6%95%B4%E7%90%86.html">5. 传统方法</a></li>
+
+
+
+
+
+
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Pytorch框架</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../pytorch/%E6%A8%A1%E5%9E%8B%E6%8B%93%E6%89%91%E7%BB%93%E6%9E%84.html">1. 模型拓扑结构</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-4"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="../pytorch/hook.html">1.1. 注册钩子函数（register_forward_hook）</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../pytorch/computation_graph.html">1.2. 计算图构建细节</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../pytorch/torch.gather.html">1.3. Torch.gather 索引</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../pytorch/02_gelu_grad.html">1.4. GeLU介绍及使用</a></li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="../pytorch/20240528_pytorch%E5%8A%A0%E9%80%9F%E8%AE%AD%E7%BB%83%E6%8A%80%E5%B7%A7.html">2. pytorch加速训练技巧</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">图像处理基础</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../%E5%9B%BE%E5%83%8F%28%E4%BF%A1%E5%8F%B7%29%E5%A4%84%E7%90%86%E5%9F%BA%E7%A1%80/20230918_%E5%8E%8B%E7%BC%A9%E6%84%9F%E7%9F%A5.html">1. 【method】稀疏与压缩感知 |  图像稀疏性及压缩感知方法白话讲解</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">深度学习基础</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%A1%80/DL_intro.html">1. 深度学习基础</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">深度学习应用</span></p>
-<ul class="nav bd-sidenav">
-<li class="toctree-l1 has-children"><a class="reference internal" href="../%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%BA%94%E7%94%A8/%E7%94%9F%E6%88%90%E5%BC%8F%E6%A8%A1%E5%9E%8Bintro.html">1. 生成式模型</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
-<li class="toctree-l2"><a class="reference internal" href="../%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%BA%94%E7%94%A8/%E7%94%9F%E6%88%90%E5%BC%8F%E6%A8%A1%E5%9E%8B/20240110_%E6%89%A9%E6%95%A3%E6%A8%A1%E5%9E%8BScore-based%20model%E7%B2%BE%E8%AE%B2.html">1.1. 扩散模型 | 1.Score-based model精讲</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%BA%94%E7%94%A8/%E7%94%9F%E6%88%90%E5%BC%8F%E6%A8%A1%E5%9E%8B/20240110_%E6%89%A9%E6%95%A3%E6%A8%A1%E5%9E%8BSDE%E7%B2%BE%E8%AE%B2.html">1.2. 扩散模型 | 2.SDE精讲</a></li>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="%E7%94%9F%E6%88%90%E5%BC%8F%E6%A8%A1%E5%9E%8Bintro.html">1. 生成式模型</a><input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-5"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="%E7%94%9F%E6%88%90%E5%BC%8F%E6%A8%A1%E5%9E%8B/20240110_%E6%89%A9%E6%95%A3%E6%A8%A1%E5%9E%8BScore-based%20model%E7%B2%BE%E8%AE%B2.html">1.1. 扩散模型 | 1.Score-based model精讲</a></li>
+<li class="toctree-l2"><a class="reference internal" href="%E7%94%9F%E6%88%90%E5%BC%8F%E6%A8%A1%E5%9E%8B/20240110_%E6%89%A9%E6%95%A3%E6%A8%A1%E5%9E%8BSDE%E7%B2%BE%E8%AE%B2.html">1.2. 扩散模型 | 2.SDE精讲</a></li>
+<li class="toctree-l2"><a class="reference internal" href="%E7%94%9F%E6%88%90%E5%BC%8F%E6%A8%A1%E5%9E%8B/20240111_%E6%89%A9%E6%95%A3%E6%A8%A1%E5%9E%8B%E5%BA%94%E7%94%A8.html">1.3. 扩散模型 | 3.Score-based SDE for accelerated MRI精讲</a></li>
 </ul>
 </li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%BA%94%E7%94%A8/%E9%80%86%E9%97%AE%E9%A2%98intro.html">2. 逆问题</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-3"><i class="fa-solid fa-chevron-down"></i></label><ul>
-<li class="toctree-l2"><a class="reference internal" href="../%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%BA%94%E7%94%A8/%E9%80%86%E9%97%AE%E9%A2%98/20230102_Diffusion_model_fo_%20the_inverse_problem.html">2.1. 【Method】inverse problem | 基于diffusion model的图像逆问题求解</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%BA%94%E7%94%A8/%E9%80%86%E9%97%AE%E9%A2%98/20230717-ADMM-CSNet%20note.html">2.2. 【method】ADMM-CSNet |  一种图像压缩感知重建的深度学习方法（1）- 方法解析</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%BA%94%E7%94%A8/%E9%80%86%E9%97%AE%E9%A2%98/20230719-ADMM-CSNet%20code.html">2.3. 代码解析</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="%E9%80%86%E9%97%AE%E9%A2%98intro.html">2. 逆问题</a><input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-6"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="%E9%80%86%E9%97%AE%E9%A2%98/20230102_Diffusion_model_fo_the_inverse_problem.html">2.1. 【Method】inverse problem | 基于diffusion model的图像逆问题求解</a></li>
+<li class="toctree-l2"><a class="reference internal" href="%E9%80%86%E9%97%AE%E9%A2%98/20230717_ADMM_CSNet_note.html">2.2. 【method】ADMM-CSNet |  一种图像压缩感知重建的深度学习方法（1）- 方法解析</a></li>
+<li class="toctree-l2"><a class="reference internal" href="%E9%80%86%E9%97%AE%E9%A2%98/20230719_ADMM_CSNet_code.html">2.3. ADMM CSNet代码解析</a></li>
+<li class="toctree-l2"><a class="reference internal" href="%E9%80%86%E9%97%AE%E9%A2%98/20230708_%E4%BD%BF%E7%94%A8%E6%95%B0%E6%8D%AE%E9%A9%B1%E5%8A%A8%E6%A8%A1%E5%9E%8B%E6%B1%82%E8%A7%A3%E9%80%86%E9%97%AE%E9%A2%98.html">2.4. 使用数据驱动模型求解逆问题</a></li>
+<li class="toctree-l2"><a class="reference internal" href="%E9%80%86%E9%97%AE%E9%A2%98/20230808_%E5%9B%BE%E5%83%8F%E9%80%86%E9%97%AE%E9%A2%98.html">2.5. 图像逆问题通用算法</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current active has-children"><a class="current reference internal" href="#">3. 可解释</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-7"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="%E5%8F%AF%E8%A7%A3%E9%87%8AAI/20240112%E6%9B%B9%E5%8E%9F%E6%B8%AF%E5%A4%A7-%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E4%B8%AD%E7%9A%84%E4%B8%80%E4%BA%9B%E7%8E%B0%E8%B1%A1%E7%9A%84%E8%A7%A3%E9%87%8A.html">3.1. 【深度学习中的一些有趣现象及其理论解释】——曹原（香港大学）-2024</a></li>
+<li class="toctree-l2"><a class="reference internal" href="%E5%8F%AF%E8%A7%A3%E9%87%8AAI/20240303_talk_trustworthy_AI.html">3.2. 【Talk】CVPRW 202206 | Towards robust and trustworthy AI for medical imaging - Ender Konukoglu</a></li>
 </ul>
 </li>
 </ul>
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">工具使用</span></p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">工具使用解决方案</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../tools/latex_symbol.html">1. Latex常用符号表</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../tools/%E5%B8%B8%E7%94%A8%E5%B7%A5%E5%85%B7.html">2. 常用工具</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tools/20220503typora%2Bupic%2B%E9%98%BF%E9%87%8C%E4%BA%91OSS%2B%E5%9D%9A%E6%9E%9C%E4%BA%91%2B%E6%9C%89%E9%81%93%E4%BA%91%E7%AC%94%E8%AE%B0%E6%9E%84%E5%BB%BA%E4%B8%93%E5%B1%9E%E7%AC%94%E8%AE%B0%E7%B3%BB%E7%BB%9F.html">3. typora+upic+阿里云OSS+坚果云+有道云笔记构建专属笔记系统</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tools/20240202_XHR_failed.html">4. Remote-SSH XHR failed无法访问远程服务器</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Leetcode算法</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../Leetcode%E7%AE%97%E6%B3%95/leetcode_Intro.html">1. Leetcode</a></li>
 </ul>
 
     </div>
@@ -293,7 +349,7 @@ const thebe_selector_output = ".output, .cell_output"
       
       
       
-      <li><a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2FMRI/MT-CEST-NOE.html&body=Your%20issue%20content%20here." target="_blank"
+      <li><a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2F深度学习应用/可解释intro.html&body=Your%20issue%20content%20here." target="_blank"
    class="btn btn-sm btn-source-issues-button dropdown-item"
    title="Open an issue"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -323,7 +379,7 @@ const thebe_selector_output = ".output, .cell_output"
       
       
       
-      <li><a href="../_sources/MRI/MT-CEST-NOE.md" target="_blank"
+      <li><a href="../_sources/深度学习应用/可解释intro.md" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -392,9 +448,7 @@ document.write(`
   </button>
 `);
 </script>
-<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <span class="fa-solid fa-list"></span>
-</label>
+
 </div></div>
       
     </div>
@@ -405,24 +459,11 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>MT&CEST&NOE 磁化转移定量成像</h1>
+    <h1>可解释</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
             
-            <div>
-                <h2> Contents </h2>
-            </div>
-            <nav aria-label="Page">
-                <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mt">MT  磁化转移</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">基础</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">MT：磁化转移理论</a></li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cest">CEST</a></li>
-</ul>
-            </nav>
         </div>
     </div>
 </div>
@@ -432,87 +473,10 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article" role="main">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="mt-cest-noe">
-<h1>MT&amp;CEST&amp;NOE 磁化转移定量成像<a class="headerlink" href="#mt-cest-noe" title="Permalink to this heading">#</a></h1>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>2023-10-18</p>
+  <section class="tex2jax_ignore mathjax_ignore" id="id1">
+<h1><span class="section-number">3. </span>可解释<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h1>
+<div class="toctree-wrapper compound">
 </div>
-<section id="mt">
-<h2>MT  磁化转移<a class="headerlink" href="#mt" title="Permalink to this heading">#</a></h2>
-<section id="id1">
-<h3>基础<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h3>
-<ul>
-<li><p>自由水：CSF，水肿（炎症反应），细胞质中多数也是自由水，细胞外间隙也有自由水。</p></li>
-<li><p>结合水：它与机体内蛋白质、氨基酸、维生素等生物大分子结合,参与机体生命物质生化活动和生理活动。</p></li>
-<li><p>激发：低能级状态的氢质子跃迁到高能级；饱和：施加脉冲能量使得低能级和高能级达到平衡状态。</p></li>
-<li><p>Two-pool system（双池系统）：小池子（自由水），大池子（结合水）。之后的内容基本都基于双池系统。</p></li>
-<li><p>1.5 交叉弛豫：两个氢质子（spin自旋），在距离非常近的情况下，这两个氢质子会相互作用，造成能量传递。（偶极耦合）。</p></li>
-<li><p>1.6 Nuclear Overhauser E：等同于交叉弛豫</p></li>
-<li><p>1.7 描述上面NOE的couple的过程：有两个常数自弛豫和交叉弛豫</p>
-<p><img alt="image-20231025120039520" src="https://ossjiyaoliu.oss-cn-beijing.aliyuncs.com/uPic/image-20231025120039520.png" /></p>
-</li>
-<li><p>1.8 Chemical Exchange：大分子上有很多结合的氢质子，当有一个其他水分子和这个大分子有接触的时候，两个氢质子会发生化学交换（直接交换位置）。原因：水上的氢质子非常活泼。化学交换的衡量核心是交换速率，CEST只能对中速和慢速交换进行定量。</p>
-<p><img alt="image-20231025120113910" src="https://ossjiyaoliu.oss-cn-beijing.aliyuncs.com/uPic/image-20231025120113910.png" /></p>
-</li>
-</ul>
-<p><img alt="image-20231025120127271" src="https://ossjiyaoliu.oss-cn-beijing.aliyuncs.com/uPic/image-20231025120127271.png" /></p>
-<ul class="simple">
-<li><p>1.9 描述化学交换的过程公式是在Block equation的基础上进行modify。</p></li>
-</ul>
-<p><img alt="image-20231025120140794" src="https://ossjiyaoliu.oss-cn-beijing.aliyuncs.com/uPic/image-20231025120140794.png" /></p>
-<ul>
-<li><p>1.10 饱和转移</p>
-<p><img alt="image-20231025120155121" src="https://ossjiyaoliu.oss-cn-beijing.aliyuncs.com/uPic/image-20231025120155121.png" /></p>
-</li>
-</ul>
-</section>
-<section id="id2">
-<h3>MT：磁化转移理论<a class="headerlink" href="#id2" title="Permalink to this heading">#</a></h3>
-<ul class="simple">
-<li><p>semi-solid成分很难成像，一般是invisible的。因为T2时间非常短。例如软骨、细胞膜、髓鞘等</p></li>
-</ul>
-<p><img alt="image-20231025120212913" src="https://ossjiyaoliu.oss-cn-beijing.aliyuncs.com/uPic/image-20231025120212913.png" /></p>
-<p><img alt="image-20231025120225354" src="https://ossjiyaoliu.oss-cn-beijing.aliyuncs.com/uPic/image-20231025120225354.png" /></p>
-<p><strong>由于大分子很难成像，因此，可以使用饱和激发/偏共振脉冲大分子，会使得自由水分子信号变化（发生交叉弛豫），通过检测水分子的信号变化，就能检测出大分子的信号变化。</strong></p>
-<ul class="simple">
-<li><p>**这种序列如何设计：**使用较宽/无选择性的脉冲</p></li>
-</ul>
-<p><img alt="image-20231025120238701" src="https://ossjiyaoliu.oss-cn-beijing.aliyuncs.com/uPic/image-20231025120238701.png" /></p>
-<ul class="simple">
-<li><p><strong>定量分析</strong>：计算MTR</p></li>
-</ul>
-<p><img alt="image-20231025120253803" src="https://ossjiyaoliu.oss-cn-beijing.aliyuncs.com/uPic/image-20231025120253803.png" /></p>
-<p>缺陷：没有考虑如何交换，是一种半定量技术</p>
-<ul class="simple">
-<li><p>最终的<span class="math notranslate nohighlight">\(MTR = (M_{sat}-M_0)/M_0\)</span></p></li>
-</ul>
-<p><img alt="image-20231025120308271" src="https://ossjiyaoliu.oss-cn-beijing.aliyuncs.com/uPic/image-20231025120308271.png" /></p>
-<p>可以看到白质信号更好，自由水信号变暗。为什么会这样：</p>
-<p><img alt="image-20231025120321034" src="https://ossjiyaoliu.oss-cn-beijing.aliyuncs.com/uPic/image-20231025120321034.png" /></p>
-<ul class="simple">
-<li><p>定量MT可以用2、3、4-pool model进行建模</p></li>
-</ul>
-</section>
-</section>
-<section id="cest">
-<h2>CEST<a class="headerlink" href="#cest" title="Permalink to this heading">#</a></h2>
-<p>CEST是一种特殊的MT。CEST有两个池：free water和中等分子（代谢物、蛋白等可自由运动的分子，比大分子小的多比水分子大）。则两个池的信号如下面所示，中分子的信号相对于大分子更局限，如右图：</p>
-<p><img alt="image-20231025120334704" src="https://ossjiyaoliu.oss-cn-beijing.aliyuncs.com/uPic/image-20231025120334704.png" /></p>
-<p>想要观察中分子可以先用选择性的频率对中等大小的分子（OH或者NH或者NH2）进行饱和，然后传递到水分子，就会发现化学传递。使得周围的水分子也饱和，从而造成水分子信号下降。</p>
-<p><img alt="image-20231025120346622" src="https://ossjiyaoliu.oss-cn-beijing.aliyuncs.com/uPic/image-20231025120346622.png" /></p>
-<p>小池子是中分子，大池子是自由水。举个具体的例子：可以看做饱和脉冲抽到了A-pool中的水，就会是的B-pool中的水过来（这里的水相当于信号）。</p>
-<p><img alt="image-20231025120400536" src="https://ossjiyaoliu.oss-cn-beijing.aliyuncs.com/uPic/image-20231025120400536.png" /></p>
-<p><img alt="image-20231025120413703" src="https://ossjiyaoliu.oss-cn-beijing.aliyuncs.com/uPic/image-20231025120413703.png" /></p>
-<p>**和MT相比CEST的优势：**有选择性，我们可以知道到底是哪一类的中等分子的贡献。</p>
-<ul>
-<li><p>Z谱：每个点的ppm会得到一个对应的contrast</p></li>
-<li><p>CEST可以观测到哪些呢？amide是最常用的</p>
-<p><img alt="image-20231025120429925" src="https://ossjiyaoliu.oss-cn-beijing.aliyuncs.com/uPic/image-20231025120429925.png" /></p>
-</li>
-</ul>
-<p>**矫正：**静磁场不均匀性</p>
-</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -528,7 +492,7 @@ document.write(`
         },
         kernelOptions: {
             name: "python3",
-            path: "./MRI"
+            path: "./深度学习应用"
         },
         predefinedOutput: true
     }
@@ -545,31 +509,30 @@ document.write(`
                 <footer class="prev-next-footer">
                   <!-- Previous / next buttons -->
 <div class="prev-next-area">
+    <a class="left-prev"
+       href="%E9%80%86%E9%97%AE%E9%A2%98/20230808_%E5%9B%BE%E5%83%8F%E9%80%86%E9%97%AE%E9%A2%98.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title"><span class="section-number">2.5. </span>图像逆问题通用算法</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="%E5%8F%AF%E8%A7%A3%E9%87%8AAI/20240112%E6%9B%B9%E5%8E%9F%E6%B8%AF%E5%A4%A7-%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E4%B8%AD%E7%9A%84%E4%B8%80%E4%BA%9B%E7%8E%B0%E8%B1%A1%E7%9A%84%E8%A7%A3%E9%87%8A.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><span class="section-number">3.1. </span>【深度学习中的一些有趣现象及其理论解释】——曹原（香港大学）-2024</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
 </div>
                 </footer>
               
             </div>
             
             
-              
-                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
-
-  <div class="sidebar-secondary-item">
-  <div class="page-toc tocsection onthispage">
-    <i class="fa-solid fa-list"></i> Contents
-  </div>
-  <nav class="bd-toc-nav page-toc">
-    <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mt">MT  磁化转移</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">基础</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">MT：磁化转移理论</a></li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cest">CEST</a></li>
-</ul>
-  </nav></div>
-
-</div></div>
               
             
           </div>
