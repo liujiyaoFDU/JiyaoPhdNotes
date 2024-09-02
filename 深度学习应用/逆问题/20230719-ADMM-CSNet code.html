@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
-    <title>4. 代码解析 &#8212; Jy&#39; s phd learning notes</title>
+    <title>2.3. 代码解析 &#8212; Jy&#39; s phd learning notes</title>
   
   
   
@@ -66,7 +66,7 @@ const thebe_selector_output = ".output, .cell_output"
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
     <link rel="next" title="1. Latex常用符号表" href="../../tools/latex_symbol.html" />
-    <link rel="prev" title="3. 【method】ADMM-CSNet | 一种图像压缩感知重建的深度学习方法（1）- 方法解析" href="20230717-ADMM-CSNet%20note.html" />
+    <link rel="prev" title="2.2. 【method】ADMM-CSNet | 一种图像压缩感知重建的深度学习方法（1）- 方法解析" href="20230717-ADMM-CSNet%20note.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -169,11 +169,11 @@ const thebe_selector_output = ".output, .cell_output"
         <p aria-level="2" class="caption" role="heading"><span class="caption-text">Basic Guides</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../../basic/jupyter_book.html">1. Jupyter Book 使用指南</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../basic/notebooks.html">2. Jupyter Notebook files</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">数学基础</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../../math/matrix_analysis.html">1. 矩阵与张量分析作业</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../math/%E7%BB%9F%E8%AE%A1/20240204_20%E8%B4%9D%E5%8F%B6%E6%96%AF%E6%8E%A8%E6%96%AD%E5%85%A5%E9%97%A8.html">1. Visual ML | Statistics | 20.贝叶斯推断入门</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../math/%E7%BB%9F%E8%AE%A1/20240204_%E8%B4%9D%E5%8F%B6%E6%96%AF%E6%8E%A8%E6%96%AD%E8%BF%9B%E9%98%B6.html">2. Visual ML | Statistics | 21.深入贝叶斯推断</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">PRML notes</span></p>
 <ul class="nav bd-sidenav">
@@ -211,9 +211,12 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l2"><a class="reference internal" href="../%E7%94%9F%E6%88%90%E5%BC%8F%E6%A8%A1%E5%9E%8B/20240110_%E6%89%A9%E6%95%A3%E6%A8%A1%E5%9E%8BSDE%E7%B2%BE%E8%AE%B2.html">1.2. 扩散模型 | 2.SDE精讲</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="20230102_Diffusion_model_fo_%20the_inverse_problem.html">2. 【Method】inverse problem | 基于diffusion model的图像逆问题求解</a></li>
-<li class="toctree-l1"><a class="reference internal" href="20230717-ADMM-CSNet%20note.html">3. 【method】ADMM-CSNet |  一种图像压缩感知重建的深度学习方法（1）- 方法解析</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">4. 代码解析</a></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="../%E9%80%86%E9%97%AE%E9%A2%98intro.html">2. 逆问题</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-3"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="20230102_Diffusion_model_fo_%20the_inverse_problem.html">2.1. 【Method】inverse problem | 基于diffusion model的图像逆问题求解</a></li>
+<li class="toctree-l2"><a class="reference internal" href="20230717-ADMM-CSNet%20note.html">2.2. 【method】ADMM-CSNet |  一种图像压缩感知重建的深度学习方法（1）- 方法解析</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">2.3. 代码解析</a></li>
+</ul>
+</li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">工具使用</span></p>
 <ul class="nav bd-sidenav">
@@ -429,7 +432,7 @@ document.write(`
 <p>整个迭代流程为： (除了整个结构的迭代循环，z zz 的内部（红色框部分）又有多次的迭代循环)</p>
 <p><img alt="" src="https://ossjiyaoliu.oss-cn-beijing.aliyuncs.com/uPic/aa2fe04e7ca1483593041bf3ec7ea1a1-20230717203045010-20230717210719015.png" /></p>
 <section id="id1">
-<h1><span class="section-number">4. </span>代码解析<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h1>
+<h1><span class="section-number">2.3. </span>代码解析<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h1>
 </section>
 
     <script type="text/x-thebe-config">
@@ -468,7 +471,7 @@ document.write(`
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title"><span class="section-number">3. </span>【method】ADMM-CSNet |  一种图像压缩感知重建的深度学习方法（1）- 方法解析</p>
+        <p class="prev-next-title"><span class="section-number">2.2. </span>【method】ADMM-CSNet |  一种图像压缩感知重建的深度学习方法（1）- 方法解析</p>
       </div>
     </a>
     <a class="right-next"

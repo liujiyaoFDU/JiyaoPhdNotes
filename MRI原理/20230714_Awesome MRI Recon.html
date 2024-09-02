@@ -1,0 +1,1051 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>3. Awesome Accelerated-MRI-Reconstruction-Papers &#8212; 阿土的炼丹炉</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=ac02cc09edc035673794" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=ac02cc09edc035673794" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=ac02cc09edc035673794" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=ac02cc09edc035673794" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=ac02cc09edc035673794" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=ac02cc09edc035673794" />
+  <script src="../_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=ac02cc09edc035673794"></script>
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'MRI原理/20230714_Awesome MRI Recon';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="5. 传统方法" href="20230731_MRI%E9%87%8D%E5%BB%BA%E6%96%87%E7%8C%AE%E6%95%B4%E7%90%86.html" />
+    <link rel="prev" title="2. Parallel MRI reconstruction" href="20230709_Parallel_MRI_reconstruction.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+  
+
+<a class="navbar-brand logo" href="../intro.html">
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/logo.jpg" class="logo__image only-light" alt="Logo image"/>
+    <script>document.write(`<img src="../_static/logo.jpg" class="logo__image only-dark" alt="Logo image"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../intro.html">
+                    Jiyao Liu’s Phd lecture notebook
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Basic Guides</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../basic/jupyter_book.html">1. Jupyter Book 使用指南</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">PRML notes</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../PRML/intro.html">PRML</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../PRML/math_basic.html">数学基础</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../PRML/Exponential_Family_Distribution.html">指数族分布</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../PRML/2023_11_05_PGM1.html">概率图模型入门</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../PRML/%E6%A6%82%E7%8E%87%E5%9B%BE%E6%A8%A1%E5%9E%8B%E6%80%BB.html">概率图模型</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../PRML/2023_11_12_Kalman_Filter.html">线性动态系统-卡曼滤波（Kalman Filter）</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../PRML/2023_11_15_Pacticle_Filter.html">Particle Filter</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">学术报告</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../Report/acad_lunch_zhuang_wang.html">1. 20231016 | 庄吓海/王成彦-可解释医学影像分析</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Report/report-rec.html">2. VALSE 20200415 |  机器学习 vs 压缩感知：核磁共振成像与重建</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">research</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../research/evidential_regression.html">1. Evidential Learning and Uncentainty</a></li>
+
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">MRI notes</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="20231018_MT_CEST_NOE.html">1. MT&amp;CEST&amp;NOE 磁化转移定量成像</a></li>
+<li class="toctree-l1"><a class="reference internal" href="20230709_Parallel_MRI_reconstruction.html">2. Parallel MRI reconstruction</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">3. Awesome Accelerated-MRI-Reconstruction-Papers </a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="20230731_MRI%E9%87%8D%E5%BB%BA%E6%96%87%E7%8C%AE%E6%95%B4%E7%90%86.html">5. 传统方法</a></li>
+
+
+
+
+
+
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Pytorch框架</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../pytorch/%E6%A8%A1%E5%9E%8B%E6%8B%93%E6%89%91%E7%BB%93%E6%9E%84.html">1. 模型拓扑结构</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../pytorch/hook.html">1.1. 注册钩子函数（register_forward_hook）</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../pytorch/computation_graph.html">1.2. 计算图构建细节</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../pytorch/torch.gather.html">1.3. Torch.gather 索引</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../pytorch/20240528_pytorch%E5%8A%A0%E9%80%9F%E8%AE%AD%E7%BB%83%E6%8A%80%E5%B7%A7.html">2. pytorch加速训练技巧</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">深度学习应用</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%BA%94%E7%94%A8/%E7%94%9F%E6%88%90%E5%BC%8F%E6%A8%A1%E5%9E%8Bintro.html">1. 生成式模型</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%BA%94%E7%94%A8/%E7%94%9F%E6%88%90%E5%BC%8F%E6%A8%A1%E5%9E%8B/20240110_%E6%89%A9%E6%95%A3%E6%A8%A1%E5%9E%8BScore-based%20model%E7%B2%BE%E8%AE%B2.html">1.1. 扩散模型 | 1.Score-based model精讲</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%BA%94%E7%94%A8/%E7%94%9F%E6%88%90%E5%BC%8F%E6%A8%A1%E5%9E%8B/20240110_%E6%89%A9%E6%95%A3%E6%A8%A1%E5%9E%8BSDE%E7%B2%BE%E8%AE%B2.html">1.2. 扩散模型 | 2.SDE精讲</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%BA%94%E7%94%A8/%E9%80%86%E9%97%AE%E9%A2%98intro.html">2. 逆问题</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-3"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%BA%94%E7%94%A8/%E9%80%86%E9%97%AE%E9%A2%98/20230102_Diffusion_model_fo_the_inverse_problem.html">2.1. 【Method】inverse problem | 基于diffusion model的图像逆问题求解</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%BA%94%E7%94%A8/%E9%80%86%E9%97%AE%E9%A2%98/20230717_ADMM_CSNet_note.html">2.2. 【method】ADMM-CSNet |  一种图像压缩感知重建的深度学习方法（1）- 方法解析</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%BA%94%E7%94%A8/%E9%80%86%E9%97%AE%E9%A2%98/20230719_ADMM_CSNet_code.html">2.3. ADMM CSNet代码解析</a></li>
+</ul>
+</li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">工具使用</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../tools/latex_symbol.html">1. Latex常用符号表</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tools/%E5%B8%B8%E7%94%A8%E5%B7%A5%E5%85%B7.html">2. 常用工具</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2FMRI原理/20230714_Awesome MRI Recon.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/MRI原理/20230714_Awesome MRI Recon.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script>
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Awesome Accelerated-MRI-Reconstruction-Papers </h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">3. Awesome Accelerated-MRI-Reconstruction-Papers </a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#not-maintained">3.1. NOT MAINTAINED</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-is-accelerated-mri-reconstruction">3.2. What is Accelerated MRI-Reconstruction?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#supervised-deep-learning-methods">3.3. Supervised Deep Learning Methods</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#unsupervised-deep-learning-methods">3.4. Unsupervised Deep Learning Methods</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#untrained-methods">3.5. Untrained Methods</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#low-rank-methods">3.6. Low Rank Methods</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#prior-based-methods">3.7. Prior Based Methods</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#classical-methods-for-parallel-imaging-and-compress-sensing">3.8. Classical Methods for Parallel Imaging and Compress Sensing</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#uncertainty-estimation">3.9. Uncertainty Estimation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#robustness">3.10. Robustness</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#other">3.11. Other</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#thanks">4. Thanks</a></li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <p>#! <a class="reference external" href="https://zhuanlan.zhihu.com/p/643451854">https://zhuanlan.zhihu.com/p/643451854</a></p>
+<section class="tex2jax_ignore mathjax_ignore" id="awesome-accelerated-mri-reconstruction-papers-awesome">
+<h1><span class="section-number">3. </span>Awesome Accelerated-MRI-Reconstruction-Papers <a class="reference external" href="https://awesome.re"><img alt="Awesome" src="https://ossjiyaoliu.oss-cn-beijing.aliyuncs.com/uPic/badge.svg" /></a><a class="headerlink" href="#awesome-accelerated-mri-reconstruction-papers-awesome" title="Permalink to this heading">#</a></h1>
+<blockquote>
+<div><p>This artical is folked from <a class="reference external" href="https://github.com/jkkronk/Accelerated-MRI-Papers/tree/main">jkkronk/Accelerated-MRI-Papers: List of Papers in MRI Reconstruction (github.com)</a>, and updating  in real time.</p>
+</div></blockquote>
+<section id="not-maintained">
+<h2><span class="section-number">3.1. </span>NOT MAINTAINED<a class="headerlink" href="#not-maintained" title="Permalink to this heading">#</a></h2>
+<p>A awesome list of a few papers on MRI reconstruction.</p>
+<p>If your paper is not on the list, please feel free to <a class="reference external" href="https://github.com/jkkronk/MRI-Reconstruction-Papers/issues">raise an issue</a> or drop me an <a class="reference external" href="mailto:jonatank&#37;&#52;&#48;ee&#46;ethz&#46;ch?subject=%5BGitHub%5D%25mri_recon%25papers">e-mail</a>.</p>
+</section>
+<section id="what-is-accelerated-mri-reconstruction">
+<h2><span class="section-number">3.2. </span>What is Accelerated MRI-Reconstruction?<a class="headerlink" href="#what-is-accelerated-mri-reconstruction" title="Permalink to this heading">#</a></h2>
+<p>MRI is acquiring data in the Fourier domain, called kspace, and to fully sampling the data in kspace is needed to get an accurate image without artefacts. This is a time-consuming task that results in a brain scan taking up to 30 minutes. Accelerated MRI-Reconstruction seeks to reduce the acquisition time to improve efficiency, reduce motion artefacts and improve patient comfort. Accelerated MRI can be done by either introducing new hardware, such as extra receiver coils (called parallel imaging), or apply algorithms for better reconstruction. An excellent detailed introduction can found in <a class="reference external" href="https://arxiv.org/pdf/1811.08839.pdf">fastMRI dataset paper</a>. Below is an example of a fully sampled and undersampled counterpart. MRI-Reconstruction can be compared with super-resolution as the main goal is to estimate unsampled frequencies.</p>
+<p><img alt="VrCT7w" src="https://ossjiyaoliu.oss-cn-beijing.aliyuncs.com/uPic/VrCT7w.png" /></p>
+<p>Yutong Chen have written a great meta review paper on accelerated MRI that can be found here: <a class="reference external" href="https://arxiv.org/abs/2112.12744">https://arxiv.org/abs/2112.12744 </a></p>
+</section>
+<section id="supervised-deep-learning-methods">
+<h2><span class="section-number">3.3. </span>Supervised Deep Learning Methods<a class="headerlink" href="#supervised-deep-learning-methods" title="Permalink to this heading">#</a></h2>
+<table class="table">
+<thead>
+<tr class="row-odd"><th class="head text-left"><p>Title</p></th>
+<th class="head text-center"><p>Short</p></th>
+<th class="head text-center"><p>Year</p></th>
+<th class="head text-center"><p>PDF</p></th>
+<th class="head text-center"><p>CODE</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-left"><p>Density Compensated Unrolled Networks for Non-Cartesian MRI Reconstruction</p></td>
+<td class="text-center"><p>PDNet</p></td>
+<td class="text-center"><p>2021</p></td>
+<td class="text-center"><p><a class="reference external" href="https://arxiv.org/abs/2101.01570">PDF</a></p></td>
+<td class="text-center"><p><a class="reference external" href="https://github.com/zaccharieramzi/fastmri-reproducible-benchmark">CODE</a></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>Deep J-Sense: Accelerated MRI Reconstruction via Unrolled Alternating Optimization</p></td>
+<td class="text-center"><p>pMRI reconstruction</p></td>
+<td class="text-center"><p>2021</p></td>
+<td class="text-center"><p><a class="reference external" href="https://arxiv.org/pdf/2103.02087.pdf">PDF</a></p></td>
+<td class="text-center"><p><a class="reference external" href="https://github.com/utcsilab/deep-jsense">CODE</a></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>Ultra-Fast T2-Weighted MR Reconstruction Using Complementary T1-Weighted Information</p></td>
+<td class="text-center"><p>Combined sequences</p></td>
+<td class="text-center"><p>2021</p></td>
+<td class="text-center"><p><a class="reference external" href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6430217/">PDF</a></p></td>
+<td class="text-center"><p><span class="xref myst">CODE</span></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>Multi-Modal MRI Reconstruction with Spatial Alignment Network</p></td>
+<td class="text-center"><p>Combined sequences/modalities</p></td>
+<td class="text-center"><p>2021</p></td>
+<td class="text-center"><p><a class="reference external" href="https://arxiv.org/pdf/2108.05603.pdf">PDF</a></p></td>
+<td class="text-center"><p><a class="reference external" href="https://github.com/woxuankai/SpatialAlignmentNetwork">CODE</a></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>Joint Frequency and Image Space Learning for Fourier Imaging</p></td>
+<td class="text-center"><p>Do reconstruction in kspace and image space</p></td>
+<td class="text-center"><p>2020</p></td>
+<td class="text-center"><p><a class="reference external" href="https://arxiv.org/abs/2007.01441">PDF</a></p></td>
+<td class="text-center"><p></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>End-to-End Variational Networks for Accelerated MRI Reconstruction</p></td>
+<td class="text-center"><p>E2E Varnet</p></td>
+<td class="text-center"><p>2020</p></td>
+<td class="text-center"><p><a class="reference external" href="https://arxiv.org/pdf/2004.06688.pdf">PDF</a></p></td>
+<td class="text-center"><p><a class="reference external" href="https://github.com/facebookresearch/fastMRI/tree/master/fastmri_examples/varnet">CODE</a></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>XPDNet for MRI Reconstruction: an Application to the fastMRI 2020 Brain Challenge</p></td>
+<td class="text-center"><p>Supervised unrolled</p></td>
+<td class="text-center"><p>2020</p></td>
+<td class="text-center"><p><a class="reference external" href="https://arxiv.org/pdf/2010.07290.pdf">PDF</a></p></td>
+<td class="text-center"><p></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>GrappaNet: Combining Parallel Imaging with Deep Learning for Multi-Coil MRI Reconstruction</p></td>
+<td class="text-center"><p>Supervised kspace</p></td>
+<td class="text-center"><p>2020</p></td>
+<td class="text-center"><p><a class="reference external" href="https://arxiv.org/pdf/1910.12325v4.pdf">PDF</a></p></td>
+<td class="text-center"><p><a class="reference external" href="https://github.com/facebookresearch/fastMRI">CODE</a></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>GrappaNet: Combining Parallel Imaging with Deep Learning for Multi-Coil MRI Reconstruction</p></td>
+<td class="text-center"><p>Supervised kspace</p></td>
+<td class="text-center"><p>2020</p></td>
+<td class="text-center"><p><a class="reference external" href="https://arxiv.org/pdf/1910.12325v4.pdf">PDF</a></p></td>
+<td class="text-center"><p><a class="reference external" href="https://github.com/facebookresearch/fastMRI">CODE</a></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>Neumann Networks for Linear Inverse Problems in Imaging</p></td>
+<td class="text-center"><p>Supervised end-to-end reconstruction</p></td>
+<td class="text-center"><p>2019</p></td>
+<td class="text-center"><p><a class="reference external" href="https://arxiv.org/pdf/1901.03707.pdf">PDF</a></p></td>
+<td class="text-center"><p><a class="reference external" href="https://dgilton.github.io/neumann_networks/">CODE</a></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>LORAKI: Autocalibrated Recurrent Neural Networks for Autoregressive MRI Reconstruction in k-Space</p></td>
+<td class="text-center"><p>Supervised CNN Kspace</p></td>
+<td class="text-center"><p>2019</p></td>
+<td class="text-center"><p><a class="reference external" href="https://arxiv.org/pdf/1904.09390.pdf">PDF</a></p></td>
+<td class="text-center"><p></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>Image reconstruction by domain transform manifold learning</p></td>
+<td class="text-center"><p>Supervised Manifold learning</p></td>
+<td class="text-center"><p>2019</p></td>
+<td class="text-center"><p><a class="reference external" href="https://arxiv.org/pdf/1704.08841.pdf">PDF</a></p></td>
+<td class="text-center"><p><a class="reference external" href="https://github.com/chongduan/MRI-AUTOMAP">CODE</a></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>KIKI-net: cross-domain convolutional neural networ ks forreconstructing undersampled magnetic resonan ce images</p></td>
+<td class="text-center"><p>Supervised CNN</p></td>
+<td class="text-center"><p>2019</p></td>
+<td class="text-center"><p><a class="reference external" href="https://onlinelibrary.wiley.com/doi/epdf/10.1002/mrm.27201">PDF</a></p></td>
+<td class="text-center"><p><a class="reference external" href="https://github.com/zaccharieramzi/fastmri-reproducible-benchmark">CODE</a></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>Learning a Variational Network for Reconstruction of Accelerated MRI Data</p></td>
+<td class="text-center"><p>Supervised Variational Network</p></td>
+<td class="text-center"><p>2017</p></td>
+<td class="text-center"><p><a class="reference external" href="https://arxiv.org/pdf/1704.00447.pdf">PDF</a></p></td>
+<td class="text-center"><p><a class="reference external" href="https://github.com/VLOGroup/mri-variationalnetwork">CODE</a></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>A Deep Cascade of Convolutional Neural Networks for MR Image Reconstruction</p></td>
+<td class="text-center"><p>Supervised Cascade Network</p></td>
+<td class="text-center"><p>2017</p></td>
+<td class="text-center"><p><a class="reference external" href="https://arxiv.org/pdf/1703.00555.pdf">PDF</a></p></td>
+<td class="text-center"><p><a class="reference external" href="https://github.com/js3611/Deep-MRI-Reconstruction">CODE</a></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>Deep ADMM-Net for Compressive Sensing MRI</p></td>
+<td class="text-center"><p>Supervised and Compressed Sensing (CS)</p></td>
+<td class="text-center"><p>2016</p></td>
+<td class="text-center"><p><a class="reference external" href="https://papers.nips.cc/paper/2016/file/1679091c5a880faf6fb5e6087eb1b2dc-Paper.pdf">PDF</a></p></td>
+<td class="text-center"><p><a class="reference external" href="https://github.com/yangyan92/Deep-ADMM-Net">CODE</a></p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="unsupervised-deep-learning-methods">
+<h2><span class="section-number">3.4. </span>Unsupervised Deep Learning Methods<a class="headerlink" href="#unsupervised-deep-learning-methods" title="Permalink to this heading">#</a></h2>
+<table class="table">
+<thead>
+<tr class="row-odd"><th class="head text-left"><p>Title</p></th>
+<th class="head text-center"><p>Short</p></th>
+<th class="head text-center"><p>Year</p></th>
+<th class="head text-center"><p>PDF</p></th>
+<th class="head text-center"><p>CODE</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-left"><p>ENSURE: A general approach for unsupervised training of deep image reconstruction algorithms</p></td>
+<td class="text-center"><p>SURE/GSURE</p></td>
+<td class="text-center"><p>2021</p></td>
+<td class="text-center"><p><a class="reference external" href="https://arxiv.org/pdf/2010.10631.pdf">PDF</a></p></td>
+<td class="text-center"><p></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>Unsupervised MRI Reconstruction with Generative Adversarial Networks</p></td>
+<td class="text-center"><p>Unsupervised with GAN</p></td>
+<td class="text-center"><p>2020</p></td>
+<td class="text-center"><p><a class="reference external" href="https://arxiv.org/pdf/2008.13065.pdf">PDF</a></p></td>
+<td class="text-center"><p><a class="reference external" href="https://github.com/MRSRL/unsupGAN-release">CODE</a></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>Unsupervised Deep Basis Pursuit: Learning inverse problems without ground-truth data</p></td>
+<td class="text-center"><p>Supervised and Unsupervised end-to-end reconstruction</p></td>
+<td class="text-center"><p>2019</p></td>
+<td class="text-center"><p><a class="reference external" href="https://arxiv.org/pdf/1910.13110.pdf">PDF</a></p></td>
+<td class="text-center"><p></p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="untrained-methods">
+<h2><span class="section-number">3.5. </span>Untrained Methods<a class="headerlink" href="#untrained-methods" title="Permalink to this heading">#</a></h2>
+<table class="table">
+<thead>
+<tr class="row-odd"><th class="head text-left"><p>Title</p></th>
+<th class="head text-center"><p>Short</p></th>
+<th class="head text-center"><p>Year</p></th>
+<th class="head text-center"><p>PDF</p></th>
+<th class="head text-center"><p>CODE</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-left"><p>Unsupervised Deep Basis Pursuit: Learning inverse problems without ground-truth data</p></td>
+<td class="text-center"><p>DIP</p></td>
+<td class="text-center"><p>2020</p></td>
+<td class="text-center"><p><a class="reference external" href="https://arxiv.org/pdf/1910.13110.pdf">PDF</a></p></td>
+<td class="text-center"><p></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>Accelerated MRI with Un-trained Neural Networks</p></td>
+<td class="text-center"><p>Untrained</p></td>
+<td class="text-center"><p>2020</p></td>
+<td class="text-center"><p><a class="reference external" href="https://arxiv.org/pdf/2007.02471.pdf">PDF</a></p></td>
+<td class="text-center"><p></p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="low-rank-methods">
+<h2><span class="section-number">3.6. </span>Low Rank Methods<a class="headerlink" href="#low-rank-methods" title="Permalink to this heading">#</a></h2>
+<table class="table">
+<thead>
+<tr class="row-odd"><th class="head text-left"><p>Title</p></th>
+<th class="head text-center"><p>Short</p></th>
+<th class="head text-center"><p>Year</p></th>
+<th class="head text-center"><p>PDF</p></th>
+<th class="head text-center"><p>CODE</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-left"><p>LORAKI: Autocalibrated Recurrent Neural Networks for Autoregressive MRI Reconstruction in k-Space</p></td>
+<td class="text-center"><p>Learnig LORAKS</p></td>
+<td class="text-center"><p>2019</p></td>
+<td class="text-center"><p><a class="reference external" href="https://arxiv.org/abs/1904.09390">PDF</a></p></td>
+<td class="text-center"><p></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>A General Framework for Compressed Sensing and Parallel MRI Using Annihilating Filter Based Low-Rank Hankel Matrix</p></td>
+<td class="text-center"><p>Parallel imaging and Compressed Sensing (CS)</p></td>
+<td class="text-center"><p>2016</p></td>
+<td class="text-center"><p><a class="reference external" href="https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&amp;arnumber=7547372">PDF</a></p></td>
+<td class="text-center"><p></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>Autocalibrated loraks for fast constrained MRI reconstruction</p></td>
+<td class="text-center"><p>LORAKS</p></td>
+<td class="text-center"><p>2015</p></td>
+<td class="text-center"><p><a class="reference external" href="https://ieeexplore.ieee.org/abstract/document/7164018">PDF</a></p></td>
+<td class="text-center"><p></p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="prior-based-methods">
+<h2><span class="section-number">3.7. </span>Prior Based Methods<a class="headerlink" href="#prior-based-methods" title="Permalink to this heading">#</a></h2>
+<table class="table">
+<thead>
+<tr class="row-odd"><th class="head text-left"><p>Title</p></th>
+<th class="head text-center"><p>Short</p></th>
+<th class="head text-center"><p>Year</p></th>
+<th class="head text-center"><p>PDF</p></th>
+<th class="head text-center"><p>CODE</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-left"><p>Bayesian Image Reconstruction using Deep Generative Models</p></td>
+<td class="text-center"><p>Unsupervised in the sense not trained end-to-end reconstruction</p></td>
+<td class="text-center"><p>2021</p></td>
+<td class="text-center"><p><a class="reference external" href="https://arxiv.org/pdf/2012.04567.pdf">PDF</a></p></td>
+<td class="text-center"><p></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>Joint reconstruction and bias field correction for undersampled MR imaging</p></td>
+<td class="text-center"><p>VAE reconstruction with Joint biasfield and reconstruction</p></td>
+<td class="text-center"><p>2020</p></td>
+<td class="text-center"><p><a class="reference external" href="https://arxiv.org/pdf/2007.13123v1.pdf">PDF</a></p></td>
+<td class="text-center"><p></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>MR Image Reconstruction Using Deep Density Priors</p></td>
+<td class="text-center"><p>VAE</p></td>
+<td class="text-center"><p>2019</p></td>
+<td class="text-center"><p><a class="reference external" href="https://ieeexplore.ieee.org/stamp/stamp.jsp?arnumber=8579232">PDF</a></p></td>
+<td class="text-center"><p><a class="reference external" href="https://github.com/kctezcan/ddp_recon">CODE</a></p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="classical-methods-for-parallel-imaging-and-compress-sensing">
+<h2><span class="section-number">3.8. </span>Classical Methods for Parallel Imaging and Compress Sensing<a class="headerlink" href="#classical-methods-for-parallel-imaging-and-compress-sensing" title="Permalink to this heading">#</a></h2>
+<table class="table">
+<thead>
+<tr class="row-odd"><th class="head text-left"><p>Title</p></th>
+<th class="head text-center"><p>Short</p></th>
+<th class="head text-center"><p>Year</p></th>
+<th class="head text-center"><p>PDF</p></th>
+<th class="head text-center"><p>CODE</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-left"><p>ESPIRiT—an eigenvalue approach to autocalibrating parallel MRI: Where SENSE meets GRAPPA</p></td>
+<td class="text-center"><p>Parallel imaging</p></td>
+<td class="text-center"><p>2014</p></td>
+<td class="text-center"><p><a class="reference external" href="https://onlinelibrary.wiley.com/doi/epdf/10.1002/mrm.24751">PDF</a></p></td>
+<td class="text-center"><p><a class="reference external" href="https://github.com/mikgroup/sigpy">CODE</a></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>Joint image reconstruction and sensitivity estimation in SENSE (JSENSE)</p></td>
+<td class="text-center"><p>Parallel imaging</p></td>
+<td class="text-center"><p>2007</p></td>
+<td class="text-center"><p><a class="reference external" href="https://pubmed.ncbi.nlm.nih.gov/17534910/">PDF</a></p></td>
+<td class="text-center"><p><a class="reference external" href="https://github.com/jkkronk/jsense_mri_reconstruction">CODE</a></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>Sparse MRI: The Application of Compressed Sensingfor Rapid MR Imaging</p></td>
+<td class="text-center"><p>Compressed Sensing (CS)</p></td>
+<td class="text-center"><p>2007</p></td>
+<td class="text-center"><p><a class="reference external" href="https://onlinelibrary.wiley.com/doi/epdf/10.1002/mrm.21391">PDF</a></p></td>
+<td class="text-center"><p><a class="reference external" href="https://github.com/peng-cao/mripy">CODE</a></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>Undersampled Radial MRI with Multiple Coils. Iterative Image Reconstruction Using a Total Variation Constraint</p></td>
+<td class="text-center"><p>Compressed Sensing (CS)</p></td>
+<td class="text-center"><p>2007</p></td>
+<td class="text-center"><p><a class="reference external" href="https://pubmed.ncbi.nlm.nih.gov/17534903/">PDF</a></p></td>
+<td class="text-center"><p></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>Robust Uncertainty Principles: Exact Signal Reconstruction from Highly Incomplete Frequency Information</p></td>
+<td class="text-center"><p>Compressed Sensing (CS)</p></td>
+<td class="text-center"><p>2004</p></td>
+<td class="text-center"><p><a class="reference external" href="https://arxiv.org/pdf/math/0409186.pdf">PDF</a></p></td>
+<td class="text-center"><p><a class="reference external" href="https://github.com/peng-cao/mripy">CODE</a></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>POCSENSE: POCS-based reconstruction for sensitivity encoded magnetic resonance imaging</p></td>
+<td class="text-center"><p>Parallel imaging</p></td>
+<td class="text-center"><p>2004</p></td>
+<td class="text-center"><p><a class="reference external" href="https://onlinelibrary.wiley.com/doi/epdf/10.1002/mrm.20285">PDF</a></p></td>
+<td class="text-center"><p><a class="reference external" href="https://mrirecon.github.io/bart/">CODE</a></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>Generalized autocalibrating partially parallel acquisitions (GRAPPA)</p></td>
+<td class="text-center"><p>Parallel imaging</p></td>
+<td class="text-center"><p>2002</p></td>
+<td class="text-center"><p><a class="reference external" href="https://onlinelibrary.wiley.com/doi/full/10.1002/mrm.10171?sid=nlm%3Apubmed">PDF</a></p></td>
+<td class="text-center"><p><a class="reference external" href="https://github.com/tetianadadakova/Tutorial-MRI-Reconstruction-Using-GRAPPA">CODE</a></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>SENSE: sensitivity encoding for fast MRI</p></td>
+<td class="text-center"><p>Parallel imaging</p></td>
+<td class="text-center"><p>1999</p></td>
+<td class="text-center"><p><a class="reference external" href="https://onlinelibrary.wiley.com/doi/epdf/10.1002/%28SICI%291522-2594%28199911%2942%3A5%3C952%3A%3AAID-MRM16%3E3.0.CO%3B2-S">PDF</a></p></td>
+<td class="text-center"><p><a class="reference external" href="https://github.com/mikgroup/sigpy">CODE</a></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>Simultaneous Acquisition of Spatial Harmonics (SMASH): Fast Imaging with Radiofrequency Coil Arrays Encoded Magnetic Resonance Imaging</p></td>
+<td class="text-center"><p>Parallel imaging</p></td>
+<td class="text-center"><p>1997</p></td>
+<td class="text-center"><p><a class="reference external" href="https://pubmed.ncbi.nlm.nih.gov/9324327/">PDF</a></p></td>
+<td class="text-center"><p></p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="uncertainty-estimation">
+<h2><span class="section-number">3.9. </span>Uncertainty Estimation<a class="headerlink" href="#uncertainty-estimation" title="Permalink to this heading">#</a></h2>
+<table class="table">
+<thead>
+<tr class="row-odd"><th class="head text-left"><p>Title</p></th>
+<th class="head text-center"><p>Short</p></th>
+<th class="head text-center"><p>Year</p></th>
+<th class="head text-center"><p>PDF</p></th>
+<th class="head text-center"><p>CODE</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-left"><p>Bayesian Uncertainty Estimation of Learned Variational MRI Reconstruction</p></td>
+<td class="text-center"><p>Epistemic Uncertainty Estimation</p></td>
+<td class="text-center"><p>2021</p></td>
+<td class="text-center"><p><a class="reference external" href="https://arxiv.org/pdf/2102.06665.pdf">PDF</a></p></td>
+<td class="text-center"><p></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>Uncertainty Quantification in Deep MRI Reconstruction</p></td>
+<td class="text-center"><p>Uncertainty</p></td>
+<td class="text-center"><p>2021</p></td>
+<td class="text-center"><p><a class="reference external" href="https://arxiv.org/pdf/1901.11228.pdf">PDF</a></p></td>
+<td class="text-center"><p></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>Sampling possible reconstructions of undersampled acquisitions in MR imaging</p></td>
+<td class="text-center"><p>Uncertainty Estimation</p></td>
+<td class="text-center"><p>2020</p></td>
+<td class="text-center"><p><a class="reference external" href="https://arxiv.org/pdf/2010.00042.pdf">PDF</a></p></td>
+<td class="text-center"><p></p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="robustness">
+<h2><span class="section-number">3.10. </span>Robustness<a class="headerlink" href="#robustness" title="Permalink to this heading">#</a></h2>
+<table class="table">
+<thead>
+<tr class="row-odd"><th class="head text-left"><p>Title</p></th>
+<th class="head text-center"><p>Short</p></th>
+<th class="head text-center"><p>Year</p></th>
+<th class="head text-center"><p>PDF</p></th>
+<th class="head text-center"><p>CODE</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-left"><p>Evaluation of the Robustness of Learned MR Image Reconstruction to Systematic Deviations Between Training and Test Data for the Models from the fastMRI Challenge</p></td>
+<td class="text-center"><p>Robustness in FastMRI</p></td>
+<td class="text-center"><p>2021</p></td>
+<td class="text-center"><p><a class="reference external" href="https://link.springer.com/chapter/10.1007/978-3-030-88552-6_3">PDF</a></p></td>
+<td class="text-center"><p></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>Measuring Robustness in Deep Learning Based Compressive Sensing</p></td>
+<td class="text-center"><p>Robustness</p></td>
+<td class="text-center"><p>2021</p></td>
+<td class="text-center"><p><a class="reference external" href="https://arxiv.org/pdf/2102.06103.pdf">PDF</a></p></td>
+<td class="text-center"><p></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>Improving Robustness of Deep-Learning-Based Image Reconstruction</p></td>
+<td class="text-center"><p>Robustness</p></td>
+<td class="text-center"><p>2020</p></td>
+<td class="text-center"><p><a class="reference external" href="https://arxiv.org/pdf/2002.11821.pdf">PDF</a></p></td>
+<td class="text-center"><p></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>On instabilities of deep learning in image reconstruction and the potential costs of AI</p></td>
+<td class="text-center"><p>Robustness review</p></td>
+<td class="text-center"><p>2019</p></td>
+<td class="text-center"><p><a class="reference external" href="https://arxiv.org/pdf/1902.05300.pdf">PDF</a></p></td>
+<td class="text-center"><p><a class="reference external" href="https://github.com/vegarant/Invfool">CODE</a></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>Scan-specific robust artificial-neural-networks for k-space interpolation (RAKI) reconstruction: Database-free deep learning for fast imaging</p></td>
+<td class="text-center"><p>Supervised CNN Kspace</p></td>
+<td class="text-center"><p>2019</p></td>
+<td class="text-center"><p><a class="reference external" href="https://onlinelibrary.wiley.com/doi/epdf/10.1002/mrm.27420">PDF</a></p></td>
+<td class="text-center"><p><a class="reference external" href="https://github.com/zczam/RAKI">CODE</a></p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="other">
+<h2><span class="section-number">3.11. </span>Other<a class="headerlink" href="#other" title="Permalink to this heading">#</a></h2>
+<table class="table">
+<thead>
+<tr class="row-odd"><th class="head text-left"><p>Title</p></th>
+<th class="head text-center"><p>Short</p></th>
+<th class="head text-center"><p>Year</p></th>
+<th class="head text-center"><p>PDF</p></th>
+<th class="head text-center"><p>CODE</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-left"><p>A review of deep learning methods for MRI reconstruction</p></td>
+<td class="text-center"><p>Review paper</p></td>
+<td class="text-center"><p>2021</p></td>
+<td class="text-center"><p><a class="reference external" href="https://arxiv.org/abs/2109.08618v1">PDF</a></p></td>
+<td class="text-center"><p></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>fastMRI+: Clinical Pathology Annotations for Knee and Brain Fully Sampled Multi-Coil MRI Data</p></td>
+<td class="text-center"><p>Lesion annotations for fastMRI</p></td>
+<td class="text-center"><p>2021</p></td>
+<td class="text-center"><p><a class="reference external" href="https://arxiv.org/abs/2109.03812">PDF</a></p></td>
+<td class="text-center"><p><a class="reference external" href="https://github.com/microsoft/fastmri-plus/">CODE</a></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>Data augmentation for deep learning based accelerated MRI reconstruction with limited data</p></td>
+<td class="text-center"><p>Data Augmentation for reconstruction</p></td>
+<td class="text-center"><p>2021</p></td>
+<td class="text-center"><p><a class="reference external" href="https://arxiv.org/abs/2106.14947">PDF</a></p></td>
+<td class="text-center"><p><a class="reference external" href="https://github.com/z-fabian/MRAugment">CODE</a></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>Results of the 2020 fastMRI Challenge for Machine Learning MR Image Reconstruction</p></td>
+<td class="text-center"><p>Competition results</p></td>
+<td class="text-center"><p>2021</p></td>
+<td class="text-center"><p><a class="reference external" href="https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&amp;arnumber=9420272&amp;tag=1">PDF</a></p></td>
+<td class="text-center"><p></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>Benchmarking MRI Reconstruction Neural Networks on Large Public Datasets</p></td>
+<td class="text-center"><p>Benchmark</p></td>
+<td class="text-center"><p>2020</p></td>
+<td class="text-center"><p><a class="reference external" href="https://sciwheel.com/work/item/10080351/resources/11943511/pdf">PDF</a></p></td>
+<td class="text-center"><p></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>Deep Learning Methods for Parallel Magnetic Resonance Image Reconstruction</p></td>
+<td class="text-center"><p>Survey</p></td>
+<td class="text-center"><p>2019</p></td>
+<td class="text-center"><p><a class="reference external" href="https://arxiv.org/pdf/1904.01112.pdf">PDF</a></p></td>
+<td class="text-center"><p></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>fastMRI: An Open Dataset and Benchmarks for Accelerated MRI</p></td>
+<td class="text-center"><p>Machine learning baselines and public dataset</p></td>
+<td class="text-center"><p>2019</p></td>
+<td class="text-center"><p><a class="reference external" href="https://arxiv.org/pdf/1811.08839.pdf">PDF</a></p></td>
+<td class="text-center"><p><a class="reference external" href="https://github.com/facebookresearch/fastMRI/">CODE</a></p></td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="thanks">
+<h1><span class="section-number">4. </span>Thanks<a class="headerlink" href="#thanks" title="Permalink to this heading">#</a></h1>
+<p>Thanks to <a class="reference external" href="https://github.com/jkkronk/Accelerated-MRI-Papers/tree/main">jkkronk/Accelerated-MRI-Papers: List of Papers in MRI Reconstruction (github.com)</a></p>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./MRI原理"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer">
+                  <!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="20230709_Parallel_MRI_reconstruction.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title"><span class="section-number">2. </span>Parallel MRI reconstruction</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="20230731_MRI%E9%87%8D%E5%BB%BA%E6%96%87%E7%8C%AE%E6%95%B4%E7%90%86.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><span class="section-number">5. </span>传统方法</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">3. Awesome Accelerated-MRI-Reconstruction-Papers </a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#not-maintained">3.1. NOT MAINTAINED</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-is-accelerated-mri-reconstruction">3.2. What is Accelerated MRI-Reconstruction?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#supervised-deep-learning-methods">3.3. Supervised Deep Learning Methods</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#unsupervised-deep-learning-methods">3.4. Unsupervised Deep Learning Methods</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#untrained-methods">3.5. Untrained Methods</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#low-rank-methods">3.6. Low Rank Methods</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#prior-based-methods">3.7. Prior Based Methods</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#classical-methods-for-parallel-imaging-and-compress-sensing">3.8. Classical Methods for Parallel Imaging and Compress Sensing</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#uncertainty-estimation">3.9. Uncertainty Estimation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#robustness">3.10. Robustness</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#other">3.11. Other</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#thanks">4. Thanks</a></li>
+</ul>
+
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Jiyao Liu
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  <p class="copyright">
+    
+      © Copyright 2022.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=ac02cc09edc035673794"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=ac02cc09edc035673794"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

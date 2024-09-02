@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
-    <title>一、Monte Carlo Method(采样) &#8212; Jy&#39; s phd learning notes</title>
+    <title>2. pytorch加速训练技巧 &#8212; 阿土的炼丹炉</title>
   
   
   
@@ -62,9 +62,13 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="../_static/sphinx-thebe.js"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'PRML/MCMC';</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'pytorch/20240528_pytorch加速训练技巧';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="1. 生成式模型" href="../%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%BA%94%E7%94%A8/%E7%94%9F%E6%88%90%E5%BC%8F%E6%A8%A1%E5%9E%8Bintro.html" />
+    <link rel="prev" title="1.3. Torch.gather 索引" href="torch.gather.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -167,21 +171,16 @@ const thebe_selector_output = ".output, .cell_output"
         <p aria-level="2" class="caption" role="heading"><span class="caption-text">Basic Guides</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../basic/jupyter_book.html">1. Jupyter Book 使用指南</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../basic/notebooks.html">2. Jupyter Notebook files</a></li>
-</ul>
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">数学基础</span></p>
-<ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../math/matrix_analysis.html">1. 矩阵与张量分析作业</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">PRML notes</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="intro.html">PRML</a></li>
-<li class="toctree-l1"><a class="reference internal" href="math_basic.html">数学基础</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Exponential_Family_Distribution.html">指数族分布</a></li>
-<li class="toctree-l1"><a class="reference internal" href="2023_11_05_PGM1.html">概率图模型入门</a></li>
-<li class="toctree-l1"><a class="reference internal" href="%E6%A6%82%E7%8E%87%E5%9B%BE%E6%A8%A1%E5%9E%8B%E6%80%BB.html">概率图模型</a></li>
-<li class="toctree-l1"><a class="reference internal" href="2023_11_12_Kalman_Filter.html">线性动态系统-卡曼滤波（Kalman Filter）</a></li>
-<li class="toctree-l1"><a class="reference internal" href="2023_11_15_Pacticle_Filter.html">Particle Filter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../PRML/intro.html">PRML</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../PRML/math_basic.html">数学基础</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../PRML/Exponential_Family_Distribution.html">指数族分布</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../PRML/2023_11_05_PGM1.html">概率图模型入门</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../PRML/%E6%A6%82%E7%8E%87%E5%9B%BE%E6%A8%A1%E5%9E%8B%E6%80%BB.html">概率图模型</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../PRML/2023_11_12_Kalman_Filter.html">线性动态系统-卡曼滤波（Kalman Filter）</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../PRML/2023_11_15_Pacticle_Filter.html">Particle Filter</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">学术报告</span></p>
 <ul class="nav bd-sidenav">
@@ -193,14 +192,29 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="../research/evidential_regression.html">1. Evidential Learning and Uncentainty</a></li>
 
 </ul>
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">深度学习基础</span></p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">MRI notes</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1 has-children"><a class="reference internal" href="../pytorch/%E6%A8%A1%E5%9E%8B%E6%8B%93%E6%89%91%E7%BB%93%E6%9E%84.html">1. 模型拓扑结构</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
-<li class="toctree-l2"><a class="reference internal" href="../pytorch/hook.html">1.1. 注册钩子函数（register_forward_hook）</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../pytorch/computation_graph.html">1.2. 计算图构建细节</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../pytorch/torch.gather.html">1.3. Torch.gather 索引</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../MRI%E5%8E%9F%E7%90%86/20231018_MT_CEST_NOE.html">1. MT&amp;CEST&amp;NOE 磁化转移定量成像</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../MRI%E5%8E%9F%E7%90%86/20230709_Parallel_MRI_reconstruction.html">2. Parallel MRI reconstruction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../MRI%E5%8E%9F%E7%90%86/20230714_Awesome%20MRI%20Recon.html">3. Awesome Accelerated-MRI-Reconstruction-Papers </a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="../MRI%E5%8E%9F%E7%90%86/20230731_MRI%E9%87%8D%E5%BB%BA%E6%96%87%E7%8C%AE%E6%95%B4%E7%90%86.html">5. 传统方法</a></li>
+
+
+
+
+
+
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Pytorch框架</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="%E6%A8%A1%E5%9E%8B%E6%8B%93%E6%89%91%E7%BB%93%E6%9E%84.html">1. 模型拓扑结构</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="hook.html">1.1. 注册钩子函数（register_forward_hook）</a></li>
+<li class="toctree-l2"><a class="reference internal" href="computation_graph.html">1.2. 计算图构建细节</a></li>
+<li class="toctree-l2"><a class="reference internal" href="torch.gather.html">1.3. Torch.gather 索引</a></li>
 </ul>
 </li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">2. pytorch加速训练技巧</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">深度学习应用</span></p>
 <ul class="nav bd-sidenav">
@@ -209,9 +223,12 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l2"><a class="reference internal" href="../%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%BA%94%E7%94%A8/%E7%94%9F%E6%88%90%E5%BC%8F%E6%A8%A1%E5%9E%8B/20240110_%E6%89%A9%E6%95%A3%E6%A8%A1%E5%9E%8BSDE%E7%B2%BE%E8%AE%B2.html">1.2. 扩散模型 | 2.SDE精讲</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="../%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%BA%94%E7%94%A8/%E9%80%86%E9%97%AE%E9%A2%98/20230102_Diffusion_model_fo_%20the_inverse_problem.html">2. 【Method】inverse problem | 基于diffusion model的图像逆问题求解</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%BA%94%E7%94%A8/%E9%80%86%E9%97%AE%E9%A2%98/20230717-ADMM-CSNet%20note.html">3. 【method】ADMM-CSNet |  一种图像压缩感知重建的深度学习方法（1）- 方法解析</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%BA%94%E7%94%A8/%E9%80%86%E9%97%AE%E9%A2%98/20230719-ADMM-CSNet%20code.html">4. 代码解析</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%BA%94%E7%94%A8/%E9%80%86%E9%97%AE%E9%A2%98intro.html">2. 逆问题</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-3"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%BA%94%E7%94%A8/%E9%80%86%E9%97%AE%E9%A2%98/20230102_Diffusion_model_fo_the_inverse_problem.html">2.1. 【Method】inverse problem | 基于diffusion model的图像逆问题求解</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%BA%94%E7%94%A8/%E9%80%86%E9%97%AE%E9%A2%98/20230717_ADMM_CSNet_note.html">2.2. 【method】ADMM-CSNet |  一种图像压缩感知重建的深度学习方法（1）- 方法解析</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%BA%94%E7%94%A8/%E9%80%86%E9%97%AE%E9%A2%98/20230719_ADMM_CSNet_code.html">2.3. ADMM CSNet代码解析</a></li>
+</ul>
+</li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">工具使用</span></p>
 <ul class="nav bd-sidenav">
@@ -288,7 +305,7 @@ const thebe_selector_output = ".output, .cell_output"
       
       
       
-      <li><a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2FPRML/MCMC.html&body=Your%20issue%20content%20here." target="_blank"
+      <li><a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2Fpytorch/20240528_pytorch加速训练技巧.html&body=Your%20issue%20content%20here." target="_blank"
    class="btn btn-sm btn-source-issues-button dropdown-item"
    title="Open an issue"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -318,7 +335,7 @@ const thebe_selector_output = ".output, .cell_output"
       
       
       
-      <li><a href="../_sources/PRML/MCMC.md" target="_blank"
+      <li><a href="../_sources/pytorch/20240528_pytorch加速训练技巧.md" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -387,7 +404,9 @@ document.write(`
   </button>
 `);
 </script>
-
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
 </div></div>
       
     </div>
@@ -398,11 +417,22 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>一、Monte Carlo Method(采样)</h1>
+    <h1>pytorch加速训练技巧</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
             
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#io">2.1. 数据IO</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">2.2. 训练策略</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#einops-pytorch">2.3. 爱因斯坦标示（<code class="docutils literal notranslate"><span class="pre">einops</span></code>）与pytorch联合编写</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#reference">2.4. Reference</a></li>
+</ul>
+            </nav>
         </div>
     </div>
 </div>
@@ -412,8 +442,53 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article" role="main">
                   
-  <section id="monte-carlo-method">
-<h1>一、Monte Carlo Method(采样)<a class="headerlink" href="#monte-carlo-method" title="Permalink to this heading">#</a></h1>
+  <p>#! <a class="reference external" href="https://zhuanlan.zhihu.com/p/700286389">https://zhuanlan.zhihu.com/p/700286389</a></p>
+<section class="tex2jax_ignore mathjax_ignore" id="pytorch">
+<h1><span class="section-number">2. </span>pytorch加速训练技巧<a class="headerlink" href="#pytorch" title="Permalink to this heading">#</a></h1>
+<section id="io">
+<h2><span class="section-number">2.1. </span>数据IO<a class="headerlink" href="#io" title="Permalink to this heading">#</a></h2>
+<p><u><strong>自定义Dataset</strong></u><strong>：优先从内存中读取数据，避免从磁盘读</strong></p>
+<ul class="simple">
+<li><p>在<code class="docutils literal notranslate"><span class="pre">__init__</span></code>中<strong>把数据加载到内存中</strong>，<code class="docutils literal notranslate"><span class="pre">__getitem__</span></code>直接从内存总获取这些已加载的数据；</p></li>
+<li><p>如果数据过大，内存不够，那么可以<strong>维持一个固定大小的内存池</strong>，<code class="docutils literal notranslate"><span class="pre">__getitem__</span></code>偶尔从磁盘读；</p></li>
+</ul>
+<p><strong><u>优化Dataloader</u></strong>：</p>
+<ul class="simple">
+<li><p>若<code class="docutils literal notranslate"><span class="pre">__getitem__</span></code>包含运算，例如Transform等数据增广或预处理，则设置<code class="docutils literal notranslate"><span class="pre">num_works&gt;0</span></code>指定使用的CPU核心数，<strong>使用多个子进程来加速数据加载</strong>。<em>注意：有时候增大num_works反而会导致训练过程阻塞变慢，原因可能是CPU资源不足、内存资源不足或数据加载和处理速度不一致（参考：<a class="reference external" href="https://blog.csdn.net/q7w8e9r4/article/details/134919387?utm_medium=distribute.pc_relevant.none-task-blog-2~default~baidujs_baidulandingword~default-0-134919387-blog-134675467.235%5Ev43%5Epc_blog_bottom_relevance_base6&amp;spm=1001.2101.3001.4242.1&amp;utm_relevant_index=1">CSDN：讲解pytorch dataloader num_workers参数设置导致训练阻塞</a>）</em></p></li>
+<li><p>**异步处理：**设置<code class="docutils literal notranslate"><span class="pre">pin_memory=True</span></code>并且<code class="docutils literal notranslate"><span class="pre">.cuda(non_blocking=True)</span></code></p>
+<ul>
+<li><p>后者表示数据CPU<span class="math notranslate nohighlight">\(\rightarrow\)</span>GPU的时候设置为异步：在传数据的时候，CPU还可以干别的事情；</p></li>
+</ul>
+</li>
+</ul>
+<p><strong><u>开启cudnn benchmark加速卷积神经网络训练</u></strong>：<code class="docutils literal notranslate"><span class="pre">torch.backends.cudnn.benchmark=True</span></code></p>
+<ul class="simple">
+<li><p>cudnn中用好几种方法实现了卷积操作，设置torch.backends.cudnn.benchmark=True使得模型在训练时寻找最快的卷积操作。这样做的情况下，模型在在前几步搜索最快的操作，因此稍慢，后面阶段的训练便会大大加速</p></li>
+<li><p>在下面几种情况下加速最为明显：GPU性能较差时，模型的卷积输入/batch_size/输入的高度和宽度是固定的等，便于模型寻找最优的卷积操作</p></li>
+</ul>
+</section>
+<section id="id1">
+<h2><span class="section-number">2.2. </span>训练策略<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h2>
+<p><strong><u>DistributedDataParallel</u></strong></p>
+<p>事实证明，distributedDataParallel比DataParallel快得多，因为它只执行梯度同步的通信。所以，一个好的hack是使用distributedDataParallel替换DataParallel，<strong>即使是在单机上进行训练</strong>。</p>
+</section>
+<section id="einops-pytorch">
+<h2><span class="section-number">2.3. </span>爱因斯坦标示（<code class="docutils literal notranslate"><span class="pre">einops</span></code>）与pytorch联合编写<a class="headerlink" href="#einops-pytorch" title="Permalink to this heading">#</a></h2>
+<p><img alt="image-20240528110542964" src="https://ossjiyaoliu.oss-cn-beijing.aliyuncs.com/uPic/image-20240528110542964.png" /></p>
+<p>爱因斯坦标示有非常大的优势：<strong><u>代码更容易理解</u>并且运行更快</strong></p>
+<p>注意：</p>
+<ol class="arabic simple">
+<li><p>下图2 out3升维的时候，需要执行某个维度，例如模型(b i)维度为6，但是并不清楚为2x3还是3x2</p></li>
+<li><p>如下图3 为 swin Transformer中image2patch的实现</p></li>
+</ol>
+<p>代码实现：</p>
+<p><img alt="image-20240528142326015" src="https://ossjiyaoliu.oss-cn-beijing.aliyuncs.com/uPic/image-20240528142326015.png" /></p>
+</section>
+<section id="reference">
+<h2><span class="section-number">2.4. </span>Reference<a class="headerlink" href="#reference" title="Permalink to this heading">#</a></h2>
+<p>[1] <a class="reference external" href="https://www.bilibili.com/video/BV1ZY411b78A?vd_source=225dba48b31d269151658db856705273">【36、PyTorch训练加速技巧与爱因斯坦标示法】</a></p>
+<p>[2] <a class="reference external" href="https://blog.csdn.net/q7w8e9r4/article/details/134919387?utm_medium=distribute.pc_relevant.none-task-blog-2~default~baidujs_baidulandingword~default-0-134919387-blog-134675467.235%5Ev43%5Epc_blog_bottom_relevance_base6&amp;spm=1001.2101.3001.4242.1&amp;utm_relevant_index=1">CSDN：讲解pytorch dataloader num_workers参数设置导致训练阻塞</a></p>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -429,7 +504,7 @@ document.write(`
         },
         kernelOptions: {
             name: "python3",
-            path: "./PRML"
+            path: "./pytorch"
         },
         predefinedOutput: true
     }
@@ -446,12 +521,47 @@ document.write(`
                 <footer class="prev-next-footer">
                   <!-- Previous / next buttons -->
 <div class="prev-next-area">
+    <a class="left-prev"
+       href="torch.gather.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title"><span class="section-number">1.3. </span>Torch.gather 索引</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="../%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%BA%94%E7%94%A8/%E7%94%9F%E6%88%90%E5%BC%8F%E6%A8%A1%E5%9E%8Bintro.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><span class="section-number">1. </span>生成式模型</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
 </div>
                 </footer>
               
             </div>
             
             
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#io">2.1. 数据IO</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">2.2. 训练策略</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#einops-pytorch">2.3. 爱因斯坦标示（<code class="docutils literal notranslate"><span class="pre">einops</span></code>）与pytorch联合编写</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#reference">2.4. Reference</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
               
             
           </div>

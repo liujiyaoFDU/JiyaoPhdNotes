@@ -38,10 +38,6 @@ document.writeln("</div>");
 
 ![计算机视觉和图像重建对比](https://ossjiyaoliu.oss-cn-beijing.aliyuncs.com/uPic/image-20230706014353119.png)
 
-MRI成像过程可以看做下面的公式：
-
-![MRI成像模型](/Users/liujiyao/Downloads/image-20230707013705811.png)
-
 理想情况下k-space是连续的，但是由于信息的采集都是的数字信号，因此采集到的都是离散化的数据，因此可以说采集到的k-空间的全采样图像都是真实情况下的欠采样。
 
 但是我们要讨论的情况是在全采样情况下的欠采样，也就是对全采样的图像我们只采样部分区域，如下图：

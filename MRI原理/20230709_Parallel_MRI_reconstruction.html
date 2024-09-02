@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
-    <title>book-subjective logic &#8212; Jy&#39; s phd learning notes</title>
+    <title>2. Parallel MRI reconstruction &#8212; 阿土的炼丹炉</title>
   
   
   
@@ -62,9 +62,13 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="../_static/sphinx-thebe.js"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'research/subjective_logic';</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'MRI原理/20230709_Parallel_MRI_reconstruction';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="3. Awesome Accelerated-MRI-Reconstruction-Papers" href="20230714_Awesome%20MRI%20Recon.html" />
+    <link rel="prev" title="1. MT&amp;CEST&amp;NOE 磁化转移定量成像" href="20231018_MT_CEST_NOE.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -167,11 +171,6 @@ const thebe_selector_output = ".output, .cell_output"
         <p aria-level="2" class="caption" role="heading"><span class="caption-text">Basic Guides</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../basic/jupyter_book.html">1. Jupyter Book 使用指南</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../basic/notebooks.html">2. Jupyter Notebook files</a></li>
-</ul>
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">数学基础</span></p>
-<ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../math/matrix_analysis.html">1. 矩阵与张量分析作业</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">PRML notes</span></p>
 <ul class="nav bd-sidenav">
@@ -190,10 +189,24 @@ const thebe_selector_output = ".output, .cell_output"
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">research</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="evidential_regression.html">1. Evidential Learning and Uncentainty</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../research/evidential_regression.html">1. Evidential Learning and Uncentainty</a></li>
 
 </ul>
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">深度学习基础</span></p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">MRI notes</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="20231018_MT_CEST_NOE.html">1. MT&amp;CEST&amp;NOE 磁化转移定量成像</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">2. Parallel MRI reconstruction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="20230714_Awesome%20MRI%20Recon.html">3. Awesome Accelerated-MRI-Reconstruction-Papers </a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="20230731_MRI%E9%87%8D%E5%BB%BA%E6%96%87%E7%8C%AE%E6%95%B4%E7%90%86.html">5. 传统方法</a></li>
+
+
+
+
+
+
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Pytorch框架</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1 has-children"><a class="reference internal" href="../pytorch/%E6%A8%A1%E5%9E%8B%E6%8B%93%E6%89%91%E7%BB%93%E6%9E%84.html">1. 模型拓扑结构</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="../pytorch/hook.html">1.1. 注册钩子函数（register_forward_hook）</a></li>
@@ -201,6 +214,7 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l2"><a class="reference internal" href="../pytorch/torch.gather.html">1.3. Torch.gather 索引</a></li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="../pytorch/20240528_pytorch%E5%8A%A0%E9%80%9F%E8%AE%AD%E7%BB%83%E6%8A%80%E5%B7%A7.html">2. pytorch加速训练技巧</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">深度学习应用</span></p>
 <ul class="nav bd-sidenav">
@@ -209,9 +223,12 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l2"><a class="reference internal" href="../%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%BA%94%E7%94%A8/%E7%94%9F%E6%88%90%E5%BC%8F%E6%A8%A1%E5%9E%8B/20240110_%E6%89%A9%E6%95%A3%E6%A8%A1%E5%9E%8BSDE%E7%B2%BE%E8%AE%B2.html">1.2. 扩散模型 | 2.SDE精讲</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="../%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%BA%94%E7%94%A8/%E9%80%86%E9%97%AE%E9%A2%98/20230102_Diffusion_model_fo_%20the_inverse_problem.html">2. 【Method】inverse problem | 基于diffusion model的图像逆问题求解</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%BA%94%E7%94%A8/%E9%80%86%E9%97%AE%E9%A2%98/20230717-ADMM-CSNet%20note.html">3. 【method】ADMM-CSNet |  一种图像压缩感知重建的深度学习方法（1）- 方法解析</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%BA%94%E7%94%A8/%E9%80%86%E9%97%AE%E9%A2%98/20230719-ADMM-CSNet%20code.html">4. 代码解析</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%BA%94%E7%94%A8/%E9%80%86%E9%97%AE%E9%A2%98intro.html">2. 逆问题</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-3"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%BA%94%E7%94%A8/%E9%80%86%E9%97%AE%E9%A2%98/20230102_Diffusion_model_fo_the_inverse_problem.html">2.1. 【Method】inverse problem | 基于diffusion model的图像逆问题求解</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%BA%94%E7%94%A8/%E9%80%86%E9%97%AE%E9%A2%98/20230717_ADMM_CSNet_note.html">2.2. 【method】ADMM-CSNet |  一种图像压缩感知重建的深度学习方法（1）- 方法解析</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%BA%94%E7%94%A8/%E9%80%86%E9%97%AE%E9%A2%98/20230719_ADMM_CSNet_code.html">2.3. ADMM CSNet代码解析</a></li>
+</ul>
+</li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">工具使用</span></p>
 <ul class="nav bd-sidenav">
@@ -288,7 +305,7 @@ const thebe_selector_output = ".output, .cell_output"
       
       
       
-      <li><a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2Fresearch/subjective_logic.html&body=Your%20issue%20content%20here." target="_blank"
+      <li><a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2FMRI原理/20230709_Parallel_MRI_reconstruction.html&body=Your%20issue%20content%20here." target="_blank"
    class="btn btn-sm btn-source-issues-button dropdown-item"
    title="Open an issue"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -318,7 +335,7 @@ const thebe_selector_output = ".output, .cell_output"
       
       
       
-      <li><a href="../_sources/research/subjective_logic.md" target="_blank"
+      <li><a href="../_sources/MRI原理/20230709_Parallel_MRI_reconstruction.md" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -400,7 +417,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>book-subjective logic</h1>
+    <h1>Parallel MRI reconstruction</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -410,7 +427,17 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#trust-revision">14.5 Trust Revision</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">2.1. 参考链接：</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">2.2. 并行成像简介</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">2.2.1. 为什么要欠采样？</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mri">2.2.2. MRI信号基础模型</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">2.2.3. 空间灵敏度获取方法</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#k">2.2.4. 基于k空间的并行成像</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sense">2.3. SENSE</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#smash">2.4. SMASH</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#grappa">2.5. GRAPPA</a></li>
 </ul>
             </nav>
         </div>
@@ -422,11 +449,78 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article" role="main">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="book-subjective-logic">
-<h1>book-subjective logic<a class="headerlink" href="#book-subjective-logic" title="Permalink to this heading">#</a></h1>
-<section id="trust-revision">
-<h2>14.5 Trust Revision<a class="headerlink" href="#trust-revision" title="Permalink to this heading">#</a></h2>
-<p>when multiple sources provide highly conflicting opinions,</p>
+  <section class="tex2jax_ignore mathjax_ignore" id="parallel-mri-reconstruction">
+<h1><span class="section-number">2. </span>Parallel MRI reconstruction<a class="headerlink" href="#parallel-mri-reconstruction" title="Permalink to this heading">#</a></h1>
+<p>[toc]</p>
+<section id="id1">
+<h2><span class="section-number">2.1. </span>参考链接：<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h2>
+<p>[1] <a class="reference external" href="https://www.ismrm.org/online-education-program/phys-eng/quiz-physics-engineering-reconstruction-methods-for-undersampled-data//">ISMRM-MR Academy: Reconstruction Methods for Undersampled Data</a></p>
+<p>[2]</p>
+</section>
+<section id="id2">
+<h2><span class="section-number">2.2. </span>并行成像简介<a class="headerlink" href="#id2" title="Permalink to this heading">#</a></h2>
+<section id="id3">
+<h3><span class="section-number">2.2.1. </span>为什么要欠采样？<a class="headerlink" href="#id3" title="Permalink to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Static imaging: Reduce scan time</p></li>
+<li><p>Dynamic imaging: inherent</p>
+<ul>
+<li><p>dynamic contrast motion</p></li>
+<li><p>body motion</p></li>
+</ul>
+</li>
+</ul>
+<p>All such situations require assumptions/ constraints/ models. 需要引入额外信息假设，可以通过约束模型进行优化重建，也可以通过其他方法。下图为欠采样的例子（替换成更好地）：</p>
+<p><img alt="undersample" src="https://ossjiyaoliu.oss-cn-beijing.aliyuncs.com/uPic/undersample.jpg" /></p>
+</section>
+<section id="mri">
+<h3><span class="section-number">2.2.2. </span>MRI信号基础模型<a class="headerlink" href="#mri" title="Permalink to this heading">#</a></h3>
+<p><img alt="image-20230705173912785" src="https://ossjiyaoliu.oss-cn-beijing.aliyuncs.com/uPic/image-20230705173912785.png" /></p>
+<p><span class="math notranslate nohighlight">\(f(r)\)</span>为连续的空间函数，即想要重建的目标图像。从数学的角度，MRI的采样都为欠采样。</p>
+<p><img alt="image-20230705174323305" src="https://ossjiyaoliu.oss-cn-beijing.aliyuncs.com/uPic/image-20230705174323305.png" /></p>
+</section>
+<section id="id4">
+<h3><span class="section-number">2.2.3. </span>空间灵敏度获取方法<a class="headerlink" href="#id4" title="Permalink to this heading">#</a></h3>
+<ol class="arabic simple">
+<li><p>空间灵敏度图像估计：在重建阶段的第一步，通过对采集到的数据进行处理，估计每个接收线圈的空间灵敏度图像。这些灵敏度图像表示了各个线圈对不同位置上的信号的接收能力。常用的估计方法是根据接收线圈的位置和强度信息进行插值和加权处理。</p></li>
+<li><p>测量</p></li>
+</ol>
+</section>
+<section id="k">
+<h3><span class="section-number">2.2.4. </span>基于k空间的并行成像<a class="headerlink" href="#k" title="Permalink to this heading">#</a></h3>
+<p>基于K空间的磁共振并行成像是利用<strong>多通道的相控阵列线圈</strong>，采集部分k空间数据结合<strong>线圈的敏感度</strong>信息，对未采集的K空间数据进行估计，从而组合成全采样的K空间数据。在K空间域的并行重建的典型方法有SMASH、AUTO-SMASH、VD-ATUO-SAMSH 以及目前普遍使用的<strong>GRAPPA</strong>。</p>
+</section>
+</section>
+<section id="sense">
+<h2><span class="section-number">2.3. </span>SENSE<a class="headerlink" href="#sense" title="Permalink to this heading">#</a></h2>
+</section>
+<section id="smash">
+<h2><span class="section-number">2.4. </span>SMASH<a class="headerlink" href="#smash" title="Permalink to this heading">#</a></h2>
+<blockquote>
+<div><p>(Simultaneous Acquisition of Spatial Harmonics)</p>
+</div></blockquote>
+<blockquote>
+<div><p>算法简介</p>
+<ol class="arabic simple">
+<li><p>SMASH的多线圈采集和空间灵敏度获取和SENSE类似</p></li>
+<li><p>数据合并：在重建阶段的第二步，使用空间灵敏度图像对采集到的数据进行组合。每个线圈接收到的数据会被乘以相应位置上的空间灵敏度值，以减少相对强信号的重叠。</p></li>
+<li><p>图像重建：在重建阶段的最后一步，使用重建算法（如傅里叶变换）对合并后的数据进行处理，生成最终的图像。重建算法根据数据的频谱信息恢复图像的空间分布。由于采集到的数据是同时来自多个线圈，利用了<strong>空间谐波</strong>的信息，重建出的图像具有更高的空间分辨率。</p></li>
+</ol>
+</div></blockquote>
+<p>SMASH的基本概念是线圈敏感度的线性组合可以直接生成确定的相位编码steps。敏感度值<span class="math notranslate nohighlight">\(C_k(x,y)\)</span>与适当的线性权重<span class="math notranslate nohighlight">\(n_k^{(m)}\)</span>相组合，以生成具有阶数<span class="math notranslate nohighlight">\(m\)</span>的正弦空间灵敏度变化的复合灵敏度分布<span class="math notranslate nohighlight">\(C_m^{comp}\)</span>:</p>
+<p><img alt="image-20230704010434891" src="https://ossjiyaoliu.oss-cn-beijing.aliyuncs.com/uPic/image-20230704010434891.png" /></p>
+<p><img alt="image-20230704013051414" src="https://ossjiyaoliu.oss-cn-beijing.aliyuncs.com/uPic/image-20230704013051414.png" /></p>
+<p>上式中<span class="math notranslate nohighlight">\(\Delta k_y＝2\pi/FOV\)</span>。对于<span class="math notranslate nohighlight">\(N_c\)</span>个阵列线圈，并且索引<span class="math notranslate nohighlight">\(k\)</span>从<span class="math notranslate nohighlight">\(1\)</span>到<span class="math notranslate nohighlight">\(N_c\)</span>；<span class="math notranslate nohighlight">\(m\)</span>是整数，指定生成的空间谐波的阶数。</p>
+<p>==上式中，只有线性权重<span class="math notranslate nohighlight">\(n_k^{m}\)</span>是未知的==。</p>
+</section>
+<section id="grappa">
+<h2><span class="section-number">2.5. </span>GRAPPA<a class="headerlink" href="#grappa" title="Permalink to this heading">#</a></h2>
+<blockquote>
+<div><p><strong>ACS lines在GRAPPA中用于自动校准感受度分布，以便在加速数据采集时进行图像重建。</strong></p>
+<p>ACS（Autocalibrating Signal）lines是指用于自动校准的信号线。在MR图像重建中，GRAPPA是一种用于加速数据采集的技术，它利用附加的自校准线（ACS lines）来估计感受野内的敏感度分布。</p>
+<p>ACS lines通常位于图像采集区域之外的一些区域，例如在k空间中的角落或边缘。这些额外的自校准线用于估计每个线圈元素的空间敏感度分布，而无需依赖外部敏感度校准（如额外的校准扫描）。</p>
+<p>通过在自校准线上进行采样，GRAPPA算法可以根据这些线上的信号和附近的加速线来推断出未采样线上的信号。使用这些推断的信号，可以进行更快速的图像重建，从而实现数据加速。</p>
+</div></blockquote>
 </section>
 </section>
 
@@ -443,7 +537,7 @@ document.write(`
         },
         kernelOptions: {
             name: "python3",
-            path: "./research"
+            path: "./MRI原理"
         },
         predefinedOutput: true
     }
@@ -460,6 +554,24 @@ document.write(`
                 <footer class="prev-next-footer">
                   <!-- Previous / next buttons -->
 <div class="prev-next-area">
+    <a class="left-prev"
+       href="20231018_MT_CEST_NOE.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title"><span class="section-number">1. </span>MT&amp;CEST&amp;NOE 磁化转移定量成像</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="20230714_Awesome%20MRI%20Recon.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><span class="section-number">3. </span>Awesome Accelerated-MRI-Reconstruction-Papers </p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
 </div>
                 </footer>
               
@@ -475,7 +587,17 @@ document.write(`
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#trust-revision">14.5 Trust Revision</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">2.1. 参考链接：</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">2.2. 并行成像简介</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">2.2.1. 为什么要欠采样？</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mri">2.2.2. MRI信号基础模型</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">2.2.3. 空间灵敏度获取方法</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#k">2.2.4. 基于k空间的并行成像</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sense">2.3. SENSE</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#smash">2.4. SMASH</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#grappa">2.5. GRAPPA</a></li>
 </ul>
   </nav></div>
 

@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
-    <title>3. 【method】ADMM-CSNet | 一种图像压缩感知重建的深度学习方法（1）- 方法解析 &#8212; Jy&#39; s phd learning notes</title>
+    <title>2.2. 【method】ADMM-CSNet | 一种图像压缩感知重建的深度学习方法（1）- 方法解析 &#8212; Jy&#39; s phd learning notes</title>
   
   
   
@@ -67,8 +67,8 @@ const thebe_selector_output = ".output, .cell_output"
     <script>DOCUMENTATION_OPTIONS.pagename = '深度学习应用/逆问题/20230717-ADMM-CSNet note';</script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="4. 代码解析" href="20230719-ADMM-CSNet%20code.html" />
-    <link rel="prev" title="2. 【Method】inverse problem | 基于diffusion model的图像逆问题求解" href="20230102_Diffusion_model_fo_%20the_inverse_problem.html" />
+    <link rel="next" title="2.3. 代码解析" href="20230719-ADMM-CSNet%20code.html" />
+    <link rel="prev" title="2.1. 【Method】inverse problem | 基于diffusion model的图像逆问题求解" href="20230102_Diffusion_model_fo_%20the_inverse_problem.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -171,11 +171,11 @@ const thebe_selector_output = ".output, .cell_output"
         <p aria-level="2" class="caption" role="heading"><span class="caption-text">Basic Guides</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../../basic/jupyter_book.html">1. Jupyter Book 使用指南</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../basic/notebooks.html">2. Jupyter Notebook files</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">数学基础</span></p>
 <ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="../../math/matrix_analysis.html">1. 矩阵与张量分析作业</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../math/%E7%BB%9F%E8%AE%A1/20240204_20%E8%B4%9D%E5%8F%B6%E6%96%AF%E6%8E%A8%E6%96%AD%E5%85%A5%E9%97%A8.html">1. Visual ML | Statistics | 20.贝叶斯推断入门</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../math/%E7%BB%9F%E8%AE%A1/20240204_%E8%B4%9D%E5%8F%B6%E6%96%AF%E6%8E%A8%E6%96%AD%E8%BF%9B%E9%98%B6.html">2. Visual ML | Statistics | 21.深入贝叶斯推断</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">PRML notes</span></p>
 <ul class="nav bd-sidenav">
@@ -197,7 +197,12 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="../../research/evidential_regression.html">1. Evidential Learning and Uncentainty</a></li>
 
 </ul>
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">深度学习基础</span></p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">MRI notes</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../MRI%E5%8E%9F%E7%90%86/20231018_MT_CEST_NOE.html">1. MT&amp;CEST&amp;NOE 磁化转移定量成像</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../MRI%E5%8E%9F%E7%90%86/20230709_Parallel_MRI_reconstruction.html">2. Parallel MRI reconstruction</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Pytorch框架</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1 has-children"><a class="reference internal" href="../../pytorch/%E6%A8%A1%E5%9E%8B%E6%8B%93%E6%89%91%E7%BB%93%E6%9E%84.html">1. 模型拓扑结构</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="../../pytorch/hook.html">1.1. 注册钩子函数（register_forward_hook）</a></li>
@@ -205,6 +210,7 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l2"><a class="reference internal" href="../../pytorch/torch.gather.html">1.3. Torch.gather 索引</a></li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="../../pytorch/20240528_pytorch%E5%8A%A0%E9%80%9F%E8%AE%AD%E7%BB%83%E6%8A%80%E5%B7%A7.html">2. pytorch加速训练技巧</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">深度学习应用</span></p>
 <ul class="current nav bd-sidenav">
@@ -213,9 +219,12 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l2"><a class="reference internal" href="../%E7%94%9F%E6%88%90%E5%BC%8F%E6%A8%A1%E5%9E%8B/20240110_%E6%89%A9%E6%95%A3%E6%A8%A1%E5%9E%8BSDE%E7%B2%BE%E8%AE%B2.html">1.2. 扩散模型 | 2.SDE精讲</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="20230102_Diffusion_model_fo_%20the_inverse_problem.html">2. 【Method】inverse problem | 基于diffusion model的图像逆问题求解</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">3. 【method】ADMM-CSNet |  一种图像压缩感知重建的深度学习方法（1）- 方法解析</a></li>
-<li class="toctree-l1"><a class="reference internal" href="20230719-ADMM-CSNet%20code.html">4. 代码解析</a></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="../%E9%80%86%E9%97%AE%E9%A2%98intro.html">2. 逆问题</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-3"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="20230102_Diffusion_model_fo_%20the_inverse_problem.html">2.1. 【Method】inverse problem | 基于diffusion model的图像逆问题求解</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">2.2. 【method】ADMM-CSNet |  一种图像压缩感知重建的深度学习方法（1）- 方法解析</a></li>
+<li class="toctree-l2"><a class="reference internal" href="20230719-ADMM-CSNet%20code.html">2.3. 代码解析</a></li>
+</ul>
+</li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">工具使用</span></p>
 <ul class="nav bd-sidenav">
@@ -414,21 +423,21 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">3.1. 摘要</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">3.2. 广义压缩感知模型</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#model">3.2.1. 1.Model</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#admm-solver">3.2.2. 2. ADMM Solver</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">3.2.3. 3.重建的高效计算</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">2.2.1. 摘要</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">2.2.2. 广义压缩感知模型</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#model">2.2.2.1. 1.Model</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#admm-solver">2.2.2.2. 2. ADMM Solver</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">2.2.2.3. 3.重建的高效计算</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#csadmm-csnet">3.3. 用于CS成像的ADMM-CSNET</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#basic-admm-csnet">3.3.1. 1.Basic-ADMM-CSNet</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#generic-admm-csnet">3.3.2. 2. Generic-ADMM-CSNet</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#network-structure-analysis">3.3.3. 3. Network Structure Analysis</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#csadmm-csnet">2.2.3. 用于CS成像的ADMM-CSNET</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#basic-admm-csnet">2.2.3.1. 1.Basic-ADMM-CSNet</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#generic-admm-csnet">2.2.3.2. 2. Generic-ADMM-CSNet</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#network-structure-analysis">2.2.3.3. 3. Network Structure Analysis</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">3.4. 网络训练</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">3.5. 参考资料</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">2.2.4. 网络训练</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">2.2.5. 参考资料</a></li>
 </ul>
             </nav>
         </div>
@@ -442,7 +451,7 @@ document.write(`
                   
   <p>#! <a class="reference external" href="https://zhuanlan.zhihu.com/p/644157062">https://zhuanlan.zhihu.com/p/644157062</a></p>
 <section class="tex2jax_ignore mathjax_ignore" id="methodadmm-csnet-1">
-<h1><span class="section-number">3. </span>【method】ADMM-CSNet |  一种图像压缩感知重建的深度学习方法（1）- 方法解析<a class="headerlink" href="#methodadmm-csnet-1" title="Permalink to this heading">#</a></h1>
+<h1><span class="section-number">2.2. </span>【method】ADMM-CSNet |  一种图像压缩感知重建的深度学习方法（1）- 方法解析<a class="headerlink" href="#methodadmm-csnet-1" title="Permalink to this heading">#</a></h1>
 <p><img alt="" src="https://ossjiyaoliu.oss-cn-beijing.aliyuncs.com/uPic/image-20230716005344967.png" /></p>
 <p>[toc]</p>
 <blockquote>
@@ -451,15 +460,15 @@ document.write(`
 <p>:rocket:pytorch:  <a class="reference external" href="https://github1s.com/lixing0810/Pytorch_ADMM-CSNet/blob/HEAD/network/CSNet_Layers.py">https://github1s.com/lixing0810/Pytorch_ADMM-CSNet/blob/HEAD/network/CSNet_Layers.py</a></p>
 </div></blockquote>
 <section id="id1">
-<h2><span class="section-number">3.1. </span>摘要<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">2.2.1. </span>摘要<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h2>
 <p>本文将传统的基于模型的CS方法和数据驱动的深度学习方法相结合，地考虑了一个图像重建的广义CS模型，使用ADMM算法求解该模型，并进一步将ADMM算法扩展为unrolling深度网络，使得ADMM的所有参数通过端到端判别学习实现。</p>
 <p>该方法在复数MR成像和实自然图像上实现了较好的重建精度。</p>
 </section>
 <section id="id2">
-<h2><span class="section-number">3.2. </span>广义压缩感知模型<a class="headerlink" href="#id2" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">2.2.2. </span>广义压缩感知模型<a class="headerlink" href="#id2" title="Permalink to this heading">#</a></h2>
 <p>本节展示了generalized CS model并提出了两种ADMM迭代求解方法。</p>
 <section id="model">
-<h3><span class="section-number">3.2.1. </span>1.Model<a class="headerlink" href="#model" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">2.2.2.1. </span>1.Model<a class="headerlink" href="#model" title="Permalink to this heading">#</a></h3>
 <p>有<strong>约束的标准CS模型</strong>定义为：</p>
 <p><img alt="" src="https://ossjiyaoliu.oss-cn-beijing.aliyuncs.com/uPic/image-20230716012134675.png" /></p>
 <p><img alt="" src="Users/liujiyao/Downloads/image-20230719000738345.png" /></p>
@@ -481,7 +490,7 @@ document.write(`
 <p>说明：特殊情况下，举个例子一个<span class="math notranslate nohighlight">\(D_l\)</span>可以是离散余弦变换，<span class="math notranslate nohighlight">\(g(\cdot)\)</span>可以为<span class="math notranslate nohighlight">\(l_q,q\in[0,1]\)</span>稀疏正则。<font color="blue">在本文中把他们设置为多个可学习的变换。</font><br /></p>
 </section>
 <section id="admm-solver">
-<h3><span class="section-number">3.2.2. </span>2. ADMM Solver<a class="headerlink" href="#admm-solver" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">2.2.2.2. </span>2. ADMM Solver<a class="headerlink" href="#admm-solver" title="Permalink to this heading">#</a></h3>
 <p>下面根据引入辅助变量方式的不同，提出了两种ADMM求解器：</p>
 <p><strong>a. Solver 1</strong>：引入变换域独立辅助变量<span class="math notranslate nohighlight">\(z = {z_1,...,z_L}\)</span>，则公示(8)等价于</p>
 <p><img alt="" src="https://ossjiyaoliu.oss-cn-beijing.aliyuncs.com/uPic/image-20230716020203684.png" /></p>
@@ -520,19 +529,19 @@ document.write(`
 </div></blockquote>
 </section>
 <section id="id3">
-<h3><span class="section-number">3.2.3. </span>3.重建的高效计算<a class="headerlink" href="#id3" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">2.2.2.3. </span>3.重建的高效计算<a class="headerlink" href="#id3" title="Permalink to this heading">#</a></h3>
 <p>略</p>
 </section>
 </section>
 <section id="csadmm-csnet">
-<h2><span class="section-number">3.3. </span>用于CS成像的ADMM-CSNET<a class="headerlink" href="#csadmm-csnet" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">2.2.3. </span>用于CS成像的ADMM-CSNET<a class="headerlink" href="#csadmm-csnet" title="Permalink to this heading">#</a></h2>
 <section id="basic-admm-csnet">
-<h3><span class="section-number">3.3.1. </span>1.Basic-ADMM-CSNet<a class="headerlink" href="#basic-admm-csnet" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">2.2.3.1. </span>1.Basic-ADMM-CSNet<a class="headerlink" href="#basic-admm-csnet" title="Permalink to this heading">#</a></h3>
 <p>基于ADMM solver I （公式[12]），如图[1]：</p>
 <p><img alt="" src="https://ossjiyaoliu.oss-cn-beijing.aliyuncs.com/uPic/image-20230716151627567.png" /></p>
 </section>
 <section id="generic-admm-csnet">
-<h3><span class="section-number">3.3.2. </span>2. Generic-ADMM-CSNet<a class="headerlink" href="#generic-admm-csnet" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">2.2.3.2. </span>2. Generic-ADMM-CSNet<a class="headerlink" href="#generic-admm-csnet" title="Permalink to this heading">#</a></h3>
 <p>对solver2使用神经网络进行拓展，提出Generic-ADMM-CSNet。</p>
 <p>下图为提出的网络结构：</p>
 <p><img alt="图1 网络结构" src="https://ossjiyaoliu.oss-cn-beijing.aliyuncs.com/uPic/image-20230716004543073.png" /></p>
@@ -568,7 +577,7 @@ document.write(`
 <p><img alt="" src="https://ossjiyaoliu.oss-cn-beijing.aliyuncs.com/uPic/image-20230716231645367.png" /></p>
 </section>
 <section id="network-structure-analysis">
-<h3><span class="section-number">3.3.3. </span>3. Network Structure Analysis<a class="headerlink" href="#network-structure-analysis" title="Permalink to this heading">#</a></h3>
+<h3><span class="section-number">2.2.3.3. </span>3. Network Structure Analysis<a class="headerlink" href="#network-structure-analysis" title="Permalink to this heading">#</a></h3>
 <p>两种ADMM-CSNet的主要不同之处在于reconstruction layer和network layers <span class="math notranslate nohighlight">\(\mathbf Z^{(n)}\)</span>的实现。</p>
 <p>reconstruction layer：</p>
 <ul class="simple">
@@ -583,7 +592,7 @@ document.write(`
 </section>
 </section>
 <section id="id4">
-<h2><span class="section-number">3.4. </span>网络训练<a class="headerlink" href="#id4" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">2.2.4. </span>网络训练<a class="headerlink" href="#id4" title="Permalink to this heading">#</a></h2>
 <ul>
 <li><p>paired数据：全采样x和欠采样观测y</p></li>
 <li><p>损失函数：averaged normalized root mean square error (NRMSE)</p>
@@ -601,7 +610,7 @@ document.write(`
 </ul>
 </section>
 <section id="id5">
-<h2><span class="section-number">3.5. </span>参考资料<a class="headerlink" href="#id5" title="Permalink to this heading">#</a></h2>
+<h2><span class="section-number">2.2.5. </span>参考资料<a class="headerlink" href="#id5" title="Permalink to this heading">#</a></h2>
 <p>【1】<a class="reference external" href="https://zhuanlan.zhihu.com/p/106896627">【凸优化笔记7】-交替方向乘子法（ADMM） - 知乎 (zhihu.com)</a></p>
 <p>【2】<em><a class="reference external" href="https://zhuanlan.zhihu.com/p/103161094">【凸优化笔记4】-4.3 软阈值算子</a></em></p>
 </section>
@@ -643,7 +652,7 @@ document.write(`
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title"><span class="section-number">2. </span>【Method】inverse problem | 基于diffusion model的图像逆问题求解</p>
+        <p class="prev-next-title"><span class="section-number">2.1. </span>【Method】inverse problem | 基于diffusion model的图像逆问题求解</p>
       </div>
     </a>
     <a class="right-next"
@@ -651,7 +660,7 @@ document.write(`
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title"><span class="section-number">4. </span>代码解析</p>
+        <p class="prev-next-title"><span class="section-number">2.3. </span>代码解析</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -670,21 +679,21 @@ document.write(`
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">3.1. 摘要</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">3.2. 广义压缩感知模型</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#model">3.2.1. 1.Model</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#admm-solver">3.2.2. 2. ADMM Solver</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">3.2.3. 3.重建的高效计算</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">2.2.1. 摘要</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">2.2.2. 广义压缩感知模型</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#model">2.2.2.1. 1.Model</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#admm-solver">2.2.2.2. 2. ADMM Solver</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">2.2.2.3. 3.重建的高效计算</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#csadmm-csnet">3.3. 用于CS成像的ADMM-CSNET</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#basic-admm-csnet">3.3.1. 1.Basic-ADMM-CSNet</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#generic-admm-csnet">3.3.2. 2. Generic-ADMM-CSNet</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#network-structure-analysis">3.3.3. 3. Network Structure Analysis</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#csadmm-csnet">2.2.3. 用于CS成像的ADMM-CSNET</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#basic-admm-csnet">2.2.3.1. 1.Basic-ADMM-CSNet</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#generic-admm-csnet">2.2.3.2. 2. Generic-ADMM-CSNet</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#network-structure-analysis">2.2.3.3. 3. Network Structure Analysis</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">3.4. 网络训练</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">3.5. 参考资料</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">2.2.4. 网络训练</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">2.2.5. 参考资料</a></li>
 </ul>
   </nav></div>
 
