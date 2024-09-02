@@ -1,0 +1,639 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>TV CS &#8212; 阿土的炼丹炉</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=ac02cc09edc035673794" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=ac02cc09edc035673794" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=ac02cc09edc035673794" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=ac02cc09edc035673794" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" href="../../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=ac02cc09edc035673794" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=ac02cc09edc035673794" />
+  <script src="../../_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=ac02cc09edc035673794"></script>
+
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/clipboard.min.js"></script>
+    <script src="../../_static/copybutton.js"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'research/文献阅读记录/20230614_TV_CS';</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+  
+
+<a class="navbar-brand logo" href="../../intro.html">
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/logo.jpg" class="logo__image only-light" alt="Logo image"/>
+    <script>document.write(`<img src="../../_static/logo.jpg" class="logo__image only-dark" alt="Logo image"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../../intro.html">
+                    Jiyao Liu’s Phd lecture notebook
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Basic Guides</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../basic/jupyter_book.html">1. Jupyter Book 使用指南</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">PRML notes</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../PRML/intro.html">PRML</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../PRML/math_basic.html">数学基础</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../PRML/Exponential_Family_Distribution.html">指数族分布</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../PRML/2023_11_05_PGM1.html">概率图模型入门</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../PRML/%E6%A6%82%E7%8E%87%E5%9B%BE%E6%A8%A1%E5%9E%8B%E6%80%BB.html">概率图模型</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../PRML/2023_11_12_Kalman_Filter.html">线性动态系统-卡曼滤波（Kalman Filter）</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../PRML/2023_11_15_Pacticle_Filter.html">Particle Filter</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">学术报告</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../Report/acad_lunch_zhuang_wang.html">1. 20231016 | 庄吓海/王成彦-可解释医学影像分析</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Report/report-rec.html">2. VALSE 20200415 |  机器学习 vs 压缩感知：核磁共振成像与重建</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">research</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../evidential_regression.html">1. Evidential Learning and Uncentainty</a></li>
+
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">MRI notes</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../MRI%E5%8E%9F%E7%90%86/20231018_MT_CEST_NOE.html">1. MT&amp;CEST&amp;NOE 磁化转移定量成像</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../MRI%E5%8E%9F%E7%90%86/20230709_Parallel_MRI_reconstruction.html">2. Parallel MRI reconstruction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../MRI%E5%8E%9F%E7%90%86/20230714_Awesome%20MRI%20Recon.html">3. Awesome Accelerated-MRI-Reconstruction-Papers </a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="../../MRI%E5%8E%9F%E7%90%86/20230731_MRI%E9%87%8D%E5%BB%BA%E6%96%87%E7%8C%AE%E6%95%B4%E7%90%86.html">5. 传统方法</a></li>
+
+
+
+
+
+
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Pytorch框架</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../pytorch/%E6%A8%A1%E5%9E%8B%E6%8B%93%E6%89%91%E7%BB%93%E6%9E%84.html">1. 模型拓扑结构</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../pytorch/hook.html">1.1. 注册钩子函数（register_forward_hook）</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../pytorch/computation_graph.html">1.2. 计算图构建细节</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../pytorch/torch.gather.html">1.3. Torch.gather 索引</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../pytorch/20240528_pytorch%E5%8A%A0%E9%80%9F%E8%AE%AD%E7%BB%83%E6%8A%80%E5%B7%A7.html">2. pytorch加速训练技巧</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">深度学习应用</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%BA%94%E7%94%A8/%E7%94%9F%E6%88%90%E5%BC%8F%E6%A8%A1%E5%9E%8Bintro.html">1. 生成式模型</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%BA%94%E7%94%A8/%E7%94%9F%E6%88%90%E5%BC%8F%E6%A8%A1%E5%9E%8B/20240110_%E6%89%A9%E6%95%A3%E6%A8%A1%E5%9E%8BScore-based%20model%E7%B2%BE%E8%AE%B2.html">1.1. 扩散模型 | 1.Score-based model精讲</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%BA%94%E7%94%A8/%E7%94%9F%E6%88%90%E5%BC%8F%E6%A8%A1%E5%9E%8B/20240110_%E6%89%A9%E6%95%A3%E6%A8%A1%E5%9E%8BSDE%E7%B2%BE%E8%AE%B2.html">1.2. 扩散模型 | 2.SDE精讲</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%BA%94%E7%94%A8/%E9%80%86%E9%97%AE%E9%A2%98intro.html">2. 逆问题</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-3"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%BA%94%E7%94%A8/%E9%80%86%E9%97%AE%E9%A2%98/20230102_Diffusion_model_fo_the_inverse_problem.html">2.1. 【Method】inverse problem | 基于diffusion model的图像逆问题求解</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%BA%94%E7%94%A8/%E9%80%86%E9%97%AE%E9%A2%98/20230717_ADMM_CSNet_note.html">2.2. 【method】ADMM-CSNet |  一种图像压缩感知重建的深度学习方法（1）- 方法解析</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%BA%94%E7%94%A8/%E9%80%86%E9%97%AE%E9%A2%98/20230719_ADMM_CSNet_code.html">2.3. ADMM CSNet代码解析</a></li>
+</ul>
+</li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">工具使用</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../tools/latex_symbol.html">1. Latex常用符号表</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/%E5%B8%B8%E7%94%A8%E5%B7%A5%E5%85%B7.html">2. 常用工具</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/20220503typora%2Bupic%2B%E9%98%BF%E9%87%8C%E4%BA%91OSS%2B%E5%9D%9A%E6%9E%9C%E4%BA%91%2B%E6%9C%89%E9%81%93%E4%BA%91%E7%AC%94%E8%AE%B0%E6%9E%84%E5%BB%BA%E4%B8%93%E5%B1%9E%E7%AC%94%E8%AE%B0%E7%B3%BB%E7%BB%9F.html">3. typora+upic+阿里云OSS+坚果云+有道云笔记构建专属笔记系统</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2Fresearch/文献阅读记录/20230614_TV_CS.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/research/文献阅读记录/20230614_TV_CS.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script>
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>TV CS</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#theory">THEORY</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">传统重建方法</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">基于反问题建模的辐射轨迹采样图像重建</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">先验信息的正则化</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">多线圈辐射采样图像重建</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="tv-cs">
+<h1>TV CS<a class="headerlink" href="#tv-cs" title="Permalink to this heading">#</a></h1>
+<p><img alt="image-20230711142854053" src="https://ossjiyaoliu.oss-cn-beijing.aliyuncs.com/uPic/image-20230711142854053.png" /></p>
+<blockquote>
+<div><p>**摘要：**本文提出了一种用于辐射式欠采样欠采样MRI的迭代重建方法：</p>
+<p>（i）基于非线性优化，</p>
+<p>（ii）允许使用惩罚函数结合先验知识</p>
+<p>（iii）处理来自多个线圈的数据</p>
+</div></blockquote>
+<blockquote>
+<div><p>本文的写法很像叙事，每一步的原因、动机、和分析都写的很详细，十分适合新手阅读！</p>
+</div></blockquote>
+<blockquote>
+<div><p>文章中的专业词汇说明：</p>
+<ol class="arabic simple">
+<li><p>coil profiles：线圈敏感度</p></li>
+</ol>
+</div></blockquote>
+<section id="theory">
+<h2>THEORY<a class="headerlink" href="#theory" title="Permalink to this heading">#</a></h2>
+<section id="id1">
+<h3>传统重建方法<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h3>
+<p>传统方法对于辐射轨迹的MRI采集通常使用投影重建或重新划线方法进行重建（我们这里不详细研究）。下面举个例子说明这种方法的缺陷：</p>
+<p><img alt="图1 左：Radial欠采样； 右：来自402、64和24个轮辐/轮条的模拟欠采样数据重建结果（每个轮辐256个数据样本）" src="https://ossjiyaoliu.oss-cn-beijing.aliyuncs.com/uPic/image-20230713195214345.png" /></p>
+<p>图1中左图Radial欠采样，每一根采样线称为一个轮辐（spoke），每个spoke有256个采样点。根据参考文献[15]，对于<span class="math notranslate nohighlight">\(n\times n\)</span>采样点的图像，必须有<span class="math notranslate nohighlight">\(n\pi/2\)</span>个spokes。该标准确定了两个相邻spokes的最外面的样本具有最大的distance，即<span class="math notranslate nohighlight">\(\Delta k = \frac{1}{FOV}\)</span>，这和奈奎斯特采样定律是一致的。图1中右图来自402、64和24个轮辐/轮条的模拟欠采样数据使用<strong>传统的投影重建或重新划线方法</strong>重建的结果，但是由于采样频率降低都会产生条纹伪影。</p>
+</section>
+<section id="id2">
+<h3>基于反问题建模的辐射轨迹采样图像重建<a class="headerlink" href="#id2" title="Permalink to this heading">#</a></h3>
+<p>反问题的建模这里就不赘述了，有兴趣的可以看看我之前的文章（<a class="reference external" href="https://zhuanlan.zhihu.com/p/642740364">【Method】稀疏与压缩感知 | 图像稀疏性及压缩感知方法白话讲解</a>）或者看原文里具体的描述，再来看下面的公式便知。</p>
+<p>我们的目标是求解最优<span class="math notranslate nohighlight">\(\overrightarrow{\mathbf{x}}\)</span>：</p>
+<p><img alt="" src="https://ossjiyaoliu.oss-cn-beijing.aliyuncs.com/uPic/image-20230713212803223.png" /></p>
+<p><img alt="" src="https://ossjiyaoliu.oss-cn-beijing.aliyuncs.com/uPic/image-20230713212829597.png" /></p>
+<p><img alt="" src="https://ossjiyaoliu.oss-cn-beijing.aliyuncs.com/uPic/image-20230713212840985.png" /></p>
+<p>但是由于公式[3]是一个欠定方程组，因此<span class="math notranslate nohighlight">\(\overrightarrow{\mathbf{x}}\)</span>的可行域是很大的。一种比较好的方法是共轭梯度法求解（此处也不做详解，重点关注之后的TV-CS方法）。</p>
+</section>
+<section id="id3">
+<h3>先验信息的正则化<a class="headerlink" href="#id3" title="Permalink to this heading">#</a></h3>
+<p>上面我们简单介绍了把该重建问题建模为反问题的优化模型，但是存在条纹伪影，因为该过程在k空间中除了辐条的位置之外的任何其他位置都不测量估计的准确性，我们举一个例子具体说明：</p>
+<p><img alt="图2" src="https://ossjiyaoliu.oss-cn-beijing.aliyuncs.com/uPic/image-20230713213951044.png" /></p>
+<p>图2展示了只有两个辐条采样的k空间图像重建的结果。图2.a表示真实物体的样子，图2.b因为条纹伪影而退化。然而方程4似乎无法判断那种解决方案更好，因为二者的k空间使用两个辐条欠采样的结果模式相同。因此我们希望对优化目标——公式[4]加入某种质量衡量的惩罚（正则化）来提高优化的质量。</p>
+<blockquote>
+<div><p>这种正则化有几点要求：①需要关于真实对象的先验知识；②不应该过于具体，保证问题的可优化性；③惩罚要是凸函数，保证能全局优化。</p>
+<p>注意：由于观测一般会被噪声污染，搜索图像估计与测量数据的完美匹配通常不是一个好的策略。为了补偿这种影响，有必要根据所获取数据的信噪比来调整惩罚系数<span class="math notranslate nohighlight">\(\lambda_i\)</span>。</p>
+</div></blockquote>
+<p>正则化如公式[7]所示：</p>
+<p><img alt="" src="https://ossjiyaoliu.oss-cn-beijing.aliyuncs.com/uPic/image-20230713214554867.png" /></p>
+<p>讲了这么多，终于步入正题，下面我们讲一讲本文的罚函数具体怎么设计：</p>
+<p>① 罚函数1：FOV惩罚</p>
+<p><img alt="" src="https://ossjiyaoliu.oss-cn-beijing.aliyuncs.com/uPic/image-20230713215237194.png" /></p>
+<p>公式中cFOV表示圆形FOV。</p>
+<p>② 罚函数2：约束目标<span class="math notranslate nohighlight">\(\overrightarrow{\mathbf{x}}\)</span>的参数空间为正。在一般图像恢复中非常有效的惩罚是将参数空间限制为正值。</p>
+<p><img alt="" src="https://ossjiyaoliu.oss-cn-beijing.aliyuncs.com/uPic/image-20230713220419545.png" /></p>
+<blockquote>
+<div><p>乍一看，负值的排除似乎理想地适用于MRI情况，其中测量的物理量，即通过某些弛豫过程调制的质子密度，是一个正单位。然而，不幸的是，使用具有复杂灵敏度分布的相控阵线圈以及物体内发生的相位变化阻碍了该标准的直接应用。在大多数成像情况下，图像的实部和虚部都不能被限制为正值。</p>
+</div></blockquote>
+<p>③罚函数3： 总变化 total variation (TV)限制。该方法在参考文献[20]中已成功应用于图像恢复。</p>
+<p>这个想法的基本假设是对象由具有恒定（或仅轻微变化）强度的区域组成，这在医学层析图像中相当适用。如果对象是分段恒定的，那么在辐射位置匹配的所有图像估计中，最好的表示应该是具有所有像素位置上最低导数的估计，即最小化总变差的估计。</p>
+<blockquote>
+<div><p>上面这段话有点绕，一个直观地理解是该方法认为图像是具有一定的分段连续性的，因此我们期望重建的结果在所有像素上的导数之和最小，也就是重建之后的图像要尽可能平滑。</p>
+</div></blockquote>
+<p>惩罚函数如公式[12]：</p>
+<p><img alt="image-20230713221222587" src="https://ossjiyaoliu.oss-cn-beijing.aliyuncs.com/uPic/image-20230713221222587.png" /></p>
+<p><span class="math notranslate nohighlight">\(D_x,D_y\)</span>为<span class="math notranslate nohighlight">\(x,y\)</span>方向上的导数（一阶、二阶、……）。</p>
+<p>因为图像是一个离散的，因此我们使用有限差分代替一阶导数：</p>
+<p><img alt="image-20230713224242305" src="https://ossjiyaoliu.oss-cn-beijing.aliyuncs.com/uPic/image-20230713224242305.png" /></p>
+<blockquote>
+<div><p>方程[12]中取模求和的操作类似<span class="math notranslate nohighlight">\(l_1\)</span>优化，有助于保持图像的边缘，主要惩罚振荡，这有助于已知吉布斯振铃伪影。如果用平方代替，则容易使得图像具有全局平滑度，导致丢失边缘。</p>
+</div></blockquote>
+<p>然而简单使用一阶导数可能会重建出不完整的图像，因为其倾向生成具有恒定强度的区域。因此我们优选使用二阶导数，使得重建图像具有恒定强度梯度的图像区域。</p>
+<p><img alt="" src="https://ossjiyaoliu.oss-cn-beijing.aliyuncs.com/uPic/image-20230713230634992.png" /></p>
+<p>有时使用一阶和二阶导数的组合也是有利的。</p>
+<p><img alt="image-20230713231226860" src="https://ossjiyaoliu.oss-cn-beijing.aliyuncs.com/uPic/image-20230713231226860.png" /></p>
+<p>图3上排是24个辐条欠采样重建的结果，分别是通过传统regridding方法和本文的方法得到的结果对于模拟数据来说，条纹伪影已经被有效地去除。图3的下一行描述了相应的傅立叶变换。</p>
+</section>
+<section id="id4">
+<h3>多线圈辐射采样图像重建<a class="headerlink" href="#id4" title="Permalink to this heading">#</a></h3>
+<p>当采用所描述的迭代策略来重建真实MRI数据时，又出现了两个困难：复数图像的非线性取模无法集成到欠采样矩阵/系统矩阵<span class="math notranslate nohighlight">\(A\)</span>中，并且现代MRI使用多相控阵列线圈，每个线圈具有不同的强度分布和可变的相位。</p>
+<p>为此，提出了一种迭代的两步重建方法：第一步试图获得所有线圈的灵敏度，然后在第二步的迭代中使用这些灵敏度来组合单个线圈通道，并在频域和图像空间之间映射时每次去除相位。</p>
+<p>在第一步中，来自所有线圈通道的信号被单独处理。实部和虚部被视为独立的参数，从而导致每个线圈通道的复值图像估计。众所周知，MRI线圈灵敏度是仅缓慢变化且不具有尖锐边缘的平滑函数。这一知识是通过使用图像导数的二次平方正则化来结合的，这导致了如前所述的全局平滑图像：</p>
+<p><img alt="image-20230713232056672" src="https://ossjiyaoliu.oss-cn-beijing.aliyuncs.com/uPic/image-20230713232056672.png" /></p>
+<p>完成所有线圈迭代后将创建SOS图像（sum-of-squares image），然后利用SOS图像产生相应的线圈灵敏度图像。值得注意的是，这些估计的线圈轮灵敏度还包括与物体相关的相位变化，因为实值平方和图像已被用作参考。由于罚函数<span class="math notranslate nohighlight">\(R_{coil}(\overrightarrow{\mathbf{x}})\)</span>二次依赖于<span class="math notranslate nohighlight">\(\overrightarrow{\mathbf{x}}\)</span>，因此作为共轭梯度迭代的一部分的线搜索只需一步，只需少量迭代即可获得合理的图像。因此，线圈灵敏度估计步骤仅花费适度的计算时间。</p>
+<p>对于第二重建步骤，来自所有线圈通道的原始数据被堆叠到数据向量<span class="math notranslate nohighlight">\(\overrightarrow{\mathbf{y}}\)</span>中，在对每个通道执行傅立叶变换之前，通过与相应的线圈敏感度相乘来扩展系统矩阵A。图5显示了系统矩阵A和伴随矩阵A#执行的在频率和图像空间之间映射的操作图。该算法呈现出符合来自所有线圈的观测结果的图像估计。此外，使用估计的线圈灵敏度以及基于非负性应用约束去除相位变化允许丢弃图像估计的虚部。值得注意的是，组合线圈重建确保了总变化约束在相控阵设置中仍然适用。否则，线圈轮廓的强度调制将与分段恒定图像的思想相冲突。</p>
+<p><img alt="图5 用于从图像域映射到频域，反之亦然的（左）系统矩阵A和（右）伴随系统矩阵A#的过程实现的示意图。" src="https://ossjiyaoliu.oss-cn-beijing.aliyuncs.com/uPic/image-20230714000756247.png" /></p>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./research/文献阅读记录"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer">
+                  <!-- Previous / next buttons -->
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#theory">THEORY</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">传统重建方法</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">基于反问题建模的辐射轨迹采样图像重建</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">先验信息的正则化</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">多线圈辐射采样图像重建</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Jiyao Liu
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  <p class="copyright">
+    
+      © Copyright 2022.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=ac02cc09edc035673794"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=ac02cc09edc035673794"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

@@ -1,4 +1,4 @@
-# 指数组分布
+# 指数族分布
 
 ![wuQ8zW](https://ossjiyaoliu.oss-cn-beijing.aliyuncs.com/uPic/wuQ8zW.png)
 
@@ -27,7 +27,11 @@ $$P(x|\eta) = h(x)\exp(\eta^T\phi(x)-A(\eta))\\$$
 其中，$\eta$为$P$维参数向量，$x\in \mathbb R^p$，$\phi(x)$为充分统计量，$A(\eta)$为log partition function。
 ```
 
-> Log partition function（对数配分函数）可以理解为一个归一化常数，通常是一个积分，保证整个式子是一个概率密度函数。![](https://ossjiyaoliu.oss-cn-beijing.aliyuncs.com/uPic/Q9KNM6.png)
+> Log partition function（对数配分函数）可以理解为一个归一化常数，通常是一个积分，保证整个式子是一个概率密度函数。
+>
+> <img src="https://ossjiyaoliu.oss-cn-beijing.aliyuncs.com/uPic/Q9KNM6.png" style="zoom:67%;" />
+>
+> 
 
 如下分布都属于指数族分布：
 

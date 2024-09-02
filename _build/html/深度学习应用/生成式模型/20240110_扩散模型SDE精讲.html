@@ -1,0 +1,820 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>1.2. 扩散模型 | 2.SDE精讲 &#8212; 阿土的炼丹炉</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=ac02cc09edc035673794" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=ac02cc09edc035673794" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=ac02cc09edc035673794" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=ac02cc09edc035673794" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" href="../../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=ac02cc09edc035673794" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=ac02cc09edc035673794" />
+  <script src="../../_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=ac02cc09edc035673794"></script>
+
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/clipboard.min.js"></script>
+    <script src="../../_static/copybutton.js"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '深度学习应用/生成式模型/20240110_扩散模型SDE精讲';</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="2. 逆问题" href="../%E9%80%86%E9%97%AE%E9%A2%98intro.html" />
+    <link rel="prev" title="1.1. 扩散模型 | 1.Score-based model精讲" href="20240110_%E6%89%A9%E6%95%A3%E6%A8%A1%E5%9E%8BScore-based%20model%E7%B2%BE%E8%AE%B2.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+  
+
+<a class="navbar-brand logo" href="../../intro.html">
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/logo.jpg" class="logo__image only-light" alt="Logo image"/>
+    <script>document.write(`<img src="../../_static/logo.jpg" class="logo__image only-dark" alt="Logo image"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../../intro.html">
+                    Jiyao Liu’s Phd lecture notebook
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Basic Guides</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../basic/jupyter_book.html">1. Jupyter Book 使用指南</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">PRML notes</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../PRML/intro.html">PRML</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../PRML/math_basic.html">数学基础</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../PRML/Exponential_Family_Distribution.html">指数族分布</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../PRML/2023_11_05_PGM1.html">概率图模型入门</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../PRML/%E6%A6%82%E7%8E%87%E5%9B%BE%E6%A8%A1%E5%9E%8B%E6%80%BB.html">概率图模型</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../PRML/2023_11_12_Kalman_Filter.html">线性动态系统-卡曼滤波（Kalman Filter）</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../PRML/2023_11_15_Pacticle_Filter.html">Particle Filter</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">学术报告</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../Report/acad_lunch_zhuang_wang.html">1. 20231016 | 庄吓海/王成彦-可解释医学影像分析</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Report/report-rec.html">2. VALSE 20200415 |  机器学习 vs 压缩感知：核磁共振成像与重建</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">research</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../research/evidential_regression.html">1. Evidential Learning and Uncentainty</a></li>
+
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">MRI notes</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../MRI%E5%8E%9F%E7%90%86/20231018_MT_CEST_NOE.html">1. MT&amp;CEST&amp;NOE 磁化转移定量成像</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../MRI%E5%8E%9F%E7%90%86/20230709_Parallel_MRI_reconstruction.html">2. Parallel MRI reconstruction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../MRI%E5%8E%9F%E7%90%86/20230714_Awesome%20MRI%20Recon.html">3. Awesome Accelerated-MRI-Reconstruction-Papers </a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="../../MRI%E5%8E%9F%E7%90%86/20230731_MRI%E9%87%8D%E5%BB%BA%E6%96%87%E7%8C%AE%E6%95%B4%E7%90%86.html">5. 传统方法</a></li>
+
+
+
+
+
+
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Pytorch框架</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../pytorch/%E6%A8%A1%E5%9E%8B%E6%8B%93%E6%89%91%E7%BB%93%E6%9E%84.html">1. 模型拓扑结构</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../pytorch/hook.html">1.1. 注册钩子函数（register_forward_hook）</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../pytorch/computation_graph.html">1.2. 计算图构建细节</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../pytorch/torch.gather.html">1.3. Torch.gather 索引</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../pytorch/20240528_pytorch%E5%8A%A0%E9%80%9F%E8%AE%AD%E7%BB%83%E6%8A%80%E5%B7%A7.html">2. pytorch加速训练技巧</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">深度学习应用</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="../%E7%94%9F%E6%88%90%E5%BC%8F%E6%A8%A1%E5%9E%8Bintro.html">1. 生成式模型</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="20240110_%E6%89%A9%E6%95%A3%E6%A8%A1%E5%9E%8BScore-based%20model%E7%B2%BE%E8%AE%B2.html">1.1. 扩散模型 | 1.Score-based model精讲</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">1.2. 扩散模型 | 2.SDE精讲</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../%E9%80%86%E9%97%AE%E9%A2%98intro.html">2. 逆问题</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-3"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../%E9%80%86%E9%97%AE%E9%A2%98/20230102_Diffusion_model_fo_the_inverse_problem.html">2.1. 【Method】inverse problem | 基于diffusion model的图像逆问题求解</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../%E9%80%86%E9%97%AE%E9%A2%98/20230717_ADMM_CSNet_note.html">2.2. 【method】ADMM-CSNet |  一种图像压缩感知重建的深度学习方法（1）- 方法解析</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../%E9%80%86%E9%97%AE%E9%A2%98/20230719_ADMM_CSNet_code.html">2.3. ADMM CSNet代码解析</a></li>
+</ul>
+</li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">工具使用</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../tools/latex_symbol.html">1. Latex常用符号表</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/%E5%B8%B8%E7%94%A8%E5%B7%A5%E5%85%B7.html">2. 常用工具</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2F深度学习应用/生成式模型/20240110_扩散模型SDE精讲.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/深度学习应用/生成式模型/20240110_扩散模型SDE精讲.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script>
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>扩散模型 | 2.SDE精讲</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">1.2.1. 摘要</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">1.2.2. 为什么要用SDE？</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sde-based-diffusion-process">1.2.3. SDE-based Diffusion Process</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sde-based-reconstruction-sampling-inference-process">1.2.4. SDE-based Reconstruction/Sampling/Inference Process</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#denoising-score-matchingsde">1.2.5. 通过denoising score matching估计反向SDE</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tips-of-designing-scoring-based-models">1.2.6. Tips of designing scoring based models</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ddpmscore-based-model">1.2.7. DDPM和score-based model统一</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ve-sde-ncsn-score-based-model-vp-sde-ddpm">1.2.7.1. VE-SDE(NCSN / Score-based model)和VP-SDE（DDPM）</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ve-sdevp-sdesde">1.2.7.2. VE-SDE、VP-SDE和SDE的前向/扩散过程的关系</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ddpm-denoiser-score-estimator">1.2.7.3. DDPM denoiser 和score estimator的关系</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#minstscore-based-model">1.2.8. 代码实战：MINST数据训练一个score-based model</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">1.2.9. 补充1：逆向SDE的推导</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#vevp">1.2.10. 补充2：VE和VP等价性证明</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">1.2.11. 总结</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">1.2.12. 参考</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <p>#! <a class="reference external" href="https://zhuanlan.zhihu.com/p/677154173">https://zhuanlan.zhihu.com/p/677154173</a></p>
+<p>[toc]</p>
+<section class="tex2jax_ignore mathjax_ignore" id="sde">
+<h1><span class="section-number">1.2. </span>扩散模型 | 2.SDE精讲<a class="headerlink" href="#sde" title="Permalink to this heading">#</a></h1>
+<p><img alt="" src="https://ossjiyaoliu.oss-cn-beijing.aliyuncs.com/uPic/9Y7UGs.png" /></p>
+<p>在前面的博客中我们讲了score-based model的开山之作：发表于2019年NIPS的<strong>Generative Modeling by Estimating Gradients of the</strong> <strong>Data Distribution</strong>，也称作<em>Noise Conditional Score Network (NCSN)</em>。</p>
+<p><a class="reference external" href="https://zhuanlan.zhihu.com/p/677141632">https://zhuanlan.zhihu.com/p/677141632</a></p>
+<p>本文主要讲解score-based model的后续工作，发表于2021年ICLR的<strong>Score-Based Generative Modeling through Stochastic Differential Equations</strong>，也称作<em>SDE</em>。<strong>本文将NSCN中有限次数的加噪推广到无穷次</strong>（连续的情况下），那么就可以得到更加一般的扩散过程，并且这个过程可以用一个随机微分方程（SDE）来表示。本文将score-based model和DDPM进行大一统。虽然SDE构造扩散模型是一个全新的框架，但是其本质还是score。</p>
+<blockquote>
+<div><p>Paper: <a class="reference external" href="https://arxiv.org/abs/2011.13456">https://arxiv.org/abs/2011.13456</a></p>
+<p>Code: <a class="github reference external" href="https://github.com/yang-song/score_sde">yang-song/score_sde</a></p>
+</div></blockquote>
+<section id="id1">
+<h2><span class="section-number">1.2.1. </span>摘要<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h2>
+<p>本文主要介绍了一种基于随机微分方程（SDE）的得分模型生成建模框架。通过将得分模型与SDE相结合，可以实现更好的样本生成、准确的似然计算、编码操控和条件生成等功能。同时，文章还提出了一种反向扩散采样方法，可以有效地从给定的数据和模型中生成样本。该方法在图像修复、图像插值等领域具有广泛的应用前景。</p>
+</section>
+<section id="id2">
+<h2><span class="section-number">1.2.2. </span>为什么要用SDE？<a class="headerlink" href="#id2" title="Permalink to this heading">#</a></h2>
+<p>在diffusion过程中，对于<span class="math notranslate nohighlight">\(t\)</span>时间点的图像<span class="math notranslate nohighlight">\(x_t\)</span>，我们考虑两种情况：</p>
+<ol class="arabic simple">
+<li><p>当<span class="math notranslate nohighlight">\(t\)</span>固定时，<span class="math notranslate nohighlight">\(x_t\)</span>是随机变量，即<span class="math notranslate nohighlight">\(x_t \sim N(\sqrt{\bar{\alpha_t}}x_0,(1-\bar{\alpha_t})I)\)</span> ；</p></li>
+<li><p>当<span class="math notranslate nohighlight">\(x\)</span>固定时，<span class="math notranslate nohighlight">\(x_t\)</span>是一个采样轨迹：<span class="math notranslate nohighlight">\(x_T,x_{T-1}, \cdots, x_1,x_0\)</span>。 因此<span class="math notranslate nohighlight">\(x_t\)</span>实质上是一个随机过程。<strong>SDE是描述随机过程的工具之一。</strong></p></li>
+</ol>
+<p>考虑将diffusion离散的连续过程离散化：对于DIffusion过程，加噪和去噪过程可以表示为
+$<span class="math notranslate nohighlight">\(
+x_0\rightarrow x_1 \rightarrow \cdots \rightarrow x_T \rightarrow x_{T-1} \rightarrow \cdots\rightarrow x_T, t \in \{0,1,\cdots,T\}
+\)</span><span class="math notranslate nohighlight">\(
+在连续过程中，我们设\)</span>t\in [0,1]<span class="math notranslate nohighlight">\(，上述离散的前向加噪过程连续化，可以表示为
+\)</span><span class="math notranslate nohighlight">\(
+x_t \rightarrow x_{t+\Delta t}, \Delta t\rightarrow0
+\)</span><span class="math notranslate nohighlight">\(
+反向去噪过程表示为
+\)</span><span class="math notranslate nohighlight">\(
+x_{t+\Delta t} \rightarrow x_t, \Delta t\rightarrow0
+\)</span>$</p>
+</section>
+<section id="sde-based-diffusion-process">
+<h2><span class="section-number">1.2.3. </span>SDE-based Diffusion Process<a class="headerlink" href="#sde-based-diffusion-process" title="Permalink to this heading">#</a></h2>
+<p><img alt="使用连续时间随机过程扰动数据增加噪声" src="https://ossjiyaoliu.oss-cn-beijing.aliyuncs.com/uPic/denoise_vp.gif" /></p>
+<p>对于图像<span class="math notranslate nohighlight">\(x\)</span>，我们定义连续的微分过程（扩散过程）为
+$<span class="math notranslate nohighlight">\(
+dx = \underbrace{f(x,t)dt}_{确定性} + \underbrace{g(t)dw}_{不确定性}
+\)</span>$
+其中，</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(f(x,t)\)</span>：drift coefficience（漂移系数）</p></li>
+<li><p><span class="math notranslate nohighlight">\(g(t)\)</span>：diffusion coefficient （diffusion系数）</p></li>
+<li><p><span class="math notranslate nohighlight">\(w\)</span>： Brownian motion （布朗运动）</p></li>
+</ul>
+<p>也就是说一次扩散<span class="math notranslate nohighlight">\(dx\)</span>是由确定性和不确定性的两个过程组合而成。布朗运动具有增量独立性、增量服从高斯分布且轨迹连续。我们定义f(x,t)dt为确定性变化过程，g(t)dw为不确定性变化过程(dw-布朗运动的微分就相当于随机采样)，如下图所示：</p>
+<p><img alt="连续扩散过程" src="https://ossjiyaoliu.oss-cn-beijing.aliyuncs.com/uPic/i4zuTj.png" /></p>
+<blockquote>
+<div><p>在实际建模过程中，可以设置各种各样的SDE样式。</p>
+</div></blockquote>
+</section>
+<section id="sde-based-reconstruction-sampling-inference-process">
+<h2><span class="section-number">1.2.4. </span>SDE-based Reconstruction/Sampling/Inference Process<a class="headerlink" href="#sde-based-reconstruction-sampling-inference-process" title="Permalink to this heading">#</a></h2>
+<p><img alt="通过反转扰动过程从噪声生成数据" src="https://ossjiyaoliu.oss-cn-beijing.aliyuncs.com/uPic/denoise_vp.gif" /></p>
+<p><strong>Defination.</strong> Reversing the SDE for sample generation
+$<span class="math notranslate nohighlight">\(
+\mathrm{d}\mathbf{x}=[\mathbf{f}(\mathbf{x},t)-g(t)^2\nabla_\mathbf{x}\log p_t(\mathbf{x})]\mathrm{d}t+g(t)\mathrm{d}\mathbf{\bar{w}},
+\)</span><span class="math notranslate nohighlight">\(
+上式中，\)</span>\mathbf{\bar{w}}<span class="math notranslate nohighlight">\(表示Brownian motion in the reverse time direction，\)</span>dt$表示infinitesimal negative time step。</p>
+<p><img alt="" src="https://ossjiyaoliu.oss-cn-beijing.aliyuncs.com/uPic/w1uJNO.png" /></p>
+<p>在我们已知前向过程的漂移、扩散系数以及<span class="math notranslate nohighlight">\(t\)</span>时刻的分数时，可以通过数值求解反向SDE，求出<span class="math notranslate nohighlight">\(\mathbf x_0\)</span>。</p>
+</section>
+<section id="denoising-score-matchingsde">
+<h2><span class="section-number">1.2.5. </span>通过denoising score matching估计反向SDE<a class="headerlink" href="#denoising-score-matchingsde" title="Permalink to this heading">#</a></h2>
+<p>我们可以使用时间相关的分数函数去利用数值解法求解反向SDE。我们使用下述weighted sum of denoising scoring matching目标函数，训练时间相关的score-based model <span class="math notranslate nohighlight">\(\mathbf s_\theta(\mathbf x, t)\)</span>：
+$$
+\begin{align}</p>
+<p>\min_\theta \mathbb{E}<em>{t\sim \mathcal{U}(0, T)} [\lambda(t) \mathbb{E}</em>{\mathbf{x}(0) \sim p_0(\mathbf{x})}\mathbf{E}<em>{\mathbf{x}(t) \sim p</em>{0t}(\mathbf{x}(t) \mid \mathbf{x}(0))}[ |s_\theta(\mathbf{x}(t), t) - \nabla_{\mathbf{x}(t)}\log p_{0t}(\mathbf{x}(t) \mid \mathbf{x}(0))|_2^2]],</p>
+<p>\end{align}
+$<span class="math notranslate nohighlight">\(
+where \)</span>\mathcal{U}(0,T)<span class="math notranslate nohighlight">\( is a uniform distribution over \)</span>[0, T]<span class="math notranslate nohighlight">\( （实际情况下，\)</span>t<span class="math notranslate nohighlight">\(要做归一化，即是从\)</span>\mathcal{U}(0,1)<span class="math notranslate nohighlight">\(采样的浮点数）。\)</span>\mathbf x_0<span class="math notranslate nohighlight">\(为训练样本，\)</span>\mathbf x_t<span class="math notranslate nohighlight">\(取决于SDE的定义。 \)</span>p_{0t}(\mathbf{x}(t) \mid \mathbf{x}(0))<span class="math notranslate nohighlight">\( denotes the transition probability from \)</span>\mathbf{x}(0)<span class="math notranslate nohighlight">\( to \)</span>\mathbf{x}(t)<span class="math notranslate nohighlight">\(, which is efficient when the draft coefficient \)</span>\mathbf f(\mathbf x,t)<span class="math notranslate nohighlight">\(  is affine （每个线性变换一定是仿射变换）。 \)</span>\lambda(t) \in \mathbb{R}<em>{&gt;0}<span class="math notranslate nohighlight">\( denotes a positive weighting function，一般设置为\)</span>\frac{1}{\mathbb{E}[|\nabla*</em>{\mathbf{x}}\log p_*{0t}(\mathbf{x}(t) \mid \mathbf{x}(0)) |_2^2]}<span class="math notranslate nohighlight">\(（特别的，当噪声分布为Gaussian，则\)</span>\lambda(t)$为Gaussian的方差），为了平衡不同时间的score matching loss的量级（保证量级相同）。</p>
+<hr class="docutils" />
+<p>例如，对于加噪的图像<span class="math notranslate nohighlight">\(q_\sigma(\tilde{\mathbf{x}}\mid\mathbf{x})=\mathcal{N}(\tilde{\mathbf{x}}\mid\mathbf{x},\sigma^2I)\)</span>，其对数密度梯度为<span class="math notranslate nohighlight">\(\nabla_{\tilde{\mathbf{x}}}\operatorname{log}q_{\sigma}(\tilde{\mathbf{x}}\mid\mathbf{x})=-(\tilde{\mathbf{x}}-\mathbf{x})/\sigma^{2}\)</span>（注意是对<span class="math notranslate nohighlight">\(\tilde{\mathbf{x}}\)</span>求导），给定一个噪声水平<span class="math notranslate nohighlight">\(\sigma\)</span>，，denoiser score matching的目标函数为：
+$<span class="math notranslate nohighlight">\(
+\ell(\boldsymbol{\theta};\sigma)\triangleq\frac{1}{2}\mathbb{E}_{p_{\mathrm{data}}(\mathbf{x})}\mathbb{E}_{\tilde{\mathbf{x}}\sim\mathcal{N}(\mathbf{x},\sigma^2I)}\left[\left\|\mathbf{s}_{\boldsymbol{\theta}}(\tilde{\mathbf{x}},\sigma)+\frac{\tilde{\mathbf{x}}-\mathbf{x}}{\sigma^2}\right\|_2^2\right]
+\)</span><span class="math notranslate nohighlight">\(
+那么，对于一系列噪声水平\)</span>\sigma \in {\sigma_i}_{i=1}^L<span class="math notranslate nohighlight">\(， 我们可以得到一个统一的目标函数：
+\)</span><span class="math notranslate nohighlight">\(
+\mathcal{L}(\boldsymbol{\theta};\{|\sigma_i\}_{i=1}^L)\triangleq\frac{1}{L}\sum_{i=1}^{L}\lambda(\sigma_i)\ell(\boldsymbol{\theta};\sigma_i),
+\)</span><span class="math notranslate nohighlight">\(
+其中，\)</span>\lambda(\sigma_i)&gt;0<span class="math notranslate nohighlight">\(是和\)</span>\sigma_i<span class="math notranslate nohighlight">\(有关的系数，为了平衡损失，使得每个加权项数量级范围接近。关于\)</span>\lambda(\sigma_i)&gt;0<span class="math notranslate nohighlight">\(的选择，文章中给定了一种方案，即\)</span>\lambda(\sigma)=\sigma^2$：</p>
+<p><img alt="" src="https://ossjiyaoliu.oss-cn-beijing.aliyuncs.com/uPic/image-20240110212822548.png" /></p>
+<p>那么总的训练loss便可以化简为：
+$<span class="math notranslate nohighlight">\(
+\mathcal{L}(\boldsymbol{\theta};\{|\sigma_i\}_{i=1}^L)\triangleq\frac{1}{2L}\sum_{i=1}^{L}||\sigma\mathbf s_\theta(\mathbf{\tilde{x}},t) + \tilde{ \mathbf{x}}-\mathbf x||_2^2,\  where\  \tilde{ \mathbf{x}}-\mathbf x\ is\ sampling\ noise.
+\)</span>$</p>
+</section>
+<section id="tips-of-designing-scoring-based-models">
+<h2><span class="section-number">1.2.6. </span>Tips of designing scoring based models<a class="headerlink" href="#tips-of-designing-scoring-based-models" title="Permalink to this heading">#</a></h2>
+<p>在设计time-dependent score-based models时候，网络架构没有太多限制，只要保证输出输出维度相同，并把时间信息作为条件输入网络即可。下面是一些有用的模型设计tips：</p>
+<ul class="simple">
+<li><p>常用<strong>U-Net</strong>作为score network作为分数网络。</p></li>
+<li><p>可以通过<strong>高斯随机特征的方法把时间信息注入网络中</strong>。Specifically, we first sample <span class="math notranslate nohighlight">\(\omega \sim \mathcal{N}(\mathbf{0}, s^2\mathbf{I})\)</span> which is subsequently fixed for the model (i.e., not learnable). For a time step <span class="math notranslate nohighlight">\(t\)</span>, the corresponding Gaussian random feature is defined as <span class="math notranslate nohighlight">\([\sin(2\pi \omega t) ; \cos(2\pi \omega t)],\)</span>where <span class="math notranslate nohighlight">\([\vec{a} ; \vec{b}]\)</span> denotes the concatenation of vector <span class="math notranslate nohighlight">\(\vec{a}\)</span> and <span class="math notranslate nohighlight">\(\vec{b}\)</span>. This Gaussian random feature can be used as an encoding for time step <span class="math notranslate nohighlight">\(t\)</span> so that the score network can condition on <span class="math notranslate nohighlight">\(t\)</span> by incorporating this encoding.</p></li>
+<li><p><strong>可以rescale U-Net的输出，即乘以一个系数</strong> <span class="math notranslate nohighlight">\(1/\sqrt{\mathbb{E}[\|\nabla_{\mathbf{x}}\log p_{0t}(\mathbf{x}(t) \mid \mathbf{x}(0)) \|_2^2]}\)</span>。 This is because the optimal <span class="math notranslate nohighlight">\(s_\theta(\mathbf{x}(t), t)\)</span> has an <span class="math notranslate nohighlight">\(\ell_2\)</span>-norm close to <span class="math notranslate nohighlight">\(\mathbb{E}[\|\nabla_{\mathbf{x}}\log p_{0t}(\mathbf{x}(t) \mid \mathbf{x}(0))]\|_2\)</span>, and the rescaling helps capture the norm of the true score. Recall that the training objective contains sums of the form <span class="math notranslate nohighlight">\(\mathbf{E}_{\mathbf{x}(t) \sim p_{0t}(\mathbf{x}(t) \mid \mathbf{x}(0))}[ \|s_\theta(\mathbf{x}(t), t) - \nabla_{\mathbf{x}(t)}\log p_{0t}(\mathbf{x}(t) \mid \mathbf{x}(0))\|_2^2].\)</span>  Therefore, it is natural to expect that the optimal score model <span class="math notranslate nohighlight">\(s_\theta(\mathbf{x}, t) \approx \nabla_{\mathbf{x}(t)} \log p_{0t}(\mathbf{x}(t) \mid \mathbf{x}(0))\)</span>. (也就是说在保证loss最小的情况下，也保证估计的分数的范数也接近真实的范数)</p></li>
+<li><p>Use <a class="reference external" href="https://discuss.pytorch.org/t/how-to-apply-exponential-moving-average-decay-for-variables/10856/3">exponential moving average</a> (EMA) of weights when sampling. This can greatly <strong>improve sample quality</strong>, but requires slightly longer training time, and requires more work in implementation. We do not include this in this tutorial, but highly recommend it when you employ score-based generative modeling to tackle more challenging real problems.</p></li>
+</ul>
+</section>
+<section id="ddpmscore-based-model">
+<h2><span class="section-number">1.2.7. </span>DDPM和score-based model统一<a class="headerlink" href="#ddpmscore-based-model" title="Permalink to this heading">#</a></h2>
+<section id="ve-sde-ncsn-score-based-model-vp-sde-ddpm">
+<h3><span class="section-number">1.2.7.1. </span>VE-SDE(NCSN / Score-based model)和VP-SDE（DDPM）<a class="headerlink" href="#ve-sde-ncsn-score-based-model-vp-sde-ddpm" title="Permalink to this heading">#</a></h3>
+<p>到此为止，我们得到了SDE-based方法的加噪和去噪过程分别为：
+$<span class="math notranslate nohighlight">\(
+\mathrm{d}\mathbf{x}=\mathbf{f}(\mathbf{x},t)\mathrm{d}t+g(t)\mathrm{d}\mathbf{w},\\
+\mathrm{d}\mathbf{x}=[\mathbf{f}(\mathbf{x},t)-g(t)^2\nabla_\mathbf{x}\log p_t(\mathbf{x})]\mathrm{d}t+g(t)\mathrm{d}\mathbf{\bar{w}},
+\)</span>$</p>
+<p><img alt="" src="https://ossjiyaoliu.oss-cn-beijing.aliyuncs.com/uPic/w1uJNO.png" /></p>
+<p>扩散模型可以大致分为两类：VE-SDE和VP-SDE。</p>
+<p><img alt="" src="https://ossjiyaoliu.oss-cn-beijing.aliyuncs.com/uPic/GJJCu8.png" /></p>
+<p>由于<span class="math notranslate nohighlight">\(x_T\)</span>要尽可能接近噪声，因此要求VE-SDE的<span class="math notranslate nohighlight">\(\sigma_T\)</span>尽可能大，因此称为方差爆炸，而VP-SDE对方差进行保留，即<span class="math notranslate nohighlight">\(\sqrt{1-\bar{\alpha_t}}\)</span>约等于1。如下图：</p>
+<p><img alt="" src="https://ossjiyaoliu.oss-cn-beijing.aliyuncs.com/uPic/JEHXxs.png" /></p>
+</section>
+<section id="ve-sdevp-sdesde">
+<h3><span class="section-number">1.2.7.2. </span>VE-SDE、VP-SDE和SDE的前向/扩散过程的关系<a class="headerlink" href="#ve-sdevp-sdesde" title="Permalink to this heading">#</a></h3>
+<p>SDE前向过程的离散化表示为</p>
+<p><img alt="" src="https://ossjiyaoliu.oss-cn-beijing.aliyuncs.com/uPic/daaIu0.png" /></p>
+<ol class="arabic simple">
+<li><p>VE-SDE：<span class="math notranslate nohighlight">\(\mathrm{d}\mathbf{x}=\sqrt{\frac{\mathrm{d}\left[\sigma^2(t)\right]}{\mathrm{d}t}\mathrm{d}\mathbf{w}}\)</span>， 推导如下</p></li>
+</ol>
+<p><img alt="" src="https://ossjiyaoliu.oss-cn-beijing.aliyuncs.com/uPic/image-20240111004020022.png" /></p>
+<ol class="arabic simple" start="2">
+<li><p>VP-SDE：<span class="math notranslate nohighlight">\(\mathrm{d}\mathbf{x}=-\frac{1}{2}\beta(t)\mathbf{x}\mathrm{d}t+\sqrt{\beta(t)}\mathrm{d}\mathbf{w}.\)</span>推导如下：</p></li>
+</ol>
+<p><img alt="" src="https://ossjiyaoliu.oss-cn-beijing.aliyuncs.com/uPic/image-20240111004646283.png" /></p>
+</section>
+<section id="ddpm-denoiser-score-estimator">
+<h3><span class="section-number">1.2.7.3. </span>DDPM denoiser 和score estimator的关系<a class="headerlink" href="#ddpm-denoiser-score-estimator" title="Permalink to this heading">#</a></h3>
+<p>根据DDPM前向过程中<span class="math notranslate nohighlight">\(x_t = \sqrt{\bar{\alpha}_t} \mathbf{x}_0 +  \sqrt{1 - \bar{\alpha}_t}\epsilon\)</span>，可知DDPM的denoiser近似
+$<span class="math notranslate nohighlight">\(
+\begin{cases}
+score\ estimator \ s_\theta(x_t,t)\\
+DDPM\ denoiser\ \epsilon (x_t,t) \approx \frac{x_t-\sqrt{\bar\alpha_t}x_0}{\sqrt{1-\bar\alpha_t}}
+\end{cases}
+\)</span><span class="math notranslate nohighlight">\(
+在DDPM中，
+\)</span><span class="math notranslate nohighlight">\(
+\begin{align}
+q(\mathbf{x}_t \vert \mathbf{x}_0) &amp;= \mathcal{N}(\mathbf{x}_t; \sqrt{\bar{\alpha}_t} \mathbf{x}_0, (1 - \bar{\alpha}_t)\mathbf{I})\\
+&amp;\propto \exp \Big(-\frac{\|\mathbf{x}_t - \sqrt{\bar\alpha_t} \mathbf{x}_{0}\|^2_2}{2(1-\bar\alpha_t)} \Big)
+\end{align}
+\)</span><span class="math notranslate nohighlight">\(
+那么可以求得当前\)</span>x_t<span class="math notranslate nohighlight">\(的对数密度梯度为
+\)</span><span class="math notranslate nohighlight">\(
+\nabla_\mathbf{x} \log p(\mathbf{x}) = \frac{x_t - \sqrt{\bar{\alpha}_{t}}\mathbf{x}_0}{1 - \bar{\alpha}_t} 
+\)</span><span class="math notranslate nohighlight">\(
+在score-based model中，有\)</span>\mathbf{s}<em>\theta(\mathbf{x}) \approx \nabla</em>\mathbf{x} \log p(\mathbf{x})<span class="math notranslate nohighlight">\(。当我们有一个\)</span>\epsilon_\theta (x_t,t) <span class="math notranslate nohighlight">\(，可以得到结论，即
+\)</span><span class="math notranslate nohighlight">\(
+\mathbf{s}_\theta(\mathbf{x}) = \frac{1}{\sqrt{1-\bar\alpha_t}}\epsilon (x_t,t)
+\)</span>$
+上式展示了DDPM denoiser 和score estimator的关系的关系。因此，这意味着，<strong>如果我现在有一个训练好的DDPM，那么其加一个系数就是Score estimator</strong>。‼️这是一个非常巧合且非常棒的结论，从此打破了两种模型之间的gap，为未来的各种预训练diffusion model和各种加速采样方式奠定了坚实的基础。</p>
+</section>
+</section>
+<section id="minstscore-based-model">
+<h2><span class="section-number">1.2.8. </span>代码实战：MINST数据训练一个score-based model<a class="headerlink" href="#minstscore-based-model" title="Permalink to this heading">#</a></h2>
+<p>在colab实现了一个生成MNIST数据的score-based model（大概训练半小时），并测试了不同的采样方式，如：<strong>Euler_SDE，PC_sampling和ODE</strong>，结果表明：<strong>效果上：PC&gt;SDE&gt;ODE，时间成本上：ODE&lt;SDE&lt;PC.</strong></p>
+<p><strong>Project链接</strong>：<a class="reference external" href="https://drive.google.com/file/d/1OYunpicIYf1Jf0JxLDcVXc0GRtk5uw3X/view?usp=sharing">https://drive.google.com/file/d/1OYunpicIYf1Jf0JxLDcVXc0GRtk5uw3X/view?usp=sharing</a></p>
+</section>
+<section id="id3">
+<h2><span class="section-number">1.2.9. </span>补充1：逆向SDE的推导<a class="headerlink" href="#id3" title="Permalink to this heading">#</a></h2>
+<p><strong>推导</strong>：</p>
+<p>这一小节我们<strong>推导SDE-based的反向重建过程</strong>。对于连续扩散模型：<span class="math notranslate nohighlight">\(dx = \underbrace{f(x,t)dt}_{确定性} + \underbrace{g(t)dw}_{不确定性}, x_t\rightarrow x_{t+\Delta t}\)</span>，令<span class="math notranslate nohighlight">\(dw=\sqrt{\Delta t}\varepsilon\)</span>，我们先离散化扩散公式：
+$<span class="math notranslate nohighlight">\(
+x_{t+\Delta t}-x_{t}=f(x_{t},t)\Delta t+g(t)\underline{\sqrt{\Delta t}}\varepsilon, \varepsilon\sim\mathcal{N}(0,I) \\
+x_{t+\Delta t}=x_{t}+f(x_{t},t)\Delta t+g(t)\underline{\sqrt{\Delta t}}\varepsilon, \varepsilon\sim\mathcal{N}(0,I)\\
+p(x_{t+\Delta t}|x_t)\sim \mathcal N (x_{t}+f(x_{t},t)\Delta t, g^2(t)\Delta t I)
+\)</span>$</p>
+<p>重建（<span class="math notranslate nohighlight">\(x_{t+\Delta t}\rightarrow x_t\)</span>）公式可由贝叶斯公式得到：</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{align}
+p(x_t|x_{t+\Delta t}) &amp;= \frac{p(x_{t+\Delta t}|x_t)P(x_t)}{px_{t+\Delta t}}\\
+&amp;=p(x_{t+\Delta t}|x_t)\mathrm{exp}(\mathrm{log} p(x_t)-\mathrm{log}p(x_{t+\Delta t}))
+\end{align}
+\end{split}\]</div>
+<blockquote>
+<div><p>写为指数的形式为了方便最后凑出score的形式。</p>
+</div></blockquote>
+<p>对<span class="math notranslate nohighlight">\(\mathrm{log}p(x_{t+\Delta t}))\)</span>作一阶泰勒展开，可以化简为：</p>
+<p><img alt="" src="https://ossjiyaoliu.oss-cn-beijing.aliyuncs.com/uPic/image-20240110235351096.png" /></p>
+<p>实际上，<span class="math notranslate nohighlight">\(logp(x_{t+\Delta_t})\)</span>为关于x和t的函数，因此一阶导有两项。代入<span class="math notranslate nohighlight">\(p(x_{t+\Delta t}|x_t)\)</span>并进行配方：</p>
+<p><img alt="" src="https://ossjiyaoliu.oss-cn-beijing.aliyuncs.com/uPic/image-20240110235914773.png" /></p>
+<p>当<span class="math notranslate nohighlight">\(\Delta t \rightarrow0\)</span>，对上式进行近似（含<span class="math notranslate nohighlight">\(\Delta_t\)</span>一次项为0）。因为我们是<span class="math notranslate nohighlight">\(x_{t+\Delta t}\rightarrow x_t\)</span>的过程，我们希望从推导的高斯分布提取均值和方差，我们希望均值和方差由<span class="math notranslate nohighlight">\(t+\Delta t\)</span>提供，通过更换变量名。近似结果为：</p>
+<p><img alt="" src="https://ossjiyaoliu.oss-cn-beijing.aliyuncs.com/uPic/xbbrdr.png" /></p>
+<p>那么可以得到每一步采样结果<span class="math notranslate nohighlight">\(p(x_t|x_{t+\Delta t })\)</span>的均值和方差为：</p>
+<p><img alt="" src="https://ossjiyaoliu.oss-cn-beijing.aliyuncs.com/uPic/iQnfBA.png" /></p>
+<p>将上式写成连续形式，即<strong>SDE的采样过程为：</strong>
+$<span class="math notranslate nohighlight">\(
+\mathrm{d}\mathbf{x}=[\mathbf{f}(\mathbf{x},t)-g(t)^2\nabla_\mathbf{x}\log p_t(\mathbf{x})]\mathrm{d}t+g(t)\mathrm{d}\mathbf{\bar{w}},
+\)</span>$
+实际实验中，离散的采样过程为</p>
+<p><img alt="" src="https://ossjiyaoliu.oss-cn-beijing.aliyuncs.com/uPic/image-20240111001557852.png" /></p>
+<p>可以发现，离散化后的采样公式中存在我们需要估计的score。</p>
+</section>
+<section id="vevp">
+<h2><span class="section-number">1.2.10. </span>补充2：VE和VP等价性证明<a class="headerlink" href="#vevp" title="Permalink to this heading">#</a></h2>
+<p>通过一些简单的参数变换，我们可以证明出VE-SDE和VP-SDE是等价的：</p>
+<p><img alt="" src="https://ossjiyaoliu.oss-cn-beijing.aliyuncs.com/uPic/8tMPXi.png" /></p>
+</section>
+<section id="id4">
+<h2><span class="section-number">1.2.11. </span>总结<a class="headerlink" href="#id4" title="Permalink to this heading">#</a></h2>
+<p>本文使用SDE模型将score-based model和DDPM进行大一统。</p>
+<ul class="simple">
+<li><p>如果现在有一个训练好的DDPM，那么其加一个系数就是Score estimator。</p></li>
+<li><p>通过一些简单的参数变换，我们可以证明出<strong>VE-SDE和VP-SDE是等价的</strong>。</p></li>
+</ul>
+<p>存在的挑战</p>
+<ul class="simple">
+<li><p>采样速度慢：ODE求解加速，隐空间diffusion，…</p></li>
+<li><p>如何处理离散数据分布（分数是定义在连续分布上）：构建autoencoder，将离散数据分布映射到连续空间上</p></li>
+</ul>
+</section>
+<section id="id5">
+<h2><span class="section-number">1.2.12. </span>参考<a class="headerlink" href="#id5" title="Permalink to this heading">#</a></h2>
+<ul class="simple">
+<li><p><a class="reference external" href="https://yang-song.net/blog/2021/score/">blog | Generative Modeling by Estimating Gradients of the Data Distribution</a></p></li>
+<li><p><a class="reference external" href="https://arxiv.org/abs/2011.13456">Song Y, Sohl-Dickstein J, Kingma D P, et al. Score-Based Generative Modeling through Stochastic Differential Equations[C]//International Conference on Learning Representations. 2020.</a></p></li>
+<li><p><a class="reference external" href="https://www.bilibili.com/video/BV19M411z7hS?vd_source=225dba48b31d269151658db856705273">【扩散模型 Diffusion Model 3-2 SDE（一）】</a></p></li>
+<li><p><a class="reference external" href="https://www.bilibili.com/video/BV1814y1n7Eh?vd_source=225dba48b31d269151658db856705273">【扩散模型 Diffusion Model 3-3 SDE（二）】</a></p></li>
+<li><p><a class="reference external" href="https://www.bilibili.com/video/BV1GY411d7Gy?vd_source=225dba48b31d269151658db856705273">【扩散模型 Diffusion Model 3-4 SDE（三）】</a></p></li>
+<li><p><a class="reference external" href="https://blog.csdn.net/qq_43800752/article/details/129422654">https://blog.csdn.net/qq_43800752/article/details/129422654</a></p></li>
+<li><p><a class="reference external" href="https://www.bilibili.com/video/BV1Dd4y1A7oz?vd_source=225dba48b31d269151658db856705273">62、Score Diffusion Model分数扩散模型理论与完整PyTorch代码详细解读</a></p></li>
+</ul>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./深度学习应用/生成式模型"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer">
+                  <!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="20240110_%E6%89%A9%E6%95%A3%E6%A8%A1%E5%9E%8BScore-based%20model%E7%B2%BE%E8%AE%B2.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title"><span class="section-number">1.1. </span>扩散模型 | 1.Score-based model精讲</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="../%E9%80%86%E9%97%AE%E9%A2%98intro.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><span class="section-number">2. </span>逆问题</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">1.2.1. 摘要</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">1.2.2. 为什么要用SDE？</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sde-based-diffusion-process">1.2.3. SDE-based Diffusion Process</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sde-based-reconstruction-sampling-inference-process">1.2.4. SDE-based Reconstruction/Sampling/Inference Process</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#denoising-score-matchingsde">1.2.5. 通过denoising score matching估计反向SDE</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tips-of-designing-scoring-based-models">1.2.6. Tips of designing scoring based models</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ddpmscore-based-model">1.2.7. DDPM和score-based model统一</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ve-sde-ncsn-score-based-model-vp-sde-ddpm">1.2.7.1. VE-SDE(NCSN / Score-based model)和VP-SDE（DDPM）</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ve-sdevp-sdesde">1.2.7.2. VE-SDE、VP-SDE和SDE的前向/扩散过程的关系</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ddpm-denoiser-score-estimator">1.2.7.3. DDPM denoiser 和score estimator的关系</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#minstscore-based-model">1.2.8. 代码实战：MINST数据训练一个score-based model</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">1.2.9. 补充1：逆向SDE的推导</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#vevp">1.2.10. 补充2：VE和VP等价性证明</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">1.2.11. 总结</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">1.2.12. 参考</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Jiyao Liu
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  <p class="copyright">
+    
+      © Copyright 2022.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=ac02cc09edc035673794"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=ac02cc09edc035673794"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

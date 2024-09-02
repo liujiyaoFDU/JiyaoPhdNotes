@@ -11,10 +11,18 @@ parts:
   - file: basic/jupyter_book
   - file: basic/notebooks
 
-- caption: Math
+- caption: 数学基础
   numbered: true # Number your chapters and sections
   chapters:
-  - file: math/matrix_analysis
+  - file: 矩阵分析intro
+  sections:
+    - file: math/matrix_analysis
+    - file: "math/凸优化/交替向乘子法(Alternating_Direction_Method_of_Multipliers_ADMM)"
+    - file: "math/凸优化/20240326 Krylov Subspace Regularization for Inverse Problems"
+  -file: 统计intro
+  sections:
+    - file: "math/统计/20240204_20贝叶斯推断入门.md"
+    - file: "math/统计/20240204_贝叶斯推断进阶.md"
 
 
 - caption: PRML notes
@@ -40,15 +48,22 @@ parts:
   chapters:
   - file: research/evidential_regression
   sections:
-  - file: research/Liver_Translation/paper_notes_1
-  - file: research/Liver_Translation/paper_notes_1
+    - file: research/Liver_Translation/paper_notes_1
+    - file: "research/文章阅读记录intro"
+    - file: research/文献阅读记录/20230614_TV_CS
+    - file: research/文献阅读记录/202401_文章阅读
+    - file: research/文献阅读记录/202403文章阅读
 
 - caption: MRI notes
   numbered: true # Number your chapters and sections
-  chapters:
-  - file:  MRI/MT-CEST-NOE
+  chapters: 
+  - file:  MRI原理/20231018_MT_CEST_NOE
+  - file:  MRI原理/20230709_Parallel_MRI_reconstruction
+  - file:  "MRI原理/20230714_Awesome MRI Recon"
+  - file:  "MRI原理/20230731_MRI重建文献整理"
+  - file:  "MRI原理/20230725_Phase_Unwrapping_and_Background_Removal"
 
-- caption: Pytorch
+- caption: Pytorch框架
   numbered: true # Number your chapters and sections
   chapters:
   - file: pytorch/模型拓扑结构
@@ -56,9 +71,38 @@ parts:
     - file: pytorch/hook
     - file: pytorch/computation_graph
     - file: pytorch/torch.gather
+  - file: pytorch/20240528_pytorch加速训练技巧
 
-- caption: 工具使用
+- caption: 图像处理基础
+  numbered: true # Number your chapters and sections
+  chapters:
+  - file: 图像(信号)处理基础/20230918_压缩感知
+
+- caption: 深度学习基础
+  numbered: true # Number your chapters and sections
+  chapters:
+  - file: 深度学习基础/DL_intro.md
+
+- caption: 深度学习应用
+  numbered: true # Number your chapters and sections
+  chapters:
+  - file: 深度学习应用/生成式模型intro
+    sections:
+    - file: 深度学习应用/生成式模型/20240110_扩散模型Score-based model精讲
+    - file: 深度学习应用/生成式模型/20240110_扩散模型SDE精讲
+    - file: 深度学习应用/生成式模型/20240111_扩散模型应用
+  - file: 深度学习应用/逆问题intro
+    sections:
+    - file: "深度学习应用/逆问题/20230102_Diffusion_model_fo_the_inverse_problem"
+    - file: "深度学习应用/逆问题/20230717_ADMM_CSNet_note"
+    - file: "深度学习应用/逆问题/20230719_ADMM_CSNet_code"
+    - file: "深度学习应用/逆问题/20230708_使用数据驱动模型求解逆问题"
+    - file: "深度学习应用/逆问题/20230808_图像逆问题"
+
+- caption: 工具使用解决方案
   numbered: true # Number your chapters and sections
   chapters:
   - file: tools/latex_symbol
   - file: tools/常用工具
+  - file: "tools/20220503typora+upic+阿里云OSS+坚果云+有道云笔记构建专属笔记系统"
+  - file: "tools/20240202_XHR_failed"

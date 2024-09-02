@@ -15,9 +15,6 @@ document.writeln("</div>");
 </script>
 ```
 
-
-
-
 ## Acknowledgements
 
 Special thanks to [Jupyter Book](https://github.com/executablebooks/jupyter-book) for this open-source tool for building publication-quality books and documents from computational material.

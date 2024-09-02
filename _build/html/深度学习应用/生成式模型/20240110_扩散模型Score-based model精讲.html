@@ -1,0 +1,754 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>1.1. 扩散模型 | 1.Score-based model精讲 &#8212; 阿土的炼丹炉</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=ac02cc09edc035673794" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=ac02cc09edc035673794" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=ac02cc09edc035673794" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=ac02cc09edc035673794" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" href="../../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=ac02cc09edc035673794" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=ac02cc09edc035673794" />
+  <script src="../../_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=ac02cc09edc035673794"></script>
+
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/clipboard.min.js"></script>
+    <script src="../../_static/copybutton.js"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '深度学习应用/生成式模型/20240110_扩散模型Score-based model精讲';</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="1.2. 扩散模型 | 2.SDE精讲" href="20240110_%E6%89%A9%E6%95%A3%E6%A8%A1%E5%9E%8BSDE%E7%B2%BE%E8%AE%B2.html" />
+    <link rel="prev" title="1. 生成式模型" href="../%E7%94%9F%E6%88%90%E5%BC%8F%E6%A8%A1%E5%9E%8Bintro.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+  
+
+<a class="navbar-brand logo" href="../../intro.html">
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/logo.jpg" class="logo__image only-light" alt="Logo image"/>
+    <script>document.write(`<img src="../../_static/logo.jpg" class="logo__image only-dark" alt="Logo image"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../../intro.html">
+                    Jiyao Liu’s Phd lecture notebook
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Basic Guides</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../basic/jupyter_book.html">1. Jupyter Book 使用指南</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">PRML notes</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../PRML/intro.html">PRML</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../PRML/math_basic.html">数学基础</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../PRML/Exponential_Family_Distribution.html">指数族分布</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../PRML/2023_11_05_PGM1.html">概率图模型入门</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../PRML/%E6%A6%82%E7%8E%87%E5%9B%BE%E6%A8%A1%E5%9E%8B%E6%80%BB.html">概率图模型</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../PRML/2023_11_12_Kalman_Filter.html">线性动态系统-卡曼滤波（Kalman Filter）</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../PRML/2023_11_15_Pacticle_Filter.html">Particle Filter</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">学术报告</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../Report/acad_lunch_zhuang_wang.html">1. 20231016 | 庄吓海/王成彦-可解释医学影像分析</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Report/report-rec.html">2. VALSE 20200415 |  机器学习 vs 压缩感知：核磁共振成像与重建</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">research</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../research/evidential_regression.html">1. Evidential Learning and Uncentainty</a></li>
+
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">MRI notes</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../MRI%E5%8E%9F%E7%90%86/20231018_MT_CEST_NOE.html">1. MT&amp;CEST&amp;NOE 磁化转移定量成像</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../MRI%E5%8E%9F%E7%90%86/20230709_Parallel_MRI_reconstruction.html">2. Parallel MRI reconstruction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../MRI%E5%8E%9F%E7%90%86/20230714_Awesome%20MRI%20Recon.html">3. Awesome Accelerated-MRI-Reconstruction-Papers </a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="../../MRI%E5%8E%9F%E7%90%86/20230731_MRI%E9%87%8D%E5%BB%BA%E6%96%87%E7%8C%AE%E6%95%B4%E7%90%86.html">5. 传统方法</a></li>
+
+
+
+
+
+
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Pytorch框架</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../pytorch/%E6%A8%A1%E5%9E%8B%E6%8B%93%E6%89%91%E7%BB%93%E6%9E%84.html">1. 模型拓扑结构</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../pytorch/hook.html">1.1. 注册钩子函数（register_forward_hook）</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../pytorch/computation_graph.html">1.2. 计算图构建细节</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../pytorch/torch.gather.html">1.3. Torch.gather 索引</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../pytorch/20240528_pytorch%E5%8A%A0%E9%80%9F%E8%AE%AD%E7%BB%83%E6%8A%80%E5%B7%A7.html">2. pytorch加速训练技巧</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">深度学习应用</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="../%E7%94%9F%E6%88%90%E5%BC%8F%E6%A8%A1%E5%9E%8Bintro.html">1. 生成式模型</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">1.1. 扩散模型 | 1.Score-based model精讲</a></li>
+<li class="toctree-l2"><a class="reference internal" href="20240110_%E6%89%A9%E6%95%A3%E6%A8%A1%E5%9E%8BSDE%E7%B2%BE%E8%AE%B2.html">1.2. 扩散模型 | 2.SDE精讲</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../%E9%80%86%E9%97%AE%E9%A2%98intro.html">2. 逆问题</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-3"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../%E9%80%86%E9%97%AE%E9%A2%98/20230102_Diffusion_model_fo_the_inverse_problem.html">2.1. 【Method】inverse problem | 基于diffusion model的图像逆问题求解</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../%E9%80%86%E9%97%AE%E9%A2%98/20230717_ADMM_CSNet_note.html">2.2. 【method】ADMM-CSNet |  一种图像压缩感知重建的深度学习方法（1）- 方法解析</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../%E9%80%86%E9%97%AE%E9%A2%98/20230719_ADMM_CSNet_code.html">2.3. ADMM CSNet代码解析</a></li>
+</ul>
+</li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">工具使用</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../tools/latex_symbol.html">1. Latex常用符号表</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/%E5%B8%B8%E7%94%A8%E5%B7%A5%E5%85%B7.html">2. 常用工具</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2F深度学习应用/生成式模型/20240110_扩散模型Score-based model精讲.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/深度学习应用/生成式模型/20240110_扩散模型Score-based model精讲.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script>
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>扩散模型 | 1.Score-based model精讲</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">1.1.1. 摘要</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">1.1.2. score-based model概述</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#score">1.1.3. “score”的概念</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#langevin-dynamics">1.1.4. 郎之万动力学（Langevin dynamics）</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#naive-score-based-generative-modeling-and-its-pitfalls">1.1.5. Naive score-based generative modeling and its pitfalls</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#defination-of-noise-conditional-score-networks-ncsn">1.1.6. Defination of Noise Conditional Score Networks (NCSN)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ncsn">1.1.7. 如何训练NCSN？</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#nscn">1.1.8. NSCN如何推理？</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#score-matching-for-score-estimation">1.1.9. 补充1：关于文章2.1 <strong>Score matching for score estimation</strong>的推导</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#inpainting">1.1.10. 补充2：Inpainting思路</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">1.1.11. 总结</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">1.1.12. 参考</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <p>#! <a class="reference external" href="https://zhuanlan.zhihu.com/p/677141632">https://zhuanlan.zhihu.com/p/677141632</a></p>
+<p>[toc]</p>
+<section class="tex2jax_ignore mathjax_ignore" id="score-based-model">
+<h1><span class="section-number">1.1. </span>扩散模型 | 1.Score-based model精讲<a class="headerlink" href="#score-based-model" title="Permalink to this heading">#</a></h1>
+<p><img alt="" src="https://ossjiyaoliu.oss-cn-beijing.aliyuncs.com/uPic/image-20240110221752107.png" /></p>
+<p>本文主要讲解score-based model的开山之作，发表于2019年NIPS的<strong>Generative Modeling by Estimating Gradients of the</strong> <strong>Data Distribution</strong>，也称作<em>Noise Conditional Score Network (NCSN)</em>。这也是我非常喜欢的一个工作，从文章的撰写到算法的设计以及代码的实现，足以看出作者多年积累的深厚的数理和代码底蕴。</p>
+<blockquote>
+<div><p>Paper: <a class="reference external" href="https://arxiv.org/abs/1907.05600">https://arxiv.org/abs/1907.05600</a></p>
+<p>Code: <a class="github reference external" href="https://github.com/ermongroup/ncsn">ermongroup/ncsn</a></p>
+</div></blockquote>
+<section id="id1">
+<h2><span class="section-number">1.1.1. </span>摘要<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h2>
+<p>本文提出了一个全新的生成模型，不是直接学习数据的分布，而是学习分布的梯度。通过分布的score function便可以得到梯度，逐步逼近目标数据。假设通过score matching方法得到了score模型，便可以使用郎之万动力学迭代过程从一个分布走到目标分布。并且，因为当数据存在于低维流形上时，梯度可能不明确且难以估计，所以我们通过不同水平的高斯噪声扰动数据，实现更精确估计数据分布的梯度。</p>
+</section>
+<section id="id2">
+<h2><span class="section-number">1.1.2. </span>score-based model概述<a class="headerlink" href="#id2" title="Permalink to this heading">#</a></h2>
+<p>给定一个dataset <span class="math notranslate nohighlight">\(\{\mathbf{x}_1, \mathbf{x}_2, \cdots, \mathbf{x}_N\}\)</span> 服从分布<span class="math notranslate nohighlight">\(p(x)\)</span>，我们的目标是训练一个生成器去近似分布<span class="math notranslate nohighlight">\(p(x)\)</span>。我们可以通过从该近似分布中采样，以获取新的数据。</p>
+<p>我们首先定义一个概率分布。在likelihood based models中，我们定义生成的normalized probability <strong>density function</strong>为
+$<span class="math notranslate nohighlight">\(
+\begin{align} p_\theta(\mathbf{x}) = \frac{e^{-f_\theta(\mathbf{x})}}{Z_\theta}, \end{align}
+\)</span><span class="math notranslate nohighlight">\(
+其中，\)</span>z_\theta &gt; 0<span class="math notranslate nohighlight">\(是一个**normalizing constant**，保证了\)</span>\int p_\theta(\mathbf{x}) \textrm{d} \mathbf{x} = 1<span class="math notranslate nohighlight">\( ，\)</span>f_\theta(\mathbf{x}) \in \mathbb{R}<span class="math notranslate nohighlight">\(是一个可学习的function（一般是一个神经网络或者解析表达式）。我们可以通过最大化likelihood来train \)</span>p_\theta(x)<span class="math notranslate nohighlight">\( ：
+\)</span><span class="math notranslate nohighlight">\(
+\begin{align} \max_\theta \sum_{i=1}^N \log p_\theta(\mathbf{x}i).  \end{align}
+\)</span><span class="math notranslate nohighlight">\(
+*为了计算\)</span>p_\theta (x)<span class="math notranslate nohighlight">\(*，我们必须计算归一化常数\)</span>z_\theta<span class="math notranslate nohighlight">\(。根据定义\)</span>z_\theta=\int_{x}e^{-f_\theta(x)}dx<span class="math notranslate nohighlight">\( ，然而计算这样一个积分常数并不容易。因此，为了使最大似然训练可行，基于似然的模型必须**限制其模型架构**（例如：a.flow-based model中要求\)</span>f_\theta<span class="math notranslate nohighlight">\(的雅可比矩阵可逆，具体来说可以参考[NICE模型](https://arxiv.org/abs/1410.8516)的网络设计，其采用了独特的**Coupling Layer**；b.自回归模型中的因果卷积）。这样做使得\)</span>z_\theta<span class="math notranslate nohighlight">\(近似\)</span>\int_{x}e^{-f_\theta(x)}dx$或者易于处理（例如，VAE 中的变分推断，或 MCMC 采样）这可能在计算上很昂贵）。</p>
+<p>通过score function 替代 density function，我们可以避开难以处理的normalizing constants问题。即<strong>score-based model不是直接学习概率分布，而是学习score</strong>。</p>
+<p>下面这幅图展示了score-based model最基本的想法：假设我们已经估计得到数据的score，也就是log概率密度的梯度，那么便可以通过类梯度下降（文中为<strong>朗之万动力学</strong>）的形式，逐渐从一个随机采样点移动到我们想要的分布。</p>
+<p><img alt="score-based model" src="https://ossjiyaoliu.oss-cn-beijing.aliyuncs.com/uPic/87TjuJ.png" /></p>
+</section>
+<section id="score">
+<h2><span class="section-number">1.1.3. </span>“score”的概念<a class="headerlink" href="#score" title="Permalink to this heading">#</a></h2>
+<p>接下来我们一步步介绍score-based model 的每一个组成。首先我们介绍一下score的概念。一般来说，生成式模型的目标是估计目标分布的概率<span class="math notranslate nohighlight">\(p_\theta(x)\)</span>，而s<strong>core function定义为数据样本的log密度的梯度：</strong><span class="math notranslate nohighlight">\(\nabla_\mathbf{x} \log p(\mathbf{x})\)</span> ，其中取对数log是为了把[0,1] 映射到无穷<span class="math notranslate nohighlight">\((-\infty,0]\)</span>范围。下图表示了数据样本的概率分布（蓝色）和log密度的梯度（箭头）。</p>
+<p><img alt="“score”的概念" src="https://ossjiyaoliu.oss-cn-beijing.aliyuncs.com/uPic/wSGalX.png" /></p>
+<p>针对score function设计的model称为score-based model <span class="math notranslate nohighlight">\(\mathbf{s}_\theta(\mathbf{x})\)</span>，<strong>目标是希望学习到一个<span class="math notranslate nohighlight">\(\mathbf{s}_\theta(\mathbf{x}) \approx \nabla_\mathbf{x} \log p(\mathbf{x})\)</span></strong>。举个例子，我们可以容易地使用energy-based model 参数化一个score-based model：
+$<span class="math notranslate nohighlight">\(
+\begin{equation} \mathbf{s}\theta (\mathbf{x}) = \nabla_{\mathbf{x}} \log p_\theta (\mathbf{x} ) = -\nabla_{\mathbf{x}} f_\theta (\mathbf{x}) - \underbrace{\nabla_\mathbf{x} \log Z_\theta}_{const}{=0} = -\nabla\mathbf{x} f_\theta(\mathbf{x}). \end{equation}
+\)</span><span class="math notranslate nohighlight">\(
+和likelihood方法相同，我们可以最小化**Fisher divergence**去训练模型：
+\)</span><span class="math notranslate nohighlight">\(
+\begin{equation} \mathbb{E}{p(\mathbf{x})}[\| \nabla_\mathbf{x} \log p(\mathbf{x}) - \mathbf{s}_\theta(\mathbf{x}) \|2^2] \end{equation}
+\)</span><span class="math notranslate nohighlight">\(
+*然而，直接计算Fisher divergence是不可行的，因为数据的score\)</span>\nabla_\mathbf{x} \log p(\mathbf{x})$*是未知的。因此，我们改变思路，用一种叫<strong>score matching</strong>的方法去求解。score match可以直接在数据集上估计，并可以使用SGD进行优化。实际上，<strong>score-based model的唯一要求是输入和输出的维度应当相同</strong>。</p>
+</section>
+<section id="langevin-dynamics">
+<h2><span class="section-number">1.1.4. </span>郎之万动力学（Langevin dynamics）<a class="headerlink" href="#langevin-dynamics" title="Permalink to this heading">#</a></h2>
+<p>建立好score-based model <span class="math notranslate nohighlight">\(\mathbf{s}_\theta(\mathbf{x}) \approx \nabla\mathbf{x} \log p(\mathbf{x})\)</span>之后，相当于我们可以通过估计的score一步一步的逼近真实分布。我们可以使用Langevin dynamics迭代过程从一个任意分布走到目标分布。Langevin dynamics提供一种MCMC过程，仅使用<span class="math notranslate nohighlight">\(\nabla_\mathbf{x} \log p(\mathbf{x})\)</span>，去从<span class="math notranslate nohighlight">\(p(x)\)</span>分布中采样。具体来说，我们给定一个先验分布<span class="math notranslate nohighlight">\(\mathbf{x}_0 \sim \pi(\mathbf{x})\)</span>​，生成一系列链式结果，其迭代代公式如下：
+$<span class="math notranslate nohighlight">\(
+\mathbf{x}_{i+1} \gets \mathbf{x}i + \epsilon \nabla_\mathbf{x} \log p(\mathbf{x}) + \sqrt{2\epsilon}~ \mathbf{z}_i, \quad i=0,1,\cdots, K
+\)</span><span class="math notranslate nohighlight">\(
+其中，\)</span>\mathbf{z}_i \sim \mathcal{N}(0, I)<span class="math notranslate nohighlight">\(，\)</span>\epsilon \to 0<span class="math notranslate nohighlight">\(，\)</span>K \to \infty<span class="math notranslate nohighlight">\(，最终\)</span>\mathbf{x}_K<span class="math notranslate nohighlight">\(收敛为\)</span>p(\mathbf{x})<span class="math notranslate nohighlight">\(的采样。当 \)</span>\epsilon<span class="math notranslate nohighlight">\(足够小、\)</span>K$足够大时，误差可以忽略不计。</p>
+<p>当得到<span class="math notranslate nohighlight">\(\mathbf{s}_\theta(\mathbf{x}) \approx \nabla\mathbf{x} \log p(\mathbf{x})\)</span>之后，我们使用下面公式进行郎之万动力学采样：
+$<span class="math notranslate nohighlight">\(
+\mathbf{x}_{i+1} \gets \mathbf{x}i + \epsilon \nabla\mathbf{x} \log p(\mathbf{x}) + \sqrt{2\epsilon}~ \mathbf{z}_i, \quad i=0,1,\cdots, K
+\)</span>$</p>
+<p><img alt="Langevin dynamics sampling" src="https://ossjiyaoliu.oss-cn-beijing.aliyuncs.com/uPic/langevin.gif" /></p>
+</section>
+<section id="naive-score-based-generative-modeling-and-its-pitfalls">
+<h2><span class="section-number">1.1.5. </span>Naive score-based generative modeling and its pitfalls<a class="headerlink" href="#naive-score-based-generative-modeling-and-its-pitfalls" title="Permalink to this heading">#</a></h2>
+<p>根据上述方法实现的生成过程依旧是有问题的：**在数据密度较低的位置，score的估计往往是不准确的。**由于随机采样点很大程度会落在概率密度较低的位置，因此推理阶段的早期，模型很容易根据错误的梯度而脱轨，不容易获得较好的结果。</p>
+<blockquote>
+<div><p>为什么在数据密度较低的位置，score的估计往往是不准确的？</p>
+<p>：模型的优化目标Fisher divergence可以写成如下形式：</p>
+<div class="math notranslate nohighlight">
+\[ \mathbb{E}_{p(\mathbf{x})}[\| \nabla_\mathbf{x} \log p(\mathbf{x}) - \mathbf{s}*\theta(\mathbf{x}) \|_2^2] = \int p(\mathbf{x}) \| \nabla_\mathbf{x} \log p(\mathbf{x}) - \mathbf{s}_\theta(\mathbf{x}) \|_2^2 \mathrm{d}\mathbf{x}. \]</div>
+<p>由于真实数据的得分函数和基于得分的模型之间的差异被<span class="math notranslate nohighlight">\(p(x)\)</span>加权，所以在密度较低的区域中<span class="math notranslate nohighlight">\(p(x)\)</span>很小，这些差异很大程度上被忽略了。因此估计的score是不准确的。</p>
+</div></blockquote>
+<p><img alt="Estimated scores are only accurate in high density regions." src="https://ossjiyaoliu.oss-cn-beijing.aliyuncs.com/uPic/pitfalls.jpg" /></p>
+<p>如何实现准确估计score呢？为了更准确的估计score，我们对原始数据加噪声以此来扩大数据密度范围，让原本低密度的数据区域膨胀，这样能够比较准确估计score的区域就扩大很多了。如下图：</p>
+<p><img alt="perturb data points with noise and train score-based models on the noisy data points instead" src="https://ossjiyaoliu.oss-cn-beijing.aliyuncs.com/uPic/single_noise.jpg" /></p>
+<p>然而，给原始分布加入噪声会导致原始分布发生改变。因此，所加的噪声需要去权衡。那么如何选择所加的噪声强度呢？我们现在所知道的理论是：</p>
+<ul class="simple">
+<li><p>对原始分布加较强的噪声，会使得更多的区域可以准确估计score，但是这样会严重损害原本的数据分布；</p></li>
+<li><p>对原始分布加较弱的噪声，会尽可能的避免损害原始数据的分布，但是这样会导致无法在大多数区域准确估计出score；</p></li>
+</ul>
+<p>那么文中给出了一个巧妙的解决思路，即：<strong>在推理的不同阶段加不同强度的噪声，推理的刚开始阶段噪声较大，推理的最终阶段噪声较小。</strong></p>
+<p>Inference算法流程图如下所示：</p>
+<p><img alt="NCSN inference via annealed Langevin dynamics " src="https://ossjiyaoliu.oss-cn-beijing.aliyuncs.com/uPic/image-20240110204129768.png" /></p>
+<p>可以看到，Sampling的迭代过程有两个循环，外循环是<span class="math notranslate nohighlight">\(L\)</span>种不同的噪声和步长Level。在每个level中，步长<span class="math notranslate nohighlight">\(\alpha_i\)</span>和噪声<span class="math notranslate nohighlight">\(\sigma_i\)</span>级别是固定的。内循环实际上就是前面提到的郎之万迭代过程。如果我们只有一个噪声级别，也就是<span class="math notranslate nohighlight">\(L=1\)</span>，那么整个流程几乎是和DDPM一致的。</p>
+</section>
+<section id="defination-of-noise-conditional-score-networks-ncsn">
+<h2><span class="section-number">1.1.6. </span>Defination of Noise Conditional Score Networks (NCSN)<a class="headerlink" href="#defination-of-noise-conditional-score-networks-ncsn" title="Permalink to this heading">#</a></h2>
+<p>NCSN定义如下，</p>
+<p><img alt="7KbrxT" src="https://ossjiyaoliu.oss-cn-beijing.aliyuncs.com/uPic/7KbrxT.png" /></p>
+<p>基于噪声的分数网络<span class="math notranslate nohighlight">\(\mathbf s_\theta(\mathbf x,\sigma)\)</span>可以估计任意噪声水平下的分数。噪声分数网络的设计如下：</p>
+<p><img alt="image-20240318144714833" src="https://ossjiyaoliu.oss-cn-beijing.aliyuncs.com/uPic/image-20240318144714833.png" /></p>
+</section>
+<section id="ncsn">
+<h2><span class="section-number">1.1.7. </span>如何训练NCSN？<a class="headerlink" href="#ncsn" title="Permalink to this heading">#</a></h2>
+<p>本文使用了一种<strong>denoise score matching</strong>的方法估计score。对于加噪的图像<span class="math notranslate nohighlight">\(q_\sigma(\tilde{\mathbf{x}}\mid\mathbf{x})=\mathcal{N}(\tilde{\mathbf{x}}\mid\mathbf{x},\sigma^2I)\)</span>，其对数密度梯度为<span class="math notranslate nohighlight">\(\nabla_{\tilde{\mathbf{x}}}\operatorname{log}q_{\sigma}(\tilde{\mathbf{x}}\mid\mathbf{x})=-(\tilde{\mathbf{x}}-\mathbf{x})/\sigma^{2}\)</span>（注意是对<span class="math notranslate nohighlight">\(\tilde{\mathbf{x}}\)</span>求导），给定一个噪声水平<span class="math notranslate nohighlight">\(\sigma\)</span>，，denoiser score matching的目标函数为：
+$<span class="math notranslate nohighlight">\(
+\ell(\boldsymbol{\theta};\sigma)\triangleq\frac{1}{2}\mathbb{E}_{p_{\mathrm{data}}(\mathbf{x})}\mathbb{E}_{\tilde{\mathbf{x}}\sim\mathcal{N}(\mathbf{x},\sigma^2I)}\left[\left\|\mathbf{s}_{\boldsymbol{\theta}}(\tilde{\mathbf{x}},\sigma)+\frac{\tilde{\mathbf{x}}-\mathbf{x}}{\sigma^2}\right\|_2^2\right]
+\)</span><span class="math notranslate nohighlight">\(
+那么，对于一系列噪声水平\)</span>\sigma \in {\sigma_i}_{i=1}^L<span class="math notranslate nohighlight">\(， 我们可以得到一个统一的目标函数：
+\)</span><span class="math notranslate nohighlight">\(
+\mathcal{L}(\boldsymbol{\theta};\{|\sigma_i\}_{i=1}^L)\triangleq\frac{1}{L}\sum_{i=1}^{L}\lambda(\sigma_i)\ell(\boldsymbol{\theta};\sigma_i),
+\)</span><span class="math notranslate nohighlight">\(
+其中，\)</span>\lambda(\sigma_i)&gt;0<span class="math notranslate nohighlight">\(是和\)</span>\sigma_i<span class="math notranslate nohighlight">\(有关的系数，为了平衡损失，使得每个加权项数量级范围接近。关于\)</span>\lambda(\sigma_i)&gt;0$的选择，文章中给定了一种方案，即让上述公式求和的每一项量级接近：</p>
+<p><img alt="" src="https://ossjiyaoliu.oss-cn-beijing.aliyuncs.com/uPic/image-20240110212822548.png" /></p>
+<p>其实，观察加噪的图像对数密度函数可知，我们想要估计的score，实际上和原图只差一个系数的关系，因此可以使用一个噪声估计网络来估计score。</p>
+<p>本人自己也写了一段训练的流程：</p>
+<p><img alt="" src="https://ossjiyaoliu.oss-cn-beijing.aliyuncs.com/uPic/image-20240110221710475.png" /></p>
+</section>
+<section id="nscn">
+<h2><span class="section-number">1.1.8. </span>NSCN如何推理？<a class="headerlink" href="#nscn" title="Permalink to this heading">#</a></h2>
+<p><img alt="" src="https://ossjiyaoliu.oss-cn-beijing.aliyuncs.com/uPic/swpg2s.png" /></p>
+<blockquote>
+<div><p><strong>说明1（为什么大噪声水平的郎之万采样结果可以作为下一步较小噪声水平的分布的初始化？）</strong>：As score estimation and Langevin dynamics perform better in <strong>high-density regions</strong>, samples from <span class="math notranslate nohighlight">\(q_{\sigma_1}(\mathbf x)\)</span> will serve as good initial samples for Langevin dynamics of <span class="math notranslate nohighlight">\(q_{\sigma_2}(\mathbf x)\)</span>. Similarly, <span class="math notranslate nohighlight">\(q_{\sigma_2}(\mathbf x)\)</span> provides good initial samples for <em>q<strong>σ</strong>i</em> (<strong>x</strong>), and finally we obtain samples of good quality from <span class="math notranslate nohighlight">\(q_{\sigma_L}(\mathbf x)\)</span>.</p>
+</div></blockquote>
+<blockquote>
+<div><p><strong>说明2（步长<span class="math notranslate nohighlight">\(\alpha_i\)</span>的选取）</strong>：</p>
+<p><img alt="" src="https://ossjiyaoliu.oss-cn-beijing.aliyuncs.com/uPic/sJmWyA.png" /></p>
+</div></blockquote>
+<blockquote>
+<div><p>**注意：**1. <span class="math notranslate nohighlight">\(\sigma\)</span>设置为等比数列比较好；2.参数更新时加上EMA更稳定；</p>
+</div></blockquote>
+</section>
+<section id="score-matching-for-score-estimation">
+<h2><span class="section-number">1.1.9. </span>补充1：关于文章2.1 <strong>Score matching for score estimation</strong>的推导<a class="headerlink" href="#score-matching-for-score-estimation" title="Permalink to this heading">#</a></h2>
+<p>分数匹配[24]最初是为了学习基于未知数据分布的i.i.d.样本的非标准化统计模型而设计的，在位置数据分布的情况下近似对数密度梯度。与典型的分数匹配不同，我们选择不使用基于能量的模型的梯度作为分数网络，以避免高阶梯度带来的额外计算。对于目标函数<span class="math notranslate nohighlight">\(\frac12\mathbb{E}_{p_{\mathrm{data}}}[\|\mathbf{s}_{\boldsymbol{\theta}}(\mathbf{x})-\nabla_{\mathbf{x}}\log p_{\mathrm{data}}(\mathbf{x})\|_{2}^{2}]\)</span>，标准的得分匹配等价于该目标函数的形式为：
+$<span class="math notranslate nohighlight">\(
+\mathbb{E}_{p_\text{data}(\mathbf{x})}\bigg[\operatorname{tr}(\nabla_{\mathbf{x}}\mathbf{s}_{\boldsymbol{\theta}}(\mathbf{x}))+\frac{1}{2}\left\|\mathbf{s}_{\boldsymbol{\theta}}(\mathbf{x})\right\|_{2}^{2}\bigg]
+\)</span>$</p>
+<blockquote>
+<div><p>上式的推导如下：
+$<span class="math notranslate nohighlight">\(
+\begin{aligned} &amp;\mathbb{E}_{p_{\mathrm{data}}}[\|\nabla_{\mathbf{x}}\log p_{\mathrm{data}}(\mathbf{x})-\mathbf{s}_{\boldsymbol{\theta}}(\mathbf{x})\|_{2}^{2}] \\=&amp;\frac{1}{2}\mathbb{E}_{p_\text{data}}[(\nabla_x \log p_\text{data}(x) - \nabla_x \log p_\theta(x))^2] \\ =&amp; \frac{1}{2} \int p_\text{data}(x) (\nabla_x \log p_\text{data}(x) - \nabla_x \log p_\theta(x))^2 \text{d}x\\ =&amp; \underbrace{\frac{1}{2} \int p_\text{data}(x) (\nabla_x \log p_\text{data}(x))^2 \text{d}x}_{\text{const}} + \frac{1}{2} \int p_\text{data}(x) (\nabla_x \log p_\theta(x))^2 \text{d} x \\ &amp;- \int p_\text{data}(x) \nabla_x \log p_\theta(x) \nabla_x \log p_\text{data}(x)\text{d}x. \end{aligned}
+\)</span><span class="math notranslate nohighlight">\(
+第三项等于：
+\)</span><span class="math notranslate nohighlight">\(
+\begin{aligned} &amp;- \int p_\text{data}(x) \nabla_x \log p_\theta(x) \nabla_x \log p_\text{data}(x) \text{d}x\\ 
+=&amp; - \int p_\text{data}(x) \nabla_x \log p_\theta(x) \frac{\nabla_x p_\text{data}(x)}{p_\text{data}(x)}\text{d} x\\ 
+=&amp; - \int \nabla_x \log p_\theta(x) \nabla_x p_\text{data}(x)\text{d} x\\ 
+\underbrace{=}_{\int udv=uv-\int vdu}&amp; - \underbrace{p_\text{data}(x) \nabla_x \log p_\theta(x)\bigg|_{-\infty}^{\infty}}_{when|x|\rightarrow\infty,p_{data}\rightarrow0} + \int p_\text{data}(x) \nabla_x^2 \log p_\theta(x) \text{d} x\\ {=}&amp; \mathbb{E}_{p_\text{data}}[\nabla_x^2 \log p_\theta(x)], \end{aligned}
+\)</span><span class="math notranslate nohighlight">\(
+因此，目标函数变为：
+\)</span><span class="math notranslate nohighlight">\(
+\mathbb{E}_{p_\text{data}}\bigg[\operatorname{tr}( \nabla_{\mathbf{x}}^2 \log p_\theta(\mathbf{x})) + \frac{1}{2} \| \nabla_\mathbf{x} \log p_\theta(\mathbf{x})\|_2^2 \bigg] + \text{const},
+\)</span>$
+本推导参考了：<a class="reference external" href="https://zhuanlan.zhihu.com/p/485023846%EF%BC%8C%E5%85%B7%E4%BD%93%E6%8E%A8%E5%AF%BC%E7%BB%86%E8%8A%82%E5%8F%AF%E4%BB%A5%E6%9F%A5%E7%9C%8B%E5%8E%9F%E6%96%87%E7%AB%A0%E3%80%82">https://zhuanlan.zhihu.com/p/485023846，具体推导细节可以查看原文章。</a></p>
+</div></blockquote>
+<p>上面等价的目标函数中，<span class="math notranslate nohighlight">\(\nabla_{\mathbf{x}}^2s_\theta(\mathbf{x})\)</span>为<span class="math notranslate nohighlight">\(s\)</span>的Jacobian。</p>
+<p>然而，在实际情况中，由于<span class="math notranslate nohighlight">\(\operatorname{tr}(\nabla_{\mathbf{x}}^2s_\theta(\mathbf{x}))\)</span>难以计算，因此score matching不能扩展到深度网络和高维数据。下面我们讨论两种常用的的大规模score matching方法：</p>
+<ol class="arabic simple">
+<li><p><strong>Denoising score matching</strong>：也就是本文使用的方法，前文已经说明，不多赘述。</p></li>
+<li><p><strong>Sliced score matching</strong>：使用随机投影方法近似<span class="math notranslate nohighlight">\(\operatorname{tr}(\nabla_{\mathbf{x}}^2s_\theta(\mathbf{x}))\)</span>，目标为：
+$<span class="math notranslate nohighlight">\(
+ \mathbb{E}_{p_{\mathbf{v}}}\mathbb{E}_{p_{\text{data}}}\left[\mathbf{v}^{\intercal}\nabla_{\mathbf{x}}\mathbf{s}_{\boldsymbol{\theta}}(\mathbf{x})\mathbf{v}+\frac{1}{2}\left\|\mathbf{s}_{\boldsymbol{\theta}}(\mathbf{x})\right\|_{2}^{2}\right]
+ \)</span>$</p></li>
+</ol>
+<p><img alt="Sliced score matching比Denoising score matching效果更好，但是时间消耗更大" src="https://ossjiyaoliu.oss-cn-beijing.aliyuncs.com/uPic/image-20240110221433082.png" /></p>
+</section>
+<section id="inpainting">
+<h2><span class="section-number">1.1.10. </span>补充2：Inpainting思路<a class="headerlink" href="#inpainting" title="Permalink to this heading">#</a></h2>
+<p>作者还提出了一种Inpainting的思路，也就是对于训练好的score-based model，可以直接拿来做Inpainting任务，这也成为了现在diffusion model来解决inverse problem的主流范式，可见作者的科研前瞻性。Inpainting任务和原始退火朗之万采样方式的差异只是多了第九行，<span class="math notranslate nohighlight">\(m\)</span>代表mask，<span class="math notranslate nohighlight">\(y\)</span>代表被mask之后的图像。也就是我们强制已知的部分不变，让生成式模型直接去做这个Inpainting任务。</p>
+<p><img alt="Inpainting算法伪代码" src="https://ossjiyaoliu.oss-cn-beijing.aliyuncs.com/uPic/BQcnMF.png" /></p>
+</section>
+<section id="id3">
+<h2><span class="section-number">1.1.11. </span>总结<a class="headerlink" href="#id3" title="Permalink to this heading">#</a></h2>
+<p>本文回答了为什么要在DDPM中加噪：本文的解答是为了更准确的估计score。</p>
+<p>本文是DDPM的一种更加直观的解释。本文指出去噪的方式，可以达到生成的效果，也就是<strong>估计噪声=估计score=估计目标分布的梯度</strong>。通过这种梯度，逐步采样到目标分布。</p>
+<p>本文提出的类似inpainting这种逆问题的求解，为之后的diffusion求解提供和很好的思路，也是现在大部分文章的主流。</p>
+</section>
+<section id="id4">
+<h2><span class="section-number">1.1.12. </span>参考<a class="headerlink" href="#id4" title="Permalink to this heading">#</a></h2>
+<ul class="simple">
+<li><p><a class="reference external" href="https://yang-song.net/blog/2021/score/">blog | Generative Modeling by Estimating Gradients of the Data Distribution</a></p></li>
+<li><p><a class="reference external" href="https://arxiv.org/pdf/1907.05600.pdf">Song Y, Ermon S. Generative modeling by estimating gradients of the data distribution[J]. Advances in neural information processing systems, 2019, 32.</a></p></li>
+<li><p><a class="reference external" href="https://www.bilibili.com/video/BV1VP411u71p?vd_source=225dba48b31d269151658db856705273">bilibili | 扩散模型 Diffusion Model 3-1 Score-based Model</a></p></li>
+</ul>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./深度学习应用/生成式模型"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer">
+                  <!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="../%E7%94%9F%E6%88%90%E5%BC%8F%E6%A8%A1%E5%9E%8Bintro.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title"><span class="section-number">1. </span>生成式模型</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="20240110_%E6%89%A9%E6%95%A3%E6%A8%A1%E5%9E%8BSDE%E7%B2%BE%E8%AE%B2.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><span class="section-number">1.2. </span>扩散模型 | 2.SDE精讲</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">1.1.1. 摘要</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">1.1.2. score-based model概述</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#score">1.1.3. “score”的概念</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#langevin-dynamics">1.1.4. 郎之万动力学（Langevin dynamics）</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#naive-score-based-generative-modeling-and-its-pitfalls">1.1.5. Naive score-based generative modeling and its pitfalls</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#defination-of-noise-conditional-score-networks-ncsn">1.1.6. Defination of Noise Conditional Score Networks (NCSN)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ncsn">1.1.7. 如何训练NCSN？</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#nscn">1.1.8. NSCN如何推理？</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#score-matching-for-score-estimation">1.1.9. 补充1：关于文章2.1 <strong>Score matching for score estimation</strong>的推导</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#inpainting">1.1.10. 补充2：Inpainting思路</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">1.1.11. 总结</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">1.1.12. 参考</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Jiyao Liu
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  <p class="copyright">
+    
+      © Copyright 2022.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=ac02cc09edc035673794"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=ac02cc09edc035673794"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

@@ -1,0 +1,873 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>1. 【method】稀疏与压缩感知 | 图像稀疏性及压缩感知方法白话讲解 &#8212; 阿土的炼丹炉</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=ac02cc09edc035673794" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=ac02cc09edc035673794" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=ac02cc09edc035673794" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=ac02cc09edc035673794" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=ac02cc09edc035673794" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=ac02cc09edc035673794" />
+  <script src="../_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=ac02cc09edc035673794"></script>
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '图像(信号)处理基础/20230918_压缩感知';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="1. 深度学习基础" href="../%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%A1%80/DL_intro.html" />
+    <link rel="prev" title="2. pytorch加速训练技巧" href="../pytorch/20240528_pytorch%E5%8A%A0%E9%80%9F%E8%AE%AD%E7%BB%83%E6%8A%80%E5%B7%A7.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+  
+
+<a class="navbar-brand logo" href="../intro.html">
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/logo.jpg" class="logo__image only-light" alt="Logo image"/>
+    <script>document.write(`<img src="../_static/logo.jpg" class="logo__image only-dark" alt="Logo image"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../intro.html">
+                    Jiyao Liu’s Phd lecture notebook
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Basic Guides</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../basic/jupyter_book.html">1. Jupyter Book 使用指南</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">PRML notes</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../PRML/intro.html">PRML</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../PRML/math_basic.html">数学基础</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../PRML/Exponential_Family_Distribution.html">指数族分布</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../PRML/2023_11_05_PGM1.html">概率图模型入门</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../PRML/%E6%A6%82%E7%8E%87%E5%9B%BE%E6%A8%A1%E5%9E%8B%E6%80%BB.html">概率图模型</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../PRML/2023_11_12_Kalman_Filter.html">线性动态系统-卡曼滤波（Kalman Filter）</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../PRML/2023_11_15_Pacticle_Filter.html">Particle Filter</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">学术报告</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../Report/acad_lunch_zhuang_wang.html">1. 20231016 | 庄吓海/王成彦-可解释医学影像分析</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Report/report-rec.html">2. VALSE 20200415 |  机器学习 vs 压缩感知：核磁共振成像与重建</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">research</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../research/evidential_regression.html">1. Evidential Learning and Uncentainty</a></li>
+
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">MRI notes</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../MRI%E5%8E%9F%E7%90%86/20231018_MT_CEST_NOE.html">1. MT&amp;CEST&amp;NOE 磁化转移定量成像</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../MRI%E5%8E%9F%E7%90%86/20230709_Parallel_MRI_reconstruction.html">2. Parallel MRI reconstruction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../MRI%E5%8E%9F%E7%90%86/20230714_Awesome%20MRI%20Recon.html">3. Awesome Accelerated-MRI-Reconstruction-Papers </a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="../MRI%E5%8E%9F%E7%90%86/20230731_MRI%E9%87%8D%E5%BB%BA%E6%96%87%E7%8C%AE%E6%95%B4%E7%90%86.html">5. 传统方法</a></li>
+
+
+
+
+
+
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Pytorch框架</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../pytorch/%E6%A8%A1%E5%9E%8B%E6%8B%93%E6%89%91%E7%BB%93%E6%9E%84.html">1. 模型拓扑结构</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../pytorch/hook.html">1.1. 注册钩子函数（register_forward_hook）</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../pytorch/computation_graph.html">1.2. 计算图构建细节</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../pytorch/torch.gather.html">1.3. Torch.gather 索引</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../pytorch/20240528_pytorch%E5%8A%A0%E9%80%9F%E8%AE%AD%E7%BB%83%E6%8A%80%E5%B7%A7.html">2. pytorch加速训练技巧</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">图像处理基础</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">1. 【method】稀疏与压缩感知 |  图像稀疏性及压缩感知方法白话讲解</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">深度学习基础</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%A1%80/DL_intro.html">1. 深度学习基础</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">深度学习应用</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%BA%94%E7%94%A8/%E7%94%9F%E6%88%90%E5%BC%8F%E6%A8%A1%E5%9E%8Bintro.html">1. 生成式模型</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%BA%94%E7%94%A8/%E7%94%9F%E6%88%90%E5%BC%8F%E6%A8%A1%E5%9E%8B/20240110_%E6%89%A9%E6%95%A3%E6%A8%A1%E5%9E%8BScore-based%20model%E7%B2%BE%E8%AE%B2.html">1.1. 扩散模型 | 1.Score-based model精讲</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%BA%94%E7%94%A8/%E7%94%9F%E6%88%90%E5%BC%8F%E6%A8%A1%E5%9E%8B/20240110_%E6%89%A9%E6%95%A3%E6%A8%A1%E5%9E%8BSDE%E7%B2%BE%E8%AE%B2.html">1.2. 扩散模型 | 2.SDE精讲</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%BA%94%E7%94%A8/%E7%94%9F%E6%88%90%E5%BC%8F%E6%A8%A1%E5%9E%8B/20240111_%E6%89%A9%E6%95%A3%E6%A8%A1%E5%9E%8B%E5%BA%94%E7%94%A8.html">1.3. 扩散模型 | 3.Score-based SDE for accelerated MRI精讲</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%BA%94%E7%94%A8/%E9%80%86%E9%97%AE%E9%A2%98intro.html">2. 逆问题</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-3"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%BA%94%E7%94%A8/%E9%80%86%E9%97%AE%E9%A2%98/20230102_Diffusion_model_fo_the_inverse_problem.html">2.1. 【Method】inverse problem | 基于diffusion model的图像逆问题求解</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%BA%94%E7%94%A8/%E9%80%86%E9%97%AE%E9%A2%98/20230717_ADMM_CSNet_note.html">2.2. 【method】ADMM-CSNet |  一种图像压缩感知重建的深度学习方法（1）- 方法解析</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%BA%94%E7%94%A8/%E9%80%86%E9%97%AE%E9%A2%98/20230719_ADMM_CSNet_code.html">2.3. ADMM CSNet代码解析</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%BA%94%E7%94%A8/%E9%80%86%E9%97%AE%E9%A2%98/20230708_%E4%BD%BF%E7%94%A8%E6%95%B0%E6%8D%AE%E9%A9%B1%E5%8A%A8%E6%A8%A1%E5%9E%8B%E6%B1%82%E8%A7%A3%E9%80%86%E9%97%AE%E9%A2%98.html">2.4. 使用数据驱动模型求解逆问题</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%BA%94%E7%94%A8/%E9%80%86%E9%97%AE%E9%A2%98/20230808_%E5%9B%BE%E5%83%8F%E9%80%86%E9%97%AE%E9%A2%98.html">2.5. 图像逆问题通用算法</a></li>
+</ul>
+</li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">工具使用解决方案</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../tools/latex_symbol.html">1. Latex常用符号表</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tools/%E5%B8%B8%E7%94%A8%E5%B7%A5%E5%85%B7.html">2. 常用工具</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tools/20220503typora%2Bupic%2B%E9%98%BF%E9%87%8C%E4%BA%91OSS%2B%E5%9D%9A%E6%9E%9C%E4%BA%91%2B%E6%9C%89%E9%81%93%E4%BA%91%E7%AC%94%E8%AE%B0%E6%9E%84%E5%BB%BA%E4%B8%93%E5%B1%9E%E7%AC%94%E8%AE%B0%E7%B3%BB%E7%BB%9F.html">3. typora+upic+阿里云OSS+坚果云+有道云笔记构建专属笔记系统</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tools/20240202_XHR_failed.html">4. Remote-SSH XHR failed无法访问远程服务器</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2F图像(信号)处理基础/20230918_压缩感知.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/图像(信号)处理基础/20230918_压缩感知.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script>
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>【method】稀疏与压缩感知 |  图像稀疏性及压缩感知方法白话讲解</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">1.1. 1. 为什么图像是可压缩的：图像空间的广阔</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sparsity">1.2. 2. 什么是Sparsity？</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">1.3. 3.压缩感知：简介</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">1.4. 4.压缩感知：数学公式</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">1.5. 5.压缩感知实例</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#l-1">1.5.1. 5.1 欠定系统的 <span class="math notranslate nohighlight">\(l_1\)</span>和稀疏解</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">1.5.2. 5.2 从稀疏观测中恢复音频信号</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">1.5.3. 5.3 压缩感知的关键——信号采样的随机性</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#sparsity-and-l1-norm">1.5.4. 5.4 Sparsity and <span class="math notranslate nohighlight">\(L1\)</span> Norm</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#when-it-works">1.6. 6. 压缩感知：When it works？</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sparse-regression">1.7. sparse regression</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sparse-representation-for-classification-src">1.8. Sparse representation for classification（SRC）</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">1.9. 参考资料</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <p>#! <a class="reference external" href="https://zhuanlan.zhihu.com/p/642740364">https://zhuanlan.zhihu.com/p/642740364</a></p>
+<section class="tex2jax_ignore mathjax_ignore" id="method">
+<h1><span class="section-number">1. </span>【method】稀疏与压缩感知 |  图像稀疏性及压缩感知方法白话讲解<a class="headerlink" href="#method" title="Permalink to this heading">#</a></h1>
+<p>[toc]</p>
+<section id="id1">
+<h2><span class="section-number">1.1. </span>1. 为什么图像是可压缩的：图像空间的广阔<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h2>
+<p>首先我们讨论一个重要的问题：为什么图像是可压缩的，亦或者说，图像是稀疏的。我们可以举一个例子：一个<span class="math notranslate nohighlight">\(20x20\)</span>的二值图像在空间中的可能性有<span class="math notranslate nohighlight">\(2^{400}\)</span>种，而人可以理解的图像也许只占<span class="math notranslate nohighlight">\(2^{400}\)</span>空间中的很小一部分，因此一幅图像只是这个巨大空间里的很小很小块分布。</p>
+<p><img alt="图像（像素）空间广阔，自然图像占据了空间的极小部分" src="https://ossjiyaoliu.oss-cn-beijing.aliyuncs.com/uPic/image-20230710235505854.png" /></p>
+</section>
+<section id="sparsity">
+<h2><span class="section-number">1.2. </span>2. 什么是Sparsity？<a class="headerlink" href="#sparsity" title="Permalink to this heading">#</a></h2>
+<p>在自然数据中观察到的固有结构意味着数据在适当的坐标系中允许稀疏表示。大多数自然信号，如图像和音频，都是高度可压缩的。这种可压缩性意味着，当在适当的基础上写入信号时，只有少数模式处于活动状态，从而减少了为了准确表示而必须存储的值的数量。即可压缩信号<span class="math notranslate nohighlight">\(\mathbf{x}\in \mathbb{R}^{n\times n }\)</span>可以通过一个变换基<span class="math notranslate nohighlight">\(\Psi\)</span>和一个稀疏向量<span class="math notranslate nohighlight">\(\mathbf{s} \in \mathbb{R}^n\)</span>（即绝大多数元素为0元素的向量）相乘的形式表示：
+$<span class="math notranslate nohighlight">\(
+\mathbf{x} = \Psi\mathbf{s}
+\)</span>$</p>
+<blockquote>
+<div><p>注意区分：下图中左图为稀疏表示，其中<span class="math notranslate nohighlight">\(\mathbf{s}\)</span>为稀疏向量，右图为另一种表示数据压缩方式，即使用低维的a表示数据。</p>
+<p><img alt="" src="https://ossjiyaoliu.oss-cn-beijing.aliyuncs.com/uPic/IMG_3992.jpg" /></p>
+</div></blockquote>
+<p>接着，我们想进一步实现一个大胆的想法，**如果只得到了<span class="math notranslate nohighlight">\(\mathbf{x}\)</span>的一部分元素（如10%），那么可以推断出<span class="math notranslate nohighlight">\(\mathbf{s}\)</span>中非零的傅里叶系数。**这便是压缩感知的目标。</p>
+<p>但是，学过信号处理的同学都知道，对于一个信号（语音、图像等等），采样的频率要大于最大信号频率的两倍才可以很好的恢复信号，也就是鼎鼎大名的奈奎斯特采样定律。<strong>压缩感知突破了奈奎斯特采样定律，只通过高度欠采样的图像，实现较好的原始信号恢复</strong>。</p>
+</section>
+<section id="id2">
+<h2><span class="section-number">1.3. </span>3.压缩感知：简介<a class="headerlink" href="#id2" title="Permalink to this heading">#</a></h2>
+<p>说了这么多，我们来看一个具体的例子把。假设图<span class="math notranslate nohighlight">\(\mathbf{x}\)</span>通过傅里叶变换<span class="math notranslate nohighlight">\(\Psi\)</span>到频域<span class="math notranslate nohighlight">\(\mathbf{s}\)</span>，对<span class="math notranslate nohighlight">\(\mathbf{s}\)</span>中信号进行阈值截断后，我们期望仍然可以重建出高质量的图像，这应该是不难的，因为我们知道，在傅里叶空间中，低频信号能量最高，也集中在中心区域，而去掉一些能量较低的高频信号对结果的影响实际上是不大的。</p>
+<p><img alt="" src="https://ossjiyaoliu.oss-cn-beijing.aliyuncs.com/uPic/image-20230707230218312.png" /></p>
+<p>我们真正想解决的问题是下面这张图：如图所示，左上角的图是我们的采样结果，也就是低质量的观测值<span class="math notranslate nohighlight">\(\mathbf{y}\)</span>，是对真实图像<span class="math notranslate nohighlight">\(\mathbf{x}\)</span>的欠采样，我们希望通过<span class="math notranslate nohighlight">\(\mathbf{y}\)</span>变换得到<span class="math notranslate nohighlight">\(\mathbf{x}\)</span>的稀疏空间，从而重建出高质量的原始图像<span class="math notranslate nohighlight">\(\mathbf{x}\)</span>：<img alt="" src="https://ossjiyaoliu.oss-cn-beijing.aliyuncs.com/uPic/image-20230708001911190.png" /></p>
+<p>我们将上面过程数学化，也就是
+$<span class="math notranslate nohighlight">\(
+\mathbf{y} = \mathbf{C}\mathbf{x}\\
+=\mathbf{C}\Psi\mathbf{s}
+\)</span><span class="math notranslate nohighlight">\(
+其中\)</span>\mathbf{C}<span class="math notranslate nohighlight">\(为欠采样矩阵。我们希望通过观测\)</span>\mathbf{y}<span class="math notranslate nohighlight">\(求解出稀疏向量\)</span>\mathbf{s}<span class="math notranslate nohighlight">\(，得到\)</span>\mathbf{s}<span class="math notranslate nohighlight">\(后我们就可已通过逆变换得到原始的\)</span>\mathbf{x}$。</p>
+</section>
+<section id="id3">
+<h2><span class="section-number">1.4. </span>4.压缩感知：数学公式<a class="headerlink" href="#id3" title="Permalink to this heading">#</a></h2>
+<p>下图表示了<span class="math notranslate nohighlight">\(\mathbf{y} = \mathbf{C}\mathbf{x}
+=\mathbf{C}\Psi\mathbf{s}\)</span>的具体形式：</p>
+<p><img alt="" src="https://ossjiyaoliu.oss-cn-beijing.aliyuncs.com/uPic/image-20230708003726661.png" /></p>
+<blockquote>
+<div><p>说明：<span class="math notranslate nohighlight">\(\Psi\)</span>是一种通用变换基，上图中可以认为是离散余弦基，也可以使用傅里叶基或者小波基。</p>
+</div></blockquote>
+<p>根据上图我们不难发现：<span class="math notranslate nohighlight">\(\mathbf{y}\)</span>是一个0值较多的欠采样信号，因此该方程组是一个欠定方程组，<span class="math notranslate nohighlight">\(\mathbf{z}\)</span>有无数个解。因此我们需要用一些附加信息来找到这个非常特殊的<span class="math notranslate nohighlight">\(\mathbf{s}\)</span>，即最稀疏的 <span class="math notranslate nohighlight">\(\mathbf{s}\)</span>。</p>
+<p>因此，我们的目标为：
+$<span class="math notranslate nohighlight">\(
+\hat{s} = \arg\min \limits_{x} \Vert \mathbf{C}\Psi\mathbf{s} -\mathbf{y} \Vert_2 + \lambda L(\mathbf{s})
+\)</span>$</p>
+<blockquote>
+<div><p>在上式中，<span class="math notranslate nohighlight">\(L(\mathbf{s})\)</span>为罚函数。可以有很多种设计方式用来约束<span class="math notranslate nohighlight">\(\mathbf{s}\)</span>，例如：</p>
+<p>①<span class="math notranslate nohighlight">\(L(\mathbf{s}) = \Vert \mathbf{s} \Vert\)</span>，一范数促进目标有更多0元素(一般来说为了的到更稀疏的<span class="math notranslate nohighlight">\(\mathbf{s}\)</span>，<span class="math notranslate nohighlight">\(L_1\)</span>范数使用较多)。</p>
+<p>②当<span class="math notranslate nohighlight">\(L(\mathbf{s}) = \Vert \mathbf{s} \Vert_2\)</span>，二范数更容易将误差分散在各个元素上，以便具有可能得最小半径。</p>
+</div></blockquote>
+<p>下图为两种范数的结果，可以看到一范数的结果更加稀疏。</p>
+<p><img alt="" src="https://ossjiyaoliu.oss-cn-beijing.aliyuncs.com/uPic/image-20230708005642993.png" /></p>
+<blockquote>
+<div><p>最直观的方法是0范数，但是0范数是非凸的，因此很难求解。在近年用高概率范数替换0范数，这将收敛到我们真正想要的稀疏方案</p>
+</div></blockquote>
+<p>注意：前面的优化目标也可以写作：</p>
+<p><img alt="" src="https://ossjiyaoliu.oss-cn-beijing.aliyuncs.com/uPic/image-20230708010417682.png" /></p>
+<p>特别的，当观测含有噪声时，优化目标如下</p>
+<p><img alt="" src="https://ossjiyaoliu.oss-cn-beijing.aliyuncs.com/uPic/image-20230708010741325.png" /></p>
+</section>
+<section id="id4">
+<h2><span class="section-number">1.5. </span>5.压缩感知实例<a class="headerlink" href="#id4" title="Permalink to this heading">#</a></h2>
+<section id="l-1">
+<h3><span class="section-number">1.5.1. </span>5.1 欠定系统的 <span class="math notranslate nohighlight">\(l_1\)</span>和稀疏解<a class="headerlink" href="#l-1" title="Permalink to this heading">#</a></h3>
+<p>下面通过一个例子（python实现）观察两种范数作为罚函数的作用：</p>
+<p>我们比较线性方程 <code class="docutils literal notranslate"><span class="pre">y</span> <span class="pre">=</span> <span class="pre">Theta</span> <span class="pre">*</span> <span class="pre">s</span></code> 的 L1 范数最小化解和 L2 范数最小化解，并绘制它们的曲线和直方图。</p>
+<p>具体来说，代码中首先生成了一个随机的矩阵 <code class="docutils literal notranslate"><span class="pre">Theta</span></code> 和一个随机的向量 <code class="docutils literal notranslate"><span class="pre">y</span></code>，用于构造线性方程。然后，代码使用优化算法求解 L1 范数最小化问题，并得到最优解 <code class="docutils literal notranslate"><span class="pre">s_L1</span></code>，同时使用矩阵的伪逆计算了 L2 范数最小化问题的解 <code class="docutils literal notranslate"><span class="pre">s_L2</span></code>。</p>
+<p>接下来，代码创建了一个包含四个子图的图形布局，分别绘制了 <code class="docutils literal notranslate"><span class="pre">s_L1</span></code> 和 <code class="docutils literal notranslate"><span class="pre">s_L2</span></code> 的曲线图以及它们的分布直方图。通过这些图形，可以比较 L1 范数最小化解和 L2 范数最小化解在数值上的差异以及它们的分布特征。</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">from</span> <span class="nn">scipy.optimize</span> <span class="kn">import</span> <span class="n">minimize</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;figure.figsize&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="mi">12</span><span class="p">,</span> <span class="mi">18</span><span class="p">]</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="s1">&#39;font.size&#39;</span><span class="p">:</span> <span class="mi">18</span><span class="p">})</span>
+
+<span class="c1"># Solve y = Theta * s for &quot;s&quot;</span>
+<span class="n">n</span> <span class="o">=</span> <span class="mi">1000</span> <span class="c1"># dimension of s</span>
+<span class="n">p</span> <span class="o">=</span> <span class="mi">200</span>  <span class="c1"># number of measurements, dim(y)</span>
+<span class="n">Theta</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="n">p</span><span class="p">,</span><span class="n">n</span><span class="p">)</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
+
+<span class="c1"># L1 Minimum norm solution s_L1</span>
+<span class="k">def</span> <span class="nf">L1_norm</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="nb">ord</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="n">constr</span> <span class="o">=</span> <span class="p">({</span><span class="s1">&#39;type&#39;</span><span class="p">:</span> <span class="s1">&#39;eq&#39;</span><span class="p">,</span> <span class="s1">&#39;fun&#39;</span><span class="p">:</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span>  <span class="n">Theta</span> <span class="o">@</span> <span class="n">x</span> <span class="o">-</span> <span class="n">y</span><span class="p">})</span>
+<span class="n">x0</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">pinv</span><span class="p">(</span><span class="n">Theta</span><span class="p">)</span> <span class="o">@</span> <span class="n">y</span> <span class="c1"># initialize with L2 solution</span>
+<span class="n">res</span> <span class="o">=</span> <span class="n">minimize</span><span class="p">(</span><span class="n">L1_norm</span><span class="p">,</span> <span class="n">x0</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s1">&#39;SLSQP&#39;</span><span class="p">,</span><span class="n">constraints</span><span class="o">=</span><span class="n">constr</span><span class="p">)</span>
+<span class="n">s_L1</span> <span class="o">=</span> <span class="n">res</span><span class="o">.</span><span class="n">x</span>
+
+<span class="c1"># L2 Minimum norm solution s_L2</span>
+<span class="n">s_L2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">pinv</span><span class="p">(</span><span class="n">Theta</span><span class="p">)</span> <span class="o">@</span> <span class="n">y</span> 
+
+<span class="n">fig</span><span class="p">,</span><span class="n">axs</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">axs</span> <span class="o">=</span> <span class="n">axs</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">s_L1</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;b&#39;</span><span class="p">,</span><span class="n">LineWidth</span><span class="o">=</span><span class="mf">1.5</span><span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="o">-</span><span class="mf">0.2</span><span class="p">,</span><span class="mf">0.2</span><span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">s_L2</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">,</span><span class="n">LineWidth</span><span class="o">=</span><span class="mf">1.5</span><span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="o">-</span><span class="mf">0.2</span><span class="p">,</span><span class="mf">0.2</span><span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">s_L1</span><span class="p">,</span><span class="n">bins</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="o">-</span><span class="mf">0.105</span><span class="p">,</span><span class="mf">0.105</span><span class="p">,</span><span class="mf">0.01</span><span class="p">),</span><span class="n">rwidth</span><span class="o">=</span><span class="mf">0.9</span><span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">s_L2</span><span class="p">,</span><span class="n">bins</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="o">-</span><span class="mf">0.105</span><span class="p">,</span><span class="mf">0.105</span><span class="p">,</span><span class="mf">0.01</span><span class="p">),</span><span class="n">rwidth</span><span class="o">=</span><span class="mf">0.9</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<p><strong>左图为1范数得到的稀疏信号<span class="math notranslate nohighlight">\(\mathbf{s}\)</span>的时域和频域，右图为2范数时域和频域结果。不难发现，L1范数使得<span class="math notranslate nohighlight">\(\mathbf{s}\)</span>更稀疏。</strong></p>
+<p><img alt="" src="https://ossjiyaoliu.oss-cn-beijing.aliyuncs.com/uPic/image-20230708110108838.png" /></p>
+</section>
+<section id="id5">
+<h3><span class="section-number">1.5.2. </span>5.2 从稀疏观测中恢复音频信号<a class="headerlink" href="#id5" title="Permalink to this heading">#</a></h3>
+<p>对于稀疏信号<span class="math notranslate nohighlight">\(\mathbf{s}\)</span>而言，我们可以在不满足奈奎斯特采样定律的条件下对信号进行采样，也可以重建信号。</p>
+<blockquote>
+<div><p>奈奎斯特采样定律：采样频率&gt;2×信号最高频率，信号才不会丢失较多信息。采样频率过小，则容易发生Aliasing（混叠）。</p>
+</div></blockquote>
+<p>下面我们以一个音频信号为例子：</p>
+<p>我们先对下面的模拟信号在1s内采样4096个点，采样的离散信号如左上角黑色的点所示，（只绘制了部分区域的图像）。</p>
+<p><img alt="" src="https://ossjiyaoliu.oss-cn-beijing.aliyuncs.com/uPic/image-20230709104527426.png" /></p>
+<p>接着对离散信号进行随机采样，只采样128个点，如左上角红色点。接着我们可以使用<code class="docutils literal notranslate"><span class="pre">matching</span> <span class="pre">pursuit</span></code>方法（我也会在后续文章中进行讲解）计算出稀疏的s（右下角），从而进行逆变换为左下角的结果。</p>
+<p><img alt="" src="Users/liujiyao/Downloads/image-20230709104915746.png" /></p>
+<p>python代码如下：</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+<span class="kn">from</span> <span class="nn">scipy.fftpack</span> <span class="kn">import</span> <span class="n">dct</span><span class="p">,</span> <span class="n">idct</span>
+<span class="kn">from</span> <span class="nn">scipy.optimize</span> <span class="kn">import</span> <span class="n">minimize</span>
+<span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s1">&#39;..&#39;</span><span class="p">,</span><span class="s1">&#39;UTILS&#39;</span><span class="p">))</span>
+<span class="kn">from</span> <span class="nn">cosamp_fn</span> <span class="kn">import</span> <span class="n">cosamp</span>
+<span class="c1"># cosamp function is available at https://github.com/avirmaux/CoSaMP</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;figure.figsize&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="mi">12</span><span class="p">,</span> <span class="mi">12</span><span class="p">]</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="s1">&#39;font.size&#39;</span><span class="p">:</span> <span class="mi">18</span><span class="p">})</span>
+
+
+<span class="c1">## Generate signal, DCT of signal</span>
+
+<span class="n">n</span> <span class="o">=</span> <span class="mi">4096</span> <span class="c1"># points in high resolution signal</span>
+<span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="n">n</span><span class="p">)</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="mi">97</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">t</span><span class="p">)</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="mi">777</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">t</span><span class="p">)</span>
+<span class="n">xt</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">fft</span><span class="o">.</span><span class="n">fft</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="c1"># Fourier transformed signal</span>
+<span class="n">PSD</span> <span class="o">=</span> <span class="n">xt</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">conj</span><span class="p">(</span><span class="n">xt</span><span class="p">)</span> <span class="o">/</span> <span class="n">n</span> <span class="c1"># Power spectral density 功率谱密度</span>
+
+
+<span class="c1">## Randomly sample signal</span>
+<span class="n">p</span> <span class="o">=</span> <span class="mi">128</span> <span class="c1"># num. random samples, p = n/32</span>
+<span class="n">perm</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">floor</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="n">p</span><span class="p">)</span> <span class="o">*</span> <span class="n">n</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">x</span><span class="p">[</span><span class="n">perm</span><span class="p">]</span>
+
+
+<span class="c1">## Solve compressed sensing problem</span>
+<span class="n">Psi</span> <span class="o">=</span> <span class="n">dct</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">identity</span><span class="p">(</span><span class="n">n</span><span class="p">))</span> <span class="c1"># Build Psi</span>
+<span class="n">Theta</span> <span class="o">=</span> <span class="n">Psi</span><span class="p">[</span><span class="n">perm</span><span class="p">,:]</span>       <span class="c1"># Measure rows of Psi</span>
+
+<span class="n">s</span> <span class="o">=</span> <span class="n">cosamp</span><span class="p">(</span><span class="n">Theta</span><span class="p">,</span><span class="n">y</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span><span class="n">epsilon</span><span class="o">=</span><span class="mf">1.e-10</span><span class="p">,</span><span class="n">max_iter</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span> <span class="c1"># CS via matching pursuit</span>
+<span class="n">xrecon</span> <span class="o">=</span> <span class="n">idct</span><span class="p">(</span><span class="n">s</span><span class="p">)</span> <span class="c1"># reconstruct full signal</span>
+
+
+
+<span class="c1">## Plot</span>
+<span class="n">time_window</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1024</span><span class="p">,</span><span class="mi">1280</span><span class="p">])</span><span class="o">/</span><span class="mi">4096</span>
+<span class="n">freq</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+<span class="n">L</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">floor</span><span class="p">(</span><span class="n">n</span><span class="o">/</span><span class="mi">2</span><span class="p">))</span>
+
+
+<span class="n">fig</span><span class="p">,</span><span class="n">axs</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">axs</span> <span class="o">=</span> <span class="n">axs</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">freq</span><span class="p">[:</span><span class="n">L</span><span class="p">],</span><span class="n">PSD</span><span class="p">[:</span><span class="n">L</span><span class="p">],</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">,</span><span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1024</span><span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1200</span><span class="p">)</span>
+
+<span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">x</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">,</span><span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">perm</span><span class="o">/</span><span class="n">n</span><span class="p">,</span><span class="n">y</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">,</span><span class="n">marker</span><span class="o">=</span><span class="s1">&#39;x&#39;</span><span class="p">,</span><span class="n">linewidth</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">ms</span><span class="o">=</span><span class="mi">12</span><span class="p">,</span><span class="n">mew</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">(</span><span class="n">time_window</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">time_window</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+
+<span class="n">axs</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">xrecon</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">,</span><span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">(</span><span class="n">time_window</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">time_window</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+
+<span class="n">xtrecon</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">fft</span><span class="o">.</span><span class="n">fft</span><span class="p">(</span><span class="n">xrecon</span><span class="p">,</span><span class="n">n</span><span class="p">)</span> <span class="c1"># computes the (fast) discrete fourier transform</span>
+<span class="n">PSDrecon</span> <span class="o">=</span> <span class="n">xtrecon</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">conj</span><span class="p">(</span><span class="n">xtrecon</span><span class="p">)</span><span class="o">/</span><span class="n">n</span> <span class="c1"># Power spectrum (how much power in each freq)</span>
+
+<span class="n">axs</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">freq</span><span class="p">[:</span><span class="n">L</span><span class="p">],</span><span class="n">PSDrecon</span><span class="p">[:</span><span class="n">L</span><span class="p">],</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">,</span><span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1024</span><span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1200</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</section>
+<section id="id6">
+<h3><span class="section-number">1.5.3. </span>5.3 压缩感知的关键——信号采样的随机性<a class="headerlink" href="#id6" title="Permalink to this heading">#</a></h3>
+<p>对于上图信号，如果我们均匀地以低于Nyquist采样定律进行采样，则很容易发生信号混叠。但是当我们使用随机的低于Nyquist采样定律较多的频率采样时候，可以通过完美重建出原始信号。</p>
+</section>
+<section id="sparsity-and-l1-norm">
+<h3><span class="section-number">1.5.4. </span>5.4 Sparsity and <span class="math notranslate nohighlight">\(L1\)</span> Norm<a class="headerlink" href="#sparsity-and-l1-norm" title="Permalink to this heading">#</a></h3>
+<p>为什么<span class="math notranslate nohighlight">\(L_1\)</span> 范式可以约束求解结果的稀疏性呢？假设<span class="math notranslate nohighlight">\(\mathbf{s} = (s_1, s_2)\)</span>，直线上都为满足<span class="math notranslate nohighlight">\(y = \Theta \mathbf{s}\)</span>的点。我们的目标是找到norm最小的<span class="math notranslate nohighlight">\(\mathbf{s}\)</span>。</p>
+<p><img alt="" src="https://ossjiyaoliu.oss-cn-beijing.aliyuncs.com/uPic/image-20230709230924799.png" /></p>
+<p>下图中两个坐标轴分别为<span class="math notranslate nohighlight">\(s_1, s_2\)</span>，我们需要找到的目标点使得norm最小，即同心的图形与直线相交时的最小距离。以<span class="math notranslate nohighlight">\(L_2\)</span> norm为例，我们想像有一个从小放大的同心圆，那么同心圆和直线恰好相交时，交点坐标为<span class="math notranslate nohighlight">\((s_1, s_2)\)</span>，不难看出交点向量是非稀疏的。并且我们有如下结论：</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(L_0\)</span>：能达到真正稀疏，但是是非凸优化问题，是NP hard；</p></li>
+<li><p><span class="math notranslate nohighlight">\(L_1\)</span>：替代<span class="math notranslate nohighlight">\(L_0\)</span>，也能达到稀疏的结果；</p></li>
+</ul>
+<p><img alt="" src="https://ossjiyaoliu.oss-cn-beijing.aliyuncs.com/uPic/image-20230709232145408.png" /></p>
+</section>
+</section>
+<section id="when-it-works">
+<h2><span class="section-number">1.6. </span>6. 压缩感知：When it works？<a class="headerlink" href="#when-it-works" title="Permalink to this heading">#</a></h2>
+<p>前面我们简单介绍了压缩感知，那么有同学可能比较疑惑，为什么压缩感知有效，并且想要实现压缩感知，应该满足什么条件？</p>
+<p><strong>为什么压缩感知有效</strong>：</p>
+<p><strong>要想使得压缩感知可以成功实现，我们需要满足如下两点要求：</strong></p>
+<ol class="arabic simple">
+<li><p>C 与<span class="math notranslate nohighlight">\(\Psi\)</span>不想关，即C的行 与<span class="math notranslate nohighlight">\(\Psi\)</span>的列正交；</p></li>
+<li><p>观测信号的稀疏度也要满足一定要求；</p></li>
+</ol>
+<p>我们先来看看第一个要求：假设下图是几个比较好的欠采样矩阵<span class="math notranslate nohighlight">\(\mathbf{C}\)</span>：</p>
+<p><img alt="" src="https://ossjiyaoliu.oss-cn-beijing.aliyuncs.com/uPic/image-20230710150706368.png" /></p>
+<p>下图是比较差的<span class="math notranslate nohighlight">\(\mathbf{C}\)</span>，也就是<span class="math notranslate nohighlight">\(\mathbf{C}\)</span>和<span class="math notranslate nohighlight">\(\Psi\)</span>相关性较大：</p>
+<p><img alt="" src="https://ossjiyaoliu.oss-cn-beijing.aliyuncs.com/uPic/image-20230710151040797.png" /></p>
+<p>可以明显看出这样的<span class="math notranslate nohighlight">\(\mathbf{C}\)</span>是完全无法恢复稀疏的<span class="math notranslate nohighlight">\(\mathbf{s}\)</span>的。</p>
+<p>第二个要求：观测信号的稀疏度<span class="math notranslate nohighlight">\(p\)</span>怎么选择？</p>
+<p>稀疏度指的是向量中非0元素的个数，<span class="math notranslate nohighlight">\(\mathbf{y}\)</span>的稀疏度<span class="math notranslate nohighlight">\(p\)</span>和<span class="math notranslate nohighlight">\(\mathbf{s}\)</span>的稀疏度<span class="math notranslate nohighlight">\(k\)</span>一般满足如下关系(<span class="math notranslate nohighlight">\(n\)</span>是<span class="math notranslate nohighlight">\(\mathbf{x}\)</span>的维度)：
+$<span class="math notranslate nohighlight">\(
+p \propto O(klog(n/k))
+\)</span><span class="math notranslate nohighlight">\(
+注意：\)</span>O(\cdot)<span class="math notranslate nohighlight">\(取决于\)</span>C<span class="math notranslate nohighlight">\(相对于\)</span>\Psi$的不相干程度，越不想干则函数的放大比例越小，需要的观测越稀疏。</p>
+<blockquote>
+<div><p>举个例子：我们可以根据<span class="math notranslate nohighlight">\(n\)</span>和<span class="math notranslate nohighlight">\(k\)</span>计算出我们的稀疏观测的稀疏度。假设<span class="math notranslate nohighlight">\(n  =10^6\)</span>，<span class="math notranslate nohighlight">\(n  =10^6\)</span> ，<span class="math notranslate nohighlight">\(k  =10^4 (1\%)\)</span>，假设<span class="math notranslate nohighlight">\(O(l) = 5 \cdot l\)</span>，那么<span class="math notranslate nohighlight">\(p = 5\cdot10^4log(100) = 10^5(10\%)\)</span>。即我们只需要观测图像只是原始图像的10%随机采样，即可重建出高质量的原图。</p>
+</div></blockquote>
+<p>总结：稀疏变换后的结果越稀疏，我们需要的观测越稀疏。</p>
+</section>
+<section id="sparse-regression">
+<h2><span class="section-number">1.7. </span>sparse regression<a class="headerlink" href="#sparse-regression" title="Permalink to this heading">#</a></h2>
+<p>一般来说我们只用最小化<span class="math notranslate nohighlight">\(L_2\)</span> 损失来实现最小二乘拟合，优化目标为：
+$<span class="math notranslate nohighlight">\(
+\hat{a} = \arg\min \limits_{a} \Vert a\mathbf{x} -\mathbf{b} \Vert_2^2
+\)</span><span class="math notranslate nohighlight">\(
+然而当存在离群点时，离群值极大地扭曲了数据的分布，从而也极大地扭曲了最小二乘解。而\)</span>L_1$norm将对这种离群值具有更好的鲁棒性，如下图所示：</p>
+<p><img alt="image-20230710193610071" src="https://ossjiyaoliu.oss-cn-beijing.aliyuncs.com/uPic/image-20230710193610071.png" /></p>
+<p>如果不存在异常值，那么结果一般来说两种norm都比较好，如下图：</p>
+<p><img alt="image-20230710200715942" src="https://ossjiyaoliu.oss-cn-beijing.aliyuncs.com/uPic/image-20230710200715942.png" /></p>
+</section>
+<section id="sparse-representation-for-classification-src">
+<h2><span class="section-number">1.8. </span>Sparse representation for classification（SRC）<a class="headerlink" href="#sparse-representation-for-classification-src" title="Permalink to this heading">#</a></h2>
+<p><img alt="image-20230710201916615" src="https://ossjiyaoliu.oss-cn-beijing.aliyuncs.com/uPic/image-20230710201916615.png" /></p>
+<p>算法流程：</p>
+<ol class="arabic">
+<li><p>对原始图像进行下采样到几乎看不出那个人，并拉直为一个向量x；</p></li>
+<li><p>对整个数据库进行造操作1，得到压缩的数据库；</p>
+<p><img alt="image-20230710202315040" src="https://ossjiyaoliu.oss-cn-beijing.aliyuncs.com/uPic/image-20230710202315040.png" /></p>
+</li>
+</ol>
+<blockquote>
+<div><p>为什么这么做？</p>
+<p>：当压缩的向量x远小于图像分辨率，我们可以使用稀疏回归以及压缩感知和稀疏表示。</p>
+</div></blockquote>
+<ol class="arabic" start="3">
+<li><p>稀疏优化：在压缩的数据库中寻找非常稀疏列的线性组合，来表示目标图像。如下图：</p>
+<p><img alt="image-20230710202816099" src="https://ossjiyaoliu.oss-cn-beijing.aliyuncs.com/uPic/image-20230710202816099.png" /></p>
+<p>上图中的error为只使用某个压缩数据库的元素来表示目标图像所导致的误差；</p>
+</li>
+</ol>
+</section>
+<section id="id7">
+<h2><span class="section-number">1.9. </span>参考资料<a class="headerlink" href="#id7" title="Permalink to this heading">#</a></h2>
+<p>[1] <a class="reference external" href="https://www.youtube.com/watch?v=yDpz0PqULXQ&amp;amp;list=PLMrJAkhIeNNRHP5UA-gIimsXLQyHXxRty&amp;amp;index=18">https://www.youtube.com/watch?v=yDpz0PqULXQ&amp;list=PLMrJAkhIeNNRHP5UA-gIimsXLQyHXxRty&amp;index=18</a></p>
+<p>[2] <a class="reference external" href="http://databookuw.com/databook.pdf">http://databookuw.com/databook.pdf</a></p>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./图像(信号)处理基础"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer">
+                  <!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="../pytorch/20240528_pytorch%E5%8A%A0%E9%80%9F%E8%AE%AD%E7%BB%83%E6%8A%80%E5%B7%A7.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title"><span class="section-number">2. </span>pytorch加速训练技巧</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="../%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%A1%80/DL_intro.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><span class="section-number">1. </span>深度学习基础</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">1.1. 1. 为什么图像是可压缩的：图像空间的广阔</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sparsity">1.2. 2. 什么是Sparsity？</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">1.3. 3.压缩感知：简介</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">1.4. 4.压缩感知：数学公式</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">1.5. 5.压缩感知实例</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#l-1">1.5.1. 5.1 欠定系统的 <span class="math notranslate nohighlight">\(l_1\)</span>和稀疏解</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">1.5.2. 5.2 从稀疏观测中恢复音频信号</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">1.5.3. 5.3 压缩感知的关键——信号采样的随机性</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#sparsity-and-l1-norm">1.5.4. 5.4 Sparsity and <span class="math notranslate nohighlight">\(L1\)</span> Norm</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#when-it-works">1.6. 6. 压缩感知：When it works？</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sparse-regression">1.7. sparse regression</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sparse-representation-for-classification-src">1.8. Sparse representation for classification（SRC）</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">1.9. 参考资料</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Jiyao Liu
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  <p class="copyright">
+    
+      © Copyright 2022.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=ac02cc09edc035673794"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=ac02cc09edc035673794"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
