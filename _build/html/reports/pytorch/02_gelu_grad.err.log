@@ -1,15 +1,4 @@
 Traceback (most recent call last):
-  File "/Users/liujiyao/miniforge3/envs/torchcpu/lib/python3.8/site-packages/nbclient/client.py", line 778, in _async_poll_for_reply
-    msg = await ensure_async(self.kc.shell_channel.get_msg(timeout=new_timeout))
-  File "/Users/liujiyao/miniforge3/envs/torchcpu/lib/python3.8/site-packages/jupyter_core/utils/__init__.py", line 182, in ensure_async
-    result = await obj
-  File "/Users/liujiyao/miniforge3/envs/torchcpu/lib/python3.8/site-packages/jupyter_client/channels.py", line 315, in get_msg
-    raise Empty
-_queue.Empty
-
-During handling of the above exception, another exception occurred:
-
-Traceback (most recent call last):
   File "/Users/liujiyao/miniforge3/envs/torchcpu/lib/python3.8/site-packages/jupyter_cache/executors/utils.py", line 58, in single_nb_execution
     executenb(
   File "/Users/liujiyao/miniforge3/envs/torchcpu/lib/python3.8/site-packages/nbclient/client.py", line 1305, in execute
@@ -20,19 +9,279 @@ Traceback (most recent call last):
     return future.result()
   File "/Users/liujiyao/miniforge3/envs/torchcpu/lib/python3.8/site-packages/nbclient/client.py", line 705, in async_execute
     await self.async_execute_cell(
-  File "/Users/liujiyao/miniforge3/envs/torchcpu/lib/python3.8/site-packages/nbclient/client.py", line 1001, in async_execute_cell
-    exec_reply = await self.task_poll_for_reply
-  File "/Users/liujiyao/miniforge3/envs/torchcpu/lib/python3.8/site-packages/nbclient/client.py", line 802, in _async_poll_for_reply
-    error_on_timeout_execute_reply = await self._async_handle_timeout(timeout, cell)
-  File "/Users/liujiyao/miniforge3/envs/torchcpu/lib/python3.8/site-packages/nbclient/client.py", line 852, in _async_handle_timeout
-    raise CellTimeoutError.error_from_timeout_and_cell(
-nbclient.exceptions.CellTimeoutError: A cell timed out while it was being executed, after 30 seconds.
-The message was: Cell execution timed out.
-Here is a preview of the cell contents:
--------------------
+  File "/Users/liujiyao/miniforge3/envs/torchcpu/lib/python3.8/site-packages/nbclient/client.py", line 1058, in async_execute_cell
+    await self._check_raise_for_error(cell, cell_index, exec_reply)
+  File "/Users/liujiyao/miniforge3/envs/torchcpu/lib/python3.8/site-packages/nbclient/client.py", line 914, in _check_raise_for_error
+    raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
+nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
+------------------
 from transformers import AutoModel
 model_ckpt = 'bert-base-uncased'
 model = AutoModel.from_pretrained(model_ckpt)
 model.encoder.layer[0]
--------------------
+------------------
+
+----- stderr -----
+'(MaxRetryError("HTTPSConnectionPool(host='cdn-lfs.huggingface.co', port=443): Max retries exceeded with url: /bert-base-uncased/68d45e234eb4a928074dfd868cead0219ab85354cc53d20e772753c6bb9169d3?response-content-disposition=inline%3B+filename*%3DUTF-8%27%27model.safetensors%3B+filename%3D%22model.safetensors%22%3B&Expires=1725539309&Policy=eyJTdGF0ZW1lbnQiOlt7IkNvbmRpdGlvbiI6eyJEYXRlTGVzc1RoYW4iOnsiQVdTOkVwb2NoVGltZSI6MTcyNTUzOTMwOX19LCJSZXNvdXJjZSI6Imh0dHBzOi8vY2RuLWxmcy5odWdnaW5nZmFjZS5jby9iZXJ0LWJhc2UtdW5jYXNlZC82OGQ0NWUyMzRlYjRhOTI4MDc0ZGZkODY4Y2VhZDAyMTlhYjg1MzU0Y2M1M2QyMGU3NzI3NTNjNmJiOTE2OWQzP3Jlc3BvbnNlLWNvbnRlbnQtZGlzcG9zaXRpb249KiJ9XX0_&Signature=OcrqznUv9wdzzI0zNdHJMCpuS8hogeMZNSKsPWCiowUA7LlWsmTiRhxtnBuEr4ETHxrod205NtQlcQl8R7Miu40jk1Slh9vjG8NsSGBDrhgeQ6MoodHm1r5LpLSRQI06oQ7AXGCmDrnMAMbOvvfDVlSO-yZLR0dlkUtF~Jf0ODHHBqMHs9AXWPE~GuoI60iAypZRGi0MmSAdjZS2XNlRnJWsi52QLuwmzp3zY5kPjKBGlGZsTEUxQL-wRKN7Pbn~v-5Wprt~gWLxRM39MKIdda6IgHwG8TCnmcTVCEXfJGjIW7ANtCZjBrxZUX-1YNRr-13gkP0DiNnVmYKJn46pqA__&Key-Pair-Id=K3ESJI6DHPFC7 (Caused by ProxyError('Cannot connect to proxy.', ConnectionResetError(54, 'Connection reset by peer')))"), '(Request ID: 507486cb-c0dd-4991-88f7-061c41ad6674)')' thrown while requesting GET https://cdn-lfs.huggingface.co/bert-base-uncased/68d45e234eb4a928074dfd868cead0219ab85354cc53d20e772753c6bb9169d3?response-content-disposition=inline%3B+filename*%3DUTF-8%27%27model.safetensors%3B+filename%3D%22model.safetensors%22%3B&Expires=1725539309&Policy=eyJTdGF0ZW1lbnQiOlt7IkNvbmRpdGlvbiI6eyJEYXRlTGVzc1RoYW4iOnsiQVdTOkVwb2NoVGltZSI6MTcyNTUzOTMwOX19LCJSZXNvdXJjZSI6Imh0dHBzOi8vY2RuLWxmcy5odWdnaW5nZmFjZS5jby9iZXJ0LWJhc2UtdW5jYXNlZC82OGQ0NWUyMzRlYjRhOTI4MDc0ZGZkODY4Y2VhZDAyMTlhYjg1MzU0Y2M1M2QyMGU3NzI3NTNjNmJiOTE2OWQzP3Jlc3BvbnNlLWNvbnRlbnQtZGlzcG9zaXRpb249KiJ9XX0_&Signature=OcrqznUv9wdzzI0zNdHJMCpuS8hogeMZNSKsPWCiowUA7LlWsmTiRhxtnBuEr4ETHxrod205NtQlcQl8R7Miu40jk1Slh9vjG8NsSGBDrhgeQ6MoodHm1r5LpLSRQI06oQ7AXGCmDrnMAMbOvvfDVlSO-yZLR0dlkUtF%7EJf0ODHHBqMHs9AXWPE%7EGuoI60iAypZRGi0MmSAdjZS2XNlRnJWsi52QLuwmzp3zY5kPjKBGlGZsTEUxQL-wRKN7Pbn%7Ev-5Wprt%7EgWLxRM39MKIdda6IgHwG8TCnmcTVCEXfJGjIW7ANtCZjBrxZUX-1YNRr-13gkP0DiNnVmYKJn46pqA__&Key-Pair-Id=K3ESJI6DHPFC7
+------------------
+
+[0;31m---------------------------------------------------------------------------[0m
+[0;31mConnectionResetError[0m                      Traceback (most recent call last)
+File [0;32m~/miniforge3/envs/torchcpu/lib/python3.8/site-packages/urllib3/connectionpool.py:711[0m, in [0;36mHTTPConnectionPool.urlopen[0;34m(self, method, url, body, headers, retries, redirect, assert_same_host, timeout, pool_timeout, release_conn, chunked, body_pos, **response_kw)[0m
+[1;32m    710[0m [38;5;28;01mif[39;00m is_new_proxy_conn [38;5;129;01mand[39;00m http_tunnel_required:
+[0;32m--> 711[0m     [38;5;28;43mself[39;49m[38;5;241;43m.[39;49m[43m_prepare_proxy[49m[43m([49m[43mconn[49m[43m)[49m
+[1;32m    713[0m [38;5;66;03m# Make the request on the httplib connection object.[39;00m
+
+File [0;32m~/miniforge3/envs/torchcpu/lib/python3.8/site-packages/urllib3/connectionpool.py:1007[0m, in [0;36mHTTPSConnectionPool._prepare_proxy[0;34m(self, conn)[0m
+[1;32m   1005[0m     conn[38;5;241m.[39mtls_in_tls_required [38;5;241m=[39m [38;5;28;01mTrue[39;00m
+[0;32m-> 1007[0m [43mconn[49m[38;5;241;43m.[39;49m[43mconnect[49m[43m([49m[43m)[49m
+
+File [0;32m~/miniforge3/envs/torchcpu/lib/python3.8/site-packages/urllib3/connection.py:419[0m, in [0;36mHTTPSConnection.connect[0;34m(self)[0m
+[1;32m    417[0m     context[38;5;241m.[39mload_default_certs()
+[0;32m--> 419[0m [38;5;28mself[39m[38;5;241m.[39msock [38;5;241m=[39m [43mssl_wrap_socket[49m[43m([49m
+[1;32m    420[0m [43m    [49m[43msock[49m[38;5;241;43m=[39;49m[43mconn[49m[43m,[49m
+[1;32m    421[0m [43m    [49m[43mkeyfile[49m[38;5;241;43m=[39;49m[38;5;28;43mself[39;49m[38;5;241;43m.[39;49m[43mkey_file[49m[43m,[49m
+[1;32m    422[0m [43m    [49m[43mcertfile[49m[38;5;241;43m=[39;49m[38;5;28;43mself[39;49m[38;5;241;43m.[39;49m[43mcert_file[49m[43m,[49m
+[1;32m    423[0m [43m    [49m[43mkey_password[49m[38;5;241;43m=[39;49m[38;5;28;43mself[39;49m[38;5;241;43m.[39;49m[43mkey_password[49m[43m,[49m
+[1;32m    424[0m [43m    [49m[43mca_certs[49m[38;5;241;43m=[39;49m[38;5;28;43mself[39;49m[38;5;241;43m.[39;49m[43mca_certs[49m[43m,[49m
+[1;32m    425[0m [43m    [49m[43mca_cert_dir[49m[38;5;241;43m=[39;49m[38;5;28;43mself[39;49m[38;5;241;43m.[39;49m[43mca_cert_dir[49m[43m,[49m
+[1;32m    426[0m [43m    [49m[43mca_cert_data[49m[38;5;241;43m=[39;49m[38;5;28;43mself[39;49m[38;5;241;43m.[39;49m[43mca_cert_data[49m[43m,[49m
+[1;32m    427[0m [43m    [49m[43mserver_hostname[49m[38;5;241;43m=[39;49m[43mserver_hostname[49m[43m,[49m
+[1;32m    428[0m [43m    [49m[43mssl_context[49m[38;5;241;43m=[39;49m[43mcontext[49m[43m,[49m
+[1;32m    429[0m [43m    [49m[43mtls_in_tls[49m[38;5;241;43m=[39;49m[43mtls_in_tls[49m[43m,[49m
+[1;32m    430[0m [43m[49m[43m)[49m
+[1;32m    432[0m [38;5;66;03m# If we're using all defaults and the connection[39;00m
+[1;32m    433[0m [38;5;66;03m# is TLSv1 or TLSv1.1 we throw a DeprecationWarning[39;00m
+[1;32m    434[0m [38;5;66;03m# for the host.[39;00m
+
+File [0;32m~/miniforge3/envs/torchcpu/lib/python3.8/site-packages/urllib3/util/ssl_.py:449[0m, in [0;36mssl_wrap_socket[0;34m(sock, keyfile, certfile, cert_reqs, ca_certs, server_hostname, ssl_version, ciphers, ssl_context, ca_cert_dir, key_password, ca_cert_data, tls_in_tls)[0m
+[1;32m    448[0m [38;5;28;01mif[39;00m send_sni:
+[0;32m--> 449[0m     ssl_sock [38;5;241m=[39m [43m_ssl_wrap_socket_impl[49m[43m([49m
+[1;32m    450[0m [43m        [49m[43msock[49m[43m,[49m[43m [49m[43mcontext[49m[43m,[49m[43m [49m[43mtls_in_tls[49m[43m,[49m[43m [49m[43mserver_hostname[49m[38;5;241;43m=[39;49m[43mserver_hostname[49m
+[1;32m    451[0m [43m    [49m[43m)[49m
+[1;32m    452[0m [38;5;28;01melse[39;00m:
+
+File [0;32m~/miniforge3/envs/torchcpu/lib/python3.8/site-packages/urllib3/util/ssl_.py:493[0m, in [0;36m_ssl_wrap_socket_impl[0;34m(sock, ssl_context, tls_in_tls, server_hostname)[0m
+[1;32m    492[0m [38;5;28;01mif[39;00m server_hostname:
+[0;32m--> 493[0m     [38;5;28;01mreturn[39;00m [43mssl_context[49m[38;5;241;43m.[39;49m[43mwrap_socket[49m[43m([49m[43msock[49m[43m,[49m[43m [49m[43mserver_hostname[49m[38;5;241;43m=[39;49m[43mserver_hostname[49m[43m)[49m
+[1;32m    494[0m [38;5;28;01melse[39;00m:
+
+File [0;32m~/miniforge3/envs/torchcpu/lib/python3.8/ssl.py:500[0m, in [0;36mSSLContext.wrap_socket[0;34m(self, sock, server_side, do_handshake_on_connect, suppress_ragged_eofs, server_hostname, session)[0m
+[1;32m    494[0m [38;5;28;01mdef[39;00m [38;5;21mwrap_socket[39m([38;5;28mself[39m, sock, server_side[38;5;241m=[39m[38;5;28;01mFalse[39;00m,
+[1;32m    495[0m                 do_handshake_on_connect[38;5;241m=[39m[38;5;28;01mTrue[39;00m,
+[1;32m    496[0m                 suppress_ragged_eofs[38;5;241m=[39m[38;5;28;01mTrue[39;00m,
+[1;32m    497[0m                 server_hostname[38;5;241m=[39m[38;5;28;01mNone[39;00m, session[38;5;241m=[39m[38;5;28;01mNone[39;00m):
+[1;32m    498[0m     [38;5;66;03m# SSLSocket class handles server_hostname encoding before it calls[39;00m
+[1;32m    499[0m     [38;5;66;03m# ctx._wrap_socket()[39;00m
+[0;32m--> 500[0m     [38;5;28;01mreturn[39;00m [38;5;28;43mself[39;49m[38;5;241;43m.[39;49m[43msslsocket_class[49m[38;5;241;43m.[39;49m[43m_create[49m[43m([49m
+[1;32m    501[0m [43m        [49m[43msock[49m[38;5;241;43m=[39;49m[43msock[49m[43m,[49m
+[1;32m    502[0m [43m        [49m[43mserver_side[49m[38;5;241;43m=[39;49m[43mserver_side[49m[43m,[49m
+[1;32m    503[0m [43m        [49m[43mdo_handshake_on_connect[49m[38;5;241;43m=[39;49m[43mdo_handshake_on_connect[49m[43m,[49m
+[1;32m    504[0m [43m        [49m[43msuppress_ragged_eofs[49m[38;5;241;43m=[39;49m[43msuppress_ragged_eofs[49m[43m,[49m
+[1;32m    505[0m [43m        [49m[43mserver_hostname[49m[38;5;241;43m=[39;49m[43mserver_hostname[49m[43m,[49m
+[1;32m    506[0m [43m        [49m[43mcontext[49m[38;5;241;43m=[39;49m[38;5;28;43mself[39;49m[43m,[49m
+[1;32m    507[0m [43m        [49m[43msession[49m[38;5;241;43m=[39;49m[43msession[49m
+[1;32m    508[0m [43m    [49m[43m)[49m
+
+File [0;32m~/miniforge3/envs/torchcpu/lib/python3.8/ssl.py:1040[0m, in [0;36mSSLSocket._create[0;34m(cls, sock, server_side, do_handshake_on_connect, suppress_ragged_eofs, server_hostname, context, session)[0m
+[1;32m   1039[0m             [38;5;28;01mraise[39;00m [38;5;167;01mValueError[39;00m([38;5;124m"[39m[38;5;124mdo_handshake_on_connect should not be specified for non-blocking sockets[39m[38;5;124m"[39m)
+[0;32m-> 1040[0m         [38;5;28;43mself[39;49m[38;5;241;43m.[39;49m[43mdo_handshake[49m[43m([49m[43m)[49m
+[1;32m   1041[0m [38;5;28;01mexcept[39;00m ([38;5;167;01mOSError[39;00m, [38;5;167;01mValueError[39;00m):
+
+File [0;32m~/miniforge3/envs/torchcpu/lib/python3.8/ssl.py:1309[0m, in [0;36mSSLSocket.do_handshake[0;34m(self, block)[0m
+[1;32m   1308[0m         [38;5;28mself[39m[38;5;241m.[39msettimeout([38;5;28;01mNone[39;00m)
+[0;32m-> 1309[0m     [38;5;28;43mself[39;49m[38;5;241;43m.[39;49m[43m_sslobj[49m[38;5;241;43m.[39;49m[43mdo_handshake[49m[43m([49m[43m)[49m
+[1;32m   1310[0m [38;5;28;01mfinally[39;00m:
+
+[0;31mConnectionResetError[0m: [Errno 54] Connection reset by peer
+
+During handling of the above exception, another exception occurred:
+
+[0;31mMaxRetryError[0m                             Traceback (most recent call last)
+File [0;32m~/miniforge3/envs/torchcpu/lib/python3.8/site-packages/requests/adapters.py:486[0m, in [0;36mHTTPAdapter.send[0;34m(self, request, stream, timeout, verify, cert, proxies)[0m
+[1;32m    485[0m [38;5;28;01mtry[39;00m:
+[0;32m--> 486[0m     resp [38;5;241m=[39m [43mconn[49m[38;5;241;43m.[39;49m[43murlopen[49m[43m([49m
+[1;32m    487[0m [43m        [49m[43mmethod[49m[38;5;241;43m=[39;49m[43mrequest[49m[38;5;241;43m.[39;49m[43mmethod[49m[43m,[49m
+[1;32m    488[0m [43m        [49m[43murl[49m[38;5;241;43m=[39;49m[43murl[49m[43m,[49m
+[1;32m    489[0m [43m        [49m[43mbody[49m[38;5;241;43m=[39;49m[43mrequest[49m[38;5;241;43m.[39;49m[43mbody[49m[43m,[49m
+[1;32m    490[0m [43m        [49m[43mheaders[49m[38;5;241;43m=[39;49m[43mrequest[49m[38;5;241;43m.[39;49m[43mheaders[49m[43m,[49m
+[1;32m    491[0m [43m        [49m[43mredirect[49m[38;5;241;43m=[39;49m[38;5;28;43;01mFalse[39;49;00m[43m,[49m
+[1;32m    492[0m [43m        [49m[43massert_same_host[49m[38;5;241;43m=[39;49m[38;5;28;43;01mFalse[39;49;00m[43m,[49m
+[1;32m    493[0m [43m        [49m[43mpreload_content[49m[38;5;241;43m=[39;49m[38;5;28;43;01mFalse[39;49;00m[43m,[49m
+[1;32m    494[0m [43m        [49m[43mdecode_content[49m[38;5;241;43m=[39;49m[38;5;28;43;01mFalse[39;49;00m[43m,[49m
+[1;32m    495[0m [43m        [49m[43mretries[49m[38;5;241;43m=[39;49m[38;5;28;43mself[39;49m[38;5;241;43m.[39;49m[43mmax_retries[49m[43m,[49m
+[1;32m    496[0m [43m        [49m[43mtimeout[49m[38;5;241;43m=[39;49m[43mtimeout[49m[43m,[49m
+[1;32m    497[0m [43m        [49m[43mchunked[49m[38;5;241;43m=[39;49m[43mchunked[49m[43m,[49m
+[1;32m    498[0m [43m    [49m[43m)[49m
+[1;32m    500[0m [38;5;28;01mexcept[39;00m (ProtocolError, [38;5;167;01mOSError[39;00m) [38;5;28;01mas[39;00m err:
+
+File [0;32m~/miniforge3/envs/torchcpu/lib/python3.8/site-packages/urllib3/connectionpool.py:798[0m, in [0;36mHTTPConnectionPool.urlopen[0;34m(self, method, url, body, headers, retries, redirect, assert_same_host, timeout, pool_timeout, release_conn, chunked, body_pos, **response_kw)[0m
+[1;32m    796[0m     e [38;5;241m=[39m ProtocolError([38;5;124m"[39m[38;5;124mConnection aborted.[39m[38;5;124m"[39m, e)
+[0;32m--> 798[0m retries [38;5;241m=[39m [43mretries[49m[38;5;241;43m.[39;49m[43mincrement[49m[43m([49m
+[1;32m    799[0m [43m    [49m[43mmethod[49m[43m,[49m[43m [49m[43murl[49m[43m,[49m[43m [49m[43merror[49m[38;5;241;43m=[39;49m[43me[49m[43m,[49m[43m [49m[43m_pool[49m[38;5;241;43m=[39;49m[38;5;28;43mself[39;49m[43m,[49m[43m [49m[43m_stacktrace[49m[38;5;241;43m=[39;49m[43msys[49m[38;5;241;43m.[39;49m[43mexc_info[49m[43m([49m[43m)[49m[43m[[49m[38;5;241;43m2[39;49m[43m][49m
+[1;32m    800[0m [43m[49m[43m)[49m
+[1;32m    801[0m retries[38;5;241m.[39msleep()
+
+File [0;32m~/miniforge3/envs/torchcpu/lib/python3.8/site-packages/urllib3/util/retry.py:592[0m, in [0;36mRetry.increment[0;34m(self, method, url, response, error, _pool, _stacktrace)[0m
+[1;32m    591[0m [38;5;28;01mif[39;00m new_retry[38;5;241m.[39mis_exhausted():
+[0;32m--> 592[0m     [38;5;28;01mraise[39;00m MaxRetryError(_pool, url, error [38;5;129;01mor[39;00m ResponseError(cause))
+[1;32m    594[0m log[38;5;241m.[39mdebug([38;5;124m"[39m[38;5;124mIncremented Retry for (url=[39m[38;5;124m'[39m[38;5;132;01m%s[39;00m[38;5;124m'[39m[38;5;124m): [39m[38;5;132;01m%r[39;00m[38;5;124m"[39m, url, new_retry)
+
+[0;31mMaxRetryError[0m: HTTPSConnectionPool(host='cdn-lfs.huggingface.co', port=443): Max retries exceeded with url: /bert-base-uncased/68d45e234eb4a928074dfd868cead0219ab85354cc53d20e772753c6bb9169d3?response-content-disposition=inline%3B+filename*%3DUTF-8%27%27model.safetensors%3B+filename%3D%22model.safetensors%22%3B&Expires=1725539309&Policy=eyJTdGF0ZW1lbnQiOlt7IkNvbmRpdGlvbiI6eyJEYXRlTGVzc1RoYW4iOnsiQVdTOkVwb2NoVGltZSI6MTcyNTUzOTMwOX19LCJSZXNvdXJjZSI6Imh0dHBzOi8vY2RuLWxmcy5odWdnaW5nZmFjZS5jby9iZXJ0LWJhc2UtdW5jYXNlZC82OGQ0NWUyMzRlYjRhOTI4MDc0ZGZkODY4Y2VhZDAyMTlhYjg1MzU0Y2M1M2QyMGU3NzI3NTNjNmJiOTE2OWQzP3Jlc3BvbnNlLWNvbnRlbnQtZGlzcG9zaXRpb249KiJ9XX0_&Signature=OcrqznUv9wdzzI0zNdHJMCpuS8hogeMZNSKsPWCiowUA7LlWsmTiRhxtnBuEr4ETHxrod205NtQlcQl8R7Miu40jk1Slh9vjG8NsSGBDrhgeQ6MoodHm1r5LpLSRQI06oQ7AXGCmDrnMAMbOvvfDVlSO-yZLR0dlkUtF~Jf0ODHHBqMHs9AXWPE~GuoI60iAypZRGi0MmSAdjZS2XNlRnJWsi52QLuwmzp3zY5kPjKBGlGZsTEUxQL-wRKN7Pbn~v-5Wprt~gWLxRM39MKIdda6IgHwG8TCnmcTVCEXfJGjIW7ANtCZjBrxZUX-1YNRr-13gkP0DiNnVmYKJn46pqA__&Key-Pair-Id=K3ESJI6DHPFC7 (Caused by ProxyError('Cannot connect to proxy.', ConnectionResetError(54, 'Connection reset by peer')))
+
+During handling of the above exception, another exception occurred:
+
+[0;31mProxyError[0m                                Traceback (most recent call last)
+Cell [0;32mIn[1], line 3[0m
+[1;32m      1[0m [38;5;28;01mfrom[39;00m [38;5;21;01mtransformers[39;00m [38;5;28;01mimport[39;00m AutoModel
+[1;32m      2[0m model_ckpt [38;5;241m=[39m [38;5;124m'[39m[38;5;124mbert-base-uncased[39m[38;5;124m'[39m
+[0;32m----> 3[0m model [38;5;241m=[39m [43mAutoModel[49m[38;5;241;43m.[39;49m[43mfrom_pretrained[49m[43m([49m[43mmodel_ckpt[49m[43m)[49m
+[1;32m      4[0m model[38;5;241m.[39mencoder[38;5;241m.[39mlayer[[38;5;241m0[39m]
+
+File [0;32m~/miniforge3/envs/torchcpu/lib/python3.8/site-packages/transformers/models/auto/auto_factory.py:565[0m, in [0;36m_BaseAutoModelClass.from_pretrained[0;34m(cls, pretrained_model_name_or_path, *model_args, **kwargs)[0m
+[1;32m    563[0m [38;5;28;01melif[39;00m [38;5;28mtype[39m(config) [38;5;129;01min[39;00m [38;5;28mcls[39m[38;5;241m.[39m_model_mapping[38;5;241m.[39mkeys():
+[1;32m    564[0m     model_class [38;5;241m=[39m _get_model_class(config, [38;5;28mcls[39m[38;5;241m.[39m_model_mapping)
+[0;32m--> 565[0m     [38;5;28;01mreturn[39;00m [43mmodel_class[49m[38;5;241;43m.[39;49m[43mfrom_pretrained[49m[43m([49m
+[1;32m    566[0m [43m        [49m[43mpretrained_model_name_or_path[49m[43m,[49m[43m [49m[38;5;241;43m*[39;49m[43mmodel_args[49m[43m,[49m[43m [49m[43mconfig[49m[38;5;241;43m=[39;49m[43mconfig[49m[43m,[49m[43m [49m[38;5;241;43m*[39;49m[38;5;241;43m*[39;49m[43mhub_kwargs[49m[43m,[49m[43m [49m[38;5;241;43m*[39;49m[38;5;241;43m*[39;49m[43mkwargs[49m
+[1;32m    567[0m [43m    [49m[43m)[49m
+[1;32m    568[0m [38;5;28;01mraise[39;00m [38;5;167;01mValueError[39;00m(
+[1;32m    569[0m     [38;5;124mf[39m[38;5;124m"[39m[38;5;124mUnrecognized configuration class [39m[38;5;132;01m{[39;00mconfig[38;5;241m.[39m[38;5;18m__class__[39m[38;5;132;01m}[39;00m[38;5;124m for this kind of AutoModel: [39m[38;5;132;01m{[39;00m[38;5;28mcls[39m[38;5;241m.[39m[38;5;18m__name__[39m[38;5;132;01m}[39;00m[38;5;124m.[39m[38;5;130;01m\n[39;00m[38;5;124m"[39m
+[1;32m    570[0m     [38;5;124mf[39m[38;5;124m"[39m[38;5;124mModel type should be one of [39m[38;5;132;01m{[39;00m[38;5;124m'[39m[38;5;124m, [39m[38;5;124m'[39m[38;5;241m.[39mjoin(c[38;5;241m.[39m[38;5;18m__name__[39m[38;5;250m [39m[38;5;28;01mfor[39;00m[38;5;250m [39mc[38;5;250m [39m[38;5;129;01min[39;00m[38;5;250m [39m[38;5;28mcls[39m[38;5;241m.[39m_model_mapping[38;5;241m.[39mkeys())[38;5;132;01m}[39;00m[38;5;124m.[39m[38;5;124m"[39m
+[1;32m    571[0m )
+
+File [0;32m~/miniforge3/envs/torchcpu/lib/python3.8/site-packages/transformers/modeling_utils.py:2909[0m, in [0;36mPreTrainedModel.from_pretrained[0;34m(cls, pretrained_model_name_or_path, config, cache_dir, ignore_mismatched_sizes, force_download, local_files_only, token, revision, use_safetensors, *model_args, **kwargs)[0m
+[1;32m   2894[0m [38;5;28;01mtry[39;00m:
+[1;32m   2895[0m     [38;5;66;03m# Load from URL or cache if already cached[39;00m
+[1;32m   2896[0m     cached_file_kwargs [38;5;241m=[39m {
+[1;32m   2897[0m         [38;5;124m"[39m[38;5;124mcache_dir[39m[38;5;124m"[39m: cache_dir,
+[1;32m   2898[0m         [38;5;124m"[39m[38;5;124mforce_download[39m[38;5;124m"[39m: force_download,
+[0;32m   (...)[0m
+[1;32m   2907[0m         [38;5;124m"[39m[38;5;124m_commit_hash[39m[38;5;124m"[39m: commit_hash,
+[1;32m   2908[0m     }
+[0;32m-> 2909[0m     resolved_archive_file [38;5;241m=[39m [43mcached_file[49m[43m([49m[43mpretrained_model_name_or_path[49m[43m,[49m[43m [49m[43mfilename[49m[43m,[49m[43m [49m[38;5;241;43m*[39;49m[38;5;241;43m*[39;49m[43mcached_file_kwargs[49m[43m)[49m
+[1;32m   2911[0m     [38;5;66;03m# Since we set _raise_exceptions_for_missing_entries=False, we don't get an exception but a None[39;00m
+[1;32m   2912[0m     [38;5;66;03m# result when internet is up, the repo and revision exist, but the file does not.[39;00m
+[1;32m   2913[0m     [38;5;28;01mif[39;00m resolved_archive_file [38;5;129;01mis[39;00m [38;5;28;01mNone[39;00m [38;5;129;01mand[39;00m filename [38;5;241m==[39m _add_variant(SAFE_WEIGHTS_NAME, variant):
+[1;32m   2914[0m         [38;5;66;03m# Maybe the checkpoint is sharded, we try to grab the index name in this case.[39;00m
+
+File [0;32m~/miniforge3/envs/torchcpu/lib/python3.8/site-packages/transformers/utils/hub.py:429[0m, in [0;36mcached_file[0;34m(path_or_repo_id, filename, cache_dir, force_download, resume_download, proxies, token, revision, local_files_only, subfolder, repo_type, user_agent, _raise_exceptions_for_missing_entries, _raise_exceptions_for_connection_errors, _commit_hash, **deprecated_kwargs)[0m
+[1;32m    426[0m user_agent [38;5;241m=[39m http_user_agent(user_agent)
+[1;32m    427[0m [38;5;28;01mtry[39;00m:
+[1;32m    428[0m     [38;5;66;03m# Load from URL or cache if already cached[39;00m
+[0;32m--> 429[0m     resolved_file [38;5;241m=[39m [43mhf_hub_download[49m[43m([49m
+[1;32m    430[0m [43m        [49m[43mpath_or_repo_id[49m[43m,[49m
+[1;32m    431[0m [43m        [49m[43mfilename[49m[43m,[49m
+[1;32m    432[0m [43m        [49m[43msubfolder[49m[38;5;241;43m=[39;49m[38;5;28;43;01mNone[39;49;00m[43m [49m[38;5;28;43;01mif[39;49;00m[43m [49m[38;5;28;43mlen[39;49m[43m([49m[43msubfolder[49m[43m)[49m[43m [49m[38;5;241;43m==[39;49m[43m [49m[38;5;241;43m0[39;49m[43m [49m[38;5;28;43;01melse[39;49;00m[43m [49m[43msubfolder[49m[43m,[49m
+[1;32m    433[0m [43m        [49m[43mrepo_type[49m[38;5;241;43m=[39;49m[43mrepo_type[49m[43m,[49m
+[1;32m    434[0m [43m        [49m[43mrevision[49m[38;5;241;43m=[39;49m[43mrevision[49m[43m,[49m
+[1;32m    435[0m [43m        [49m[43mcache_dir[49m[38;5;241;43m=[39;49m[43mcache_dir[49m[43m,[49m
+[1;32m    436[0m [43m        [49m[43muser_agent[49m[38;5;241;43m=[39;49m[43muser_agent[49m[43m,[49m
+[1;32m    437[0m [43m        [49m[43mforce_download[49m[38;5;241;43m=[39;49m[43mforce_download[49m[43m,[49m
+[1;32m    438[0m [43m        [49m[43mproxies[49m[38;5;241;43m=[39;49m[43mproxies[49m[43m,[49m
+[1;32m    439[0m [43m        [49m[43mresume_download[49m[38;5;241;43m=[39;49m[43mresume_download[49m[43m,[49m
+[1;32m    440[0m [43m        [49m[43mtoken[49m[38;5;241;43m=[39;49m[43mtoken[49m[43m,[49m
+[1;32m    441[0m [43m        [49m[43mlocal_files_only[49m[38;5;241;43m=[39;49m[43mlocal_files_only[49m[43m,[49m
+[1;32m    442[0m [43m    [49m[43m)[49m
+[1;32m    443[0m [38;5;28;01mexcept[39;00m GatedRepoError [38;5;28;01mas[39;00m e:
+[1;32m    444[0m     [38;5;28;01mraise[39;00m [38;5;167;01mEnvironmentError[39;00m(
+[1;32m    445[0m         [38;5;124m"[39m[38;5;124mYou are trying to access a gated repo.[39m[38;5;130;01m\n[39;00m[38;5;124mMake sure to request access at [39m[38;5;124m"[39m
+[1;32m    446[0m         [38;5;124mf[39m[38;5;124m"[39m[38;5;124mhttps://huggingface.co/[39m[38;5;132;01m{[39;00mpath_or_repo_id[38;5;132;01m}[39;00m[38;5;124m and pass a token having permission to this repo either [39m[38;5;124m"[39m
+[1;32m    447[0m         [38;5;124m"[39m[38;5;124mby logging in with `huggingface-cli login` or by passing `token=<your_token>`.[39m[38;5;124m"[39m
+[1;32m    448[0m     ) [38;5;28;01mfrom[39;00m [38;5;21;01me[39;00m
+
+File [0;32m~/miniforge3/envs/torchcpu/lib/python3.8/site-packages/huggingface_hub/utils/_validators.py:118[0m, in [0;36mvalidate_hf_hub_args.<locals>._inner_fn[0;34m(*args, **kwargs)[0m
+[1;32m    115[0m [38;5;28;01mif[39;00m check_use_auth_token:
+[1;32m    116[0m     kwargs [38;5;241m=[39m smoothly_deprecate_use_auth_token(fn_name[38;5;241m=[39mfn[38;5;241m.[39m[38;5;18m__name__[39m, has_token[38;5;241m=[39mhas_token, kwargs[38;5;241m=[39mkwargs)
+[0;32m--> 118[0m [38;5;28;01mreturn[39;00m [43mfn[49m[43m([49m[38;5;241;43m*[39;49m[43margs[49m[43m,[49m[43m [49m[38;5;241;43m*[39;49m[38;5;241;43m*[39;49m[43mkwargs[49m[43m)[49m
+
+File [0;32m~/miniforge3/envs/torchcpu/lib/python3.8/site-packages/huggingface_hub/file_download.py:1431[0m, in [0;36mhf_hub_download[0;34m(repo_id, filename, subfolder, repo_type, revision, endpoint, library_name, library_version, cache_dir, local_dir, local_dir_use_symlinks, user_agent, force_download, force_filename, proxies, etag_timeout, resume_download, token, local_files_only, legacy_cache_layout)[0m
+[1;32m   1428[0m         [38;5;28;01mif[39;00m local_dir [38;5;129;01mis[39;00m [38;5;129;01mnot[39;00m [38;5;28;01mNone[39;00m:
+[1;32m   1429[0m             _check_disk_space(expected_size, local_dir)
+[0;32m-> 1431[0m     [43mhttp_get[49m[43m([49m
+[1;32m   1432[0m [43m        [49m[43murl_to_download[49m[43m,[49m
+[1;32m   1433[0m [43m        [49m[43mtemp_file[49m[43m,[49m
+[1;32m   1434[0m [43m        [49m[43mproxies[49m[38;5;241;43m=[39;49m[43mproxies[49m[43m,[49m
+[1;32m   1435[0m [43m        [49m[43mresume_size[49m[38;5;241;43m=[39;49m[43mresume_size[49m[43m,[49m
+[1;32m   1436[0m [43m        [49m[43mheaders[49m[38;5;241;43m=[39;49m[43mheaders[49m[43m,[49m
+[1;32m   1437[0m [43m        [49m[43mexpected_size[49m[38;5;241;43m=[39;49m[43mexpected_size[49m[43m,[49m
+[1;32m   1438[0m [43m    [49m[43m)[49m
+[1;32m   1440[0m [38;5;28;01mif[39;00m local_dir [38;5;129;01mis[39;00m [38;5;28;01mNone[39;00m:
+[1;32m   1441[0m     logger[38;5;241m.[39minfo([38;5;124mf[39m[38;5;124m"[39m[38;5;124mStoring [39m[38;5;132;01m{[39;00murl[38;5;132;01m}[39;00m[38;5;124m in cache at [39m[38;5;132;01m{[39;00mblob_path[38;5;132;01m}[39;00m[38;5;124m"[39m)
+
+File [0;32m~/miniforge3/envs/torchcpu/lib/python3.8/site-packages/huggingface_hub/file_download.py:515[0m, in [0;36mhttp_get[0;34m(url, temp_file, proxies, resume_size, headers, timeout, max_retries, expected_size)[0m
+[1;32m    512[0m [38;5;28;01mif[39;00m resume_size [38;5;241m>[39m [38;5;241m0[39m:
+[1;32m    513[0m     headers[[38;5;124m"[39m[38;5;124mRange[39m[38;5;124m"[39m] [38;5;241m=[39m [38;5;124m"[39m[38;5;124mbytes=[39m[38;5;132;01m%d[39;00m[38;5;124m-[39m[38;5;124m"[39m [38;5;241m%[39m (resume_size,)
+[0;32m--> 515[0m r [38;5;241m=[39m [43m_request_wrapper[49m[43m([49m
+[1;32m    516[0m [43m    [49m[43mmethod[49m[38;5;241;43m=[39;49m[38;5;124;43m"[39;49m[38;5;124;43mGET[39;49m[38;5;124;43m"[39;49m[43m,[49m
+[1;32m    517[0m [43m    [49m[43murl[49m[38;5;241;43m=[39;49m[43murl[49m[43m,[49m
+[1;32m    518[0m [43m    [49m[43mstream[49m[38;5;241;43m=[39;49m[38;5;28;43;01mTrue[39;49;00m[43m,[49m
+[1;32m    519[0m [43m    [49m[43mproxies[49m[38;5;241;43m=[39;49m[43mproxies[49m[43m,[49m
+[1;32m    520[0m [43m    [49m[43mheaders[49m[38;5;241;43m=[39;49m[43mheaders[49m[43m,[49m
+[1;32m    521[0m [43m    [49m[43mtimeout[49m[38;5;241;43m=[39;49m[43mtimeout[49m[43m,[49m
+[1;32m    522[0m [43m    [49m[43mmax_retries[49m[38;5;241;43m=[39;49m[43mmax_retries[49m[43m,[49m
+[1;32m    523[0m [43m[49m[43m)[49m
+[1;32m    524[0m hf_raise_for_status(r)
+[1;32m    525[0m content_length [38;5;241m=[39m r[38;5;241m.[39mheaders[38;5;241m.[39mget([38;5;124m"[39m[38;5;124mContent-Length[39m[38;5;124m"[39m)
+
+File [0;32m~/miniforge3/envs/torchcpu/lib/python3.8/site-packages/huggingface_hub/file_download.py:452[0m, in [0;36m_request_wrapper[0;34m(method, url, max_retries, base_wait_time, max_wait_time, timeout, follow_relative_redirects, **params)[0m
+[1;32m    449[0m     [38;5;28;01mreturn[39;00m response
+[1;32m    451[0m [38;5;66;03m# 3. Exponential backoff[39;00m
+[0;32m--> 452[0m [38;5;28;01mreturn[39;00m [43mhttp_backoff[49m[43m([49m
+[1;32m    453[0m [43m    [49m[43mmethod[49m[38;5;241;43m=[39;49m[43mmethod[49m[43m,[49m
+[1;32m    454[0m [43m    [49m[43murl[49m[38;5;241;43m=[39;49m[43murl[49m[43m,[49m
+[1;32m    455[0m [43m    [49m[43mmax_retries[49m[38;5;241;43m=[39;49m[43mmax_retries[49m[43m,[49m
+[1;32m    456[0m [43m    [49m[43mbase_wait_time[49m[38;5;241;43m=[39;49m[43mbase_wait_time[49m[43m,[49m
+[1;32m    457[0m [43m    [49m[43mmax_wait_time[49m[38;5;241;43m=[39;49m[43mmax_wait_time[49m[43m,[49m
+[1;32m    458[0m [43m    [49m[43mretry_on_exceptions[49m[38;5;241;43m=[39;49m[43m([49m[43mTimeout[49m[43m,[49m[43m [49m[43mProxyError[49m[43m)[49m[43m,[49m
+[1;32m    459[0m [43m    [49m[43mretry_on_status_codes[49m[38;5;241;43m=[39;49m[43m([49m[43m)[49m[43m,[49m
+[1;32m    460[0m [43m    [49m[43mtimeout[49m[38;5;241;43m=[39;49m[43mtimeout[49m[43m,[49m
+[1;32m    461[0m [43m    [49m[38;5;241;43m*[39;49m[38;5;241;43m*[39;49m[43mparams[49m[43m,[49m
+[1;32m    462[0m [43m[49m[43m)[49m
+
+File [0;32m~/miniforge3/envs/torchcpu/lib/python3.8/site-packages/huggingface_hub/utils/_http.py:274[0m, in [0;36mhttp_backoff[0;34m(method, url, max_retries, base_wait_time, max_wait_time, retry_on_exceptions, retry_on_status_codes, **kwargs)[0m
+[1;32m    271[0m     logger[38;5;241m.[39mwarning([38;5;124mf[39m[38;5;124m"[39m[38;5;124m'[39m[38;5;132;01m{[39;00merr[38;5;132;01m}[39;00m[38;5;124m'[39m[38;5;124m thrown while requesting [39m[38;5;132;01m{[39;00mmethod[38;5;132;01m}[39;00m[38;5;124m [39m[38;5;132;01m{[39;00murl[38;5;132;01m}[39;00m[38;5;124m"[39m)
+[1;32m    273[0m     [38;5;28;01mif[39;00m nb_tries [38;5;241m>[39m max_retries:
+[0;32m--> 274[0m         [38;5;28;01mraise[39;00m err
+[1;32m    276[0m [38;5;66;03m# Sleep for X seconds[39;00m
+[1;32m    277[0m logger[38;5;241m.[39mwarning([38;5;124mf[39m[38;5;124m"[39m[38;5;124mRetrying in [39m[38;5;132;01m{[39;00msleep_time[38;5;132;01m}[39;00m[38;5;124ms [Retry [39m[38;5;132;01m{[39;00mnb_tries[38;5;132;01m}[39;00m[38;5;124m/[39m[38;5;132;01m{[39;00mmax_retries[38;5;132;01m}[39;00m[38;5;124m].[39m[38;5;124m"[39m)
+
+File [0;32m~/miniforge3/envs/torchcpu/lib/python3.8/site-packages/huggingface_hub/utils/_http.py:258[0m, in [0;36mhttp_backoff[0;34m(method, url, max_retries, base_wait_time, max_wait_time, retry_on_exceptions, retry_on_status_codes, **kwargs)[0m
+[1;32m    255[0m     kwargs[[38;5;124m"[39m[38;5;124mdata[39m[38;5;124m"[39m][38;5;241m.[39mseek(io_obj_initial_pos)
+[1;32m    257[0m [38;5;66;03m# Perform request and return if status_code is not in the retry list.[39;00m
+[0;32m--> 258[0m response [38;5;241m=[39m [43msession[49m[38;5;241;43m.[39;49m[43mrequest[49m[43m([49m[43mmethod[49m[38;5;241;43m=[39;49m[43mmethod[49m[43m,[49m[43m [49m[43murl[49m[38;5;241;43m=[39;49m[43murl[49m[43m,[49m[43m [49m[38;5;241;43m*[39;49m[38;5;241;43m*[39;49m[43mkwargs[49m[43m)[49m
+[1;32m    259[0m [38;5;28;01mif[39;00m response[38;5;241m.[39mstatus_code [38;5;129;01mnot[39;00m [38;5;129;01min[39;00m retry_on_status_codes:
+[1;32m    260[0m     [38;5;28;01mreturn[39;00m response
+
+File [0;32m~/miniforge3/envs/torchcpu/lib/python3.8/site-packages/requests/sessions.py:589[0m, in [0;36mSession.request[0;34m(self, method, url, params, data, headers, cookies, files, auth, timeout, allow_redirects, proxies, hooks, stream, verify, cert, json)[0m
+[1;32m    584[0m send_kwargs [38;5;241m=[39m {
+[1;32m    585[0m     [38;5;124m"[39m[38;5;124mtimeout[39m[38;5;124m"[39m: timeout,
+[1;32m    586[0m     [38;5;124m"[39m[38;5;124mallow_redirects[39m[38;5;124m"[39m: allow_redirects,
+[1;32m    587[0m }
+[1;32m    588[0m send_kwargs[38;5;241m.[39mupdate(settings)
+[0;32m--> 589[0m resp [38;5;241m=[39m [38;5;28;43mself[39;49m[38;5;241;43m.[39;49m[43msend[49m[43m([49m[43mprep[49m[43m,[49m[43m [49m[38;5;241;43m*[39;49m[38;5;241;43m*[39;49m[43msend_kwargs[49m[43m)[49m
+[1;32m    591[0m [38;5;28;01mreturn[39;00m resp
+
+File [0;32m~/miniforge3/envs/torchcpu/lib/python3.8/site-packages/requests/sessions.py:703[0m, in [0;36mSession.send[0;34m(self, request, **kwargs)[0m
+[1;32m    700[0m start [38;5;241m=[39m preferred_clock()
+[1;32m    702[0m [38;5;66;03m# Send the request[39;00m
+[0;32m--> 703[0m r [38;5;241m=[39m [43madapter[49m[38;5;241;43m.[39;49m[43msend[49m[43m([49m[43mrequest[49m[43m,[49m[43m [49m[38;5;241;43m*[39;49m[38;5;241;43m*[39;49m[43mkwargs[49m[43m)[49m
+[1;32m    705[0m [38;5;66;03m# Total elapsed time of the request (approximately)[39;00m
+[1;32m    706[0m elapsed [38;5;241m=[39m preferred_clock() [38;5;241m-[39m start
+
+File [0;32m~/miniforge3/envs/torchcpu/lib/python3.8/site-packages/huggingface_hub/utils/_http.py:63[0m, in [0;36mUniqueRequestIdAdapter.send[0;34m(self, request, *args, **kwargs)[0m
+[1;32m     61[0m [38;5;250m[39m[38;5;124;03m"""Catch any RequestException to append request id to the error message for debugging."""[39;00m
+[1;32m     62[0m [38;5;28;01mtry[39;00m:
+[0;32m---> 63[0m     [38;5;28;01mreturn[39;00m [38;5;28;43msuper[39;49m[43m([49m[43m)[49m[38;5;241;43m.[39;49m[43msend[49m[43m([49m[43mrequest[49m[43m,[49m[43m [49m[38;5;241;43m*[39;49m[43margs[49m[43m,[49m[43m [49m[38;5;241;43m*[39;49m[38;5;241;43m*[39;49m[43mkwargs[49m[43m)[49m
+[1;32m     64[0m [38;5;28;01mexcept[39;00m requests[38;5;241m.[39mRequestException [38;5;28;01mas[39;00m e:
+[1;32m     65[0m     request_id [38;5;241m=[39m request[38;5;241m.[39mheaders[38;5;241m.[39mget(X_AMZN_TRACE_ID)
+
+File [0;32m~/miniforge3/envs/torchcpu/lib/python3.8/site-packages/requests/adapters.py:513[0m, in [0;36mHTTPAdapter.send[0;34m(self, request, stream, timeout, verify, cert, proxies)[0m
+[1;32m    510[0m     [38;5;28;01mraise[39;00m RetryError(e, request[38;5;241m=[39mrequest)
+[1;32m    512[0m [38;5;28;01mif[39;00m [38;5;28misinstance[39m(e[38;5;241m.[39mreason, _ProxyError):
+[0;32m--> 513[0m     [38;5;28;01mraise[39;00m ProxyError(e, request[38;5;241m=[39mrequest)
+[1;32m    515[0m [38;5;28;01mif[39;00m [38;5;28misinstance[39m(e[38;5;241m.[39mreason, _SSLError):
+[1;32m    516[0m     [38;5;66;03m# This branch is for urllib3 v1.22 and later.[39;00m
+[1;32m    517[0m     [38;5;28;01mraise[39;00m SSLError(e, request[38;5;241m=[39mrequest)
+
+[0;31mProxyError[0m: (MaxRetryError("HTTPSConnectionPool(host='cdn-lfs.huggingface.co', port=443): Max retries exceeded with url: /bert-base-uncased/68d45e234eb4a928074dfd868cead0219ab85354cc53d20e772753c6bb9169d3?response-content-disposition=inline%3B+filename*%3DUTF-8%27%27model.safetensors%3B+filename%3D%22model.safetensors%22%3B&Expires=1725539309&Policy=eyJTdGF0ZW1lbnQiOlt7IkNvbmRpdGlvbiI6eyJEYXRlTGVzc1RoYW4iOnsiQVdTOkVwb2NoVGltZSI6MTcyNTUzOTMwOX19LCJSZXNvdXJjZSI6Imh0dHBzOi8vY2RuLWxmcy5odWdnaW5nZmFjZS5jby9iZXJ0LWJhc2UtdW5jYXNlZC82OGQ0NWUyMzRlYjRhOTI4MDc0ZGZkODY4Y2VhZDAyMTlhYjg1MzU0Y2M1M2QyMGU3NzI3NTNjNmJiOTE2OWQzP3Jlc3BvbnNlLWNvbnRlbnQtZGlzcG9zaXRpb249KiJ9XX0_&Signature=OcrqznUv9wdzzI0zNdHJMCpuS8hogeMZNSKsPWCiowUA7LlWsmTiRhxtnBuEr4ETHxrod205NtQlcQl8R7Miu40jk1Slh9vjG8NsSGBDrhgeQ6MoodHm1r5LpLSRQI06oQ7AXGCmDrnMAMbOvvfDVlSO-yZLR0dlkUtF~Jf0ODHHBqMHs9AXWPE~GuoI60iAypZRGi0MmSAdjZS2XNlRnJWsi52QLuwmzp3zY5kPjKBGlGZsTEUxQL-wRKN7Pbn~v-5Wprt~gWLxRM39MKIdda6IgHwG8TCnmcTVCEXfJGjIW7ANtCZjBrxZUX-1YNRr-13gkP0DiNnVmYKJn46pqA__&Key-Pair-Id=K3ESJI6DHPFC7 (Caused by ProxyError('Cannot connect to proxy.', ConnectionResetError(54, 'Connection reset by peer')))"), '(Request ID: 507486cb-c0dd-4991-88f7-061c41ad6674)')
 
