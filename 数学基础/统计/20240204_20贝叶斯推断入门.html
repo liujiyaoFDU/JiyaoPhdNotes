@@ -1,0 +1,748 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>3.1. Visual ML | Statistics | 20.贝叶斯推断入门 &#8212; 阿土的炼丹炉</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=ac02cc09edc035673794" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=ac02cc09edc035673794" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=ac02cc09edc035673794" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=ac02cc09edc035673794" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" href="../../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=ac02cc09edc035673794" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=ac02cc09edc035673794" />
+  <script src="../../_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=ac02cc09edc035673794"></script>
+
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/clipboard.min.js"></script>
+    <script src="../../_static/copybutton.js"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '数学基础/统计/20240204_20贝叶斯推断入门';</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="3.2. Visual ML | Statistics | 21.深入贝叶斯推断" href="20240204_%E8%B4%9D%E5%8F%B6%E6%96%AF%E6%8E%A8%E6%96%AD%E8%BF%9B%E9%98%B6.html" />
+    <link rel="prev" title="3. 统计" href="../%E7%BB%9F%E8%AE%A1intro.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+  
+
+<a class="navbar-brand logo" href="../../intro.html">
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/logo.jpg" class="logo__image only-light" alt="Logo image"/>
+    <script>document.write(`<img src="../../_static/logo.jpg" class="logo__image only-dark" alt="Logo image"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../../intro.html">
+                    Jiyao Liu
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Basic Guides</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../basic/jupyter_book.html">1. Jupyter Book 使用指南</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">数学基础</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../%E7%9F%A9%E9%98%B5%E5%88%86%E6%9E%90intro.html">1. 矩阵分析</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../%E7%9F%A9%E9%98%B5/matrix_analysis.html">1.1. 矩阵与张量分析作业</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../%E4%BC%98%E5%8C%96intro.html">2. 优化</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../%E5%87%B8%E4%BC%98%E5%8C%96/%E4%BA%A4%E6%9B%BF%E5%90%91%E4%B9%98%E5%AD%90%E6%B3%95%28Alternating_Direction_Method_of_Multipliers_ADMM%29.html">2.1. 交替方向乘子法（Alternating Direction Method of Multipliers, ADMM）</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../%E5%87%B8%E4%BC%98%E5%8C%96/20240326%20Krylov%20Subspace%20Regularization%20for%20Inverse%20Problems.html">2.2. Krylov Subspace Regularization for Inverse Problems</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="../%E7%BB%9F%E8%AE%A1intro.html">3. 统计</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-3"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">3.1. Visual ML | Statistics | 20.贝叶斯推断入门</a></li>
+<li class="toctree-l2"><a class="reference internal" href="20240204_%E8%B4%9D%E5%8F%B6%E6%96%AF%E6%8E%A8%E6%96%AD%E8%BF%9B%E9%98%B6.html">3.2. Visual ML | Statistics | 21.深入贝叶斯推断</a></li>
+</ul>
+</li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">PRML notes</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../PRML/intro.html">1. PRML</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../PRML/math_basic.html">2. 数学基础</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../PRML/Exponential_Family_Distribution.html">3. 指数族分布</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../PRML/2023_11_05_PGM1.html">4. 概率图模型入门</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../PRML/%E6%A6%82%E7%8E%87%E5%9B%BE%E6%A8%A1%E5%9E%8B%E6%80%BB.html">5. 概率图模型</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../PRML/2023_11_12_Kalman_Filter.html">6. 线性动态系统-卡曼滤波（Kalman Filter）</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../PRML/2023_11_15_Pacticle_Filter.html">7. Particle Filter</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">学术报告</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../Report/acad_lunch_zhuang_wang.html">1. 20231016 | 庄吓海/王成彦-可解释医学影像分析</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Report/report-rec.html">2. VALSE 20200415 |  机器学习 vs 压缩感知：核磁共振成像与重建</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">research</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../research/evidential_regression.html">1. Evidential Learning and Uncentainty</a></li>
+
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../research/%E6%96%87%E7%8C%AE%E9%98%85%E8%AF%BB%E8%AE%B0%E5%BD%95intro.html">3. 文献阅读记录</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-4"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../research/%E6%96%87%E7%8C%AE%E9%98%85%E8%AF%BB%E8%AE%B0%E5%BD%95/202401_%E6%96%87%E7%AB%A0%E9%98%85%E8%AF%BB.html">3.1. 【Paper Reading】Foundation model | 可解释性 | 图像融合 20240123</a></li>
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="../../research/%E6%96%87%E7%8C%AE%E9%98%85%E8%AF%BB%E8%AE%B0%E5%BD%95/202403%E6%96%87%E7%AB%A0%E9%98%85%E8%AF%BB.html">3.5. 20240303【Paper Reading】Uncertainty | 可解释性</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../research/%E6%96%87%E7%8C%AE%E9%98%85%E8%AF%BB%E8%AE%B0%E5%BD%95/20230614_TV_CS.html">3.6. TV CS</a></li>
+</ul>
+</li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">MRI notes</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../MRI%E5%8E%9F%E7%90%86/20231018_MT_CEST_NOE.html">1. MT&amp;CEST&amp;NOE 磁化转移定量成像</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../MRI%E5%8E%9F%E7%90%86/20230709_Parallel_MRI_reconstruction.html">2. Parallel MRI reconstruction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../MRI%E5%8E%9F%E7%90%86/20230714_Awesome%20MRI%20Recon.html">3. Awesome Accelerated-MRI-Reconstruction-Papers </a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="../../MRI%E5%8E%9F%E7%90%86/20230731_MRI%E9%87%8D%E5%BB%BA%E6%96%87%E7%8C%AE%E6%95%B4%E7%90%86.html">5. 传统方法</a></li>
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="../../MRI%E5%8E%9F%E7%90%86/20230725_Phase_Unwrapping_and_Background_Removal.html">12. 如何重建QSM</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Pytorch框架</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../pytorch/%E6%A8%A1%E5%9E%8B%E6%8B%93%E6%89%91%E7%BB%93%E6%9E%84.html">1. 模型拓扑结构</a><input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-5"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../pytorch/hook.html">1.1. 注册钩子函数（register_forward_hook）</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../pytorch/computation_graph.html">1.2. 计算图构建细节</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../pytorch/torch.gather.html">1.3. Torch.gather 索引</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../pytorch/02_gelu_grad.html">1.4. GeLU介绍及使用</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../pytorch/20240528_pytorch%E5%8A%A0%E9%80%9F%E8%AE%AD%E7%BB%83%E6%8A%80%E5%B7%A7.html">2. pytorch加速训练技巧</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">图像处理基础</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../%E5%9B%BE%E5%83%8F%28%E4%BF%A1%E5%8F%B7%29%E5%A4%84%E7%90%86%E5%9F%BA%E7%A1%80/20230918_%E5%8E%8B%E7%BC%A9%E6%84%9F%E7%9F%A5.html">1. 【method】稀疏与压缩感知 |  图像稀疏性及压缩感知方法白话讲解</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">深度学习基础</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%A1%80/DL_intro.html">1. 深度学习基础</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">深度学习应用</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%BA%94%E7%94%A8/%E7%94%9F%E6%88%90%E5%BC%8F%E6%A8%A1%E5%9E%8Bintro.html">1. 生成式模型</a><input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-6"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%BA%94%E7%94%A8/%E7%94%9F%E6%88%90%E5%BC%8F%E6%A8%A1%E5%9E%8B/20240110_%E6%89%A9%E6%95%A3%E6%A8%A1%E5%9E%8BScore-based%20model%E7%B2%BE%E8%AE%B2.html">1.1. 扩散模型 | 1.Score-based model精讲</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%BA%94%E7%94%A8/%E7%94%9F%E6%88%90%E5%BC%8F%E6%A8%A1%E5%9E%8B/20240110_%E6%89%A9%E6%95%A3%E6%A8%A1%E5%9E%8BSDE%E7%B2%BE%E8%AE%B2.html">1.2. 扩散模型 | 2.SDE精讲</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%BA%94%E7%94%A8/%E7%94%9F%E6%88%90%E5%BC%8F%E6%A8%A1%E5%9E%8B/20240111_%E6%89%A9%E6%95%A3%E6%A8%A1%E5%9E%8B%E5%BA%94%E7%94%A8.html">1.3. 扩散模型 | 3.Score-based SDE for accelerated MRI精讲</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%BA%94%E7%94%A8/%E9%80%86%E9%97%AE%E9%A2%98intro.html">2. 逆问题</a><input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-7"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%BA%94%E7%94%A8/%E9%80%86%E9%97%AE%E9%A2%98/20230102_Diffusion_model_fo_the_inverse_problem.html">2.1. 【Method】inverse problem | 基于diffusion model的图像逆问题求解</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%BA%94%E7%94%A8/%E9%80%86%E9%97%AE%E9%A2%98/20230717_ADMM_CSNet_note.html">2.2. 【method】ADMM-CSNet |  一种图像压缩感知重建的深度学习方法（1）- 方法解析</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%BA%94%E7%94%A8/%E9%80%86%E9%97%AE%E9%A2%98/20230719_ADMM_CSNet_code.html">2.3. ADMM CSNet代码解析</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%BA%94%E7%94%A8/%E9%80%86%E9%97%AE%E9%A2%98/20230708_%E4%BD%BF%E7%94%A8%E6%95%B0%E6%8D%AE%E9%A9%B1%E5%8A%A8%E6%A8%A1%E5%9E%8B%E6%B1%82%E8%A7%A3%E9%80%86%E9%97%AE%E9%A2%98.html">2.4. 使用数据驱动模型求解逆问题</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%BA%94%E7%94%A8/%E9%80%86%E9%97%AE%E9%A2%98/20230808_%E5%9B%BE%E5%83%8F%E9%80%86%E9%97%AE%E9%A2%98.html">2.5. 图像逆问题通用算法</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%BA%94%E7%94%A8/%E5%8F%AF%E8%A7%A3%E9%87%8Aintro.html">3. 可解释</a><input class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-8"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%BA%94%E7%94%A8/%E5%8F%AF%E8%A7%A3%E9%87%8AAI/20240112%E6%9B%B9%E5%8E%9F%E6%B8%AF%E5%A4%A7-%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E4%B8%AD%E7%9A%84%E4%B8%80%E4%BA%9B%E7%8E%B0%E8%B1%A1%E7%9A%84%E8%A7%A3%E9%87%8A.html">3.1. 【深度学习中的一些有趣现象及其理论解释】——曹原（香港大学）-2024</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%BA%94%E7%94%A8/%E5%8F%AF%E8%A7%A3%E9%87%8AAI/20240303_talk_trustworthy_AI.html">3.2. 【Talk】CVPRW 202206 | Towards robust and trustworthy AI for medical imaging - Ender Konukoglu</a></li>
+</ul>
+</li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">工具使用解决方案</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../tools/latex_symbol.html">1. Latex常用符号表</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/%E5%B8%B8%E7%94%A8%E5%B7%A5%E5%85%B7.html">2. 常用工具</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/20220503typora%2Bupic%2B%E9%98%BF%E9%87%8C%E4%BA%91OSS%2B%E5%9D%9A%E6%9E%9C%E4%BA%91%2B%E6%9C%89%E9%81%93%E4%BA%91%E7%AC%94%E8%AE%B0%E6%9E%84%E5%BB%BA%E4%B8%93%E5%B1%9E%E7%AC%94%E8%AE%B0%E7%B3%BB%E7%BB%9F.html">3. typora+upic+阿里云OSS+坚果云+有道云笔记构建专属笔记系统</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/20240202_XHR_failed.html">4. Remote-SSH XHR failed无法访问远程服务器</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Leetcode算法</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../Leetcode%E7%AE%97%E6%B3%95/leetcode_Intro.html">1. Leetcode</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2F数学基础/统计/20240204_20贝叶斯推断入门.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/数学基础/统计/20240204_20贝叶斯推断入门.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script>
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Visual ML | Statistics | 20.贝叶斯推断入门</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">3.1.1. 贝叶斯推断定义</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">3.1.2. 从鸡兔同笼问题出发，研究贝叶斯推断</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">3.1.2.1. 1.农夫完全不确定鸡兔比例，先验分布为均匀分布</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#bata-alpha-alpha">3.1.2.2. 2. 农夫认为鸡兔的比例接近 1:1，但是对这个比例的确信程度不同，先验分布为<span class="math notranslate nohighlight">\(Bata(\alpha, \alpha)\)</span></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#beta-alpha-beta">3.1.2.3. 3.并不确定具体比例接近几比几，先验分布为<span class="math notranslate nohighlight">\(Beta(\alpha, \beta)\)</span></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">3.1.3. 贝叶斯收缩</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">3.1.4. 总结</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">3.1.5. 参考</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <p>#! <a class="reference external" href="https://zhuanlan.zhihu.com/p/681394812">https://zhuanlan.zhihu.com/p/681394812</a></p>
+<section class="tex2jax_ignore mathjax_ignore" id="visual-ml-statistics-20">
+<h1><span class="section-number">3.1. </span>Visual ML | Statistics | 20.贝叶斯推断入门<a class="headerlink" href="#visual-ml-statistics-20" title="Permalink to this heading">#</a></h1>
+<p><img alt="" src="https://ossjiyaoliu.oss-cn-beijing.aliyuncs.com/uPic/lzwmQR.png" /></p>
+<p><img alt="贝叶斯推断知识图" src="https://ossjiyaoliu.oss-cn-beijing.aliyuncs.com/uPic/image-20240204150128737.png" /></p>
+<section id="id1">
+<h2><span class="section-number">3.1.1. </span>贝叶斯推断定义<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h2>
+<p>贝叶斯推断的核心是在以往的经验 (先验概率) 基础上，结合新的数据，得到新的概率 (后验概 率)。而模型参数分布随着外部样本数据不断输入而迭代更新。不同的是，<strong>频率派只考虑样本数据本身，不考虑先验概率。</strong></p>
+<p><img alt="通过贝叶斯定理迭代学习" src="https://ossjiyaoliu.oss-cn-beijing.aliyuncs.com/uPic/image-20240204150730958.png" /></p>
+<p>贝叶斯推断定义为
+$<span class="math notranslate nohighlight">\(
+\underbrace{f_{\Theta\mid X}(\theta\mid x)}_{后牙}=\frac{\underbrace{f_{X\mid\Theta}(x\mid\theta)}_{似然}\underbrace{f_{\Theta}(\theta)}_{先验}}{\underbrace{\underset{\vartheta}{\operatorname*{\int}}f_{X\mid\Theta}(x\mid\theta)f_{\Theta}(\theta)\mathrm{d}\theta}_{证据}}
+\)</span><span class="math notranslate nohighlight">\(
+在上式中未知参数\)</span>\Theta<span class="math notranslate nohighlight">\(为随机变量，\)</span>\theta<span class="math notranslate nohighlight">\(为一个随机变量的取值。当\)</span>\Theta=\theta<span class="math notranslate nohighlight">\(取不同值时，**似然**分布也有相应的变化。**似然×先验**表示\)</span>X<span class="math notranslate nohighlight">\(和\)</span>\Theta<span class="math notranslate nohighlight">\(的**联合分布**，**证据**为该联合分布的边缘分布，与\)</span>\theta<span class="math notranslate nohighlight">\(无关，意味着数据对先验的选择没有影响。后验代表在整合“先验 + 样本数据”之后，我们对参数\)</span>\Theta$ 的新的“认识”。在连续迭代贝叶斯学习中，这个后验概率分布是下一个迭代的先验概率分布。</p>
+<p>为了的到真正的后验概率密度，我们需要求得证据的积分。但是这个积分一般来说没有闭式解（一般来说仅<strong>共轭先验可以求得闭式解，即后验和先验都是同类分布</strong>），因此可能需要通过数值积分或蒙特卡洛模拟。</p>
+</section>
+<section id="id2">
+<h2><span class="section-number">3.1.2. </span>从鸡兔同笼问题出发，研究贝叶斯推断<a class="headerlink" href="#id2" title="Permalink to this heading">#</a></h2>
+<blockquote>
+<div><p>问题：一个巨大无比农场散养大量“走地”鸡、兔。但是，农夫自己也说不清楚鸡兔的比例。 用<span class="math notranslate nohighlight">\(\Theta\)</span>代表兔子的比例随机变量，这意味着<span class="math notranslate nohighlight">\(\Theta\)</span>的取值范围为 [0, 1]。为了搞清楚农场鸡兔比例，农夫决定随机抓<span class="math notranslate nohighlight">\(n\)</span>只动物。<span class="math notranslate nohighlight">\(X_1,X_2\ldots X_n\)</span>为每次抓取动物的结果。 <span class="math notranslate nohighlight">\(X_i\)</span>的样本空间为<span class="math notranslate nohighlight">\(\{0,1\}\)</span>，其中 0 代表鸡，1 代表兔。</p>
+</div></blockquote>
+<p>根据农夫对农场的大致了解，我们从如下几个角度分别分析不同先验得到的不同后验结果：①农夫完全不确定鸡兔的比例，我们选择连续均匀分布 Uniform(0, 1) 为先验分布；②设农夫认为鸡兔的比例接近 1:1，农夫对这个比例的确信程度不同，先验分布为<span class="math notranslate nohighlight">\(Bata(\alpha, \alpha)\)</span>；③更一般的情况：并不确定具体比例接近几比几，先验分布为<span class="math notranslate nohighlight">\(Beta(\alpha, \beta)\)</span>分布。</p>
+<section id="id3">
+<h3><span class="section-number">3.1.2.1. </span>1.农夫完全不确定鸡兔比例，先验分布为均匀分布<a class="headerlink" href="#id3" title="Permalink to this heading">#</a></h3>
+<p><strong>理论分析</strong></p>
+<p>由于农夫完全不确定鸡兔的比例，我们选择连续均匀分布 Uniform(0, 1) 为先验分布：<span class="math notranslate nohighlight">\(f_\Theta\left(\theta\right)=1,\quad\theta\in[0,1]\)</span>，称为<strong>无信息先验</strong>。在给定<span class="math notranslate nohighlight">\(\Theta=\theta\)</span>条件下，观测样本<span class="math notranslate nohighlight">\(X_i=x_i\)</span>（代表某一次抓到的动物，0 代表鸡，1 代表兔）服从IID的Bernoulli(<em>θ</em>)：<span class="math notranslate nohighlight">\(\underbrace{f_{X_i\mid\Theta}\left(x_i\mid\theta\right)}_{\mathrm{Likelihood}}=\theta^{x_i}\left(1-\theta\right)^{1-x_i}\)</span>。</p>
+<p>则联合分布为
+$<span class="math notranslate nohighlight">\(
+\begin{aligned}
+\underbrace{f_{X_1,X_2,...,X_n,\Theta}\left(x_1,x_2,...,x_n,\theta\right)}_{\mathrm{Joint}}&amp; =\underbrace{f_{X_1,X_2,\ldots,X_n|\Theta}\left(x_1,x_2,\ldots,x_n\mid\theta\right)}_{\text{Likelihood}}\underbrace{f_\Theta\left(\theta\right)}_{\text{Prior}}  \\
+&amp;=f_{X_1|\Theta}\left(x_1\mid\theta\right)\cdotp f_{X_2|\Theta}\left(x_2\mid\theta\right)\cdotp\cdotp\cdotp f_{X_n|\Theta}\left(x_n\mid\theta\right)\cdotp\underbrace{f_{\Theta}\left(\theta\right)}_{\mathrm{l}} \\
+&amp;=\prod_{i=1}^n\theta^{x_i}\left(1-\theta\right)^{1-x_i}=\theta^{\sum_{i=1}^nx_i}\left(1-\theta\right)^{n-\sum_{i=1}^nx_i}\\
+&amp;=\theta^s(1-\theta)^{n-s}, s = \sum_{i=1}^nx_i（n次抽取中兔子抽中的次数）
+\end{aligned}
+\)</span><span class="math notranslate nohighlight">\(
+证据为上述联合分布的积分，该积分恰好为Beta函数：
+\)</span><span class="math notranslate nohighlight">\(
+\begin{aligned}
+f_{X_1,|X_2,...,X_n}\left(x_1,x_2,...,x_n\right)&amp; =\int_\theta f_{X_1,X_2,...,X_n,\Theta}\left(x_1,x_2,...,x_n,\theta\right)\mathrm{d}\theta   \\
+&amp;=\int_\theta\theta^s\left(1-\theta\right)^{n-s}\operatorname{d}\theta \\
+&amp;=\int_\theta\theta^{s+1-1}\left(1-\theta\right)^{n-s+1-1}\operatorname{d}\theta\\&amp;=\operatorname{B}{\left(s+1,n-s+1\right)}=\frac{s!\left(n-s\right)!}{\left(n+1\right)!}
+\end{aligned}
+\)</span><span class="math notranslate nohighlight">\(
+由此，在\)</span>X_1=x_1,X_2=x_2,\ldots,X_n=x_n<span class="math notranslate nohighlight">\(条件下，\)</span>\Theta<span class="math notranslate nohighlight">\(的后验分布为：
+\)</span><span class="math notranslate nohighlight">\(
+ \begin{aligned}
+f_{\Theta\mid X_1,X_2,...,X_n}\left(\theta\mid x_1,x_2,...,x_n\right)&amp; =\frac{\overbrace{f_{X_1,X_2,\ldots,X_n,\Theta}\left(x_1,x_2,\ldots,x_n,\theta\right)}^{\text{Joint}}}{\underbrace{f _ { X _ 1 , X _ 2 , \ldots , X _ n }\left(x_1,x_2,\ldots,x_n\right)}_{\text{Evidence}}}  \\
+&amp;=\frac{\theta^s\left(1-\theta\right)^{n-s}}{\mathrm{B}\left(s+1,n-s+1\right)}=\frac{\theta^{\left(s+1\right)-1}\left(1-\theta\right)^{\left(n-s+1\right)-1}}{\mathrm{B}\left(s+1,n-s+1\right)}
+\end{aligned}
+\)</span>$
+上式中分母的作用仅仅是条件概率归一化。而该后验分布，恰好为<strong>Beta(<em>s</em> + 1, <em>n</em> – <em>s</em> + 1)分布</strong>！</p>
+<p><img alt="先验 U(0, 1) + 样本 (s, n – s) → 后验 Beta(s + 1, n – s + 1)" src="https://ossjiyaoliu.oss-cn-beijing.aliyuncs.com/uPic/image-20240204160332952.png" /></p>
+<p><strong>模拟实验</strong></p>
+<p>实际上 Uniform(0, 1) 就是 Beta(1, 1)。我们可以把蒙特卡洛模拟代入后验Beta(<em>s</em> + 1, <em>n</em> – <em>s</em> + 1)，得到后验分布的形状。</p>
+<blockquote>
+<div><p>说明：本文使用伯努利随机数发生器模拟抽样过程，设置真实兔子占比为0.45。</p>
+</div></blockquote>
+<p>模拟实验结果如下图所示：图a))为200次采样，每次采样的结果（鸡0or兔1）；图b)表示随着纵坐标采样总次数的增多，鸡和兔的真实比例的变化；图c)表示后验概率随着纵坐标样本数量的变化。</p>
+<p><img alt="试验的模拟结果，先验分布为 Beta(1, 1)" src="https://ossjiyaoliu.oss-cn-beijing.aliyuncs.com/uPic/image-20240204160630523.png" /></p>
+<p>下图为后验分布随着样本数的变化：灰色为真实兔子的比例</p>
+<p><img alt="九张不同节点的后验概率分布曲线快照，先验分布为 Beta(1, 1)。可以看出信念越来越强" src="https://ossjiyaoliu.oss-cn-beijing.aliyuncs.com/uPic/image-20240204163043426.png" /></p>
+<p><strong>实验结论如下：</strong></p>
+<ol class="arabic simple">
+<li><p>后验概率分布 <span class="math notranslate nohighlight">\(f_{\theta|X}(\theta|x)\)</span>曲线不断变的细高，也就是后验标准差不断变小。这是因为样本数据不断增多，大家对鸡兔比例变得越发“确信”。</p></li>
+<li><p>上图中黑色划线为农场兔子的真实比例；各个子图中红色划线对应的就是后验概率分布的最大值，<strong>最大后验</strong>在逼近兔子的真实比例。</p></li>
+<li><p>上述贝叶斯推断可以看做最大后验（MAP），其和频率派极大似然（MLE）的区别在于：<strong>MAP可以融合主观（先验）信息！</strong>（虽然此处我们提供的是无信息先验，后文可以我们通过提供其他先验作为例子），可以证明的是：<strong>贝叶斯推断在客观数据不足的时候最好用（适应于样本较小），当样本量非常大时，频率派更有用。</strong></p></li>
+<li><p>先验分布的选择和参数的确定代表“经验”，也代表某种“信念”。先验分布的选择和样本数据无关，不需要通过样本数据构造。反过来，观测到的样本数据对先验的选择没有任何影响。贝叶斯推断可以采用迭代方式，即后验概率可以成为新样本数据的先验概率。</p></li>
+</ol>
+</section>
+<section id="bata-alpha-alpha">
+<h3><span class="section-number">3.1.2.2. </span>2. 农夫认为鸡兔的比例接近 1:1，但是对这个比例的确信程度不同，先验分布为<span class="math notranslate nohighlight">\(Bata(\alpha, \alpha)\)</span><a class="headerlink" href="#bata-alpha-alpha" title="Permalink to this heading">#</a></h3>
+<p>由于农夫认为鸡兔的比例为 1:1，也就是先验的均值接近0.5。因此，我们选用<span class="math notranslate nohighlight">\(\mathrm{Beta}(\alpha,\alpha)\)</span>作为先验分布：
+$<span class="math notranslate nohighlight">\(
+f_\Theta(\theta)=\frac1{\mathrm{B}(\alpha,\alpha)}\theta^{\alpha-1}\left(1-\theta\right)^{\alpha-1}, \mathrm{B}(\alpha,\alpha)=\frac{\Gamma(\alpha)\Gamma(\alpha)}{\Gamma(\alpha+\alpha)}
+\)</span><span class="math notranslate nohighlight">\(
+根据确信程度不同，选取不同的\)</span>\alpha$，我们可以得到不同的先验：</p>
+<p><img alt="五个不同参数 α 取不同值时 Beta(α, α) 分布 PDF 图像" src="https://ossjiyaoliu.oss-cn-beijing.aliyuncs.com/uPic/image-20240204164235823.png" /></p>
+<p>之后的具体推导和前文类似，可以直接看参考材料中的原文，在这里我们只看一下不同先验<span class="math notranslate nohighlight">\(\alpha\)</span>下的实验结果：</p>
+<p>①下图为<span class="math notranslate nohighlight">\(\alpha=2\)</span>的实验结果，也就是对鸡兔比例为1:1的确信度不高。</p>
+<p><img alt="九张不同节点的后验概率分布曲线快照，先验分布为 Beta(2, 2)" src="https://ossjiyaoliu.oss-cn-beijing.aliyuncs.com/uPic/image-20240204165130774.png" /></p>
+<p>② <span class="math notranslate nohighlight">\(\alpha=16\)</span>，确信度很高</p>
+<p><img alt="九张不同节点的后验概率分布曲线快照，先验分布为 Beta(16, 16)" src="https://ossjiyaoliu.oss-cn-beijing.aliyuncs.com/uPic/image-20240204165153389.png" /></p>
+<p>结论：先验分布 Beta(<em>α</em>, <em>α</em>) 中 <em>α</em> 越大，代表主观经验越发“先入为主”，对贝叶斯推断最终结果越强。表现在图 25 中就是，随着 <em>α</em> 增大，似然分布和后验分布差异越大，MAP 优化解越发偏离 MLE 优化解，如下图：</p>
+<p><img alt=". 对比先验分布、似然分布、后验分布，α 取不同值时" src="https://ossjiyaoliu.oss-cn-beijing.aliyuncs.com/uPic/image-20240204165333677.png" /></p>
+</section>
+<section id="beta-alpha-beta">
+<h3><span class="section-number">3.1.2.3. </span>3.并不确定具体比例接近几比几，先验分布为<span class="math notranslate nohighlight">\(Beta(\alpha, \beta)\)</span><a class="headerlink" href="#beta-alpha-beta" title="Permalink to this heading">#</a></h3>
+<p>并不确定具体比例接近几比几，先验分布为<span class="math notranslate nohighlight">\(Beta(\alpha, \beta)\)</span>。所示一组图像代表比例和确信度同时变化：</p>
+<p><img alt=". 比例和确信程度同时变化" src="https://ossjiyaoliu.oss-cn-beijing.aliyuncs.com/uPic/image-20240204165711625.png" /></p>
+<p>推导的到后验的形式如下：
+$<span class="math notranslate nohighlight">\(
+\begin{aligned}
+f_{\Theta\mid X_1,X_2,...,X_n}\left(\theta\mid x_1,x_2,...,x_n\right)&amp; =\frac{f_{X_1,X_2,...,X_n,\Theta}\left(x_1,x_2,...,x_n,\theta\right)}{f_{X_1,X_2,...,X_n}\left(x_1,x_2,...,x_n\right)}  \\
+&amp;=\frac{\frac1{\mathrm{B}\left(\alpha,\beta\right)}\theta^{s+\alpha-1}\left(1-\theta\right)^{n-s+\beta-1}}{\underline{\mathrm{B}\left(s+\alpha,n-s+\beta\right)}}=\frac{\theta^{s+\alpha-1}\left(1-\theta\right)^{n-s+\beta-1}}{\mathrm{B}\left(s+\alpha,n-s+\beta\right)}
+\end{aligned}
+\)</span>$
+这里就不做具体的可视化了。</p>
+</section>
+</section>
+<section id="id4">
+<h2><span class="section-number">3.1.3. </span>贝叶斯收缩<a class="headerlink" href="#id4" title="Permalink to this heading">#</a></h2>
+<p>先验<span class="math notranslate nohighlight">\(\mathrm{Beta}(\alpha,\beta)\)</span>的后验推导的结果为：<span class="math notranslate nohighlight">\(\mathrm{Beta}(s+\alpha,n-s+\beta)\)</span>，后验的众数（均值）为<span class="math notranslate nohighlight">\(\frac{s+\alpha-1}{n+\alpha+\beta-2}\)</span>。定义<span class="math notranslate nohighlight">\(w=\frac{\alpha+\beta-2}{n+\alpha+\beta-2}, 1-w=\frac n{n+\alpha+\beta-2}\)</span>可以把该式写成两部分：
+$<span class="math notranslate nohighlight">\(
+\begin{aligned}\frac{s+\alpha-1}{n+\alpha|+\beta-2}&amp;=w\times\underbrace{\frac{\alpha-1}{\alpha+\beta-2}}_{\text{Prior mode/mean}}+\left(1-w\right)\times\underbrace{\frac sn}_{\text{Sample mean}}\end{aligned}
+\)</span><span class="math notranslate nohighlight">\(
+随着样本量\)</span>n<span class="math notranslate nohighlight">\(增大，\)</span>w<span class="math notranslate nohighlight">\(趋向于0，\)</span>1-w<span class="math notranslate nohighlight">\(趋向于1，也就是说**！！随着样本数据量不断增多，先验的影响力不断减小。\)</span>n$趋近无穷时，MAP和MLE结果趋同。**这证明了前文的结论：<strong>贝叶斯推断在客观数据不足的时候最好用（适应于样本较小），当样本量非常大时，频率派更有用。</strong></p>
+<p>**！！当<span class="math notranslate nohighlight">\(n\)</span>较小时候，先验影响力很大，MAP的结果向先验均值收缩，这种效果称为贝叶斯收缩(Bayes shrinkage)。**<strong>当然，<em>α</em> 和 <em>β</em> 越大，先验的“主观”影响力也会越大。</strong></p>
+<p>换个角度，当我们对参数先验知识模糊不清时，Beta(1, 1) 并非唯一选择。任何 <em>α</em> 和 <em>β</em> 较小的Beta 分布都可以。因为随着样本数量不断增大，先验分布的较小参数对后验影响微乎其微。</p>
+</section>
+<section id="id5">
+<h2><span class="section-number">3.1.4. </span>总结<a class="headerlink" href="#id5" title="Permalink to this heading">#</a></h2>
+<p>贝叶斯推断所体现出来的“学习过程”和人类认知过程极为相似，贝叶斯推断的优点在于其能够利用<strong>先验信息</strong>和后验概率，通过不断更新来获得更准确的估计结果。总结来说，贝叶斯推断的过程包括以下几个步骤：<strong>1) 确定模型和参数空间，建立参数的先验分布；2) 收集数据；3) 根据样本数据，计算似然函数；4) 利用贝叶斯定理，将似然函数与先验概率相结合，计算后验概率；5) 根据后验概率，更新先验概率，得到更准确的参数估计。</strong></p>
+<p>当然，本节只是最简单的贝叶斯推断，志在了解贝叶斯推断背后的思想。希望大家能通过本章例子理解贝叶斯推断背后的思想，以及整条技术路线。</p>
+</section>
+<section id="id6">
+<h2><span class="section-number">3.1.5. </span>参考<a class="headerlink" href="#id6" title="Permalink to this heading">#</a></h2>
+<p>[1] <a class="reference external" href="https://github.com/Visualize-ML/Book5_Essentials-of-Probability-and-Statistics/blob/main/Book5_Ch20_%E8%B4%9D%E5%8F%B6%E6%96%AF%E6%8E%A8%E6%96%AD%E5%85%A5%E9%97%A8__%E7%BB%9F%E8%AE%A1%E8%87%B3%E7%AE%80__%E9%B8%A2%E5%B0%BE%E8%8A%B1%E4%B9%A6__%E4%BB%8E%E5%8A%A0%E5%87%8F%E4%B9%98%E9%99%A4%E5%88%B0%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0.pdf">20.贝叶斯推断入门.pdf</a></p>
+<p>[2] 文中demo实验代码：<a class="github reference external" href="https://github.com/Visualize-ML/Book5_Essentials-of-Probability-and-Statistics/tree/main/Book5_Ch20_Python_Codes">Visualize-ML/Book5_Essentials-of-Probability-and-Statistics</a></p>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./数学基础/统计"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer">
+                  <!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="../%E7%BB%9F%E8%AE%A1intro.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title"><span class="section-number">3. </span>统计</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="20240204_%E8%B4%9D%E5%8F%B6%E6%96%AF%E6%8E%A8%E6%96%AD%E8%BF%9B%E9%98%B6.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><span class="section-number">3.2. </span>Visual ML | Statistics | 21.深入贝叶斯推断</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">3.1.1. 贝叶斯推断定义</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">3.1.2. 从鸡兔同笼问题出发，研究贝叶斯推断</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">3.1.2.1. 1.农夫完全不确定鸡兔比例，先验分布为均匀分布</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#bata-alpha-alpha">3.1.2.2. 2. 农夫认为鸡兔的比例接近 1:1，但是对这个比例的确信程度不同，先验分布为<span class="math notranslate nohighlight">\(Bata(\alpha, \alpha)\)</span></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#beta-alpha-beta">3.1.2.3. 3.并不确定具体比例接近几比几，先验分布为<span class="math notranslate nohighlight">\(Beta(\alpha, \beta)\)</span></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">3.1.3. 贝叶斯收缩</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">3.1.4. 总结</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">3.1.5. 参考</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Jiyao Liu
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  <p class="copyright">
+    
+      © Copyright 2022.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=ac02cc09edc035673794"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=ac02cc09edc035673794"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
