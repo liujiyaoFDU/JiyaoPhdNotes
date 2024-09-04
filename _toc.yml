@@ -14,18 +14,20 @@ parts:
 - caption: 数学基础
   numbered: true # Number your chapters and sections
   chapters:
-  - file: math/矩阵分析intro
+  - file: 数学基础/矩阵分析intro
     sections:
-    - file: math/矩阵/matrix_analysis.md
-    - file: "math/凸优化/交替向乘子法(Alternating_Direction_Method_of_Multipliers_ADMM)"
-    - file: "math/凸优化/20240326 Krylov Subspace Regularization for Inverse Problems"
-  - file: math/统计intro
+    - file: 数学基础/矩阵/matrix_analysis.md
+  - file: 数学基础/优化intro
     sections:
-    - file: "math/统计/20240204_20贝叶斯推断入门.md"
-    - file: "math/统计/20240204_贝叶斯推断进阶.md"
+    - file: "数学基础/凸优化/交替向乘子法(Alternating_Direction_Method_of_Multipliers_ADMM)"
+    - file: "数学基础/凸优化/20240326 Krylov Subspace Regularization for Inverse Problems"
+  - file: 数学基础/统计intro
+    sections:
+    - file: "数学基础/统计/20240204_20贝叶斯推断入门.md"
+    - file: "数学基础/统计/20240204_贝叶斯推断进阶.md"
 
 - caption: PRML notes
-  # numbered: true # Number your chapters and sections
+  numbered: true # Number your chapters and sections
   chapters:
   - file: PRML/intro
     # sections:
@@ -114,7 +116,7 @@ parts:
   - file: "tools/20240202_XHR_failed"
 
 
-- caption: Leetcode算法
+- caption: 算法面经
   numbered: true # Number your chapters and sections
   chapters:
-  - file: Leetcode算法/leetcode_Intro.md
+  - file: 算法面经/算法面经intro
