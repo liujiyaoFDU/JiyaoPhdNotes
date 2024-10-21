@@ -26,6 +26,16 @@ parts:
     - file: "数学基础/统计/20240204_20贝叶斯推断入门.md"
     - file: "数学基础/统计/20240204_贝叶斯推断进阶.md"
 
+- caption: 课程笔记
+  numbered: true # Number your chapters and sections
+  chapters:
+  - file: "课程笔记/2024_生成式AI_李宏毅/intro"
+    sections:
+    - file: "课程笔记/2024_生成式AI_李宏毅/1_提示工程与AI_agent"
+    - file: "课程笔记/2024_生成式AI_李宏毅/2_LLM训练_生成策略_從專才到通才"
+    - file: "课程笔记/2024_生成式AI_李宏毅/3_AI_agent"
+    - file: "课程笔记/2024_生成式AI_李宏毅/4_LLM的可解释性"
+
 - caption: PRML notes
   numbered: true # Number your chapters and sections
   chapters:
@@ -120,3 +130,14 @@ parts:
   numbered: true # Number your chapters and sections
   chapters:
   - file: 算法面经/算法面经intro
+  - file: 算法面经/0_手撕深度学习代码
+  - file: 算法面经/1_数组
+  - file: 算法面经/2_链表
+  - file: 算法面经/3_哈希表
+
+
+- caption: 个人经验
+  numbered: true # Number your chapters and sections
+  chapters:
+  - file: "个人经验/2021人工智能保研经验（西电智科to复旦类脑）"
+

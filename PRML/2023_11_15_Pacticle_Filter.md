@@ -12,7 +12,7 @@ Dynamic Model 是在概率图模型中加入了时序的因素，所以样本之
 
 量序列，而每一个观测变量都对应着一个隐变量，隐变量也被称之为系统变量 (System Variable)，所
 
-以有时我们也将 Dynamic Model 称之为 State Space Model（状态空间模型）。 动态模型分为三类：
+以有时我们也将 Dynamic Model 称之为 State Space  Model（状态空间模型）。 动态模型分为三类：
 
 + HMM：隐状态是离散变量，观测变量可以离散也可以连续；
 + Linear Dynamic System（Karman filter），**Non-linear Dynamic System（Particle filter）: 隐状态是连续变量**
